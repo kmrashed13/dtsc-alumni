@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap');
 
 /* =====================================
@@ -453,8 +452,6 @@ section:not(.hero) {
   gap: 18px;
 }
 
-/* Empty gallery until Admin uploads */
-
 .gallery-grid:empty {
   display: none;
 }
@@ -719,9 +716,6 @@ section:not(.hero) {
     scroll-padding-top: 155px;
   }
 
-
-  /* HEADER */
-
   .header {
     min-height: 95px;
     grid-template-columns: 52px 1fr 52px;
@@ -749,9 +743,6 @@ section:not(.hero) {
     font-size: 9px;
     margin-top: 5px;
   }
-
-
-  /* NAVIGATION */
 
   .navbar {
     min-height: 50px;
@@ -795,9 +786,6 @@ section:not(.hero) {
     padding: 12px 20px;
     font-size: 13px;
   }
-
-
-  /* HERO */
 
   .hero {
     aspect-ratio: auto;
@@ -847,9 +835,6 @@ section:not(.hero) {
     font-size: 12px;
   }
 
-
-  /* COMMON SECTIONS */
-
   section:not(.hero) {
     padding: 42px 18px;
   }
@@ -865,9 +850,6 @@ section:not(.hero) {
   .section-title p {
     font-size: 12px;
   }
-
-
-  /* ABOUT */
 
   .about-content {
     grid-template-columns: 1fr;
@@ -886,9 +868,6 @@ section:not(.hero) {
     font-size: 13px;
   }
 
-
-  /* GALLERY */
-
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -898,17 +877,11 @@ section:not(.hero) {
     height: 135px;
   }
 
-
-  /* MEMBERSHIP */
-
   .membership-btn {
     display: block;
     max-width: 250px;
     margin: 10px auto;
   }
-
-
-  /* FOOTER */
 
   .footer {
     padding: 35px 22px 0;
@@ -978,4 +951,155 @@ section:not(.hero) {
     grid-template-columns: 1fr;
   }
 
+}
+
+
+/* =====================================
+   18. POPUP MODALS (REGISTER & LOGIN)
+===================================== */
+
+.auth-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.auth-modal.active {
+  display: flex;
+}
+
+.auth-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 44, 38, 0.72);
+  backdrop-filter: blur(3px);
+}
+
+.auth-modal-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 440px;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 28px 24px 22px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.25);
+  border-top: 5px solid var(--gold);
+  text-align: center;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.auth-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: var(--light);
+  color: var(--dark);
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s;
+}
+
+.auth-close:hover {
+  background: var(--green);
+  color: var(--white);
+}
+
+.auth-modal-icon {
+  font-size: 34px;
+  margin-bottom: 6px;
+}
+
+.auth-modal-content h2 {
+  color: var(--green);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.auth-modal-content > p {
+  color: var(--gray);
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+.auth-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.auth-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 15px;
+  border: 1.5px solid #e2e8e5;
+  border-radius: 10px;
+  background: var(--light);
+  transition: 0.25s;
+}
+
+.auth-option:hover {
+  border-color: var(--green);
+  background: #eaf3f0;
+  transform: translateX(3px);
+}
+
+.option-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.option-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.option-text strong {
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.option-text small {
+  color: var(--gray);
+  font-size: 12px;
+}
+
+.option-arrow {
+  color: var(--gold);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.auth-modal-footer {
+  margin-top: 18px !important;
+  margin-bottom: 0 !important;
+  font-size: 12px !important;
+  color: #888888 !important;
 }
