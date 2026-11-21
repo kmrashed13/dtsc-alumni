@@ -1,142 +1,132 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // ================= MOBILE HAMBURGER MENU =================
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
 
-  // =====================================
-  // MOBILE HAMBURGER MENU
-  // =====================================
+    function closeMobileMenu() {
+        if (menuToggle && navMenu) {
+            navMenu.classList.remove("active");
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.innerHTML = "&#9776;";
+        }
+    }
 
-  const menuToggle = document.getElementById("menuToggle");
-  const navMenu = document.getElementById("navMenu");
-
-  function closeMobileMenu() {
     if (menuToggle && navMenu) {
-      navMenu.classList.remove("active");
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.innerHTML = "&#9776;";
+        menuToggle.addEventListener("click", function () {
+            const isOpen = navMenu.classList.toggle("active");
+            menuToggle.setAttribute("aria-expanded", isOpen);
+            menuToggle.innerHTML = isOpen ? "&times;" : "&#9776;";
+        });
+
+        navMenu.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                closeMobileMenu();
+            });
+        });
     }
-  }
 
-  if (menuToggle && navMenu) {
-
-    menuToggle.addEventListener("click", function () {
-
-      const isOpen = navMenu.classList.toggle("active");
-
-      menuToggle.setAttribute("aria-expanded", isOpen);
-      menuToggle.innerHTML = isOpen ? "&times;" : "&#9776;";
-
-    });
-
-    navMenu.querySelectorAll("a").forEach(function (link) {
-
-      link.addEventListener("click", function () {
-        closeMobileMenu();
-      });
-
-    });
-
-    document.addEventListener("click", function (event) {
-
-      if (
-        !navMenu.contains(event.target) &&
-        !menuToggle.contains(event.target)
-      ) {
-        closeMobileMenu();
-      }
-
-    });
-
-  }
-
-
-  // =====================================
-  // LANGUAGE TOGGLE
-  // =====================================
-
-  const languageToggle = document.getElementById("languageToggle");
-
-  if (languageToggle) {
-
-    languageToggle.addEventListener("click", function () {
-
-      const currentLanguage = document.documentElement.lang;
-
-      if (currentLanguage === "en") {
-
-        document.documentElement.lang = "bn";
-        languageToggle.textContent = "(EN)";
-
-      } else {
-
-        document.documentElement.lang = "en";
-        languageToggle.textContent = "(BN)";
-
-      }
-
-    });
-
-  }
-
-
-  // =====================================
-  // REGISTER & LOGIN POPUP MODALS
-  // =====================================
-
-  const registerModal = document.getElementById("registerModal");
-  const loginModal = document.getElementById("loginModal");
-  const closeRegisterModal = document.getElementById("closeRegisterModal");
-  const closeLoginModal = document.getElementById("closeLoginModal");
-
-  function openModal(modal) {
-    if (!modal) return;
-    closeMobileMenu();
-    modal.classList.add("active");
-    modal.setAttribute("aria-hidden", "false");
-  }
-
-  function closeModal(modal) {
-    if (!modal) return;
-    modal.classList.remove("active");
-    modal.setAttribute("aria-hidden", "true");
-  }
-
-  document.querySelectorAll(".register-trigger").forEach(function (trigger) {
-    trigger.addEventListener("click", function (e) {
-      e.preventDefault();
-      openModal(registerModal);
-    });
-  });
-
-  document.querySelectorAll(".login-trigger").forEach(function (trigger) {
-    trigger.addEventListener("click", function (e) {
-      e.preventDefault();
-      openModal(loginModal);
-    });
-  });
-
-  if (closeRegisterModal) {
-    closeRegisterModal.addEventListener("click", function () {
-      closeModal(registerModal);
-    });
-  }
-
-  if (closeLoginModal) {
-    closeLoginModal.addEventListener("click", function () {
-      closeModal(loginModal);
-    });
-  }
-
-  document.querySelectorAll(".auth-modal-overlay").forEach(function (overlay) {
-    overlay.addEventListener("click", function () {
-      closeModal(registerModal);
-      closeModal(loginModal);
-    });
-  });
-
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-      closeModal(registerModal);
-      closeModal(loginModal);
+    // ================= MODAL POPUP LOGIC =================
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add("show");
+            modal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+        }
     }
-  });
 
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove("show");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+        }
+    }
+
+    // Open Login / Register Modals
+    document.querySelectorAll(".open-modal").forEach(function (trigger) {
+        trigger.addEventListener("click", function (e) {
+            e.preventDefault();
+            closeMobileMenu();
+            const targetId = this.getAttribute("data-target");
+            openModal(targetId);
+        });
+    });
+
+    // Close Modal via Close (×) Button
+    document.querySelectorAll(".modal-close").forEach(function (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+            const targetId = this.getAttribute("data-close");
+            closeModal(targetId);
+        });
+    });
+
+    // Switch between Login and Register Modals
+    document.querySelectorAll(".switch-modal").forEach(function (switchBtn) {
+        switchBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            const fromModal = this.getAttribute("data-from");
+            const toModal = this.getAttribute("data-to");
+            closeModal(fromModal);
+            openModal(toModal);
+        });
+    });
+
+    // Close Modal when clicking outside the dialog box
+    document.querySelectorAll(".modal-backdrop").forEach(function (backdrop) {
+        backdrop.addEventListener("click", function (e) {
+            if (e.target === backdrop) {
+                closeModal(backdrop.id);
+            }
+        });
+    });
+
+    // Close Modal on Escape key
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            document.querySelectorAll(".modal-backdrop.show").forEach(function (openBackdrop) {
+                closeModal(openBackdrop.id);
+            });
+        }
+    });
+
+    // ================= CONDITIONAL PROGRAM FIELD =================
+    const regProgram = document.getElementById("regProgram");
+    const deptGroup = document.getElementById("deptGroup");
+    const regDept = document.getElementById("regDept");
+
+    if (regProgram && deptGroup) {
+        regProgram.addEventListener("change", function () {
+            if (this.value === "Diploma" || this.value === "SSC" || this.value === "HSC") {
+                deptGroup.style.display = "block";
+                regDept.setAttribute("required", "required");
+            } else {
+                deptGroup.style.display = "none";
+                regDept.removeAttribute("required");
+            }
+        });
+    }
+
+    // ================= FORM SUBMISSION HANDLERS =================
+    const loginForm = document.getElementById("loginForm");
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert("Login submitted! Connect your backend/Firebase authentication here.");
+            closeModal("loginModal");
+            loginForm.reset();
+        });
+    }
+
+    const registerForm = document.getElementById("registerForm");
+    if (registerForm) {
+        registerForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert("Registration submitted successfully!");
+            closeModal("registerModal");
+            registerForm.reset();
+            if (deptGroup) deptGroup.style.display = "none";
+        });
+    }
 });
