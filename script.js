@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // ================= MOBILE HAMBURGER MENU =================
+    // Mobile Hamburger Menu
     const menuToggle = document.getElementById("menuToggle");
     const navMenu = document.getElementById("navMenu");
 
@@ -20,12 +20,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         navMenu.querySelectorAll("a").forEach(function (link) {
             link.addEventListener("click", function () {
-                closeMobileMenu();
+                if (!link.classList.contains("open-modal")) {
+                    closeMobileMenu();
+                }
             });
         });
     }
 
-    // ================= MODAL POPUP LOGIC =================
+    // Modal Popup Logic
     function openModal(modalId) {
         const modal = document.getElementById(modalId);
         if (modal) {
@@ -44,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Open Login / Register Modals
     document.querySelectorAll(".open-modal").forEach(function (trigger) {
         trigger.addEventListener("click", function (e) {
             e.preventDefault();
@@ -54,7 +55,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Close Modal via Close (×) Button
     document.querySelectorAll(".modal-close").forEach(function (closeBtn) {
         closeBtn.addEventListener("click", function () {
             const targetId = this.getAttribute("data-close");
@@ -62,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Switch between Login and Register Modals
     document.querySelectorAll(".switch-modal").forEach(function (switchBtn) {
         switchBtn.addEventListener("click", function (e) {
             e.preventDefault();
@@ -73,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Close Modal when clicking outside the dialog box
     document.querySelectorAll(".modal-backdrop").forEach(function (backdrop) {
         backdrop.addEventListener("click", function (e) {
             if (e.target === backdrop) {
@@ -82,7 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Close Modal on Escape key
     document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") {
             document.querySelectorAll(".modal-backdrop.show").forEach(function (openBackdrop) {
@@ -91,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // ================= CONDITIONAL PROGRAM FIELD =================
+    // Conditional Program Field
     const regProgram = document.getElementById("regProgram");
     const deptGroup = document.getElementById("deptGroup");
     const regDept = document.getElementById("regDept");
@@ -100,15 +97,15 @@ document.addEventListener("DOMContentLoaded", function () {
         regProgram.addEventListener("change", function () {
             if (this.value === "Diploma" || this.value === "SSC" || this.value === "HSC") {
                 deptGroup.style.display = "block";
-                regDept.setAttribute("required", "required");
+                if (regDept) regDept.setAttribute("required", "required");
             } else {
                 deptGroup.style.display = "none";
-                regDept.removeAttribute("required");
+                if (regDept) regDept.removeAttribute("required");
             }
         });
     }
 
-    // ================= FORM SUBMISSION HANDLERS =================
+    // Form Submission Handlers
     const loginForm = document.getElementById("loginForm");
     if (loginForm) {
         loginForm.addEventListener("submit", function (e) {
