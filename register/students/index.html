@@ -2,702 +2,729 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#103e35">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#103e35">
 
-  <title>Student Membership Registration | DTSC Alumni Association</title>
+    <title>Student Membership Registration | DTSC Alumni Association</title>
 
-  <link rel="stylesheet" href="./student.css">
-  <script src="./student.js" defer></script>
+    <link rel="stylesheet" href="./student.css">
+    <script src="./student.js" defer></script>
 </head>
 
 <body>
 
 <div class="registration-container">
 
-  <header class="form-header">
-    <a href="../../index.html" class="back-link">← Back to Home</a>
+    <!-- OFFICIAL HEADER -->
+    <header class="form-header">
+        <img src="../../assets/logo.png" alt="DTSC Logo" class="form-logo">
 
-    <img src="../../assets/logo.png" alt="DTSC Alumni Logo" class="form-logo">
+        <h1>DTSC ALUMNI ASSOCIATION</h1>
+        <h2>Membership Registration Form</h2>
+        <p>Together We Grow, Forever We Belong</p>
 
-    <h1>Student Membership Registration</h1>
-    <p>DTSC Alumni Association</p>
-    <span>Connect • Remember • Inspire</span>
-  </header>
+        <a href="../../index.html" class="back-link">
+            ← Back to Official Website
+        </a>
+    </header>
 
-  <form id="studentRegistrationForm" enctype="multipart/form-data">
+    <form id="studentRegistrationForm">
 
-    <!-- PERSONAL INFORMATION -->
+        <!-- 1. PERSONAL INFORMATION -->
+        <section class="form-section">
 
-    <section class="form-section">
-      <h2>01. Personal & Contact Information</h2>
+            <h3 class="section-title">
+                1. Personal & Contact Information
+            </h3>
 
-      <div class="form-grid">
+            <div class="form-grid">
 
-        <div class="form-group full-width">
-          <label>Profile Photo</label>
-          <input type="file" id="studentPhoto" accept="image/*">
-          <img id="photoPreview" class="photo-preview" alt="Photo Preview">
+                <div class="form-group full-width">
+                    <label>Photo Upload</label>
+                    <input type="file" id="studentPhoto" accept="image/*">
+                    <div class="photo-preview" id="photoPreview">
+                        <span>Photo Preview</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Name (As per Certificate) *</label>
+                    <input type="text" id="fullName"
+                        placeholder="e.g. RASHEDUL ISLAM" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Father Name *</label>
+                    <input type="text" id="fatherName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Mother Name *</label>
+                    <input type="text" id="motherName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Date of Birth *</label>
+                    <div class="date-grid">
+                        <select id="birthDay" required>
+                            <option value="">Day</option>
+                        </select>
+
+                        <select id="birthMonth" required>
+                            <option value="">Month</option>
+                            <option>Jan</option><option>Feb</option>
+                            <option>Mar</option><option>Apr</option>
+                            <option>May</option><option>Jun</option>
+                            <option>Jul</option><option>Aug</option>
+                            <option>Sep</option><option>Oct</option>
+                            <option>Nov</option><option>Dec</option>
+                        </select>
+
+                        <select id="birthYear" required>
+                            <option value="">Year</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Blood Group *</label>
+                    <select id="bloodGroup" required>
+                        <option value="">Select Blood Group</option>
+                        <option>A+</option><option>A-</option>
+                        <option>B+</option><option>B-</option>
+                        <option>O+</option><option>O-</option>
+                        <option>AB+</option><option>AB-</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Contact Number *</label>
+                    <input type="tel" id="mobile"
+                        placeholder="01XXXXXXXXX" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email"
+                        placeholder="you@example.com">
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 2. PRESENT ADDRESS -->
+        <section class="form-section">
+
+            <h3 class="section-title">2. Present Address</h3>
+
+            <div class="form-group">
+                <label class="checkbox-line">
+                    <input type="checkbox" id="sameAddress">
+                    Present Address & Permanent Address are same
+                </label>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Division *</label>
+                    <select id="presentDivision" required>
+                        <option value="">Select Division</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>District *</label>
+                    <select id="presentDistrict" required>
+                        <option value="">Select District</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Area Type *</label>
+                    <select id="presentAreaType" required>
+                        <option value="">Select Area Type</option>
+                        <option value="upazila">Upazila</option>
+                        <option value="city">City Corporation</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Area *</label>
+                    <select id="presentArea" required>
+                        <option value="">Select Area</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="presentUnionGroup" hidden>
+                    <label>Union / Municipality</label>
+                    <input type="text" id="presentUnion"
+                        placeholder="Enter Union / Municipality">
+                </div>
+
+                <div class="form-group">
+                    <label>Post Office *</label>
+                    <input type="text" id="presentPostOffice" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Post Code *</label>
+                    <input type="text" id="presentPostCode" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Full Address *</label>
+                    <textarea id="presentAddress"
+                        placeholder="House, Area, City" required></textarea>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 3. PERMANENT ADDRESS -->
+        <section class="form-section" id="permanentAddressFields">
+
+            <h3 class="section-title">3. Permanent Address</h3>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Division *</label>
+                    <select id="permanentDivision">
+                        <option value="">Select Division</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>District *</label>
+                    <select id="permanentDistrict">
+                        <option value="">Select District</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Area Type *</label>
+                    <select id="permanentAreaType">
+                        <option value="">Select Area Type</option>
+                        <option value="upazila">Upazila</option>
+                        <option value="city">City Corporation</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Area *</label>
+                    <select id="permanentArea">
+                        <option value="">Select Area</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="permanentUnionGroup" hidden>
+                    <label>Union / Municipality</label>
+                    <input type="text" id="permanentUnion">
+                </div>
+
+                <div class="form-group">
+                    <label>Post Office *</label>
+                    <input type="text" id="permanentPostOffice">
+                </div>
+
+                <div class="form-group">
+                    <label>Post Code *</label>
+                    <input type="text" id="permanentPostCode">
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Full Address *</label>
+                    <textarea id="permanentAddress"
+                        placeholder="House, Area, City"></textarea>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 4. ACADEMIC INFORMATION -->
+        <section class="form-section">
+
+            <h3 class="section-title">
+                4. Academic Information – Which was your last exam at DTSC?
+            </h3>
+
+            <p>Select Examination (You can select multiple)</p>
+
+            <div class="academic-options">
+
+                <label class="checkbox-card">
+                    <input type="checkbox" id="examJSC" value="JSC">
+                    Junior School Certificate - JSC
+                </label>
+
+                <label class="checkbox-card">
+                    <input type="checkbox" id="examSSC" value="SSC">
+                    Secondary School Certificate - SSC
+                </label>
+
+                <label class="checkbox-card">
+                    <input type="checkbox" id="examHSC" value="HSC">
+                    Higher Secondary Certificate - HSC
+                </label>
+
+                <label class="checkbox-card">
+                    <input type="checkbox" id="examDiploma"
+                        value="Diploma">
+                    Diploma in Engineering
+                </label>
+
+            </div>
+
+
+            <!-- JSC -->
+            <div class="conditional-section" id="jscFields" hidden>
+
+                <h4>JSC Information</h4>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>JSC Roll *</label>
+                        <input type="text" id="jscRoll">
+                    </div>
+
+                    <div class="form-group">
+                        <label>JSC Registration *</label>
+                        <input type="text" id="jscReg">
+                    </div>
+
+                    <div class="form-group">
+                        <label>GPA *</label>
+                        <input type="number" id="jscGPA"
+                            min="0" max="5" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Passing Year *</label>
+                        <select id="jscPassingYear">
+                            <option value="">Select Year</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Session *</label>
+                        <select id="jscSession">
+                            <option value="">Select Session</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- SSC -->
+            <div class="conditional-section" id="sscFields" hidden>
+
+                <h4>SSC Information</h4>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Trade *</label>
+                        <select id="sscTrade">
+                            <option value="">Select Trade</option>
+                            <option>General Electrical Works</option>
+                            <option>Refrigeration and Air Conditions</option>
+                            <option>Machine Tools Operation</option>
+                            <option>Farm Machinery</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>SSC Session *</label>
+                        <select id="sscSession">
+                            <option value="">Select Session</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>SSC Roll *</label>
+                        <input type="text" id="sscRoll">
+                    </div>
+
+                    <div class="form-group">
+                        <label>SSC Registration *</label>
+                        <input type="text" id="sscReg">
+                    </div>
+
+                    <div class="form-group">
+                        <label>GPA *</label>
+                        <input type="number" id="sscGPA"
+                            min="0" max="5" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Passing Year *</label>
+                        <select id="sscPassingYear">
+                            <option value="">Select Year</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- HSC -->
+            <div class="conditional-section" id="hscFields" hidden>
+
+                <h4>HSC Information</h4>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Trade *</label>
+                        <select id="hscTrade">
+                            <option value="">Select Trade</option>
+                            <option value="21">21 - Agro Machinery</option>
+                            <option value="27">27 - Electrical Works and Maintenance</option>
+                            <option value="30">30 - Machine Tools Operation and Maintenance</option>
+                            <option value="32">32 - Refrigeration and Air-conditioning</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>HSC Session *</label>
+                        <select id="hscSession">
+                            <option value="">Select Session</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>HSC Roll *</label>
+                        <input type="text" id="hscRoll">
+                    </div>
+
+                    <div class="form-group">
+                        <label>HSC Registration *</label>
+                        <input type="text" id="hscReg">
+                    </div>
+
+                    <div class="form-group">
+                        <label>GPA *</label>
+                        <input type="number" id="hscGPA"
+                            min="0" max="5" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Passing Year *</label>
+                        <select id="hscPassingYear">
+                            <option value="">Select Year</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- DIPLOMA -->
+            <div class="conditional-section" id="diplomaFields" hidden>
+
+                <h4>Diploma in Engineering Information</h4>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Technology *</label>
+                        <select id="diplomaTechnology">
+                            <option value="">Select Technology</option>
+                            <option value="70">70 - Mechanical Technology</option>
+                            <option value="67">67 - Electrical Technology</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Session *</label>
+                        <select id="diplomaSession">
+                            <option value="">Select Session</option>
+                            <option>2016-17</option>
+                            <option>2017-18</option>
+                            <option>2018-19</option>
+                            <option>2019-20</option>
+                            <option>2020-21</option>
+                            <option>2021-22</option>
+                            <option>2022-23</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Diploma Roll *</label>
+                        <input type="text" id="diplomaRoll">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Diploma Registration *</label>
+                        <input type="text" id="diplomaReg">
+                    </div>
+
+                    <div class="form-group">
+                        <label>CGPA *</label>
+                        <input type="number" id="diplomaCGPA"
+                            min="0" max="4" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Passing Year *</label>
+                        <select id="diplomaPassingYear">
+                            <option value="">Select Year</option>
+                            <option>2018</option>
+                            <option>2019</option>
+                            <option>2020</option>
+                            <option>2021</option>
+                            <option>2022</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- 5. CURRENT STATUS -->
+        <section class="form-section">
+
+            <h3 class="section-title">5. Current Status</h3>
+
+            <div class="status-options">
+
+                <label class="checkbox-card">
+                    <input type="checkbox" id="statusHigher">
+                    Higher Studies
+                </label>
+
+                <label class="checkbox-card">
+                    <input type="checkbox" id="statusJob">
+                    Job Holder
+                </label>
+
+                <label class="checkbox-card">
+                    <input type="checkbox" id="statusBusiness">
+                    Entrepreneur / Business
+                </label>
+
+                <label class="checkbox-card">
+                    <input type="checkbox" id="statusOthers">
+                    Others
+                </label>
+
+            </div>
+
+
+            <!-- HIGHER STUDIES -->
+            <div class="conditional-section"
+                id="higherStudiesFields" hidden>
+
+                <h4>Higher Studies Information</h4>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Institute Name *</label>
+                        <input type="text" id="higherInstitute"
+                            placeholder="University or College">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Department *</label>
+                        <input type="text" id="higherDepartment">
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- JOB -->
+            <div class="conditional-section" id="jobFields" hidden>
+
+                <h4>Employment Information</h4>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Employment Type *</label>
+                        <select id="jobType">
+                            <option value="">Select Type</option>
+                            <option value="Private">Private</option>
+                            <option value="Government Service">
+                                Government Service
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Organization / Company *</label>
+                        <input type="text" id="jobOrganization">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Designation *</label>
+                        <input type="text" id="jobDesignation">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Department *</label>
+                        <input type="text" id="jobDepartment">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Location *</label>
+                        <input type="text" id="jobLocation">
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- BUSINESS -->
+            <div class="conditional-section"
+                id="businessFields" hidden>
+
+                <h4>Business Information</h4>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Business / Organization Name</label>
+                        <input type="text" id="businessName">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Business Location</label>
+                        <input type="text" id="businessLocation">
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- OTHERS -->
+            <div class="conditional-section"
+                id="otherStatusFields" hidden>
+
+                <h4>Other Information</h4>
+
+                <div class="form-group">
+                    <label>Please Specify</label>
+                    <textarea id="otherStatus"
+                        placeholder="Please describe your current status"></textarea>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 6. ASSOCIATION DETAILS -->
+        <section class="form-section">
+
+            <h3 class="section-title">6. Association Details</h3>
+
+            <div class="form-group">
+                <label>
+                    Please tell us suggestions regarding the DTSC Alumni Association.
+                </label>
+
+                <textarea id="suggestions"
+                    rows="4"
+                    placeholder="Your valuable suggestions..."></textarea>
+            </div>
+
+        </section>
+
+
+        <!-- 7. ACCOUNT -->
+        <section class="form-section">
+
+            <h3 class="section-title">
+                7. For Login & Manage Your Profile
+            </h3>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>E-mail / Mobile *</label>
+                    <input type="text" id="accountEmail"
+                        placeholder="Email or Mobile Number">
+                </div>
+
+                <div class="form-group">
+                    <label>Password *</label>
+                    <input type="password" id="password"
+                        placeholder="Create Password">
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password *</label>
+                    <input type="password" id="confirmPassword"
+                        placeholder="Confirm Password">
+                </div>
+
+            </div>
+
+            <div class="google-auth">
+                <button type="button" class="google-button"
+                    id="googleSignIn">
+                    Sign in with Google
+                </button>
+
+                <p>No password required for Google Sign-in</p>
+            </div>
+
+        </section>
+
+
+        <!-- DECLARATION -->
+        <section class="declaration-section">
+
+            <label class="checkbox-line">
+                <input type="checkbox" id="declaration" required>
+                I agree to the terms and conditions of DTSC Alumni Association.
+            </label>
+
+        </section>
+
+
+        <!-- ACTION BUTTONS -->
+        <div class="form-actions">
+
+            <button type="button" id="previewBtn"
+                class="preview-button">
+                Preview
+            </button>
+
+            <button type="reset" class="reset-button">
+                Reset
+            </button>
+
+            <button type="submit" id="submitBtn"
+                class="submit-button">
+                Register Now
+            </button>
+
         </div>
 
-        <div class="form-group">
-          <label>Full Name (As per Certificate) *</label>
-          <input type="text" id="fullName" name="fullName"
-                 placeholder="e.g. RASHEDUL ISLAM" required>
-        </div>
 
-        <div class="form-group">
-          <label>Father's Name *</label>
-          <input type="text" id="fatherName" name="fatherName" required>
-        </div>
+        <!-- PREVIEW AREA -->
+        <div class="preview-area" id="previewArea" hidden></div>
 
-        <div class="form-group">
-          <label>Mother's Name *</label>
-          <input type="text" id="motherName" name="motherName" required>
-        </div>
+    </form>
 
-        <div class="form-group">
-          <label>Date of Birth *</label>
-          <div class="date-grid">
-            <select id="birthDay" required>
-              <option value="">Day</option>
-            </select>
 
-            <select id="birthMonth" required>
-              <option value="">Month</option>
-              <option>Jan</option><option>Feb</option>
-              <option>Mar</option><option>Apr</option>
-              <option>May</option><option>Jun</option>
-              <option>Jul</option><option>Aug</option>
-              <option>Sep</option><option>Oct</option>
-              <option>Nov</option><option>Dec</option>
-            </select>
-
-            <select id="birthYear" required>
-              <option value="">Year</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Blood Group *</label>
-          <select id="bloodGroup" required>
-            <option value="">Select Blood Group</option>
-            <option>A+</option><option>A-</option>
-            <option>B+</option><option>B-</option>
-            <option>O+</option><option>O-</option>
-            <option>AB+</option><option>AB-</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Contact Number *</label>
-          <input type="tel" id="mobile" name="mobile"
-                 placeholder="01XXXXXXXXX" required>
-        </div>
-
-        <div class="form-group">
-          <label>Email Address *</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- PRESENT ADDRESS -->
-
-    <section class="form-section">
-      <h2>02. Present Address</h2>
-
-      <div class="form-grid">
-
-        <div class="form-group">
-          <label>Division *</label>
-          <select id="presentDivision" required>
-            <option value="">Select Division</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>District *</label>
-          <select id="presentDistrict" required disabled>
-            <option value="">Select District</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Area Type *</label>
-          <select id="presentAreaType" required disabled>
-            <option value="">Select Area Type</option>
-            <option value="upazila">Upazila</option>
-            <option value="city">City Corporation</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Upazila / City Corporation *</label>
-          <select id="presentArea" required disabled>
-            <option value="">Select Area</option>
-          </select>
-        </div>
-
-        <div class="form-group" id="presentUnionGroup" hidden>
-          <label>Union / Municipality *</label>
-          <input type="text" id="presentUnion"
-                 placeholder="Enter Union / Municipality">
-        </div>
-
-        <div class="form-group">
-          <label>Post Office *</label>
-          <input type="text" id="presentPostOffice" required>
-        </div>
-
-        <div class="form-group">
-          <label>Post Code *</label>
-          <input type="text" id="presentPostCode" required>
-        </div>
-
-        <div class="form-group full-width">
-          <label>Full Present Address *</label>
-          <textarea id="presentAddress" rows="3" required
-            placeholder="House, Road, Area, City"></textarea>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- PERMANENT ADDRESS -->
-
-    <section class="form-section" id="permanentAddressSection">
-      <h2>03. Permanent Address</h2>
-
-      <label class="checkbox-line">
-        <input type="checkbox" id="sameAddress">
-        Present Address and Permanent Address are the same
-      </label>
-
-      <div class="form-grid" id="permanentAddressFields">
-
-        <div class="form-group">
-          <label>Division *</label>
-          <select id="permanentDivision" required>
-            <option value="">Select Division</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>District *</label>
-          <select id="permanentDistrict" required disabled>
-            <option value="">Select District</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Area Type *</label>
-          <select id="permanentAreaType" required disabled>
-            <option value="">Select Area Type</option>
-            <option value="upazila">Upazila</option>
-            <option value="city">City Corporation</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Upazila / City Corporation *</label>
-          <select id="permanentArea" required disabled>
-            <option value="">Select Area</option>
-          </select>
-        </div>
-
-        <div class="form-group" id="permanentUnionGroup" hidden>
-          <label>Union / Municipality *</label>
-          <input type="text" id="permanentUnion">
-        </div>
-
-        <div class="form-group">
-          <label>Post Office *</label>
-          <input type="text" id="permanentPostOffice" required>
-        </div>
-
-        <div class="form-group">
-          <label>Post Code *</label>
-          <input type="text" id="permanentPostCode" required>
-        </div>
-
-        <div class="form-group full-width">
-          <label>Full Permanent Address *</label>
-          <textarea id="permanentAddress" rows="3" required></textarea>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ACADEMIC INFORMATION -->
-
-    <section class="form-section">
-      <h2>04. Academic Information</h2>
-
-      <p class="section-description">
-        Which examinations did you complete at DTSC?
-        Select all applicable examinations.
-      </p>
-
-      <div class="academic-options">
-
-        <label class="checkbox-card">
-          <input type="checkbox" name="examinations"
-                 value="JSC" id="examJSC">
-          Junior School Certificate (JSC)
-        </label>
-
-        <label class="checkbox-card">
-          <input type="checkbox" name="examinations"
-                 value="SSC" id="examSSC">
-          Secondary School Certificate (SSC)
-        </label>
-
-        <label class="checkbox-card">
-          <input type="checkbox" name="examinations"
-                 value="HSC" id="examHSC">
-          Higher Secondary Certificate (HSC)
-        </label>
-
-        <label class="checkbox-card">
-          <input type="checkbox" name="examinations"
-                 value="Diploma" id="examDiploma">
-          Diploma in Engineering
-        </label>
-
-      </div>
-
-
-      <!-- JSC -->
-
-      <div class="conditional-section" id="jscFields">
-        <h3>JSC Information</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>JSC Roll *</label>
-            <input type="text" id="jscRoll">
-          </div>
-
-          <div class="form-group">
-            <label>JSC Registration Number *</label>
-            <input type="text" id="jscReg">
-          </div>
-
-          <div class="form-group">
-            <label>GPA *</label>
-            <input type="number" id="jscGPA"
-                   min="0" max="5" step="0.01">
-          </div>
-
-          <div class="form-group">
-            <label>Passing Year *</label>
-            <select id="jscPassingYear">
-              <option value="">Select Year</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Session *</label>
-            <select id="jscSession">
-              <option value="">Select Session</option>
-            </select>
-          </div>
-
-        </div>
-      </div>
-
-
-      <!-- SSC -->
-
-      <div class="conditional-section" id="sscFields">
-        <h3>SSC Information</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Trade *</label>
-            <select id="sscTrade">
-              <option value="">Select Trade</option>
-              <option>General Electrical Works</option>
-              <option>Refrigeration and Air Conditions</option>
-              <option>Machine Tools Operation</option>
-              <option>Farm Machinery</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Session *</label>
-            <select id="sscSession">
-              <option value="">Select Session</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>SSC Roll *</label>
-            <input type="text" id="sscRoll">
-          </div>
-
-          <div class="form-group">
-            <label>SSC Registration Number *</label>
-            <input type="text" id="sscReg">
-          </div>
-
-          <div class="form-group">
-            <label>GPA *</label>
-            <input type="number" id="sscGPA"
-                   min="0" max="5" step="0.01">
-          </div>
-
-          <div class="form-group">
-            <label>Passing Year *</label>
-            <select id="sscPassingYear">
-              <option value="">Select Year</option>
-            </select>
-          </div>
-
-        </div>
-      </div>
-
-
-      <!-- HSC -->
-
-      <div class="conditional-section" id="hscFields">
-        <h3>HSC Information</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Trade *</label>
-            <select id="hscTrade">
-              <option value="">Select Trade</option>
-              <option value="21">21 - Agro Machinery</option>
-              <option value="27">27 - Electrical Works and Maintenance</option>
-              <option value="30">30 - Machine Tools Operation and Maintenance</option>
-              <option value="32">32 - Refrigeration and Air-conditioning</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Session *</label>
-            <select id="hscSession">
-              <option value="">Select Session</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>HSC Roll *</label>
-            <input type="text" id="hscRoll">
-          </div>
-
-          <div class="form-group">
-            <label>HSC Registration Number *</label>
-            <input type="text" id="hscReg">
-          </div>
-
-          <div class="form-group">
-            <label>GPA *</label>
-            <input type="number" id="hscGPA"
-                   min="0" max="5" step="0.01">
-          </div>
-
-          <div class="form-group">
-            <label>Passing Year *</label>
-            <select id="hscPassingYear">
-              <option value="">Select Year</option>
-            </select>
-          </div>
-
-        </div>
-      </div>
-
-
-      <!-- DIPLOMA -->
-
-      <div class="conditional-section" id="diplomaFields">
-        <h3>Diploma in Engineering Information</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Technology *</label>
-            <select id="diplomaTechnology">
-              <option value="">Select Technology</option>
-              <option value="70">70 - Mechanical Technology</option>
-              <option value="67">67 - Electrical Technology</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Session *</label>
-            <select id="diplomaSession">
-              <option value="">Select Session</option>
-              <option>2016-17</option>
-              <option>2017-18</option>
-              <option>2018-19</option>
-              <option>2019-20</option>
-              <option>2020-21</option>
-              <option>2021-22</option>
-              <option>2022-23</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Diploma Roll *</label>
-            <input type="text" id="diplomaRoll">
-          </div>
-
-          <div class="form-group">
-            <label>Diploma Registration Number *</label>
-            <input type="text" id="diplomaReg">
-          </div>
-
-          <div class="form-group">
-            <label>CGPA *</label>
-            <input type="number" id="diplomaCGPA"
-                   min="0" max="4" step="0.01">
-          </div>
-
-          <div class="form-group">
-            <label>Passing Year *</label>
-            <select id="diplomaPassingYear">
-              <option value="">Select Year</option>
-              <option>2018</option>
-              <option>2019</option>
-              <option>2020</option>
-              <option>2021</option>
-              <option>2022</option>
-            </select>
-          </div>
-
-        </div>
-      </div>
-
-    </section>
-
-
-    <!-- CURRENT STATUS -->
-
-    <section class="form-section">
-      <h2>05. Current Status</h2>
-
-      <div class="status-options">
-
-        <label class="checkbox-card">
-          <input type="checkbox" name="currentStatus"
-                 value="Higher Studies" id="statusHigher">
-          Higher Studies
-        </label>
-
-        <label class="checkbox-card">
-          <input type="checkbox" name="currentStatus"
-                 value="Job Holder" id="statusJob">
-          Job Holder
-        </label>
-
-        <label class="checkbox-card">
-          <input type="checkbox" name="currentStatus"
-                 value="Entrepreneur / Business" id="statusBusiness">
-          Entrepreneur / Business
-        </label>
-
-        <label class="checkbox-card">
-          <input type="checkbox" name="currentStatus"
-                 value="Others" id="statusOthers">
-          Others
-        </label>
-
-      </div>
-
-      <div class="conditional-section" id="higherStudiesFields">
-        <h3>Higher Studies Details</h3>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Institute Name *</label>
-            <input type="text" id="higherInstitute">
-          </div>
-
-          <div class="form-group">
-            <label>Department *</label>
-            <input type="text" id="higherDepartment">
-          </div>
-        </div>
-      </div>
-
-
-      <div class="conditional-section" id="jobFields">
-        <h3>Employment Details</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Employment Type *</label>
-            <select id="jobType">
-              <option value="">Select Type</option>
-              <option value="Government Service">Government Service</option>
-              <option value="Private">Private</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Organization / Company *</label>
-            <input type="text" id="jobOrganization">
-          </div>
-
-          <div class="form-group">
-            <label>Designation *</label>
-            <input type="text" id="jobDesignation">
-          </div>
-
-          <div class="form-group">
-            <label>Department *</label>
-            <input type="text" id="jobDepartment">
-          </div>
-
-          <div class="form-group full-width">
-            <label>Location *</label>
-            <input type="text" id="jobLocation">
-          </div>
-
-        </div>
-      </div>
-
-
-      <div class="conditional-section" id="businessFields">
-        <h3>Business Details</h3>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Business / Organization Name</label>
-            <input type="text" id="businessName">
-          </div>
-
-          <div class="form-group">
-            <label>Business Location</label>
-            <input type="text" id="businessLocation">
-          </div>
-        </div>
-      </div>
-
-
-      <div class="conditional-section" id="otherStatusFields">
-        <h3>Other Status</h3>
-        <textarea id="otherStatus" rows="3"
-          placeholder="Please describe your current status"></textarea>
-      </div>
-
-    </section>
-
-
-    <!-- ASSOCIATION DETAILS -->
-
-    <section class="form-section">
-      <h2>06. Association Details</h2>
-
-      <div class="form-group">
-        <label>
-          Please tell us your suggestions regarding the DTSC Alumni Association.
-        </label>
-
-        <textarea id="suggestions" rows="5"
-          placeholder="Write your suggestions here..."></textarea>
-      </div>
-
-    </section>
-
-
-    <!-- ACCOUNT INFORMATION -->
-
-    <section class="form-section">
-      <h2>07. Login & Manage Your Profile</h2>
-
-      <div class="form-grid">
-
-        <div class="form-group">
-          <label>Account Email *</label>
-          <input type="email" id="accountEmail" required>
-        </div>
-
-        <div class="form-group">
-          <label>Mobile Number *</label>
-          <input type="tel" id="accountMobile" required>
-        </div>
-
-        <div class="form-group">
-          <label>Password *</label>
-          <input type="password" id="password"
-                 minlength="8" autocomplete="new-password" required>
-        </div>
-
-        <div class="form-group">
-          <label>Confirm Password *</label>
-          <input type="password" id="confirmPassword"
-                 minlength="8" autocomplete="new-password" required>
-        </div>
-
-      </div>
-
-      <div class="google-auth">
-        <p>Or register using your Google Account</p>
-        <button type="button" id="googleSignIn" class="google-button">
-          <span>G</span> Continue with Google
-        </button>
-        <small>
-          Google registration will be enabled after authentication setup.
-        </small>
-      </div>
-
-    </section>
-
-
-    <!-- DECLARATION -->
-
-    <section class="form-section declaration-section">
-
-      <label class="checkbox-line">
-        <input type="checkbox" id="declaration" required>
-        I confirm that the information provided above is correct and accurate.
-      </label>
-
-    </section>
-
-
-    <!-- ACTION BUTTONS -->
-
-    <div class="form-actions">
-
-      <button type="button" id="previewBtn" class="preview-button">
-        Preview
-      </button>
-
-      <button type="reset" class="reset-button">
-        Reset Form
-      </button>
-
-      <button type="submit" id="submitBtn" class="submit-button">
-        Register Now
-      </button>
-
-    </div>
-
-
-    <!-- PREVIEW AREA -->
-
-    <div id="previewArea" class="preview-area" hidden></div>
-
-  </form>
-
-  <footer class="form-footer">
-    <p>© DTSC Alumni Association. All Rights Reserved.</p>
-  </footer>
+    <footer class="form-footer">
+        <strong>DTSC Alumni Association</strong>
+        <p>Stay Connected | Build a Stronger Alumni Network</p>
+        <p>© DTSC Alumni Association. All Rights Reserved.</p>
+    </footer>
 
 </div>
 
