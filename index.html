@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#103e35">
+    <meta name="theme-color" content="#064b37">
 
     <title>DTSC Alumni Association</title>
 
@@ -12,27 +14,35 @@
 
 <body>
 
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
+
 <header class="site-header">
 
     <div class="header-container">
 
-        <div class="header-logo">
-            <img src="assets/logo.png" alt="Alumni Logo">
+        <!-- LEFT LOGO -->
+        <div class="header-logo left-logo">
+            <img src="assets/logo.png" alt="DTSC Alumni Logo">
         </div>
 
+        <!-- CENTER TITLE -->
         <div class="header-title">
-            <h1 data-en="DTSC Alumni Association">
-                DTSC Alumni Association
-            </h1>
 
-            <p data-en="Dewanganj Govt. Technical School & College, Jamalpur">
-                Dewanganj Govt. Technical School & College, Jamalpur
+            <h1>DTSC Alumni Association</h1>
+
+            <p>
+                Dewanganj Govt. Technical School &amp; College, Jamalpur
             </p>
+
+            <span class="header-tagline">
+                Together Again... Stronger Forever...
+            </span>
+
         </div>
 
-        <div class="header-logo">
-            <img src="assets/dtsclogo.png" alt="College Logo">
+        <!-- RIGHT LOGO -->
+        <div class="header-logo right-logo">
+            <img src="assets/dtsclogo.png" alt="DTSC College Logo">
         </div>
 
     </div>
@@ -40,70 +50,91 @@
 </header>
 
 
-<!-- NAVIGATION -->
+<!-- ================= NAVIGATION ================= -->
+
 <nav class="navbar">
 
     <div class="nav-container">
 
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <!-- MOBILE MENU BUTTON -->
+        <button class="menu-toggle"
+                id="menuToggle"
+                aria-label="Open Navigation">
             ☰
         </button>
 
+        <!-- MAIN MENU -->
         <ul class="nav-menu" id="navMenu">
 
             <li>
-                <a href="index.html" data-en="Home">হোম</a>
+                <a href="index.html" class="active">Home</a>
             </li>
 
             <li>
-                <a href="about/index.html" data-en="About Us">আমাদের সম্পর্কে</a>
+                <a href="#about">About Us</a>
             </li>
 
             <li>
-                <a href="members/index.html" data-en="Members">সদস্যবৃন্দ</a>
+                <a href="#events">Events</a>
             </li>
 
             <li>
-                <a href="teachers/index.html" data-en="Teachers">শিক্ষকমণ্ডলী</a>
+                <a href="#gallery">Gallery</a>
             </li>
 
             <li>
-                <a href="notices/index.html" data-en="Notices">নোটিশ</a>
+                <a href="membership/index.html">
+                    Membership Directory
+                </a>
             </li>
 
             <li>
-                <a href="events/index.html" data-en="Events">ইভেন্ট</a>
-            </li>
-
-            <li>
-                <a href="gallery/index.html" data-en="Gallery">গ্যালারি</a>
+                <a href="#contact">Contact</a>
             </li>
 
         </ul>
 
+
+        <!-- RIGHT NAVIGATION ACTIONS -->
         <div class="nav-actions">
 
-            <button id="languageToggle" class="language-btn">
-                English
+            <!-- LANGUAGE -->
+            <button class="language-btn"
+                    id="languageToggle"
+                    type="button">
+                (BN)
             </button>
 
+
+            <!-- ACCOUNT -->
             <div class="account-wrapper">
 
-                <button class="account-btn" id="accountToggle">
-                    <span data-en="Account">অ্যাকাউন্ট</span>
-                    ▾
+                <button class="account-btn"
+                        id="accountToggle"
+                        type="button">
+
+                    <span>👤 Account</span>
+                    <span>▾</span>
+
                 </button>
 
-                <div class="account-dropdown" id="accountDropdown">
+
+                <!-- ACCOUNT DROPDOWN -->
+                <div class="account-dropdown"
+                     id="accountDropdown">
 
                     <a href="register/index.html"
-                       data-en="Register">
-                        নিবন্ধন
+                       class="account-register">
+
+                        Register
+
                     </a>
 
                     <a href="login/index.html"
-                       data-en="Login">
-                        লগইন
+                       class="account-login">
+
+                        Login
+
                     </a>
 
                 </div>
@@ -117,40 +148,209 @@
 </nav>
 
 
-<!-- HERO SECTION -->
+<!-- ================= HERO SECTION ================= -->
+
 <section class="hero">
 
     <div class="hero-overlay">
 
         <div class="hero-content">
 
-            <span class="hero-tag"
-                  data-en="Welcome to Our Alumni Community">
-                আমাদের অ্যালামনাই পরিবারে স্বাগতম
-            </span>
+            <h2>Welcome to</h2>
 
-            <h2 data-en="Together We Build Our Future">
-                একসাথে গড়ি আগামীর ভবিষ্যৎ
-            </h2>
+            <h1>DTSC Alumni Association</h1>
 
-            <p data-en="Connecting former students, teachers and the institution through a lifelong community.">
-                প্রাক্তন শিক্ষার্থী, সম্মানিত শিক্ষক ও
-                প্রতিষ্ঠানের মধ্যে গড়ে তুলি আজীবনের বন্ধন।
+            <p>
+                Connecting Our Alumni, Celebrating Our Bond,
+                <br>
+                Building a Stronger Community Together.
             </p>
 
-            <div class="hero-buttons">
+            <a href="register/index.html" class="hero-button">
 
-                <a href="register/index.html"
-                   class="btn btn-primary"
-                   data-en="Become a Member">
-                    সদস্য হোন
-                </a>
+                Join Our Community
 
-                <a href="about/index.html"
-                   class="btn btn-outline"
-                   data-en="Explore More">
-                    আরও জানুন
-                </a>
+                <span>→</span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT & NOTICE SECTION ================= -->
+
+<section class="about-notice-section">
+
+    <!-- ABOUT -->
+    <div class="about-image">
+
+        <img src="assets/Institute.jpg"
+             alt="Dewanganj Govt. Technical School and College">
+
+    </div>
+
+
+    <div class="about-content" id="about">
+
+        <div class="section-title">
+
+            <span>ABOUT US</span>
+
+            <h2>About Us</h2>
+
+        </div>
+
+        <p>
+            DTSC Alumni Association is a proud platform for all
+            former students of Dewanganj Govt. Technical School
+            &amp; College.
+
+            Our goal is to keep the bond alive, support each other,
+            and contribute to the growth of our alma mater and society.
+        </p>
+
+        <a href="about/index.html" class="small-button">
+            Learn More →
+        </a>
+
+    </div>
+
+
+    <!-- NOTICE BOARD -->
+    <div class="notice-board" id="notices">
+
+        <div class="notice-heading">
+
+            <h2>📢 Notice Board</h2>
+
+            <a href="notices/index.html">View All →</a>
+
+        </div>
+
+
+        <div class="notice-item">
+
+            <div class="notice-date">
+                <strong>25</strong>
+                <span>Apr</span>
+            </div>
+
+            <div class="notice-text">
+                <h3>Annual Reunion</h3>
+                <p>DTSC Alumni Association is going to organize the annual reunion...</p>
+            </div>
+
+        </div>
+
+
+        <div class="notice-item">
+
+            <div class="notice-date">
+                <strong>18</strong>
+                <span>Apr</span>
+            </div>
+
+            <div class="notice-text">
+                <h3>Website Launch</h3>
+                <p>Our new website is now live!</p>
+            </div>
+
+        </div>
+
+
+        <div class="notice-item">
+
+            <div class="notice-date">
+                <strong>10</strong>
+                <span>Apr</span>
+            </div>
+
+            <div class="notice-text">
+                <h3>Scholarship Program</h3>
+                <p>Applications are open...</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= UPCOMING EVENTS ================= -->
+
+<section class="events-section" id="events">
+
+    <div class="section-heading">
+
+        <h2>📅 Upcoming Events</h2>
+
+        <a href="events/index.html">View All →</a>
+
+    </div>
+
+
+    <div class="events-container">
+
+
+        <div class="event-card">
+
+            <div class="event-date">
+                <strong>15</strong>
+                <span>May</span>
+            </div>
+
+            <div class="event-info">
+
+                <h3>Annual Reunion 2025</h3>
+
+                <p>📍 DTSC College Campus</p>
+
+                <p>◷ 9:00 AM – 5:00 PM</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="event-card">
+
+            <div class="event-date">
+                <strong>21</strong>
+                <span>Jun</span>
+            </div>
+
+            <div class="event-info">
+
+                <h3>Career Guidance Seminar</h3>
+
+                <p>📍 DTSC Auditorium</p>
+
+                <p>◷ 2:00 PM – 5:00 PM</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="event-card">
+
+            <div class="event-date">
+                <strong>05</strong>
+                <span>Jul</span>
+            </div>
+
+            <div class="event-info">
+
+                <h3>Alumni Get-Together</h3>
+
+                <p>📍 Jamalpur</p>
+
+                <p>◷ 6:00 PM – 9:00 PM</p>
 
             </div>
 
@@ -161,196 +361,200 @@
 </section>
 
 
-<!-- WELCOME SECTION -->
-<section class="welcome-section">
+<!-- ================= GALLERY & ACHIEVEMENTS ================= -->
 
-    <div class="section-heading">
+<section class="gallery-achievement-section">
 
-        <span data-en="OUR COMMUNITY">আমাদের পরিবার</span>
 
-        <h2 data-en="Welcome to DTSC Alumni Association">
-            DTSC Alumni Association-এ স্বাগতম
-        </h2>
+    <!-- GALLERY -->
+    <div class="gallery-section" id="gallery">
 
-        <p data-en="A platform that connects generations of students and teachers.">
-            প্রাক্তন শিক্ষার্থী ও শিক্ষকদের একত্রিত করার
-            একটি সম্মিলিত প্ল্যাটফর্ম।
-        </p>
+        <div class="section-heading">
+
+            <h2>📷 Our Gallery</h2>
+
+            <a href="gallery/index.html">View All →</a>
+
+        </div>
+
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item">
+                <img src="assets/Institute.jpg" alt="College Campus">
+            </div>
+
+            <div class="gallery-item">
+                <img src="assets/Institute.jpg" alt="College Memories">
+            </div>
+
+            <div class="gallery-item">
+                <img src="assets/Institute.jpg" alt="Alumni Activities">
+            </div>
+
+            <div class="gallery-item">
+                <img src="assets/Institute.jpg" alt="College Events">
+            </div>
+
+            <div class="gallery-item">
+                <img src="assets/Institute.jpg" alt="Alumni Community">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACHIEVEMENTS -->
+    <div class="achievement-section">
+
+        <h2>🏆 Our Achievements</h2>
+
+        <div class="achievement-grid">
+
+            <div class="achievement-item">
+
+                <span>👥</span>
+
+                <h3>5,000+</h3>
+
+                <p>Alumni Members</p>
+
+            </div>
+
+
+            <div class="achievement-item">
+
+                <span>📅</span>
+
+                <h3>50+</h3>
+
+                <p>Events</p>
+
+            </div>
+
+
+            <div class="achievement-item">
+
+                <span>📄</span>
+
+                <h3>100+</h3>
+
+                <p>Notices</p>
+
+            </div>
+
+        </div>
 
     </div>
 
 </section>
 
 
-<!-- FEATURES -->
-<section class="features-section">
+<!-- ================= CONTACT ================= -->
 
-    <div class="feature-card">
-        <div class="feature-icon">👨‍🎓</div>
+<section class="contact-section" id="contact">
 
-        <h3 data-en="Alumni Members">প্রাক্তন শিক্ষার্থী</h3>
+    <h2>Contact DTSC Alumni Association</h2>
 
-        <p data-en="Stay connected with your classmates and friends.">
-            সহপাঠী ও বন্ধুদের সঙ্গে যোগাযোগ রাখুন।
-        </p>
-
-        <a href="members/index.html"
-           data-en="View Members">
-            সদস্য দেখুন →
-        </a>
-    </div>
-
-
-    <div class="feature-card">
-        <div class="feature-icon">👨‍🏫</div>
-
-        <h3 data-en="Honorable Teachers">সম্মানিত শিক্ষক</h3>
-
-        <p data-en="Remember and connect with our respected teachers.">
-            আমাদের শ্রদ্ধেয় শিক্ষকদের সঙ্গে যুক্ত থাকুন।
-        </p>
-
-        <a href="teachers/index.html"
-           data-en="View Teachers">
-            শিক্ষক দেখুন →
-        </a>
-    </div>
-
-
-    <div class="feature-card">
-        <div class="feature-icon">📢</div>
-
-        <h3 data-en="Latest Notices">সর্বশেষ নোটিশ</h3>
-
-        <p data-en="Get important updates and announcements.">
-            গুরুত্বপূর্ণ তথ্য ও ঘোষণা জানুন।
-        </p>
-
-        <a href="notices/index.html"
-           data-en="Read Notices">
-            নোটিশ পড়ুন →
-        </a>
-    </div>
-
-
-    <div class="feature-card">
-        <div class="feature-icon">🎉</div>
-
-        <h3 data-en="Events & Reunion">ইভেন্ট ও পুনর্মিলনী</h3>
-
-        <p data-en="Join our programs, events and alumni reunions.">
-            বিভিন্ন অনুষ্ঠান ও পুনর্মিলনীতে অংশগ্রহণ করুন।
-        </p>
-
-        <a href="events/index.html"
-           data-en="Explore Events">
-            ইভেন্ট দেখুন →
-        </a>
-    </div>
-
-</section>
-
-
-<!-- ABOUT INSTITUTE -->
-<section class="institute-section">
-
-    <div class="institute-image">
-        <img src="assets/Institute.jpg"
-             alt="Dewanganj Govt. Technical School and College">
-    </div>
-
-    <div class="institute-content">
-
-        <span data-en="OUR INSTITUTION">আমাদের প্রতিষ্ঠান</span>
-
-        <h2 data-en="Dewanganj Govt. Technical School & College">
-            দেওয়ানগঞ্জ সরকারি টেকনিক্যাল স্কুল ও কলেজ
-        </h2>
-
-        <p data-en="Our institution is the foundation of our memories, friendships and achievements.">
-            এই প্রতিষ্ঠান আমাদের স্মৃতি, বন্ধুত্ব ও
-            অর্জনের এক অবিচ্ছেদ্য অংশ।
-        </p>
-
-        <a href="about/index.html"
-           class="read-more"
-           data-en="Learn More">
-            বিস্তারিত জানুন →
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- JOIN SECTION -->
-<section class="join-section">
-
-    <h2 data-en="Be a Part of Our Alumni Family">
-        আমাদের অ্যালামনাই পরিবারের অংশ হোন
-    </h2>
-
-    <p data-en="Reconnect with old friends and build new connections.">
-        পুরোনো বন্ধুদের সঙ্গে আবার যুক্ত হোন,
-        গড়ে তুলুন নতুন সম্পর্ক।
+    <p>
+        Dewanganj Govt. Technical School &amp; College,
+        Jamalpur, Bangladesh
     </p>
 
-    <a href="register/index.html"
-       class="btn btn-primary"
-       data-en="Register Now">
-        এখনই নিবন্ধন করুন
+    <a href="contact/index.html" class="small-button">
+        Contact Us →
     </a>
 
 </section>
 
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
+
 <footer class="footer">
 
     <div class="footer-content">
 
-        <div>
-            <h3>DTSC Alumni Association</h3>
 
-            <p>
-                Dewanganj Govt. Technical School & College,
-                Jamalpur, Bangladesh
-            </p>
+        <!-- FOOTER BRAND -->
+        <div class="footer-brand">
+
+            <img src="assets/logo.png" alt="DTSC Alumni Logo">
+
+            <div>
+
+                <h2>DTSC Alumni Association</h2>
+
+                <p>Together Again... Stronger Forever...</p>
+
+            </div>
+
         </div>
 
-        <div>
-            <h3 data-en="Quick Links">গুরুত্বপূর্ণ লিংক</h3>
 
-            <a href="about/index.html" data-en="About Us">আমাদের সম্পর্কে</a>
-            <a href="members/index.html" data-en="Members">সদস্যবৃন্দ</a>
-            <a href="notices/index.html" data-en="Notices">নোটিশ</a>
-            <a href="events/index.html" data-en="Events">ইভেন্ট</a>
+        <!-- CONTACT -->
+        <div class="footer-contact">
+
+            <h3>Contact Us</h3>
+
+            <p>📍 Dewanganj, Jamalpur</p>
+
+            <p>✉️ Email: info@dtscalumni.org</p>
+
         </div>
 
-        <div>
-            <h3 data-en="Contact">যোগাযোগ</h3>
 
-            <p>Dewanganj, Jamalpur</p>
-            <p>Bangladesh</p>
+        <!-- SOCIAL -->
+        <div class="footer-social">
+
+            <h3>Follow Us</h3>
+
+            <a href="#">Facebook</a>
+
+            <a href="#">YouTube</a>
+
+            <a href="#">LinkedIn</a>
+
+        </div>
+
+
+        <!-- FOOTER SLOGAN -->
+        <div class="footer-slogan">
+
+            Proud to be DTSCian
+
         </div>
 
     </div>
+
 
     <div class="footer-bottom">
 
         <p>
             © <span id="currentYear"></span>
-            DTSC Alumni Association.
-            <span data-en="All Rights Reserved.">
-                সর্বস্বত্ব সংরক্ষিত।
-            </span>
+            DTSC Alumni Association. All Rights Reserved.
         </p>
+
+        <div>
+
+            <a href="privacy/index.html">Privacy Policy</a>
+
+            <span>|</span>
+
+            <a href="terms/index.html">Terms of Service</a>
+
+            <span>|</span>
+
+            <a href="#contact">Contact</a>
+
+        </div>
 
     </div>
 
 </footer>
 
 
+<!-- JAVASCRIPT -->
 <script src="script.js"></script>
 
 </body>
