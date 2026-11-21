@@ -1,293 +1,499 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DTSC Alumni Association | Dewanganj Govt. Technical School & College</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#103e35">
+
+  <title>DTSC Alumni Association</title>
+
+  <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
 
-    <!-- Header & Navigation -->
-    <header class="site-header">
-        <div class="container header-container">
-            <div class="brand-logo">
-                <img src="logo-left.png" alt="DTSC Logo" class="logo-img" onerror="this.style.display='none'">
-                <div class="brand-text">
-                    <h1>DTSC Alumni Association</h1>
-                    <p class="sub-title">Dewanganj Govt. Technical School & College, Jamalpur</p>
-                    <span class="tagline">Shared Roots, Lifelong Fellowship</span>
-                </div>
-                <img src="logo-right.png" alt="Association Logo" class="logo-img" onerror="this.style.display='none'">
-            </div>
+  <!-- HEADER + NAVIGATION -->
 
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+  <div class="site-header">
 
-            <nav class="nav-menu" id="navMenu">
-                <ul class="nav-list">
-                    <li><a href="#home" class="nav-link">Home</a></li>
-                    <li><a href="#about" class="nav-link">About Us</a></li>
-                    <li><a href="#events" class="nav-link">Events</a></li>
-                    <li><a href="#gallery" class="nav-link">Gallery</a></li>
-                    <li><a href="#directory" class="nav-link">Membership Directory</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                    <li><button type="button" class="lang-btn" id="langToggle">[En]</button></li>
-                    <li><a href="javascript:void(0)" class="btn-nav btn-login open-modal" data-target="loginModal">Login</a></li>
-                    <li><a href="javascript:void(0)" class="btn-nav btn-register open-modal" data-target="registerModal">Register</a></li>
-                </ul>
-            </nav>
-        </div>
+    <header class="header">
+
+      <div class="header-logo">
+        <img src="./assets/logo.png" alt="DTSC Alumni Association Logo">
+      </div>
+
+      <div class="header-title">
+        <h1>DTSC Alumni Association</h1>
+        <p>Dewanganj Govt. Technical School & College, Jamalpur</p>
+        <span>Shared Roots, Lifelong Fellowship</span>
+      </div>
+
+      <div class="header-logo">
+        <img src="./assets/dtsclogo.png" alt="DTSC Institute Logo">
+      </div>
+
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="hero-overlay">
-            <div class="container hero-content">
-                <p class="hero-welcome">Welcome to</p>
-                <h2 class="hero-title">DTSC Alumni Association</h2>
-                <p class="hero-subtitle">Shared Roots, Lifelong Fellowship</p>
-                <p class="hero-desc">Together again—DTSCians, friends, and teachers bound by shared memories.</p>
-                <div class="hero-buttons">
-                    <a href="javascript:void(0)" class="btn btn-primary open-modal" data-target="registerModal">Join Our Community &rarr;</a>
-                    <a href="#directory" class="btn btn-outline">Explore Membership</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- NAVIGATION -->
 
-    <!-- About Our Association -->
-    <section id="about" class="section-padding">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About Our Association</h2>
-                <div class="title-underline"></div>
-                <p class="section-subtitle">Our History, Our Pride, Our Community</p>
-            </div>
+    <nav class="navbar">
 
-            <div class="about-card">
-                <div class="about-image">
-                    <img src="campus.jpg" alt="DTSC Campus" onerror="this.src='https://via.placeholder.com/600x350/0f4c3a/ffffff?text=DTSC+Campus'">
-                </div>
-                <div class="about-text">
-                    <h3>Welcome to Our Alumni Community</h3>
-                    <p>DTSC Alumni Association is a platform for former students and respected teachers of Dewanganj Govt. Technical School & College, Jamalpur.</p>
-                    <p>Our goal is to maintain lifelong connections, promote mutual support, preserve memories and contribute to the development of our institution.</p>
-                    <a href="#about-details" class="text-link">Read More &rarr;</a>
-                </div>
-            </div>
-        </div>
-    </section>
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Open Menu"
+        aria-expanded="false">
+        ☰
+      </button>
 
-    <!-- Notice Board -->
-    <section id="notices" class="section-padding bg-light">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Notice Board</h2>
-                <div class="title-underline"></div>
-                <p class="section-subtitle">Latest announcements and updates</p>
-            </div>
+      <ul class="nav-menu" id="navMenu">
 
-            <div class="notice-box">
-                <div class="notice-empty">
-                    <p>No notices available at the moment.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <li><a href="index.html">Home</a></li>
 
-    <!-- Upcoming Events -->
-    <section id="events" class="section-padding">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Upcoming Events</h2>
-                <div class="title-underline"></div>
-                <p class="section-subtitle">Stay connected with our activities</p>
-            </div>
+        <li><a href="about/index.html">About Us</a></li>
 
-            <div class="event-placeholder-box">
-                <p>Upcoming events will be published here.</p>
-                <a href="#all-events" class="text-link">View All Events &rarr;</a>
-            </div>
-        </div>
-    </section>
+        <li><a href="events/index.html">Events</a></li>
 
-    <!-- Photo Gallery -->
-    <section id="gallery" class="section-padding bg-light">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Photo Gallery</h2>
-                <div class="title-underline"></div>
-                <p class="section-subtitle">Memories that bring us together</p>
-            </div>
+        <li><a href="gallery/index.html">Gallery</a></li>
 
-            <div class="gallery-cta">
-                <a href="#full-gallery" class="text-link">Explore Gallery &rarr;</a>
-            </div>
-        </div>
-    </section>
+        <li>
+          <a href="membership/index.html">Membership Directory</a>
+        </li>
 
-    <!-- Become a Member -->
-    <section id="directory" class="cta-banner">
-        <div class="container">
-            <h2>Become a Member</h2>
-            <p>Reconnect with your institution and alumni family.</p>
-            <div class="cta-buttons">
-                <a href="javascript:void(0)" class="btn btn-outline-light open-modal" data-target="registerModal">Register Now</a>
-                <a href="#member-list" class="btn btn-outline-light">Membership Directory</a>
-            </div>
-        </div>
-    </section>
+        <li><a href="contact/index.html">Contact</a></li>
 
-    <!-- Contact Us -->
-    <section id="contact" class="section-padding">
-        <div class="container text-center">
-            <div class="section-header">
-                <h2 class="section-title">Contact Us</h2>
-                <div class="title-underline"></div>
-                <p class="section-subtitle">We would love to hear from you</p>
-            </div>
-            <p class="contact-address">Dewanganj Govt. Technical School & College,<br>Dewanganj, Jamalpur, Bangladesh</p>
-            <a href="#contact-form" class="text-link">Contact Details &rarr;</a>
-        </div>
-    </section>
+        <li>
+          <button id="languageToggle">(BN)</button>
+        </li>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container footer-grid">
-            <div class="footer-col">
-                <h3>DTSC Alumni Association</h3>
-                <p>Connecting former students and respected teachers of Dewanganj Govt. Technical School & College. Shared Roots, Lifelong Fellowship.</p>
-            </div>
+        <li>
+          <a href="#" class="login-trigger">Login</a>
+        </li>
 
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#events">Events</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
+        <li>
+          <a href="#" class="register-trigger">Register</a>
+        </li>
 
-            <div class="footer-col">
-                <h4>Membership</h4>
-                <ul>
-                    <li><a href="javascript:void(0)" class="open-modal" data-target="registerModal">Join Our Community</a></li>
-                    <li><a href="#directory">Membership Directory</a></li>
-                    <li><a href="javascript:void(0)" class="open-modal" data-target="loginModal">Member Login</a></li>
-                </ul>
-            </div>
+      </ul>
 
-            <div class="footer-col">
-                <h4>Contact Information</h4>
-                <p>Dewanganj Govt. Technical School & College</p>
-                <p>Dewanganj, Jamalpur, Bangladesh</p>
-                <a href="#contact" class="footer-link">Contact Us &rarr;</a>
-            </div>
-        </div>
+    </nav>
 
-        <div class="footer-bottom">
-            <div class="container">
-                <p>&copy; 2026 DTSC Alumni Association. All Rights Reserved.</p>
-                <p class="footer-tagline">Shared Roots, Lifelong Fellowship</p>
-            </div>
-        </div>
-    </footer>
+  </div>
 
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal-backdrop" aria-hidden="true">
-        <div class="modal-dialog">
-            <button type="button" class="modal-close" data-close="loginModal">&times;</button>
-            <div class="modal-header">
-                <h3>Member Login</h3>
-                <p>Sign in to access your DTSC Alumni profile</p>
-            </div>
-            <form id="loginForm" class="modal-form">
-                <div class="form-group">
-                    <label for="loginEmail">Email or Mobile Number</label>
-                    <input type="text" id="loginEmail" placeholder="Enter your email or phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
-            </form>
-            <div class="modal-footer-text">
-                Don't have an account? <a href="javascript:void(0)" class="switch-modal" data-from="loginModal" data-to="registerModal">Register Now</a>
-            </div>
-        </div>
+
+  <!-- HERO BANNER -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <p class="hero-label">Welcome to</p>
+
+      <h2>DTSC Alumni Association</h2>
+
+      <h3>Shared Roots, Lifelong Fellowship</h3>
+
+      <p class="hero-message">
+        Together again—DTSCians, friends, and teachers bound by shared memories.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#" class="hero-btn register-trigger">
+          Join Our Community →
+        </a>
+
+        <a href="membership/index.html" class="hero-btn secondary-btn">
+          Explore Membership
+        </a>
+
+      </div>
+
     </div>
 
-    <!-- Register Modal -->
-    <div id="registerModal" class="modal-backdrop" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <button type="button" class="modal-close" data-close="registerModal">&times;</button>
-            <div class="modal-header">
-                <h3>Alumni Registration</h3>
-                <p>Join the DTSC Alumni Association community</p>
-            </div>
-            <form id="registerForm" class="modal-form">
-                <div class="form-group">
-                    <label for="regName">Full Name</label>
-                    <input type="text" id="regName" placeholder="Enter your full name" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="regProgram">Program</label>
-                        <select id="regProgram" required>
-                            <option value="">Select Program</option>
-                            <option value="JSC">JSC (Vocational)</option>
-                            <option value="SSC">SSC (Vocational)</option>
-                            <option value="HSC">HSC (Vocational / BM)</option>
-                            <option value="Diploma">Diploma in Engineering</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="regBatch">Passing Year / Batch</label>
-                        <input type="number" id="regBatch" placeholder="e.g. 2020" min="1995" max="2030" required>
-                    </div>
-                </div>
-                <div class="form-group" id="deptGroup" style="display: none;">
-                    <label for="regDept">Department / Trade</label>
-                    <input type="text" id="regDept" placeholder="e.g. Mechanical, Civil, Electrical, Computer">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="regPhone">Mobile Number</label>
-                        <input type="tel" id="regPhone" placeholder="01XXXXXXXXX" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="regBlood">Blood Group</label>
-                        <select id="regBlood">
-                            <option value="">Select</option>
-                            <option value="A+">A+</option>
-                            <option value="A-">A-</option>
-                            <option value="B+">B+</option>
-                            <option value="B-">B-</option>
-                            <option value="O+">O+</option>
-                            <option value="O-">O-</option>
-                            <option value="AB+">AB+</option>
-                            <option value="AB-">AB-</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="regPassword">Create Password</label>
-                    <input type="password" id="regPassword" placeholder="Minimum 6 characters" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Complete Registration</button>
-            </form>
-            <div class="modal-footer-text">
-                Already a member? <a href="javascript:void(0)" class="switch-modal" data-from="registerModal" data-to="loginModal">Login Here</a>
-            </div>
-        </div>
+  </section>
+
+
+  <!-- ABOUT SECTION -->
+
+  <section class="about-section">
+
+    <div class="section-title">
+      <h2>About Our Association</h2>
+      <p>Our History, Our Pride, Our Community</p>
     </div>
 
-    <script src="script.js"></script>
+    <div class="about-content">
+
+      <div class="about-image">
+        <img src="./assets/institute.jpg" alt="Our Institute">
+      </div>
+
+      <div class="about-text">
+
+        <h3>Welcome to Our Alumni Community</h3>
+
+        <p>
+          DTSC Alumni Association is a platform for former students
+          and respected teachers of Dewanganj Govt. Technical School
+          & College, Jamalpur.
+        </p>
+
+        <p>
+          Our goal is to maintain lifelong connections, promote
+          mutual support, preserve memories and contribute to
+          the development of our institution.
+        </p>
+
+        <a href="about/index.html" class="read-more">
+          Read More →
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- NOTICE BOARD -->
+
+  <section class="notice-section">
+
+    <div class="section-title">
+      <h2>Notice Board</h2>
+      <p>Latest announcements and updates</p>
+    </div>
+
+    <div class="notice-box">
+      <p>No notices available at the moment.</p>
+    </div>
+
+  </section>
+
+
+  <!-- EVENTS SECTION -->
+
+  <section class="events-section">
+
+    <div class="section-title">
+      <h2>Upcoming Events</h2>
+      <p>Stay connected with our activities</p>
+    </div>
+
+    <div class="event-box">
+
+      <p>Upcoming events will be published here.</p>
+
+      <a href="events/index.html">
+        View All Events →
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- PHOTO GALLERY -->
+
+  <section class="gallery-section">
+
+    <div class="section-title">
+      <h2>Photo Gallery</h2>
+      <p>Memories that bring us together</p>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Admin uploaded photos will appear here -->
+    </div>
+
+    <div class="gallery-link">
+      <a href="gallery/index.html">Explore Gallery →</a>
+    </div>
+
+  </section>
+
+
+  <!-- MEMBERSHIP SECTION -->
+
+  <section class="membership-section">
+
+    <div class="section-title">
+      <h2>Become a Member</h2>
+      <p>Reconnect with your institution and alumni family.</p>
+    </div>
+
+    <a href="#" class="membership-btn register-trigger">
+      Register Now
+    </a>
+
+    <a href="membership/index.html" class="membership-btn">
+      Membership Directory
+    </a>
+
+  </section>
+
+
+  <!-- CONTACT SECTION -->
+
+  <section class="contact-section">
+
+    <div class="section-title">
+      <h2>Contact Us</h2>
+      <p>We would love to hear from you</p>
+    </div>
+
+    <p>
+      Dewanganj Govt. Technical School & College,
+      Dewanganj, Jamalpur, Bangladesh
+    </p>
+
+    <a href="contact/index.html">
+      Contact Details →
+    </a>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div class="footer-container">
+
+      <div class="footer-column footer-about">
+
+        <h3>DTSC Alumni Association</h3>
+
+        <p>
+          Connecting former students and respected teachers
+          of Dewanganj Govt. Technical School & College.
+          Shared Roots, Lifelong Fellowship.
+        </p>
+
+      </div>
+
+      <div class="footer-column">
+
+        <h4>Quick Links</h4>
+
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about/index.html">About Us</a></li>
+          <li><a href="events/index.html">Events</a></li>
+          <li><a href="gallery/index.html">Gallery</a></li>
+          <li><a href="contact/index.html">Contact</a></li>
+        </ul>
+
+      </div>
+
+      <div class="footer-column">
+
+        <h4>Membership</h4>
+
+        <ul>
+          <li>
+            <a href="#" class="register-trigger">Join Our Community</a>
+          </li>
+
+          <li>
+            <a href="membership/index.html">Membership Directory</a>
+          </li>
+
+          <li>
+            <a href="#" class="login-trigger">Member Login</a>
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="footer-column">
+
+        <h4>Contact Information</h4>
+
+        <p>Dewanganj Govt. Technical School & College</p>
+        <p>Dewanganj, Jamalpur, Bangladesh</p>
+
+        <a href="contact/index.html">Contact Us →</a>
+
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+      <p>
+        © 2026 DTSC Alumni Association. All Rights Reserved.
+      </p>
+
+      <p>
+        Shared Roots, Lifelong Fellowship
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <!-- REGISTER POPUP -->
+
+  <div
+    class="register-modal"
+    id="registerModal"
+    aria-hidden="true">
+
+    <div class="register-modal-overlay"></div>
+
+    <div
+      class="register-modal-content"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="registerTitle">
+
+      <button
+        type="button"
+        class="register-close"
+        id="closeRegisterModal"
+        aria-label="Close">
+        &times;
+      </button>
+
+      <div class="register-modal-icon">🎓</div>
+
+      <h2 id="registerTitle">Choose Registration Type</h2>
+
+      <p>Please select your membership category.</p>
+
+      <div class="register-options">
+
+        <a href="./register/students/index.html"
+           class="register-option student-option">
+
+          <span class="option-icon">🎓</span>
+
+          <span class="option-text">
+            <strong>Student</strong>
+            <small>Register as a former student</small>
+          </span>
+
+          <span class="option-arrow">→</span>
+
+        </a>
+
+        <a href="./register/teachers/index.html"
+           class="register-option teacher-option">
+
+          <span class="option-icon">👨‍🏫</span>
+
+          <span class="option-text">
+            <strong>Honorable Teacher</strong>
+            <small>Register as a respected teacher</small>
+          </span>
+
+          <span class="option-arrow">→</span>
+
+        </a>
+
+      </div>
+
+      <p class="register-modal-footer">
+        DTSC Alumni Association
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- LOGIN POPUP -->
+
+  <div
+    class="login-modal"
+    id="loginModal"
+    aria-hidden="true">
+
+    <div class="login-modal-overlay"></div>
+
+    <div
+      class="login-modal-content"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="loginTitle">
+
+      <button
+        type="button"
+        class="login-close"
+        id="closeLoginModal"
+        aria-label="Close">
+        &times;
+      </button>
+
+      <div class="login-modal-icon">🔐</div>
+
+      <h2 id="loginTitle">Choose Login Type</h2>
+
+      <p>Please select your account category.</p>
+
+      <div class="login-options">
+
+        <a href="./student/index.html"
+           class="login-option">
+
+          <span class="option-icon">🎓</span>
+
+          <span class="option-text">
+            <strong>Student</strong>
+            <small>Student member login</small>
+          </span>
+
+          <span class="option-arrow">→</span>
+
+        </a>
+
+        <a href="./teachers/index.html"
+           class="login-option">
+
+          <span class="option-icon">👨‍🏫</span>
+
+          <span class="option-text">
+            <strong>Honorable Teacher</strong>
+            <small>Teacher member login</small>
+          </span>
+
+          <span class="option-arrow">→</span>
+
+        </a>
+
+        <a href="./admin/index.html"
+           class="login-option admin-option">
+
+          <span class="option-icon">🛡️</span>
+
+          <span class="option-text">
+            <strong>Administration</strong>
+            <small>Admin and management login</small>
+          </span>
+
+          <span class="option-arrow">→</span>
+
+        </a>
+
+      </div>
+
+      <p class="login-modal-footer">
+        DTSC Alumni Association
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- JAVASCRIPT -->
+
+  <script src="./script.js"></script>
+
 </body>
 </html>
