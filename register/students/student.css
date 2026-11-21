@@ -1,455 +1,458 @@
+/* =====================================
+   DTSC ALUMNI ASSOCIATION
+   STUDENT REGISTRATION FORM
+   ===================================== */
 
 :root {
-  --primary: #103e35;
-  --primary-light: #176b59;
-  --secondary: #d9ad55;
-  --background: #f4f7f5;
-  --white: #ffffff;
-  --text: #263832;
-  --muted: #718078;
-  --border: #dce5df;
-  --danger: #c0392b;
-  --shadow: 0 8px 30px rgba(16, 62, 53, 0.08);
+    --primary: #103e35;
+    --primary-dark: #092e27;
+    --secondary: #d4a843;
+    --background: #f3f6f5;
+    --white: #ffffff;
+    --text: #26332f;
+    --muted: #6b7772;
+    --border: #dce5e1;
+    --danger: #dc3545;
+    --success: #198754;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: var(--background);
-  color: var(--text);
-  line-height: 1.6;
-  padding: 25px 15px;
+    font-family: Arial, "Noto Sans Bengali", sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
 }
+
+/* MAIN CONTAINER */
 
 .registration-container {
-  max-width: 1050px;
-  margin: auto;
-  background: var(--white);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  overflow: hidden;
+    width: 100%;
+    max-width: 1050px;
+    margin: 35px auto;
+    padding: 0 18px;
 }
+
+/* HEADER */
 
 .form-header {
-  background: linear-gradient(135deg, #103e35, #176b59);
-  color: white;
-  text-align: center;
-  padding: 35px 20px;
-  position: relative;
-}
-
-.back-link {
-  position: absolute;
-  top: 18px;
-  left: 20px;
-  color: white;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.back-link:hover {
-  text-decoration: underline;
+    background: var(--white);
+    padding: 28px 20px;
+    text-align: center;
+    border-radius: 12px;
+    border-top: 5px solid var(--primary);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+    margin-bottom: 25px;
 }
 
 .form-logo {
-  width: 75px;
-  height: 75px;
-  object-fit: contain;
-  background: white;
-  padding: 6px;
-  border-radius: 50%;
-  margin-bottom: 12px;
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    margin-bottom: 10px;
 }
 
 .form-header h1 {
-  font-size: 27px;
-  margin-bottom: 5px;
+    color: var(--primary);
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.form-header h2 {
+    color: var(--text);
+    font-size: 19px;
+    margin-bottom: 5px;
 }
 
 .form-header p {
-  font-size: 16px;
-  font-weight: 600;
+    color: var(--muted);
+    font-size: 14px;
 }
 
-.form-header span {
-  display: block;
-  margin-top: 8px;
-  font-size: 12px;
-  color: #e4d3a8;
-  letter-spacing: 1px;
+.back-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
 }
 
-#studentRegistrationForm {
-  padding: 25px;
+.back-link:hover {
+    color: var(--secondary);
 }
+
+/* FORM SECTIONS */
 
 .form-section {
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 24px;
-  background: #fff;
+    background: var(--white);
+    padding: 25px;
+    margin-bottom: 22px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.035);
 }
 
-.form-section h2 {
-  font-size: 19px;
-  color: var(--primary);
-  border-bottom: 2px solid var(--secondary);
-  padding-bottom: 10px;
-  margin-bottom: 22px;
+.section-title {
+    color: var(--primary);
+    font-size: 18px;
+    font-weight: 700;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e8eeeb;
 }
 
-.form-section h3 {
-  color: var(--primary);
-  font-size: 16px;
-  margin-bottom: 17px;
-}
-
-.section-description {
-  color: var(--muted);
-  margin-bottom: 18px;
-  font-size: 14px;
-}
+/* FORM GRID */
 
 .form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  min-width: 0;
-}
-
-.form-group label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #34483f;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .full-width {
-  grid-column: 1 / -1;
+    grid-column: 1 / -1;
 }
 
-input,
-select,
-textarea {
-  width: 100%;
-  min-height: 44px;
-  padding: 11px 12px;
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  background: #fff;
-  color: var(--text);
-  font-family: inherit;
-  font-size: 14px;
-  outline: none;
-  transition: 0.2s;
+/* LABELS */
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 7px;
 }
 
-textarea {
-  resize: vertical;
-  min-height: 90px;
+.required {
+    color: var(--danger);
 }
 
-input:focus,
-select:focus,
-textarea:focus {
-  border-color: var(--primary-light);
-  box-shadow: 0 0 0 3px rgba(23, 107, 89, 0.10);
+/* INPUTS */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #cfdad5;
+    border-radius: 6px;
+    background: #fff;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s ease;
 }
 
-input:disabled,
-select:disabled {
-  background: #f0f2f1;
-  cursor: not-allowed;
+.form-group textarea {
+    min-height: 95px;
+    resize: vertical;
 }
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(16, 62, 53, 0.10);
+}
+
+.form-group input:disabled,
+.form-group select:disabled {
+    background: #edf1ef;
+    cursor: not-allowed;
+}
+
+/* DATE GRID */
 
 .date-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.3fr 1.2fr;
-  gap: 7px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
 }
+
+/* PHOTO */
 
 .photo-preview {
-  display: none;
-  width: 115px;
-  height: 115px;
-  object-fit: cover;
-  border: 3px solid var(--border);
-  border-radius: 10px;
-  margin-top: 10px;
+    width: 125px;
+    height: 145px;
+    border: 2px dashed #bdccc5;
+    border-radius: 8px;
+    background: #f8faf9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 10px;
 }
 
-.photo-preview[src] {
-  display: block;
+.photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
+
+.photo-preview span {
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    padding: 8px;
+}
+
+/* CHECKBOX OPTIONS */
 
 .checkbox-line {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 14px;
-  cursor: pointer;
-  margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 10px 0;
+    font-size: 14px;
 }
 
-.checkbox-line input,
-.checkbox-card input {
-  width: 17px;
-  min-height: 17px;
-  height: 17px;
-  accent-color: var(--primary);
-  flex-shrink: 0;
-  margin-top: 3px;
+.checkbox-line input {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--primary);
+    cursor: pointer;
 }
 
 .academic-options,
 .status-options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
 }
 
 .checkbox-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 14px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: #fafcfb;
-  cursor: pointer;
-  font-size: 14px;
-  transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 15px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: #fbfcfb;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
 }
 
 .checkbox-card:hover {
-  border-color: var(--primary-light);
-  background: #f0f7f3;
+    border-color: var(--primary);
+    background: #f2f7f5;
 }
 
-.checkbox-card:has(input:checked) {
-  border-color: var(--primary);
-  background: #eaf4ef;
+.checkbox-card input {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--primary);
 }
+
+/* CONDITIONAL SECTIONS */
 
 .conditional-section {
-  display: none;
-  border: 1px solid #dce8df;
-  border-left: 4px solid var(--primary-light);
-  background: #f8fbf9;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 20px 0;
+    background: #f8faf9;
+    border: 1px solid #dce7e1;
+    border-left: 4px solid var(--primary);
+    border-radius: 7px;
+    padding: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
-.conditional-section.active {
-  display: block;
+[hidden] {
+    display: none !important;
 }
+
+/* GOOGLE SIGN IN */
 
 .google-auth {
-  text-align: center;
-  margin-top: 25px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-}
-
-.google-auth p {
-  font-size: 14px;
-  margin-bottom: 12px;
-  color: var(--muted);
+    margin-top: 18px;
+    text-align: center;
 }
 
 .google-button {
-  width: 100%;
-  max-width: 330px;
-  min-height: 45px;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  color: #333;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 350px;
+    min-height: 45px;
+    padding: 10px 15px;
+    background: var(--white);
+    color: #333;
+    border: 1px solid #ccd5d1;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 .google-button:hover {
-  background: #f6f8f7;
-  border-color: #9baea4;
+    background: #f4f7f5;
+    border-color: var(--primary);
 }
 
-.google-button span {
-  font-size: 19px;
-  font-weight: bold;
-  color: #4285f4;
-  margin-right: 9px;
-}
-
-.google-auth small {
-  display: block;
-  color: var(--muted);
-  margin-top: 9px;
-  font-size: 11px;
-}
+/* DECLARATION */
 
 .declaration-section {
-  background: #f8fbf9;
+    background: #f7faf8;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 18px;
+    margin-top: 15px;
 }
 
+/* FORM ACTIONS */
+
 .form-actions {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin: 28px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
 }
 
 .form-actions button {
-  min-width: 145px;
-  padding: 13px 22px;
-  border: none;
-  border-radius: 7px;
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.form-actions button:hover {
-  transform: translateY(-2px);
-  opacity: 0.92;
+    min-width: 145px;
+    min-height: 45px;
+    padding: 11px 22px;
+    border: none;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
 }
 
 .preview-button {
-  background: #416b83;
+    background: #e8eff0;
+    color: var(--primary);
+}
+
+.preview-button:hover {
+    background: #d8e4e1;
 }
 
 .reset-button {
-  background: #78847e;
+    background: #6c757d;
+    color: var(--white);
+}
+
+.reset-button:hover {
+    background: #565e64;
 }
 
 .submit-button {
-  background: var(--primary);
+    background: var(--primary);
+    color: var(--white);
 }
 
+.submit-button:hover {
+    background: var(--primary-dark);
+}
+
+.form-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* PREVIEW AREA */
+
 .preview-area {
-  display: none;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 20px;
-  margin: 20px 0;
-  background: #f8fbf9;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px;
+    margin-top: 20px;
+    overflow-wrap: anywhere;
 }
 
 .preview-area h3 {
-  color: var(--primary);
-  margin-bottom: 15px;
+    color: var(--primary);
+    margin-bottom: 15px;
 }
 
-.preview-area p {
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 14px;
-  overflow-wrap: anywhere;
-}
+/* FOOTER */
 
 .form-footer {
-  background: #103e35;
-  color: white;
-  text-align: center;
-  padding: 18px;
-  font-size: 12px;
+    text-align: center;
+    padding: 22px 10px;
+    color: var(--muted);
+    font-size: 13px;
 }
 
-/* TABLET */
-
-@media (max-width: 768px) {
-  body {
-    padding: 12px;
-  }
-
-  #studentRegistrationForm {
-    padding: 16px;
-  }
-
-  .form-section {
-    padding: 18px;
-  }
-
-  .form-header h1 {
-    font-size: 22px;
-  }
+.form-footer strong {
+    color: var(--primary);
 }
 
-/* MOBILE */
+/* RESPONSIVE */
 
-@media (max-width: 550px) {
-  body {
-    padding: 0;
-  }
+@media (max-width: 700px) {
 
-  .registration-container {
-    border-radius: 0;
-  }
+    .registration-container {
+        margin: 15px auto;
+        padding: 0 10px;
+    }
 
-  .form-header {
-    padding: 55px 15px 25px;
-  }
+    .form-header {
+        padding: 22px 12px;
+    }
 
-  .form-header h1 {
-    font-size: 20px;
-  }
+    .form-header h1 {
+        font-size: 20px;
+    }
 
-  .back-link {
-    top: 15px;
-    left: 15px;
-  }
+    .form-header h2 {
+        font-size: 17px;
+    }
 
-  #studentRegistrationForm {
-    padding: 12px;
-  }
+    .form-section {
+        padding: 18px 14px;
+    }
 
-  .form-section {
-    padding: 15px;
-    margin-bottom: 16px;
-  }
+    .section-title {
+        font-size: 16px;
+    }
 
-  .form-section h2 {
-    font-size: 17px;
-  }
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
 
-  .form-grid,
-  .academic-options,
-  .status-options {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
+    .academic-options,
+    .status-options {
+        grid-template-columns: 1fr;
+    }
 
-  .date-grid {
-    grid-template-columns: 1fr 1.2fr 1fr;
-  }
+    .form-actions {
+        flex-direction: column;
+    }
 
-  .conditional-section {
-    padding: 14px;
-  }
+    .form-actions button {
+        width: 100%;
+    }
+}
 
-  .form-actions {
-    flex-direction: column;
-  }
+@media (max-width: 380px) {
 
-  .form-actions button {
-    width: 100%;
-  }
+    .date-grid {
+        grid-template-columns: 1fr;
+    }
+
 }
