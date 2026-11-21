@@ -50,22 +50,22 @@
 
       <ul class="nav-menu" id="navMenu">
 
-        <li><a href="index.html">Home</a></li>
+        <li><a href="./index.html">Home</a></li>
 
-        <li><a href="about/index.html">About Us</a></li>
+        <li><a href="./about/index.html">About Us</a></li>
 
-        <li><a href="events/index.html">Events</a></li>
+        <li><a href="./events/index.html">Events</a></li>
 
-        <li><a href="gallery/index.html">Gallery</a></li>
+        <li><a href="./gallery/index.html">Gallery</a></li>
 
         <li>
-          <a href="membership/index.html">Membership Directory</a>
+          <a href="./membership/index.html">Membership Directory</a>
         </li>
 
-        <li><a href="contact/index.html">Contact</a></li>
+        <li><a href="./contact/index.html">Contact</a></li>
 
         <li>
-          <button id="languageToggle">(BN)</button>
+          <button id="languageToggle" type="button">(BN)</button>
         </li>
 
         <li>
@@ -105,7 +105,7 @@
           Join Our Community →
         </a>
 
-        <a href="membership/index.html" class="hero-btn secondary-btn">
+        <a href="./membership/index.html" class="hero-btn secondary-btn">
           Explore Membership
         </a>
 
@@ -147,7 +147,7 @@
           the development of our institution.
         </p>
 
-        <a href="about/index.html" class="read-more">
+        <a href="./about/index.html" class="read-more">
           Read More →
         </a>
 
@@ -187,7 +187,7 @@
 
       <p>Upcoming events will be published here.</p>
 
-      <a href="events/index.html">
+      <a href="./events/index.html">
         View All Events →
       </a>
 
@@ -210,7 +210,7 @@
     </div>
 
     <div class="gallery-link">
-      <a href="gallery/index.html">Explore Gallery →</a>
+      <a href="./gallery/index.html">Explore Gallery →</a>
     </div>
 
   </section>
@@ -229,7 +229,7 @@
       Register Now
     </a>
 
-    <a href="membership/index.html" class="membership-btn">
+    <a href="./membership/index.html" class="membership-btn">
       Membership Directory
     </a>
 
@@ -250,7 +250,7 @@
       Dewanganj, Jamalpur, Bangladesh
     </p>
 
-    <a href="contact/index.html">
+    <a href="./contact/index.html">
       Contact Details →
     </a>
 
@@ -280,11 +280,11 @@
         <h4>Quick Links</h4>
 
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about/index.html">About Us</a></li>
-          <li><a href="events/index.html">Events</a></li>
-          <li><a href="gallery/index.html">Gallery</a></li>
-          <li><a href="contact/index.html">Contact</a></li>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./about/index.html">About Us</a></li>
+          <li><a href="./events/index.html">Events</a></li>
+          <li><a href="./gallery/index.html">Gallery</a></li>
+          <li><a href="./contact/index.html">Contact</a></li>
         </ul>
 
       </div>
@@ -294,17 +294,25 @@
         <h4>Membership</h4>
 
         <ul>
+
           <li>
-            <a href="#" class="register-trigger">Join Our Community</a>
+            <a href="#" class="register-trigger">
+              Join Our Community
+            </a>
           </li>
 
           <li>
-            <a href="membership/index.html">Membership Directory</a>
+            <a href="./membership/index.html">
+              Membership Directory
+            </a>
           </li>
 
           <li>
-            <a href="#" class="login-trigger">Member Login</a>
+            <a href="#" class="login-trigger">
+              Member Login
+            </a>
           </li>
+
         </ul>
 
       </div>
@@ -316,7 +324,7 @@
         <p>Dewanganj Govt. Technical School & College</p>
         <p>Dewanganj, Jamalpur, Bangladesh</p>
 
-        <a href="contact/index.html">Contact Us →</a>
+        <a href="./contact/index.html">Contact Us →</a>
 
       </div>
 
@@ -337,7 +345,9 @@
   </footer>
 
 
-  <!-- REGISTER POPUP -->
+  <!-- =====================================
+       REGISTER POPUP
+  ====================================== -->
 
   <div
     class="register-modal"
@@ -362,14 +372,21 @@
 
       <div class="register-modal-icon">🎓</div>
 
-      <h2 id="registerTitle">Choose Registration Type</h2>
+      <h2 id="registerTitle">
+        Choose Registration Type
+      </h2>
 
-      <p>Please select your membership category.</p>
+      <p>
+        Please select your membership category.
+      </p>
 
       <div class="register-options">
 
-        <a href="./register/students/index.html"
-           class="register-option student-option">
+        <!-- STUDENT REGISTRATION -->
+
+        <a
+          href="./register/students/index.html"
+          class="register-option student-option">
 
           <span class="option-icon">🎓</span>
 
@@ -382,8 +399,11 @@
 
         </a>
 
-        <a href="./register/teachers/index.html"
-           class="register-option teacher-option">
+        <!-- TEACHER REGISTRATION -->
+
+        <a
+          href="./register/teachers/index.html"
+          class="register-option teacher-option">
 
           <span class="option-icon">👨‍🏫</span>
 
@@ -407,7 +427,9 @@
   </div>
 
 
-  <!-- LOGIN POPUP -->
+  <!-- =====================================
+       LOGIN POPUP
+  ====================================== -->
 
   <div
     class="login-modal"
@@ -432,48 +454,61 @@
 
       <div class="login-modal-icon">🔐</div>
 
-      <h2 id="loginTitle">Choose Login Type</h2>
+      <h2 id="loginTitle">
+        Choose Login Type
+      </h2>
 
-      <p>Please select your account category.</p>
+      <p>
+        Select your account category to continue.
+      </p>
 
       <div class="login-options">
 
-        <a href="./student/index.html"
-           class="login-option">
+        <!-- STUDENT LOGIN -->
+
+        <a
+          href="./student/index.html"
+          class="login-option">
 
           <span class="option-icon">🎓</span>
 
           <span class="option-text">
             <strong>Student</strong>
-            <small>Student member login</small>
+            <small>Student account login</small>
           </span>
 
           <span class="option-arrow">→</span>
 
         </a>
 
-        <a href="./teachers/index.html"
-           class="login-option">
+        <!-- TEACHER LOGIN -->
+
+        <a
+          href="./teachers/index.html"
+          class="login-option">
 
           <span class="option-icon">👨‍🏫</span>
 
           <span class="option-text">
             <strong>Honorable Teacher</strong>
-            <small>Teacher member login</small>
+            <small>Teacher account login</small>
           </span>
 
           <span class="option-arrow">→</span>
 
         </a>
 
-        <a href="./admin/index.html"
-           class="login-option admin-option">
+        <!-- ADMIN LOGIN -->
 
-          <span class="option-icon">🛡️</span>
+        <a
+          href="./admin/index.html"
+          class="login-option admin-option">
+
+          <span class="option-icon">⚙️</span>
 
           <span class="option-text">
             <strong>Administration</strong>
-            <small>Admin and management login</small>
+            <small>Management panel login</small>
           </span>
 
           <span class="option-arrow">→</span>
