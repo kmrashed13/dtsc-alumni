@@ -18,8 +18,6 @@
 
   <div class="site-header">
 
-    <!-- HEADER -->
-
     <header class="header">
 
       <div class="header-logo">
@@ -37,7 +35,6 @@
       </div>
 
     </header>
-
 
     <!-- NAVIGATION -->
 
@@ -73,7 +70,9 @@
 
         <li><a href="login/index.html">Login</a></li>
 
-        <li><a href="register/index.html">Register</a></li>
+        <li>
+          <a href="#" class="register-trigger">Register</a>
+        </li>
 
       </ul>
 
@@ -88,9 +87,7 @@
 
     <div class="hero-content">
 
-      <p class="hero-label">
-        Welcome to
-      </p>
+      <p class="hero-label">Welcome to</p>
 
       <h2>DTSC Alumni Association</h2>
 
@@ -102,7 +99,7 @@
 
       <div class="hero-buttons">
 
-        <a href="register/index.html" class="hero-btn">
+        <a href="#" class="hero-btn register-trigger">
           Join Our Community →
         </a>
 
@@ -226,7 +223,7 @@
       <p>Reconnect with your institution and alumni family.</p>
     </div>
 
-    <a href="register/index.html" class="membership-btn">
+    <a href="#" class="membership-btn register-trigger">
       Register Now
     </a>
 
@@ -276,7 +273,6 @@
 
       </div>
 
-
       <div class="footer-column">
 
         <h4>Quick Links</h4>
@@ -291,19 +287,19 @@
 
       </div>
 
-
       <div class="footer-column">
 
         <h4>Membership</h4>
 
         <ul>
-          <li><a href="register/index.html">Join Our Community</a></li>
+          <li>
+            <a href="#" class="register-trigger">Join Our Community</a>
+          </li>
           <li><a href="membership/index.html">Membership Directory</a></li>
           <li><a href="login/index.html">Member Login</a></li>
         </ul>
 
       </div>
-
 
       <div class="footer-column">
 
@@ -318,7 +314,6 @@
 
     </div>
 
-
     <div class="footer-bottom">
 
       <p>
@@ -332,6 +327,84 @@
     </div>
 
   </footer>
+
+
+  <!-- REGISTRATION TYPE POPUP -->
+
+  <div
+    class="register-modal"
+    id="registerModal"
+    aria-hidden="true">
+
+    <div class="register-modal-overlay"></div>
+
+    <div
+      class="register-modal-content"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="registerTitle">
+
+      <button
+        type="button"
+        class="register-close"
+        id="closeRegisterModal"
+        aria-label="Close">
+        &times;
+      </button>
+
+      <div class="register-modal-icon">🎓</div>
+
+      <h2 id="registerTitle">
+        Choose Registration Type
+      </h2>
+
+      <p>
+        Please select your membership category.
+      </p>
+
+      <div class="register-options">
+
+        <a
+          href="./register/students/index.html"
+          class="register-option student-option">
+
+          <span class="option-icon">🎓</span>
+
+          <span class="option-text">
+            <strong>Student</strong>
+            <small>Register as a former student</small>
+          </span>
+
+          <span class="option-arrow">→</span>
+
+        </a>
+
+        <a
+          href="./register/teachers/index.html"
+          class="register-option teacher-option">
+
+          <span class="option-icon">👨‍🏫</span>
+
+          <span class="option-text">
+            <strong>Honorable Teacher</strong>
+            <small>Register as a respected teacher</small>
+          </span>
+
+          <span class="option-arrow">→</span>
+
+        </a>
+
+      </div>
+
+      <p class="register-modal-footer">
+        DTSC Alumni Association
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- END REGISTRATION POPUP -->
 
 
   <!-- JAVASCRIPT -->
