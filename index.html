@@ -1,561 +1,282 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#064b37">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#103e35">
 
-    <title>DTSC Alumni Association</title>
+  <title>DTSC Alumni Association</title>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
+  <!-- HEADER -->
+  <header class="header">
 
-<header class="site-header">
-
-    <div class="header-container">
-
-        <!-- LEFT LOGO -->
-        <div class="header-logo left-logo">
-            <img src="assets/logo.png" alt="DTSC Alumni Logo">
-        </div>
-
-        <!-- CENTER TITLE -->
-        <div class="header-title">
-
-            <h1>DTSC Alumni Association</h1>
-
-            <p>
-                Dewanganj Govt. Technical School &amp; College, Jamalpur
-            </p>
-
-            <span class="header-tagline">
-                Together Again... Stronger Forever...
-            </span>
-
-        </div>
-
-        <!-- RIGHT LOGO -->
-        <div class="header-logo right-logo">
-            <img src="assets/dtsclogo.png" alt="DTSC College Logo">
-        </div>
-
+    <div class="header-logo">
+      <img src="./assets/logo.png" alt="Alumni Logo">
     </div>
 
-</header>
+    <div class="header-title">
+      <h1>DTSC Alumni Association</h1>
+      <p>Dewanganj Govt. Technical School & College, Jamalpur</p>
+      <span>Connecting Generations, Building the Future</span>
+    </div>
+
+    <div class="header-logo">
+      <img src="./assets/dtsclogo.png" alt="DTSC Logo">
+    </div>
+
+  </header>
 
 
-<!-- ================= NAVIGATION ================= -->
+  <!-- NAVIGATION -->
+  <nav class="navbar">
 
-<nav class="navbar">
+    <button class="menu-toggle" id="menuToggle">
+      ☰
+    </button>
 
-    <div class="nav-container">
+    <ul class="nav-menu" id="navMenu">
 
-        <!-- MOBILE MENU BUTTON -->
-        <button class="menu-toggle"
-                id="menuToggle"
-                aria-label="Open Navigation">
-            ☰
+      <li><a href="index.html">Home</a></li>
+
+      <li><a href="about/index.html">About Us</a></li>
+
+      <li><a href="events/index.html">Events</a></li>
+
+      <li><a href="gallery/index.html">Gallery</a></li>
+
+      <li>
+        <a href="membership/index.html">
+          Membership Directory
+        </a>
+      </li>
+
+      <li><a href="contact/index.html">Contact</a></li>
+
+      <li>
+        <button id="languageToggle">(BN)</button>
+      </li>
+
+      <li class="account-menu">
+
+        <button id="accountToggle">
+          Account ▾
         </button>
 
-        <!-- MAIN MENU -->
-        <ul class="nav-menu" id="navMenu">
+        <div class="account-dropdown" id="accountDropdown">
 
-            <li>
-                <a href="index.html" class="active">Home</a>
-            </li>
+          <a href="register/index.html">Register</a>
 
-            <li>
-                <a href="#about">About Us</a>
-            </li>
-
-            <li>
-                <a href="#events">Events</a>
-            </li>
-
-            <li>
-                <a href="#gallery">Gallery</a>
-            </li>
-
-            <li>
-                <a href="membership/index.html">
-                    Membership Directory
-                </a>
-            </li>
-
-            <li>
-                <a href="#contact">Contact</a>
-            </li>
-
-        </ul>
-
-
-        <!-- RIGHT NAVIGATION ACTIONS -->
-        <div class="nav-actions">
-
-            <!-- LANGUAGE -->
-            <button class="language-btn"
-                    id="languageToggle"
-                    type="button">
-                (BN)
-            </button>
-
-
-            <!-- ACCOUNT -->
-            <div class="account-wrapper">
-
-                <button class="account-btn"
-                        id="accountToggle"
-                        type="button">
-
-                    <span>👤 Account</span>
-                    <span>▾</span>
-
-                </button>
-
-
-                <!-- ACCOUNT DROPDOWN -->
-                <div class="account-dropdown"
-                     id="accountDropdown">
-
-                    <a href="register/index.html"
-                       class="account-register">
-
-                        Register
-
-                    </a>
-
-                    <a href="login/index.html"
-                       class="account-login">
-
-                        Login
-
-                    </a>
-
-                </div>
-
-            </div>
+          <a href="login/index.html">Login</a>
 
         </div>
 
-    </div>
+      </li>
 
-</nav>
+    </ul>
+
+  </nav>
 
 
-<!-- ================= HERO SECTION ================= -->
+  <!-- HERO SECTION -->
+  <section class="hero">
 
-<section class="hero">
+    <div class="hero-content">
 
-    <div class="hero-overlay">
+      <p>Welcome to</p>
 
-        <div class="hero-content">
+      <h2>DTSC Alumni Association</h2>
 
-            <h2>Welcome to</h2>
+      <h3>
+        A Bond Beyond Graduation
+      </h3>
 
-            <h1>DTSC Alumni Association</h1>
+      <p>
+        Bringing together former students and respected teachers
+        of Dewanganj Govt. Technical School & College.
+        Let's reconnect, share memories and build a stronger community.
+      </p>
 
-            <p>
-                Connecting Our Alumni, Celebrating Our Bond,
-                <br>
-                Building a Stronger Community Together.
-            </p>
-
-            <a href="register/index.html" class="hero-button">
-
-                Join Our Community
-
-                <span>→</span>
-
-            </a>
-
-        </div>
+      <a href="register/index.html" class="hero-btn">
+        Join Our Community
+      </a>
 
     </div>
 
-</section>
+  </section>
 
 
-<!-- ================= ABOUT & NOTICE SECTION ================= -->
+  <!-- ABOUT SECTION -->
+  <section class="about-section">
 
-<section class="about-notice-section">
-
-    <!-- ABOUT -->
-    <div class="about-image">
-
-        <img src="assets/Institute.jpg"
-             alt="Dewanganj Govt. Technical School and College">
-
+    <div class="section-title">
+      <h2>About Our Association</h2>
+      <p>Our History, Our Pride, Our Community</p>
     </div>
 
+    <div class="about-content">
 
-    <div class="about-content" id="about">
+      <div class="about-image">
+        <img src="./assets/institute.jpg" alt="Our Institute">
+      </div>
 
-        <div class="section-title">
+      <div class="about-text">
 
-            <span>ABOUT US</span>
-
-            <h2>About Us</h2>
-
-        </div>
+        <h3>Welcome to Our Alumni Community</h3>
 
         <p>
-            DTSC Alumni Association is a proud platform for all
-            former students of Dewanganj Govt. Technical School
-            &amp; College.
-
-            Our goal is to keep the bond alive, support each other,
-            and contribute to the growth of our alma mater and society.
+          DTSC Alumni Association is a platform for former students
+          and respected teachers of Dewanganj Govt. Technical School
+          & College, Jamalpur.
         </p>
 
-        <a href="about/index.html" class="small-button">
-            Learn More →
+        <p>
+          Our goal is to maintain lifelong connections, promote
+          mutual support, preserve memories and contribute to
+          the development of our institution.
+        </p>
+
+        <a href="about/index.html" class="read-more">
+          Read More →
         </a>
 
-    </div>
-
-
-    <!-- NOTICE BOARD -->
-    <div class="notice-board" id="notices">
-
-        <div class="notice-heading">
-
-            <h2>📢 Notice Board</h2>
-
-            <a href="notices/index.html">View All →</a>
-
-        </div>
-
-
-        <div class="notice-item">
-
-            <div class="notice-date">
-                <strong>25</strong>
-                <span>Apr</span>
-            </div>
-
-            <div class="notice-text">
-                <h3>Annual Reunion</h3>
-                <p>DTSC Alumni Association is going to organize the annual reunion...</p>
-            </div>
-
-        </div>
-
-
-        <div class="notice-item">
-
-            <div class="notice-date">
-                <strong>18</strong>
-                <span>Apr</span>
-            </div>
-
-            <div class="notice-text">
-                <h3>Website Launch</h3>
-                <p>Our new website is now live!</p>
-            </div>
-
-        </div>
-
-
-        <div class="notice-item">
-
-            <div class="notice-date">
-                <strong>10</strong>
-                <span>Apr</span>
-            </div>
-
-            <div class="notice-text">
-                <h3>Scholarship Program</h3>
-                <p>Applications are open...</p>
-            </div>
-
-        </div>
+      </div>
 
     </div>
 
-</section>
+  </section>
 
 
-<!-- ================= UPCOMING EVENTS ================= -->
+  <!-- NOTICE SECTION -->
+  <section class="notice-section">
 
-<section class="events-section" id="events">
+    <div class="section-title">
+      <h2>Notice Board</h2>
+      <p>Latest announcements and updates</p>
+    </div>
 
-    <div class="section-heading">
+    <div class="notice-box">
+      <p>No notices available at the moment.</p>
+    </div>
 
-        <h2>📅 Upcoming Events</h2>
+  </section>
 
-        <a href="events/index.html">View All →</a>
+
+  <!-- EVENTS SECTION -->
+  <section class="events-section">
+
+    <div class="section-title">
+      <h2>Upcoming Events</h2>
+      <p>Stay connected with our activities</p>
+    </div>
+
+    <div class="event-box">
+      <p>Upcoming events will be published here.</p>
+      <a href="events/index.html">View All Events →</a>
+    </div>
+
+  </section>
+
+
+  <!-- GALLERY SECTION -->
+  <section class="gallery-section">
+
+    <div class="section-title">
+      <h2>Photo Gallery</h2>
+      <p>Memories that bring us together</p>
+    </div>
+
+    <div class="gallery-grid">
+
+      <img src="./assets/institute.jpg" alt="Institute Photo">
+
+      <img src="./assets/institute.jpg" alt="Institute Memory">
+
+      <img src="./assets/institute.jpg" alt="Campus Photo">
 
     </div>
 
-
-    <div class="events-container">
-
-
-        <div class="event-card">
-
-            <div class="event-date">
-                <strong>15</strong>
-                <span>May</span>
-            </div>
-
-            <div class="event-info">
-
-                <h3>Annual Reunion 2025</h3>
-
-                <p>📍 DTSC College Campus</p>
-
-                <p>◷ 9:00 AM – 5:00 PM</p>
-
-            </div>
-
-        </div>
-
-
-        <div class="event-card">
-
-            <div class="event-date">
-                <strong>21</strong>
-                <span>Jun</span>
-            </div>
-
-            <div class="event-info">
-
-                <h3>Career Guidance Seminar</h3>
-
-                <p>📍 DTSC Auditorium</p>
-
-                <p>◷ 2:00 PM – 5:00 PM</p>
-
-            </div>
-
-        </div>
-
-
-        <div class="event-card">
-
-            <div class="event-date">
-                <strong>05</strong>
-                <span>Jul</span>
-            </div>
-
-            <div class="event-info">
-
-                <h3>Alumni Get-Together</h3>
-
-                <p>📍 Jamalpur</p>
-
-                <p>◷ 6:00 PM – 9:00 PM</p>
-
-            </div>
-
-        </div>
-
+    <div class="gallery-link">
+      <a href="gallery/index.html">Explore Gallery →</a>
     </div>
 
-</section>
+  </section>
 
 
-<!-- ================= GALLERY & ACHIEVEMENTS ================= -->
+  <!-- MEMBERSHIP SECTION -->
+  <section class="membership-section">
 
-<section class="gallery-achievement-section">
-
-
-    <!-- GALLERY -->
-    <div class="gallery-section" id="gallery">
-
-        <div class="section-heading">
-
-            <h2>📷 Our Gallery</h2>
-
-            <a href="gallery/index.html">View All →</a>
-
-        </div>
-
-
-        <div class="gallery-grid">
-
-            <div class="gallery-item">
-                <img src="assets/Institute.jpg" alt="College Campus">
-            </div>
-
-            <div class="gallery-item">
-                <img src="assets/Institute.jpg" alt="College Memories">
-            </div>
-
-            <div class="gallery-item">
-                <img src="assets/Institute.jpg" alt="Alumni Activities">
-            </div>
-
-            <div class="gallery-item">
-                <img src="assets/Institute.jpg" alt="College Events">
-            </div>
-
-            <div class="gallery-item">
-                <img src="assets/Institute.jpg" alt="Alumni Community">
-            </div>
-
-        </div>
-
+    <div class="section-title">
+      <h2>Become a Member</h2>
+      <p>Reconnect with your institution and alumni family.</p>
     </div>
 
-
-    <!-- ACHIEVEMENTS -->
-    <div class="achievement-section">
-
-        <h2>🏆 Our Achievements</h2>
-
-        <div class="achievement-grid">
-
-            <div class="achievement-item">
-
-                <span>👥</span>
-
-                <h3>5,000+</h3>
-
-                <p>Alumni Members</p>
-
-            </div>
-
-
-            <div class="achievement-item">
-
-                <span>📅</span>
-
-                <h3>50+</h3>
-
-                <p>Events</p>
-
-            </div>
-
-
-            <div class="achievement-item">
-
-                <span>📄</span>
-
-                <h3>100+</h3>
-
-                <p>Notices</p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= CONTACT ================= -->
-
-<section class="contact-section" id="contact">
-
-    <h2>Contact DTSC Alumni Association</h2>
-
-    <p>
-        Dewanganj Govt. Technical School &amp; College,
-        Jamalpur, Bangladesh
-    </p>
-
-    <a href="contact/index.html" class="small-button">
-        Contact Us →
+    <a href="register/index.html" class="membership-btn">
+      Register Now
     </a>
 
-</section>
+    <a href="membership/index.html" class="membership-btn">
+      Membership Directory
+    </a>
+
+  </section>
 
 
-<!-- ================= FOOTER ================= -->
+  <!-- CONTACT SECTION -->
+  <section class="contact-section">
 
-<footer class="footer">
+    <div class="section-title">
+      <h2>Contact Us</h2>
+      <p>We would love to hear from you</p>
+    </div>
 
-    <div class="footer-content">
+    <p>
+      Dewanganj Govt. Technical School & College,
+      Dewanganj, Jamalpur, Bangladesh
+    </p>
 
+    <a href="contact/index.html">Contact Details →</a>
 
-        <!-- FOOTER BRAND -->
-        <div class="footer-brand">
-
-            <img src="assets/logo.png" alt="DTSC Alumni Logo">
-
-            <div>
-
-                <h2>DTSC Alumni Association</h2>
-
-                <p>Together Again... Stronger Forever...</p>
-
-            </div>
-
-        </div>
+  </section>
 
 
-        <!-- CONTACT -->
-        <div class="footer-contact">
+  <!-- FOOTER -->
+  <footer class="footer">
 
-            <h3>Contact Us</h3>
+    <h3>DTSC Alumni Association</h3>
 
-            <p>📍 Dewanganj, Jamalpur</p>
+    <p>
+      Dewanganj Govt. Technical School & College, Jamalpur
+    </p>
 
-            <p>✉️ Email: info@dtscalumni.org</p>
+    <p>
+      Connecting Generations, Building the Future
+    </p>
 
-        </div>
+    <div class="footer-links">
 
+      <a href="about/index.html">About</a>
 
-        <!-- SOCIAL -->
-        <div class="footer-social">
+      <a href="events/index.html">Events</a>
 
-            <h3>Follow Us</h3>
+      <a href="membership/index.html">Membership</a>
 
-            <a href="#">Facebook</a>
-
-            <a href="#">YouTube</a>
-
-            <a href="#">LinkedIn</a>
-
-        </div>
-
-
-        <!-- FOOTER SLOGAN -->
-        <div class="footer-slogan">
-
-            Proud to be DTSCian
-
-        </div>
+      <a href="contact/index.html">Contact</a>
 
     </div>
 
+    <p class="copyright">
+      © 2026 DTSC Alumni Association. All Rights Reserved.
+    </p>
 
-    <div class="footer-bottom">
-
-        <p>
-            © <span id="currentYear"></span>
-            DTSC Alumni Association. All Rights Reserved.
-        </p>
-
-        <div>
-
-            <a href="privacy/index.html">Privacy Policy</a>
-
-            <span>|</span>
-
-            <a href="terms/index.html">Terms of Service</a>
-
-            <span>|</span>
-
-            <a href="#contact">Contact</a>
-
-        </div>
-
-    </div>
-
-</footer>
+  </footer>
 
 
-<!-- JAVASCRIPT -->
-<script src="script.js"></script>
+  <script src="./script.js"></script>
 
 </body>
 </html>
