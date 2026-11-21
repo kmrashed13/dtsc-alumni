@@ -1,5 +1,59 @@
 
-/* RESTORE ORIGINAL DTSC DESIGN */
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* =========================================
+   1. GLOBAL SETTINGS
+========================================= */
+
+:root {
+  --green: #103e35;
+  --green-light: #176052;
+  --gold: #c9a646;
+  --gold-light: #e3c875;
+  --white: #ffffff;
+  --light: #f5f8f6;
+  --gray: #666666;
+  --dark: #222222;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 190px;
+}
+
+body {
+  font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+  color: var(--dark);
+  background: var(--white);
+  line-height: 1.6;
+  padding-top: 180px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+
+/* =========================================
+   2. FIXED HEADER
+========================================= */
 
 .site-header {
   position: fixed;
@@ -7,23 +61,182 @@
   left: 0;
   width: 100%;
   z-index: 1000;
+  background: var(--white);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
 }
 
-body {
-  padding-top: 180px;
+
+/* =========================================
+   3. MAIN HEADER
+========================================= */
+
+.header {
+  width: 100%;
+  min-height: 125px;
+  padding: 10px 4%;
+
+  display: grid;
+  grid-template-columns: 75px 1fr 75px;
+  align-items: center;
+  gap: 15px;
+
+  background: var(--white);
+  border-bottom: 3px solid var(--gold);
 }
 
-/* Original large centered hero */
+.header-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-logo img {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+}
+
+.header-title {
+  text-align: center;
+}
+
+.header-title h1 {
+  color: var(--green);
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.header-title p {
+  color: var(--gray);
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.header-title span {
+  display: block;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+
+/* =========================================
+   4. NAVIGATION
+========================================= */
+
+.navbar {
+  width: 100%;
+  min-height: 55px;
+  background: var(--green);
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding: 0 4%;
+  position: relative;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  list-style: none;
+}
+
+.nav-menu li {
+  position: relative;
+}
+
+.nav-menu li a,
+.nav-menu li button {
+  display: block;
+  padding: 15px 11px;
+
+  color: var(--white);
+  background: transparent;
+  border: none;
+
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+
+  transition: 0.3s;
+}
+
+.nav-menu li a:hover,
+.nav-menu li button:hover {
+  color: var(--gold-light);
+  background: rgba(255,255,255,0.08);
+}
+
+
+/* =========================================
+   5. ACCOUNT DROPDOWN
+========================================= */
+
+.account-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+
+  min-width: 150px;
+  background: var(--white);
+
+  border-top: 3px solid var(--gold);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  border-radius: 0 0 5px 5px;
+  overflow: hidden;
+}
+
+.account-dropdown.show {
+  display: block;
+}
+
+.account-dropdown a {
+  display: block;
+  padding: 11px 15px !important;
+
+  color: var(--green) !important;
+  background: var(--white) !important;
+}
+
+.account-dropdown a:hover {
+  background: var(--light) !important;
+  color: var(--gold) !important;
+}
+
+
+/* =========================================
+   6. HAMBURGER MENU
+========================================= */
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  color: var(--white);
+  border: none;
+  font-size: 29px;
+  padding: 5px 10px;
+}
+
+
+/* =========================================
+   7. HERO BANNER
+========================================= */
 
 .hero {
   width: 100%;
   min-height: 650px;
-  height: auto;
 
   background:
     linear-gradient(
-      rgba(8, 48, 39, 0.72),
-      rgba(8, 48, 39, 0.78)
+      rgba(8,48,39,0.72),
+      rgba(8,48,39,0.78)
     ),
     url("./assets/institute.jpg");
 
@@ -36,8 +249,9 @@ body {
   justify-content: center;
 
   text-align: center;
-  padding: 65px 25px;
-  color: #fff;
+  padding: 55px 25px;
+
+  color: var(--white);
 }
 
 .hero-content {
@@ -46,14 +260,14 @@ body {
 }
 
 .hero-label {
-  color: #e3c875;
+  color: var(--gold-light);
   font-size: 28px;
   font-weight: 600;
   margin-bottom: 45px;
 }
 
 .hero-content h2 {
-  color: #fff;
+  color: var(--white);
   font-size: 48px;
   font-weight: 800;
   line-height: 1.35;
@@ -61,17 +275,17 @@ body {
 }
 
 .hero-content h3 {
-  color: #e3c875;
+  color: var(--gold-light);
   font-size: 29px;
   margin-bottom: 35px;
 }
 
 .hero-message {
-  color: #fff;
-  font-size: 20px;
+  color: var(--white);
+  font-size: 19px;
   line-height: 1.8;
   max-width: 750px;
-  margin: 0 auto 45px;
+  margin: 0 auto 40px;
 }
 
 .hero-buttons {
@@ -84,33 +298,359 @@ body {
 
 .hero-btn {
   display: inline-block;
-  padding: 16px 28px;
-  background: #c9a646;
-  color: #103e35;
-  border: 1px solid #c9a646;
+  padding: 15px 26px;
+
+  background: var(--gold);
+  color: var(--green);
+
+  border: 1px solid var(--gold);
   border-radius: 8px;
-  font-size: 17px;
+
+  font-size: 16px;
   font-weight: 700;
+  transition: 0.3s;
+}
+
+.hero-btn:hover {
+  background: var(--white);
+  border-color: var(--white);
+  color: var(--green);
 }
 
 .secondary-btn {
   background: transparent;
-  color: #fff;
-  border-color: #fff;
+  color: var(--white);
+  border-color: var(--white);
 }
 
 .secondary-btn:hover {
-  background: #fff;
-  color: #103e35;
+  background: var(--white);
+  color: var(--green);
 }
 
-/* Empty gallery */
+
+/* =========================================
+   8. COMMON SECTION DESIGN
+========================================= */
+
+section:not(.hero) {
+  padding: 55px 7%;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.section-title h2 {
+  color: var(--green);
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.section-title h2::after {
+  content: "";
+  display: block;
+
+  width: 65px;
+  height: 4px;
+
+  background: var(--gold);
+  margin: 12px auto 0;
+}
+
+.section-title p {
+  color: var(--gray);
+  font-size: 14px;
+}
+
+
+/* =========================================
+   9. ABOUT SECTION
+========================================= */
+
+.about-section {
+  background: var(--white);
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 35px;
+  align-items: center;
+}
+
+.about-image img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+}
+
+.about-text h3 {
+  color: var(--green);
+  font-size: 21px;
+  margin-bottom: 12px;
+}
+
+.about-text p {
+  color: var(--gray);
+  font-size: 14px;
+  margin-bottom: 13px;
+}
+
+.read-more {
+  display: inline-block;
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--gold);
+  margin-top: 5px;
+}
+
+
+/* =========================================
+   10. NOTICE BOARD
+========================================= */
+
+.notice-section {
+  background: var(--light);
+}
+
+.notice-box {
+  max-width: 850px;
+  margin: auto;
+  padding: 24px;
+
+  text-align: center;
+  background: var(--white);
+
+  border-left: 4px solid var(--gold);
+  border-radius: 5px;
+
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.notice-box p {
+  color: var(--gray);
+  font-size: 14px;
+}
+
+
+/* =========================================
+   11. EVENTS SECTION
+========================================= */
+
+.events-section {
+  background: var(--white);
+}
+
+.event-box {
+  max-width: 850px;
+  margin: auto;
+  padding: 28px;
+
+  text-align: center;
+  background: var(--light);
+  border-radius: 8px;
+}
+
+.event-box p {
+  color: var(--gray);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.event-box a {
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   12. PHOTO GALLERY
+========================================= */
+
+.gallery-section {
+  background: var(--light);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* Gallery stays empty until Admin uploads */
 
 .gallery-grid:empty {
   display: none;
 }
 
-/* Mobile */
+.gallery-grid img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.gallery-grid img:hover {
+  transform: translateY(-4px);
+}
+
+.gallery-link {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.gallery-link a {
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   13. MEMBERSHIP SECTION
+========================================= */
+
+.membership-section {
+  text-align: center;
+  background: var(--green);
+  color: var(--white);
+}
+
+.membership-section .section-title h2 {
+  color: var(--white);
+}
+
+.membership-section .section-title p {
+  color: #e0e9e5;
+}
+
+.membership-btn {
+  display: inline-block;
+  margin: 7px;
+  padding: 12px 22px;
+
+  border: 1px solid var(--gold);
+  border-radius: 5px;
+
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.membership-btn:hover {
+  background: var(--gold);
+  color: var(--green);
+}
+
+
+/* =========================================
+   14. CONTACT SECTION
+========================================= */
+
+.contact-section {
+  text-align: center;
+  background: var(--white);
+}
+
+.contact-section p {
+  color: var(--gray);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.contact-section a {
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   15. FOOTER
+========================================= */
+
+.footer {
+  background: #092c26;
+  color: var(--white);
+
+  text-align: center;
+  padding: 35px 20px 18px;
+
+  border-top: 3px solid var(--gold);
+}
+
+.footer h3 {
+  color: var(--gold-light);
+  font-size: 21px;
+  margin-bottom: 8px;
+}
+
+.footer p {
+  font-size: 13px;
+  color: #d6e1dc;
+  margin-bottom: 7px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 18px 0;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: var(--white);
+}
+
+.footer-links a:hover {
+  color: var(--gold-light);
+}
+
+.copyright {
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 15px;
+  margin-top: 18px;
+}
+
+
+/* =========================================
+   16. TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 950px) {
+
+  .header-title h1 {
+    font-size: 22px;
+  }
+
+  .nav-menu {
+    gap: 0;
+  }
+
+  .nav-menu li a,
+  .nav-menu li button {
+    padding: 14px 7px;
+    font-size: 10px;
+  }
+
+}
+
+
+/* =========================================
+   17. MOBILE RESPONSIVE
+========================================= */
 
 @media (max-width: 650px) {
 
@@ -118,12 +658,48 @@ body {
     padding-top: 145px;
   }
 
-  .header {
-    min-height: 95px;
+  html {
+    scroll-padding-top: 155px;
   }
 
+
+  /* MOBILE HEADER */
+
+  .header {
+    min-height: 95px;
+    grid-template-columns: 52px 1fr 52px;
+    padding: 8px 10px;
+    gap: 6px;
+  }
+
+  .header-logo img {
+    width: 46px;
+    height: 46px;
+  }
+
+  .header-title h1 {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .header-title p {
+    font-size: 9px;
+    line-height: 1.4;
+    margin-top: 4px;
+  }
+
+  .header-title span {
+    font-size: 9px;
+    margin-top: 4px;
+  }
+
+
+  /* MOBILE NAVIGATION */
+
   .navbar {
+    min-height: 50px;
     justify-content: flex-end;
+    padding: 0 15px;
   }
 
   .menu-toggle {
@@ -131,10 +707,73 @@ body {
     margin-left: auto;
   }
 
+  .nav-menu {
+    display: none;
+
+    position: absolute;
+    top: 100%;
+    right: 0;
+
+    width: 100%;
+    background: var(--green);
+
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    gap: 0;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .nav-menu li {
+    width: 100%;
+  }
+
+  .nav-menu li a,
+  .nav-menu li button {
+    width: 100%;
+    text-align: left;
+
+    padding: 12px 20px;
+    font-size: 13px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+
+  /* MOBILE ACCOUNT */
+
+  .account-dropdown {
+    position: static;
+    width: 100%;
+
+    box-shadow: none;
+    border-top: 1px solid var(--gold);
+    border-radius: 0;
+  }
+
+  .account-dropdown a {
+    padding-left: 35px !important;
+  }
+
+
+  /* MOBILE HERO */
+
   .hero {
     min-height: 650px;
     padding: 45px 20px;
+
     text-align: center;
+    background-position: center;
+  }
+
+  .hero-content {
+    max-width: 100%;
   }
 
   .hero-label {
@@ -161,11 +800,119 @@ body {
 
   .hero-buttons {
     justify-content: center;
+    gap: 10px;
   }
 
   .hero-btn {
     padding: 13px 17px;
     font-size: 13px;
+  }
+
+
+  /* MOBILE COMMON SECTIONS */
+
+  section:not(.hero) {
+    padding: 42px 18px;
+  }
+
+  .section-title {
+    margin-bottom: 25px;
+  }
+
+  .section-title h2 {
+    font-size: 23px;
+  }
+
+  .section-title p {
+    font-size: 12px;
+  }
+
+
+  /* MOBILE ABOUT */
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .about-image img {
+    height: 210px;
+  }
+
+  .about-text h3 {
+    font-size: 19px;
+  }
+
+
+  /* MOBILE GALLERY */
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .gallery-grid img {
+    height: 135px;
+  }
+
+
+  /* MOBILE MEMBERSHIP */
+
+  .membership-btn {
+    display: block;
+    max-width: 240px;
+    margin: 10px auto;
+  }
+
+
+  /* MOBILE FOOTER */
+
+  .footer-links {
+    gap: 12px;
+  }
+
+}
+
+
+/* =========================================
+   18. SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+  .header-title h1 {
+    font-size: 14px;
+  }
+
+  .header-title p,
+  .header-title span {
+    font-size: 8px;
+  }
+
+  .header-logo img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .hero-label {
+    font-size: 18px;
+  }
+
+  .hero-content h2 {
+    font-size: 29px;
+  }
+
+  .hero-content h3 {
+    font-size: 18px;
+  }
+
+  .hero-message {
+    font-size: 13px;
+  }
+
+  .hero-btn {
+    padding: 11px 13px;
+    font-size: 11px;
   }
 
 }
