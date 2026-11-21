@@ -4,316 +4,166 @@
    MAIN JAVASCRIPT
 ========================================= */
 
-// CURRENT YEAR
 document.addEventListener("DOMContentLoaded", function () {
 
-    const yearElement = document.getElementById("currentYear");
+  /* MOBILE MENU */
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
 
-/* ==========================================
-   DTSC ALUMNI ASSOCIATION
-   MAIN JAVASCRIPT
-========================================== */
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener("click", function () {
+      navMenu.classList.toggle("active");
+    });
+  }
 
-document.addEventListener("DOMContentLoaded", function () {
 
-    /* ======================================
-       1. CURRENT YEAR
-    ====================================== */
+  /* ACCOUNT DROPDOWN */
+  const accountToggle = document.getElementById("accountToggle");
+  const accountDropdown = document.getElementById("accountDropdown");
 
-    const yearElement = document.getElementById("currentYear");
+  if (accountToggle && accountDropdown) {
+    accountToggle.addEventListener("click", function (event) {
+      event.stopPropagation();
+      accountDropdown.classList.toggle("show");
+    });
 
-    if (yearElement) {
-        yearElement.textContent = new Date().getFullYear();
+    document.addEventListener("click", function (event) {
+      if (
+        !accountDropdown.contains(event.target) &&
+        !accountToggle.contains(event.target)
+      ) {
+        accountDropdown.classList.remove("show");
+      }
+    });
+  }
+
+
+  /* LANGUAGE TRANSLATION */
+  const languageToggle = document.getElementById("languageToggle");
+
+  let currentLanguage = "EN";
+
+  const translations = {
+    "Home": "হোম",
+    "About Us": "আমাদের সম্পর্কে",
+    "Events": "ইভেন্টসমূহ",
+    "Gallery": "গ্যালারি",
+    "Membership Directory": "সদস্য ডিরেক্টরি",
+    "Contact": "যোগাযোগ",
+    "Account": "অ্যাকাউন্ট",
+    "Register": "নিবন্ধন",
+    "Login": "লগইন",
+    "Welcome to": "স্বাগতম",
+    "DTSC Alumni Association": "ডিটিএসসি অ্যালামনাই অ্যাসোসিয়েশন",
+    "A Bond Beyond Graduation": "স্নাতকের পরেও অটুট বন্ধন",
+    "Join Our Community": "আমাদের কমিউনিটিতে যোগ দিন",
+    "About Our Association": "আমাদের সংগঠন সম্পর্কে",
+    "Our History, Our Pride, Our Community": "আমাদের ইতিহাস, আমাদের গর্ব, আমাদের কমিউনিটি",
+    "Welcome to Our Alumni Community": "আমাদের অ্যালামনাই কমিউনিটিতে স্বাগতম",
+    "Read More →": "আরও পড়ুন →",
+    "Notice Board": "নোটিশ বোর্ড",
+    "Latest announcements and updates": "সর্বশেষ ঘোষণা ও আপডেট",
+    "No notices available at the moment.": "এই মুহূর্তে কোনো নোটিশ নেই।",
+    "Upcoming Events": "আসন্ন ইভেন্টসমূহ",
+    "Stay connected with our activities": "আমাদের কার্যক্রমের সঙ্গে যুক্ত থাকুন",
+    "Upcoming events will be published here.": "আসন্ন ইভেন্টের তথ্য এখানে প্রকাশ করা হবে।",
+    "View All Events →": "সব ইভেন্ট দেখুন →",
+    "Photo Gallery": "ফটো গ্যালারি",
+    "Memories that bring us together": "যেসব স্মৃতি আমাদের একত্রিত করে",
+    "Explore Gallery →": "গ্যালারি দেখুন →",
+    "Become a Member": "সদস্য হোন",
+    "Reconnect with your institution and alumni family.": "আপনার প্রতিষ্ঠান ও অ্যালামনাই পরিবারের সঙ্গে যুক্ত হোন।",
+    "Register Now": "এখনই নিবন্ধন করুন",
+    "Contact Us": "যোগাযোগ করুন",
+    "We would love to hear from you": "আপনার কথা শুনতে আমরা আগ্রহী",
+    "About": "আমাদের সম্পর্কে",
+    "Membership": "সদস্যপদ",
+    "Connecting Generations, Building the Future": "প্রজন্মের বন্ধন, ভবিষ্যৎ নির্মাণ",
+    "All Rights Reserved.": "সর্বস্বত্ব সংরক্ষিত।"
+  };
+
+
+  function translatePage() {
+
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null
+    );
+
+    let textNodes = [];
+
+    while (walker.nextNode()) {
+      textNodes.push(walker.currentNode);
     }
 
+    textNodes.forEach(function (node) {
 
-    /* ======================================
-       2. MOBILE NAVIGATION MENU
-    ====================================== */
+      const originalText = node.textContent.trim();
 
-    const menuToggle = document.getElementById("menuToggle");
-    const navMenu = document.getElementById("navMenu");
+      if (!originalText) return;
 
-    if (menuToggle && navMenu) {
+      if (currentLanguage === "BN") {
 
-        menuToggle.addEventListener("click", function () {
-
-            navMenu.classList.toggle("active");
-
-            const isOpen = navMenu.classList.contains("active");
-
-            menuToggle.textContent = isOpen ? "✕" : "☰";
-
-            menuToggle.setAttribute(
-                "aria-expanded",
-                isOpen ? "true" : "false"
-            );
-
-        });
-
-        // Close menu after clicking a link
-        navMenu.querySelectorAll("a").forEach(function (link) {
-
-            link.addEventListener("click", function () {
-
-                navMenu.classList.remove("active");
-                menuToggle.textContent = "☰";
-
-                menuToggle.setAttribute("aria-expanded", "false");
-
-            });
-
-        });
-
-    }
-
-
-    /* ======================================
-       3. ACCOUNT DROPDOWN
-    ====================================== */
-
-    const accountToggle = document.getElementById("accountToggle");
-    const accountDropdown = document.getElementById("accountDropdown");
-
-    if (accountToggle && accountDropdown) {
-
-        accountToggle.addEventListener("click", function (event) {
-
-            event.stopPropagation();
-
-            accountDropdown.classList.toggle("show");
-
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener("click", function (event) {
-
-            if (
-                !accountDropdown.contains(event.target) &&
-                !accountToggle.contains(event.target)
-            ) {
-
-                accountDropdown.classList.remove("show");
-
-            }
-
-        });
-
-        // Close dropdown after selecting Register/Login
-        accountDropdown.querySelectorAll("a").forEach(function (link) {
-
-            link.addEventListener("click", function () {
-
-                accountDropdown.classList.remove("show");
-
-            });
-
-        });
-
-    }
-
-
-    /* ======================================
-       4. ENGLISH - BANGLA TRANSLATION
-       Default Language: ENGLISH
-    ====================================== */
-
-    const languageToggle = document.getElementById("languageToggle");
-
-    let currentLanguage = "en";
-
-    const translations = {
-
-        "Home": "হোম",
-        "About Us": "আমাদের সম্পর্কে",
-        "Events": "ইভেন্ট",
-        "Gallery": "গ্যালারি",
-        "Membership Directory": "সদস্য তালিকা",
-        "Contact": "যোগাযোগ",
-        "Account": "অ্যাকাউন্ট",
-
-        "Register": "নিবন্ধন",
-        "Login": "লগইন",
-
-        "Welcome to": "স্বাগতম",
-        "DTSC Alumni Association": "ডিটিএসসি অ্যালামনাই অ্যাসোসিয়েশন",
-
-        "Connecting Our Alumni, Celebrating Our Bond,": "প্রাক্তন শিক্ষার্থীদের একত্রিত করি, সম্পর্কের বন্ধন উদযাপন করি,",
-        "Building a Stronger Community Together.": "একসাথে গড়ে তুলি আরও শক্তিশালী একটি কমিউনিটি।",
-
-        "Join Our Community": "আমাদের কমিউনিটিতে যোগ দিন",
-
-        "ABOUT US": "আমাদের সম্পর্কে",
-        "About Us": "আমাদের সম্পর্কে",
-
-        "DTSC Alumni Association is a proud platform for all former students of Dewanganj Govt. Technical School & College. Our goal is to keep the bond alive, support each other, and contribute to the growth of our alma mater and society.":
-
-        "ডিটিএসসি অ্যালামনাই অ্যাসোসিয়েশন দেওয়ানগঞ্জ সরকারি টেকনিক্যাল স্কুল ও কলেজের প্রাক্তন শিক্ষার্থীদের একটি সম্মিলিত প্ল্যাটফর্ম। আমাদের লক্ষ্য বন্ধন অটুট রাখা, একে অপরকে সহযোগিতা করা এবং আমাদের প্রিয় প্রতিষ্ঠানের উন্নয়নে অবদান রাখা।",
-
-        "Learn More →": "আরও জানুন →",
-
-        "📢 Notice Board": "📢 নোটিশ বোর্ড",
-        "View All →": "সব দেখুন →",
-
-        "Annual Reunion": "বার্ষিক পুনর্মিলনী",
-        "DTSC Alumni Association is going to organize the annual reunion...":
-            "ডিটিএসসি অ্যালামনাই অ্যাসোসিয়েশন বার্ষিক পুনর্মিলনীর আয়োজন করতে যাচ্ছে...",
-
-        "Website Launch": "ওয়েবসাইট উদ্বোধন",
-        "Our new website is now live!": "আমাদের নতুন ওয়েবসাইট এখন চালু!",
-
-        "Scholarship Program": "বৃত্তি কার্যক্রম",
-        "Applications are open...": "আবেদন গ্রহণ চলছে...",
-
-        "📅 Upcoming Events": "📅 আসন্ন ইভেন্ট",
-
-        "Annual Reunion 2025": "বার্ষিক পুনর্মিলনী ২০২৫",
-        "📍 DTSC College Campus": "📍 ডিটিএসসি কলেজ ক্যাম্পাস",
-        "◷ 9:00 AM – 5:00 PM": "◷ সকাল ৯টা – বিকাল ৫টা",
-
-        "Career Guidance Seminar": "ক্যারিয়ার গাইডেন্স সেমিনার",
-        "📍 DTSC Auditorium": "📍 ডিটিএসসি অডিটোরিয়াম",
-        "◷ 2:00 PM – 5:00 PM": "◷ দুপুর ২টা – বিকাল ৫টা",
-
-        "Alumni Get-Together": "অ্যালামনাই গেট-টুগেদার",
-        "📍 Jamalpur": "📍 জামালপুর",
-        "◷ 6:00 PM – 9:00 PM": "◷ সন্ধ্যা ৬টা – রাত ৯টা",
-
-        "📷 Our Gallery": "📷 আমাদের গ্যালারি",
-        "🏆 Our Achievements": "🏆 আমাদের অর্জন",
-
-        "5,000+": "৫,০০০+",
-        "Alumni Members": "অ্যালামনাই সদস্য",
-        "50+": "৫০+",
-        "100+": "১০০+",
-        "Events": "ইভেন্ট",
-        "Notices": "নোটিশ",
-
-        "Contact DTSC Alumni Association": "ডিটিএসসি অ্যালামনাই অ্যাসোসিয়েশনে যোগাযোগ করুন",
-
-        "Dewanganj, Jamalpur": "দেওয়ানগঞ্জ, জামালপুর",
-        "✉️ Email: info@dtscalumni.org": "✉️ ইমেইল: info@dtscalumni.org",
-
-        "Contact Us": "যোগাযোগ করুন",
-        "Follow Us": "আমাদের অনুসরণ করুন",
-
-        "Proud to be DTSCian": "গর্বিত DTSCian",
-
-        "All Rights Reserved.": "সর্বস্বত্ব সংরক্ষিত।",
-        "Privacy Policy": "গোপনীয়তা নীতি",
-        "Terms of Service": "সেবার শর্তাবলি"
-
-    };
-
-
-    /* ======================================
-       5. TRANSLATION FUNCTION
-    ====================================== */
-
-    const originalTexts = new WeakMap();
-
-    function translatePage(language) {
-
-        const walker = document.createTreeWalker(
-            document.body,
-            NodeFilter.SHOW_TEXT
-        );
-
-        const textNodes = [];
-
-        while (walker.nextNode()) {
-            textNodes.push(walker.currentNode);
+        if (translations[originalText]) {
+          node.textContent = translations[originalText];
         }
 
-        textNodes.forEach(function (node) {
+      } else {
 
-            const parent = node.parentElement;
+        const reverseTranslations = {};
 
-            if (
-                !parent ||
-                ["SCRIPT", "STYLE", "NOSCRIPT"].includes(parent.tagName)
-            ) {
-                return;
-            }
-
-            if (!originalTexts.has(node)) {
-                originalTexts.set(node, node.nodeValue);
-            }
-
-            const original = originalTexts.get(node);
-            const trimmed = original.trim();
-
-            if (!trimmed) return;
-
-            let translated = trimmed;
-
-            if (language === "bn" && translations[trimmed]) {
-                translated = translations[trimmed];
-            }
-
-            // Restore original English text
-            if (language === "en") {
-                node.nodeValue = original;
-                return;
-            }
-
-            const start = original.indexOf(trimmed);
-            const end = start + trimmed.length;
-
-            node.nodeValue =
-                original.slice(0, start) +
-                translated +
-                original.slice(end);
-
+        Object.keys(translations).forEach(function (key) {
+          reverseTranslations[translations[key]] = key;
         });
 
-
-        // Update document language
-        document.documentElement.lang = language;
-
-        // Update language button
-        if (languageToggle) {
-
-            languageToggle.textContent =
-                language === "en" ? "(BN)" : "(EN)";
-
-            languageToggle.setAttribute(
-                "aria-label",
-                language === "en"
-                    ? "Switch to Bangla"
-                    : "Switch to English"
-            );
-
+        if (reverseTranslations[originalText]) {
+          node.textContent = reverseTranslations[originalText];
         }
 
-        currentLanguage = language;
+      }
 
-    }
+    });
 
 
-    /* ======================================
-       6. LANGUAGE BUTTON CLICK
-    ====================================== */
-
+    /* UPDATE LANGUAGE BUTTON */
     if (languageToggle) {
-
-        languageToggle.addEventListener("click", function () {
-
-            const nextLanguage =
-                currentLanguage === "en" ? "bn" : "en";
-
-            translatePage(nextLanguage);
-
-        });
-
+      languageToggle.textContent =
+        currentLanguage === "EN" ? "(BN)" : "(EN)";
     }
 
+    document.documentElement.lang =
+      currentLanguage === "EN" ? "en" : "bn";
+  }
 
-    /* ======================================
-       7. DEFAULT ENGLISH
-    ====================================== */
 
-    translatePage("en");
+  if (languageToggle) {
 
+    languageToggle.addEventListener("click", function () {
+
+      currentLanguage =
+        currentLanguage === "EN" ? "BN" : "EN";
+
+      translatePage();
+
+    });
+
+  }
+
+
+  /* CLOSE MOBILE MENU AFTER NAVIGATION */
+  if (navMenu) {
+
+    const navLinks = navMenu.querySelectorAll("a");
+
+    navLinks.forEach(function (link) {
+
+      link.addEventListener("click", function () {
+        navMenu.classList.remove("active");
+      });
+
+    });
+
+  }
 
 });
