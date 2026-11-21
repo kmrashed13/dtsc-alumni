@@ -1,7 +1,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,1160 +9,471 @@
   <title>Teacher Registration | DTSC Alumni Association</title>
 
   <link rel="stylesheet" href="./teacher.css">
-
 </head>
 
 <body>
 
-  <div class="registration-container">
+  <header class="form-header">
+    <a href="../../index.html" class="back-link">← Back to Home</a>
 
-    <!-- HEADER -->
+    <div class="header-content">
+      <img src="../../assets/logo.png" alt="DTSC Alumni Logo">
 
-    <header class="form-header">
+      <div>
+        <h1>DTSC Alumni Association</h1>
+        <p>Teacher Membership Registration Form</p>
+        <span>Teachers • Former Teachers • Retired Teachers</span>
+      </div>
+    </div>
+  </header>
 
-      <a href="../../index.html" class="back-link">
-        ← Back to Home
-      </a>
+  <main class="registration-container">
 
-      <img src="../../assets/logo.png"
-           alt="DTSC Alumni Logo">
+    <div class="form-heading">
+      <h2>Teacher Registration</h2>
+      <p>Please provide your information accurately to become a member of the association.</p>
+    </div>
 
-      <h1>DTSC Alumni Association</h1>
+    <form id="teacherRegistrationForm">
 
-      <h2>Teacher Membership Registration</h2>
+      <!-- PERSONAL INFORMATION -->
+      <section class="form-section">
+        <h3>01. Personal & Contact Information</h3>
 
-      <p>
-        Welcome to the DTSC Alumni Association
-      </p>
+        <div class="form-grid">
 
-    </header>
-
-
-    <main class="form-container">
-
-      <form id="teacherRegistrationForm">
-
-        <!-- 01 PERSONAL INFORMATION -->
-
-        <section class="form-section">
-
-          <h2>01. Personal & Contact Information</h2>
+          <div class="form-group full-width photo-group">
+            <label for="teacherPhoto">Profile Photo *</label>
+            <div class="photo-preview">
+              <img id="photoPreview" src="https://placehold.co/120x120?text=Photo" alt="Profile Preview">
+            </div>
+            <input type="file" id="teacherPhoto" accept="image/*" required>
+          </div>
 
           <div class="form-group">
+            <label for="fullName">Full Name (As per NID) *</label>
+            <input type="text" id="fullName" name="fullName" required>
+          </div>
 
-            <label for="teacherPhoto">
-              Profile Photo <span class="required">*</span>
+          <div class="form-group">
+            <label for="nameBangla">Name in Bangla</label>
+            <input type="text" id="nameBangla" name="nameBangla">
+          </div>
+
+          <div class="form-group">
+            <label for="fatherName">Father's Name *</label>
+            <input type="text" id="fatherName" name="fatherName" required>
+          </div>
+
+          <div class="form-group">
+            <label for="motherName">Mother's Name *</label>
+            <input type="text" id="motherName" name="motherName" required>
+          </div>
+
+          <div class="form-group">
+            <label for="dateOfBirth">Date of Birth *</label>
+            <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+          </div>
+
+          <div class="form-group">
+            <label for="gender">Gender *</label>
+            <select id="gender" name="gender" required>
+              <option value="">Select Gender</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mobile">Mobile Number *</label>
+            <input type="tel" id="mobile" name="mobile" placeholder="01XXXXXXXXX" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="bloodGroup">Blood Group</label>
+            <select id="bloodGroup" name="bloodGroup">
+              <option value="">Select Blood Group</option>
+              <option>A+</option>
+              <option>A-</option>
+              <option>B+</option>
+              <option>B-</option>
+              <option>AB+</option>
+              <option>AB-</option>
+              <option>O+</option>
+              <option>O-</option>
+              <option>Unknown</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="nid">NID Number</label>
+            <input type="text" id="nid" name="nid">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- DTSC SERVICE INFORMATION -->
+      <section class="form-section">
+        <h3>02. DTSC Service Information</h3>
+
+        <div class="form-group">
+          <label>Current Service Status at DTSC *</label>
+
+          <div class="radio-options">
+            <label>
+              <input type="radio" name="serviceStatus" value="Currently Working" required>
+              Currently Working
             </label>
-
-            <input type="file"
-                   id="teacherPhoto"
-                   name="teacherPhoto"
-                   accept="image/*"
-                   required>
-
-            <img id="photoPreview"
-                 class="photo-preview"
-                 alt="Photo Preview"
-                 style="display:none;">
-
-          </div>
-
-
-          <div class="form-grid">
-
-            <div class="form-group">
-
-              <label for="fullName">
-                Full Name (English) *
-              </label>
-
-              <input type="text"
-                     id="fullName"
-                     name="fullName"
-                     placeholder="e.g. Khondokar Mohammed Rashedul Islam"
-                     required>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="banglaName">
-                Full Name (বাংলায়)
-              </label>
-
-              <input type="text"
-                     id="banglaName"
-                     name="banglaName"
-                     placeholder="বাংলায় পূর্ণ নাম">
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="gender">Gender *</label>
-
-              <select id="gender" name="gender" required>
-
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-
-              </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="bloodGroup">Blood Group</label>
-
-              <select id="bloodGroup" name="bloodGroup">
-
-                <option value="">Select Blood Group</option>
-                <option>A+</option>
-                <option>A-</option>
-                <option>B+</option>
-                <option>B-</option>
-                <option>O+</option>
-                <option>O-</option>
-                <option>AB+</option>
-                <option>AB-</option>
-
-              </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="mobile">Mobile Number (WhatsApp) *</label>
-
-              <input type="tel"
-                     id="mobile"
-                     name="mobile"
-                     placeholder="01XXXXXXXXX"
-                     required>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="email">Email Address *</label>
-
-              <input type="email"
-                     id="email"
-                     name="email"
-                     placeholder="example@email.com"
-                     required>
-
-            </div>
-
-          </div>
-
-        </section>
-
-
-        <!-- 02 PRESENT ADDRESS -->
-
-        <section class="form-section">
-
-          <h2>02. Present Address</h2>
-
-          <div class="form-grid">
-
-            <div class="form-group">
-
-              <label for="presentDivision">Division *</label>
-
-              <select id="presentDivision"
-                      name="presentDivision"
-                      required>
-
-                <option value="">Select Division</option>
-
-              </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="presentDistrict">District *</label>
-
-              <select id="presentDistrict"
-                      name="presentDistrict"
-                      required>
-
-                <option value="">Select District</option>
-
-              </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="presentAreaType">Area Type *</label>
-
-              <select id="presentAreaType"
-                      name="presentAreaType"
-                      required>
-
-                <option value="">Select Area Type</option>
-                <option value="Upazila">Upazila</option>
-                <option value="City Corporation">City Corporation</option>
-
-              </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="presentUpazila">Upazila / City Corporation *</label>
-
-              <select id="presentUpazila"
-                      name="presentUpazila"
-                      required>
-
-                <option value="">Select Area</option>
-
-              </select>
-
-            </div>
-
-
-            <div class="form-group"
-                 id="presentUnionGroup"
-                 style="display:none;">
-
-              <label for="presentUnion">
-                Union / Municipality
-              </label>
-
-              <input type="text"
-                     id="presentUnion"
-                     name="presentUnion"
-                     placeholder="Union / Municipality Name">
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="presentPostOffice">Post Office</label>
-
-              <input type="text"
-                     id="presentPostOffice"
-                     name="presentPostOffice"
-                     placeholder="Post Office">
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="presentPostCode">Post Code</label>
-
-              <input type="text"
-                     id="presentPostCode"
-                     name="presentPostCode"
-                     placeholder="Post Code">
-
-            </div>
-
-
-            <div class="form-group full-width">
-
-              <label for="presentAddress">Full Address *</label>
-
-              <textarea id="presentAddress"
-                        name="presentAddress"
-                        placeholder="House, Road, Area, City"
-                        required></textarea>
-
-            </div>
-
-          </div>
-
-        </section>
-
-
-        <!-- 03 PERMANENT ADDRESS -->
-
-        <section class="form-section"
-                 id="permanentAddressSection">
-
-          <h2>03. Permanent Address</h2>
-
-          <div class="form-group same-address">
 
             <label>
-              <input type="checkbox"
-                     id="sameAddress"
-                     name="sameAddress">
-
-              Present Address and Permanent Address are the same
+              <input type="radio" name="serviceStatus" value="Retired">
+              Retired
             </label>
 
+            <label>
+              <input type="radio" name="serviceStatus" value="Transferred">
+              Transferred
+            </label>
+          </div>
+        </div>
+
+        <!-- CURRENTLY WORKING -->
+        <div id="workingFields" class="conditional-section" hidden>
+          <h4>Currently Working Information</h4>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="workingDesignation">Current Designation *</label>
+              <input type="text" id="workingDesignation" name="workingDesignation">
+            </div>
+
+            <div class="form-group">
+              <label for="workingDepartment">Department / Trade *</label>
+              <select id="workingDepartment" name="workingDepartment">
+                <option value="">Select Department</option>
+                <option>Mechanical Technology</option>
+                <option>Electrical Technology</option>
+                <option>Civil Technology</option>
+                <option>Computer Technology</option>
+                <option>Electronics Technology</option>
+                <option>Power Technology</option>
+                <option>Non-Technical</option>
+                <option>Administration</option>
+                <option>Others</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="workingSubject">Subject (If Non-Technical)</label>
+              <input type="text" id="workingSubject" name="workingSubject">
+            </div>
+
+            <div class="form-group">
+              <label for="workingOther">Other Department / Position</label>
+              <input type="text" id="workingOther" name="workingOther">
+            </div>
+
+            <div class="form-group">
+              <label for="joiningDate">Joining Date at DTSC</label>
+              <input type="date" id="joiningDate" name="joiningDate">
+            </div>
+          </div>
+        </div>
+
+        <!-- RETIRED -->
+        <div id="retiredFields" class="conditional-section" hidden>
+          <h4>Retirement Information</h4>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="retirementDate">Date of Retirement *</label>
+              <input type="date" id="retirementDate" name="retirementDate">
+            </div>
+
+            <div class="form-group">
+              <label for="retiredDesignation">Last Designation</label>
+              <input type="text" id="retiredDesignation" name="retiredDesignation">
+            </div>
+
+            <div class="form-group">
+              <label for="retiredDepartment">Last Department / Trade</label>
+              <input type="text" id="retiredDepartment" name="retiredDepartment">
+            </div>
+
+            <div class="form-group">
+              <label for="retiredServiceYears">Total Years of Service</label>
+              <input type="number" id="retiredServiceYears" name="retiredServiceYears" min="0">
+            </div>
+          </div>
+        </div>
+
+        <!-- TRANSFERRED -->
+        <div id="exTeacherFields" class="conditional-section" hidden>
+          <h4>Transferred Teacher Information</h4>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="transferDate">Transfer Date *</label>
+              <input type="date" id="transferDate" name="transferDate">
+            </div>
+
+            <div class="form-group">
+              <label for="transferInstitution">Current Institution *</label>
+              <input type="text" id="transferInstitution" name="transferInstitution">
+            </div>
+
+            <div class="form-group">
+              <label for="transferDesignation">Current Designation</label>
+              <input type="text" id="transferDesignation" name="transferDesignation">
+            </div>
+
+            <div class="form-group">
+              <label for="transferDepartment">Current Department</label>
+              <input type="text" id="transferDepartment" name="transferDepartment">
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ADDRESS INFORMATION -->
+      <section class="form-section">
+        <h3>03. Address Information</h3>
+
+        <h4>Present Address</h4>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="presentDivision">Division *</label>
+            <select id="presentDivision" required>
+              <option value="">Select Division</option>
+            </select>
           </div>
 
+          <div class="form-group">
+            <label for="presentDistrict">District *</label>
+            <select id="presentDistrict" required>
+              <option value="">Select District</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="presentAreaType">Area Type *</label>
+            <select id="presentAreaType" required>
+              <option value="">Select Area Type</option>
+              <option value="Upazila">Upazila</option>
+              <option value="City Corporation">City Corporation</option>
+              <option value="Municipality">Municipality</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="presentUpazila">Upazila / City Corporation *</label>
+            <select id="presentUpazila" required>
+              <option value="">Select Area</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="presentUnion">Union / Ward</label>
+            <select id="presentUnion">
+              <option value="">Select Union / Ward</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="presentPostOffice">Post Office</label>
+            <input type="text" id="presentPostOffice">
+          </div>
+
+          <div class="form-group">
+            <label for="presentPostCode">Post Code</label>
+            <input type="text" id="presentPostCode">
+          </div>
+
+          <div class="form-group full-width">
+            <label for="presentAddress">Village / Road / House / Detailed Address *</label>
+            <textarea id="presentAddress" rows="3" required></textarea>
+          </div>
+
+        </div>
+
+        <div class="same-address">
+          <label>
+            <input type="checkbox" id="sameAddress">
+            Permanent Address is same as Present Address
+          </label>
+        </div>
+
+        <div id="permanentAddressSection">
+          <h4>Permanent Address</h4>
 
           <div class="form-grid">
 
             <div class="form-group">
-
               <label for="permanentDivision">Division *</label>
-
-              <select id="permanentDivision"
-                      name="permanentDivision"
-                      required>
-
+              <select id="permanentDivision" required>
                 <option value="">Select Division</option>
-
               </select>
-
             </div>
 
-
             <div class="form-group">
-
               <label for="permanentDistrict">District *</label>
-
-              <select id="permanentDistrict"
-                      name="permanentDistrict"
-                      required>
-
+              <select id="permanentDistrict" required>
                 <option value="">Select District</option>
-
               </select>
-
             </div>
 
-
             <div class="form-group">
-
               <label for="permanentAreaType">Area Type *</label>
-
-              <select id="permanentAreaType"
-                      name="permanentAreaType"
-                      required>
-
+              <select id="permanentAreaType" required>
                 <option value="">Select Area Type</option>
                 <option value="Upazila">Upazila</option>
                 <option value="City Corporation">City Corporation</option>
-
+                <option value="Municipality">Municipality</option>
               </select>
-
             </div>
 
-
             <div class="form-group">
-
-              <label for="permanentUpazila">
-                Upazila / City Corporation *
-              </label>
-
-              <select id="permanentUpazila"
-                      name="permanentUpazila"
-                      required>
-
+              <label for="permanentUpazila">Upazila / City Corporation *</label>
+              <select id="permanentUpazila" required>
                 <option value="">Select Area</option>
-
               </select>
-
             </div>
-
-
-            <div class="form-group"
-                 id="permanentUnionGroup"
-                 style="display:none;">
-
-              <label for="permanentUnion">
-                Union / Municipality
-              </label>
-
-              <input type="text"
-                     id="permanentUnion"
-                     name="permanentUnion"
-                     placeholder="Union / Municipality Name">
-
-            </div>
-
 
             <div class="form-group">
+              <label for="permanentUnion">Union / Ward</label>
+              <select id="permanentUnion">
+                <option value="">Select Union / Ward</option>
+              </select>
+            </div>
 
+            <div class="form-group">
               <label for="permanentPostOffice">Post Office</label>
-
-              <input type="text"
-                     id="permanentPostOffice"
-                     name="permanentPostOffice"
-                     placeholder="Post Office">
-
+              <input type="text" id="permanentPostOffice">
             </div>
-
 
             <div class="form-group">
-
               <label for="permanentPostCode">Post Code</label>
-
-              <input type="text"
-                     id="permanentPostCode"
-                     name="permanentPostCode"
-                     placeholder="Post Code">
-
+              <input type="text" id="permanentPostCode">
             </div>
-
 
             <div class="form-group full-width">
-
-              <label for="permanentAddress">Full Address *</label>
-
-              <textarea id="permanentAddress"
-                        name="permanentAddress"
-                        placeholder="House, Road, Area, City"
-                        required></textarea>
-
+              <label for="permanentAddress">Village / Road / House / Detailed Address *</label>
+              <textarea id="permanentAddress" rows="3" required></textarea>
             </div>
 
           </div>
+        </div>
 
-        </section>
+      </section>
 
+      <!-- PROFESSIONAL INFORMATION -->
+      <section class="form-section">
+        <h3>04. Current Professional Information</h3>
 
-        <!-- 04 TEACHING STATUS -->
-
-        <section class="form-section">
-
-          <h2>04. Service & Teaching Status at DTSC</h2>
+        <div class="form-grid">
 
           <div class="form-group">
-
-            <label>Current Status at DTSC *</label>
-
-            <div class="radio-group">
-
-              <label>
-                <input type="radio"
-                       name="serviceStatus"
-                       value="working"
-                       required>
-                Currently Working
-              </label>
-
-              <label>
-                <input type="radio"
-                       name="serviceStatus"
-                       value="retired">
-                Retired
-              </label>
-
-              <label>
-                <input type="radio"
-                       name="serviceStatus"
-                       value="transferred">
-                Transferred / Ex-Teacher
-              </label>
-
-            </div>
-
+            <label for="professionalStatus">Current Professional Status</label>
+            <select id="professionalStatus">
+              <option value="">Select Status</option>
+              <option>Teaching</option>
+              <option>Government Service</option>
+              <option>Private Service</option>
+              <option>Business</option>
+              <option>Retired</option>
+              <option>Other</option>
+            </select>
           </div>
-
-
-          <!-- CURRENTLY WORKING -->
-
-          <div id="workingFields"
-               class="conditional-section">
-
-            <h3>Currently Working Information</h3>
-
-            <div class="form-grid">
-
-              <div class="form-group">
-
-                <label for="workingDesignation">
-                  Current Designation *
-                </label>
-
-                <select id="workingDesignation"
-                        name="workingDesignation">
-
-                  <option value="">Select Designation</option>
-                  <option>Principal</option>
-                  <option>Chief Instructor</option>
-                  <option>Instructor</option>
-                  <option>Junior Instructor</option>
-                  <option>Craft Instructor</option>
-                  <option>Workshop Super</option>
-                  <option value="Others">Others</option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group"
-                   id="workingOtherDesignationGroup"
-                   style="display:none;">
-
-                <label for="workingOtherDesignation">
-                  Write Designation
-                </label>
-
-                <input type="text"
-                       id="workingOtherDesignation"
-                       name="workingOtherDesignation"
-                       placeholder="Your Designation">
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label for="workingDepartment">
-                  Department / Trade / Subject *
-                </label>
-
-                <select id="workingDepartment"
-                        name="workingDepartment">
-
-                  <option value="">Select Department</option>
-                  <option>General Electrical Works</option>
-                  <option>Refrigeration & Air Conditioning</option>
-                  <option>Machine Tools Operation</option>
-                  <option>Farm Machinery</option>
-                  <option>Mechanical Technology</option>
-                  <option value="Non-Tech">Non-Tech / General</option>
-                  <option value="Others">Others</option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group"
-                   id="workingNonTechGroup"
-                   style="display:none;">
-
-                <label for="workingNonTechSubject">
-                  Subject Name
-                </label>
-
-                <select id="workingNonTechSubject"
-                        name="workingNonTechSubject">
-
-                  <option value="">Select Subject</option>
-                  <option>Bengali</option>
-                  <option>English</option>
-                  <option>Mathematics</option>
-                  <option>Physics</option>
-                  <option>Chemistry</option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group"
-                   id="workingOtherDepartmentGroup"
-                   style="display:none;">
-
-                <label for="workingOtherDepartment">
-                  Write Department / Subject
-                </label>
-
-                <input type="text"
-                       id="workingOtherDepartment"
-                       name="workingOtherDepartment">
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label for="joiningDate">
-                  Joining Date at DTSC *
-                </label>
-
-                <input type="date"
-                       id="joiningDate"
-                       name="joiningDate">
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- RETIRED -->
-
-          <div id="retiredFields"
-               class="conditional-section">
-
-            <h3>Retired Teacher Information</h3>
-
-            <div class="form-grid">
-
-              <div class="form-group">
-
-                <label for="retiredDesignation">
-                  Last Designation *
-                </label>
-
-                <select id="retiredDesignation"
-                        name="retiredDesignation">
-
-                  <option value="">Select Designation</option>
-                  <option>Principal</option>
-                  <option>Chief Instructor</option>
-                  <option>Instructor</option>
-                  <option>Junior Instructor</option>
-                  <option>Craft Instructor</option>
-                  <option>Workshop Super</option>
-                  <option value="Others">Others</option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group"
-                   id="retiredOtherDesignationGroup"
-                   style="display:none;">
-
-                <label for="retiredOtherDesignation">
-                  Write Designation
-                </label>
-
-                <input type="text"
-                       id="retiredOtherDesignation"
-                       name="retiredOtherDesignation">
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label for="retiredDepartment">
-                  Department / Trade / Subject *
-                </label>
-
-                <select id="retiredDepartment"
-                        name="retiredDepartment">
-
-                  <option value="">Select Department</option>
-                  <option>General Electrical Works</option>
-                  <option>Refrigeration & Air Conditioning</option>
-                  <option>Machine Tools Operation</option>
-                  <option>Farm Machinery</option>
-                  <option>Mechanical Technology</option>
-                  <option value="Non-Tech">Non-Tech / General</option>
-                  <option value="Others">Others</option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group"
-                   id="retiredNonTechGroup"
-                   style="display:none;">
-
-                <label for="retiredNonTechSubject">
-                  Subject Name
-                </label>
-
-                <select id="retiredNonTechSubject"
-                        name="retiredNonTechSubject">
-
-                  <option value="">Select Subject</option>
-                  <option>Bengali</option>
-                  <option>English</option>
-                  <option>Mathematics</option>
-                  <option>Physics</option>
-                  <option>Chemistry</option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group"
-                   id="retiredOtherDepartmentGroup"
-                   style="display:none;">
-
-                <label for="retiredOtherDepartment">
-                  Write Department / Subject
-                </label>
-
-                <input type="text"
-                       id="retiredOtherDepartment"
-                       name="retiredOtherDepartment">
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label for="retiredJoiningYear">
-                  Joining Year at DTSC *
-                </label>
-
-                <select id="retiredJoiningYear"
-                        name="retiredJoiningYear"
-                        required>
-
-                  <option value="">Select Joining Year</option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label for="retirementYear">
-                  Retirement Year *
-                </label>
-
-                <select id="retirementYear"
-                        name="retirementYear">
-
-                  <option value="">Select Retirement Year</option>
-
-                </select>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- TRANSFERRED / EX TEACHER -->
-
-          <div id="exTeacherFields"
-               class="conditional-section">
-
-            <h3>Transferred / Ex-Teacher Information</h3>
-
-            <div class="form-grid">
-
-              <div class="form-group">
-
-                <label for="exDesignation">
-                  Last Designation *
-                </label>
-
-                <select id="exDesignation"
-                        name="exDesignation">
-
-                  <option value="">Select Designation</option>
-                  <option>Principal</option>
-                  <option>Chief Instructor</option>
-                  <option>Instructor</option>
-                  <option>Junior Instructor</option>
-                  <option>Craft Instructor</option>
-                  <option>Workshop Super</option>
-                  <option value="Others">Others</option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group"
-                   id="exOtherDesignationGroup"
-                   style="display:none;">
-
-                <label for="exOtherDesignation">
-                  Write Designation
-                </label>
-
-                <input type="text"
-                       id="exOtherDesignation"
-                       name="exOtherDesignation">
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label for="exDepartment">
-                  Department / Trade / Subject *
-                </label>
-
-                <select id="exDepartment"
-                        name="exDepartment">
-
-                  <option value="">Select Department</option>
-                  <option>General Electrical Works</option>
-                  <option>Refrigeration & Air Conditioning</option>
-                  <option>Machine Tools Operation</option>
-                  <option>Farm Machinery</option>
-                  <option>Mechanical Technology</option>
-                  <option value="Non-Tech">Non-Tech / General</option>
-                  <option value="Others">Others</option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group"
-                   id="exNonTechGroup"
-                   style="display:none;">
-
-                <label for="exNonTechSubject">
-                  Subject Name
-                </label>
-
-                <select id="exNonTechSubject"
-                        name="exNonTechSubject">
-
-                  <option value="">Select Subject</option>
-                  <option>Bengali</option>
-                  <option>English</option>
-                  <option>Mathematics</option>
-                  <option>Physics</option>
-                  <option>Chemistry</option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group"
-                   id="exOtherDepartmentGroup"
-                   style="display:none;">
-
-                <label for="exOtherDepartment">
-                  Write Department / Subject
-                </label>
-
-                <input type="text"
-                       id="exOtherDepartment"
-                       name="exOtherDepartment">
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label for="serviceFromYear">
-                  Service From Year *
-                </label>
-
-                <select id="serviceFromYear"
-                        name="serviceFromYear">
-
-                  <option value="">Select Year</option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label for="serviceToYear">
-                  Service To Year *
-                </label>
-
-                <select id="serviceToYear"
-                        name="serviceToYear">
-
-                  <option value="">Select Year</option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group full-width">
-
-                <label for="currentStatus">
-                  Current Status *
-                </label>
-
-                <select id="currentStatus"
-                        name="currentStatus">
-
-                  <option value="">Select Current Status</option>
-                  <option value="Government">
-                    Working at Government Institute
-                  </option>
-                  <option value="Private">
-                    Working at Private Institute
-                  </option>
-                  <option value="Higher Studies">
-                    Higher Studies / Abroad
-                  </option>
-                  <option value="Others">Others</option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group full-width"
-                   id="currentInstituteGroup"
-                   style="display:none;">
-
-                <label for="currentInstitute">
-                  Institution Name
-                </label>
-
-                <input type="text"
-                       id="currentInstitute"
-                       name="currentInstitute"
-                       placeholder="Institution Name">
-
-              </div>
-
-
-              <div class="form-group"
-                   id="currentDesignationGroup"
-                   style="display:none;">
-
-                <label for="currentDesignation">
-                  Current Designation
-                </label>
-
-                <input type="text"
-                       id="currentDesignation"
-                       name="currentDesignation"
-                       placeholder="Current Designation">
-
-              </div>
-
-
-              <div class="form-group full-width"
-                   id="otherCurrentStatusGroup"
-                   style="display:none;">
-
-                <label for="otherCurrentStatus">
-                  Please Specify
-                </label>
-
-                <textarea id="otherCurrentStatus"
-                          name="otherCurrentStatus"
-                          placeholder="Write your current status"></textarea>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
-
-
-        <!-- 05 MESSAGE -->
-
-        <section class="form-section">
-
-          <h2>05. Message / Advice for Students & Alumni</h2>
 
           <div class="form-group">
-
-            <label for="message">
-              Your Message or Advice
-            </label>
-
-            <textarea id="message"
-                      name="message"
-                      placeholder="Share your valuable advice for students and alumni..."></textarea>
-
+            <label for="currentWorkplace">Current Workplace</label>
+            <input type="text" id="currentWorkplace">
           </div>
 
-        </section>
-
-
-        <!-- 06 ACCOUNT -->
-
-        <section class="form-section">
-
-          <h2>06. Login & Manage Your Profile</h2>
-
-          <p class="info-note">
-            আপনার Registration সম্পন্ন হলে এই Email/Mobile
-            ও Password দিয়ে Profile পরিচালনা করতে পারবেন।
-            Google Sign-In ব্যবহার করলে Password প্রয়োজন হবে না।
-          </p>
-
-          <div class="form-grid">
-
-            <div class="form-group">
-
-              <label for="accountEmail">
-                Account Email *
-              </label>
-
-              <input type="email"
-                     id="accountEmail"
-                     name="accountEmail"
-                     placeholder="Your Email Address"
-                     required>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="accountMobile">
-                Account Mobile Number
-              </label>
-
-              <input type="tel"
-                     id="accountMobile"
-                     name="accountMobile"
-                     placeholder="01XXXXXXXXX">
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="password">
-                Password *
-              </label>
-
-              <input type="password"
-                     id="password"
-                     name="password"
-                     minlength="8"
-                     placeholder="Minimum 8 characters"
-                     required>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="confirmPassword">
-                Confirm Password *
-              </label>
-
-              <input type="password"
-                     id="confirmPassword"
-                     name="confirmPassword"
-                     minlength="8"
-                     placeholder="Confirm Password"
-                     required>
-
-            </div>
-
+          <div class="form-group full-width">
+            <label for="suggestions">Advice / Suggestions for DTSC Alumni Association</label>
+            <textarea id="suggestions" rows="4" placeholder="Write your valuable suggestions..."></textarea>
           </div>
 
+        </div>
+      </section>
 
-          <button type="button"
-                  id="googleSignIn"
-                  class="btn-google">
+      <!-- ACCOUNT INFORMATION -->
+      <section class="form-section">
+        <h3>05. Account Information</h3>
 
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="password">Create Password *</label>
+            <input type="password" id="password" minlength="8" required>
+            <small>Minimum 8 characters.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password *</label>
+            <input type="password" id="confirmPassword" minlength="8" required>
+          </div>
+
+        </div>
+
+        <div class="google-login">
+          <p>Or continue with your Google Account</p>
+          <button type="button" id="googleSignIn" class="google-btn">
             Continue with Google
-
           </button>
-
-          <p class="info-note">
-            Google Authentication পরবর্তী ধাপে Supabase-এর
-            মাধ্যমে সংযুক্ত করা হবে।
-          </p>
-
-        </section>
-
-
-        <!-- DECLARATION -->
-
-        <section class="form-section">
-
-          <h2>07. Declaration</h2>
-
-          <div class="declaration">
-
-            <label>
-
-              <input type="checkbox"
-                     id="declaration"
-                     name="declaration"
-                     required>
-
-              I hereby declare that all information provided
-              in this registration form is true and correct
-              to the best of my knowledge.
-
-            </label>
-
-          </div>
-
-        </section>
-
-
-        <!-- FORM BUTTONS -->
-
-        <div class="form-actions">
-
-          <button type="reset"
-                  class="btn-secondary">
-
-            Reset Form
-
-          </button>
-
-
-          <button type="button"
-                  id="previewBtn"
-                  class="btn-primary">
-
-            Preview Information
-
-          </button>
-
-
-          <button type="submit"
-                  id="submitBtn"
-                  class="submit-btn">
-
-            Submit Registration
-
-          </button>
-
         </div>
+      </section>
 
+      <!-- DECLARATION -->
+      <section class="form-section declaration-section">
+        <h3>06. Declaration</h3>
 
-        <!-- PREVIEW -->
+        <label class="declaration">
+          <input type="checkbox" id="declaration" required>
+          I hereby declare that all the information provided above is true and correct to the best of my knowledge.
+        </label>
+      </section>
 
-        <div id="previewArea"
-             class="preview-container">
+      <!-- ACTION BUTTONS -->
+      <div class="form-actions">
+        <button type="button" id="previewBtn" class="preview-btn">
+          Preview Information
+        </button>
 
-        </div>
+        <button type="submit" id="submitBtn" class="submit-btn">
+          Register as Teacher
+        </button>
+      </div>
 
-      </form>
+    </form>
 
-    </main>
+    <!-- PREVIEW AREA -->
+    <div id="previewSection" class="preview-section" hidden>
+      <h3>Registration Preview</h3>
+      <div id="previewContent"></div>
 
+      <button type="button" id="editBtn" class="preview-btn">
+        Edit Information
+      </button>
+    </div>
 
-    <footer class="form-footer">
+    <p class="footer-note">
+      © DTSC Alumni Association. All Rights Reserved.
+    </p>
 
-      <p>
-        © DTSC Alumni Association
-      </p>
+  </main>
 
-      <p>
-        Designed for Teachers & Alumni
-      </p>
-
-    </footer>
-
-  </div>
-
-
-  <script src="./teacher.js" defer></script>
-
+  <script src="./teacher.js"></script>
 </body>
 </html>
