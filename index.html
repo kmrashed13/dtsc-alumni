@@ -14,17 +14,16 @@
 
 <body>
 
-  <!-- =================================
-       FIXED HEADER + NAVIGATION
-  ================================== -->
+  <!-- FIXED HEADER + NAVIGATION -->
 
   <div class="site-header">
 
     <!-- HEADER -->
+
     <header class="header">
 
       <div class="header-logo">
-        <img src="./assets/logo.png" alt="DTSC Alumni Logo">
+        <img src="./assets/logo.png" alt="DTSC Alumni Association Logo">
       </div>
 
       <div class="header-title">
@@ -34,16 +33,21 @@
       </div>
 
       <div class="header-logo">
-        <img src="./assets/dtsclogo.png" alt="DTSC Logo">
+        <img src="./assets/dtsclogo.png" alt="DTSC Institute Logo">
       </div>
 
     </header>
 
 
     <!-- NAVIGATION -->
+
     <nav class="navbar">
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Open Menu"
+        aria-expanded="false">
         ☰
       </button>
 
@@ -67,16 +71,9 @@
           <button id="languageToggle">(BN)</button>
         </li>
 
-        <li class="account-menu">
+        <li><a href="login/index.html">Login</a></li>
 
-          <button id="accountToggle">Account ▾</button>
-
-          <div class="account-dropdown" id="accountDropdown">
-            <a href="register/index.html">Register</a>
-            <a href="login/index.html">Login</a>
-          </div>
-
-        </li>
+        <li><a href="register/index.html">Register</a></li>
 
       </ul>
 
@@ -85,16 +82,14 @@
   </div>
 
 
-  <!-- =================================
-       HERO BANNER
-  ================================== -->
+  <!-- HERO BANNER -->
 
   <section class="hero">
 
     <div class="hero-content">
 
       <p class="hero-label">
-        Welcome to DTSC Alumni Association
+        Welcome to
       </p>
 
       <h2>DTSC Alumni Association</h2>
@@ -108,7 +103,7 @@
       <div class="hero-buttons">
 
         <a href="register/index.html" class="hero-btn">
-          Join Our Community
+          Join Our Community →
         </a>
 
         <a href="membership/index.html" class="hero-btn secondary-btn">
@@ -122,9 +117,7 @@
   </section>
 
 
-  <!-- =================================
-       ABOUT SECTION
-  ================================== -->
+  <!-- ABOUT SECTION -->
 
   <section class="about-section">
 
@@ -166,9 +159,7 @@
   </section>
 
 
-  <!-- =================================
-       NOTICE BOARD
-  ================================== -->
+  <!-- NOTICE BOARD -->
 
   <section class="notice-section">
 
@@ -184,9 +175,7 @@
   </section>
 
 
-  <!-- =================================
-       EVENTS SECTION
-  ================================== -->
+  <!-- EVENTS SECTION -->
 
   <section class="events-section">
 
@@ -208,10 +197,7 @@
   </section>
 
 
-  <!-- =================================
-       PHOTO GALLERY
-       Images will be added from Admin
-  ================================== -->
+  <!-- PHOTO GALLERY -->
 
   <section class="gallery-section">
 
@@ -231,9 +217,7 @@
   </section>
 
 
-  <!-- =================================
-       MEMBERSHIP SECTION
-  ================================== -->
+  <!-- MEMBERSHIP SECTION -->
 
   <section class="membership-section">
 
@@ -253,9 +237,7 @@
   </section>
 
 
-  <!-- =================================
-       CONTACT SECTION
-  ================================== -->
+  <!-- CONTACT SECTION -->
 
   <section class="contact-section">
 
@@ -276,40 +258,84 @@
   </section>
 
 
-  <!-- =================================
-       FOOTER
-  ================================== -->
+  <!-- PROFESSIONAL FOOTER -->
 
   <footer class="footer">
 
-    <h3>DTSC Alumni Association</h3>
+    <div class="footer-container">
 
-    <p>
-      Dewanganj Govt. Technical School & College, Jamalpur
-    </p>
+      <div class="footer-column footer-about">
 
-    <p>Shared Roots, Lifelong Fellowship</p>
+        <h3>DTSC Alumni Association</h3>
 
-    <div class="footer-links">
+        <p>
+          Connecting former students and respected teachers
+          of Dewanganj Govt. Technical School & College.
+          Shared Roots, Lifelong Fellowship.
+        </p>
 
-      <a href="about/index.html">About</a>
+      </div>
 
-      <a href="events/index.html">Events</a>
 
-      <a href="membership/index.html">Membership</a>
+      <div class="footer-column">
 
-      <a href="contact/index.html">Contact</a>
+        <h4>Quick Links</h4>
+
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about/index.html">About Us</a></li>
+          <li><a href="events/index.html">Events</a></li>
+          <li><a href="gallery/index.html">Gallery</a></li>
+          <li><a href="contact/index.html">Contact</a></li>
+        </ul>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h4>Membership</h4>
+
+        <ul>
+          <li><a href="register/index.html">Join Our Community</a></li>
+          <li><a href="membership/index.html">Membership Directory</a></li>
+          <li><a href="login/index.html">Member Login</a></li>
+        </ul>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h4>Contact Information</h4>
+
+        <p>Dewanganj Govt. Technical School & College</p>
+        <p>Dewanganj, Jamalpur, Bangladesh</p>
+
+        <a href="contact/index.html">Contact Us →</a>
+
+      </div>
 
     </div>
 
-    <p class="copyright">
-      © 2026 DTSC Alumni Association. All Rights Reserved.
-    </p>
+
+    <div class="footer-bottom">
+
+      <p>
+        © 2026 DTSC Alumni Association. All Rights Reserved.
+      </p>
+
+      <p>
+        Shared Roots, Lifelong Fellowship
+      </p>
+
+    </div>
 
   </footer>
 
 
   <!-- JAVASCRIPT -->
+
   <script src="./script.js"></script>
 
 </body>
