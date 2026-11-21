@@ -1,22 +1,19 @@
 
-/* =========================================
-   DTSC ALUMNI ASSOCIATION
-   MAIN WEBSITE STYLESHEET
-========================================= */
-
 @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
 
+/* ==============================
+   GLOBAL
+============================== */
 
-/* GLOBAL */
 :root {
   --green: #103e35;
   --green-light: #176052;
   --gold: #c9a646;
   --gold-light: #e3c875;
-  --white: #ffffff;
+  --white: #fff;
   --light: #f5f8f6;
-  --dark: #222;
   --gray: #666;
+  --dark: #222;
 }
 
 * {
@@ -27,13 +24,15 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 160px;
 }
 
 body {
   font-family: 'Poppins', 'Hind Siliguri', sans-serif;
   color: var(--dark);
   background: var(--white);
-  line-height: 1.7;
+  line-height: 1.6;
+  padding-top: 180px;
 }
 
 a {
@@ -52,18 +51,33 @@ button {
 }
 
 
-/* =========================================
-   HEADER
-========================================= */
+/* ==============================
+   FIXED HEADER
+============================== */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: var(--white);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+}
+
+
+/* ==============================
+   MAIN HEADER
+============================== */
 
 .header {
   width: 100%;
-  min-height: 140px;
-  padding: 18px 5%;
+  min-height: 125px;
+  padding: 10px 4%;
   display: grid;
-  grid-template-columns: 100px 1fr 100px;
+  grid-template-columns: 75px 1fr 75px;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   background: var(--white);
   border-bottom: 3px solid var(--gold);
 }
@@ -75,8 +89,8 @@ button {
 }
 
 .header-logo img {
-  width: 85px;
-  height: 85px;
+  width: 65px;
+  height: 65px;
   object-fit: contain;
 }
 
@@ -86,45 +100,45 @@ button {
 
 .header-title h1 {
   color: var(--green);
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 800;
   line-height: 1.3;
 }
 
 .header-title p {
   color: var(--gray);
-  font-size: 14px;
+  font-size: 13px;
   margin-top: 5px;
 }
 
 .header-title span {
+  display: block;
   color: var(--gold);
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 1px;
+  font-weight: 700;
+  margin-top: 5px;
 }
 
 
-/* =========================================
+/* ==============================
    NAVIGATION
-========================================= */
+============================== */
 
 .navbar {
   width: 100%;
-  min-height: 56px;
+  min-height: 55px;
   background: var(--green);
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 0 3%;
+  justify-content: flex-end;
+  padding: 0 4%;
   position: relative;
-  z-index: 100;
 }
 
 .nav-menu {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 4px;
   list-style: none;
 }
@@ -136,12 +150,13 @@ button {
 .nav-menu li a,
 .nav-menu li button {
   display: block;
-  padding: 16px 12px;
+  padding: 15px 11px;
   color: var(--white);
   background: transparent;
   border: none;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
+  white-space: nowrap;
   transition: 0.3s;
 }
 
@@ -159,10 +174,10 @@ button {
   position: absolute;
   top: 100%;
   right: 0;
-  min-width: 155px;
+  min-width: 150px;
   background: var(--white);
   border-top: 3px solid var(--gold);
-  box-shadow: 0 5px 18px rgba(0,0,0,0.15);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
   border-radius: 0 0 5px 5px;
   overflow: hidden;
 }
@@ -172,9 +187,10 @@ button {
 }
 
 .account-dropdown a {
+  display: block;
+  padding: 11px 15px !important;
   color: var(--green) !important;
   background: var(--white) !important;
-  padding: 12px 16px !important;
 }
 
 .account-dropdown a:hover {
@@ -183,28 +199,28 @@ button {
 }
 
 
-/* MOBILE MENU BUTTON */
+/* HAMBURGER */
 
 .menu-toggle {
   display: none;
   background: transparent;
   color: var(--white);
   border: none;
-  font-size: 27px;
-  padding: 8px 12px;
+  font-size: 29px;
+  padding: 5px 10px;
 }
 
 
-/* =========================================
-   HERO BANNER
-========================================= */
+/* ==============================
+   HERO SECTION
+============================== */
 
 .hero {
-  min-height: 520px;
+  min-height: 390px;
   background:
     linear-gradient(
-      rgba(9, 42, 35, 0.76),
-      rgba(9, 42, 35, 0.76)
+      rgba(9,42,35,0.72),
+      rgba(9,42,35,0.78)
     ),
     url("./assets/institute.jpg");
 
@@ -216,71 +232,95 @@ button {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 70px 20px;
+  padding: 35px 20px;
   color: var(--white);
 }
 
 .hero-content {
-  max-width: 850px;
+  max-width: 750px;
+  width: 100%;
 }
 
-.hero-content > p:first-child {
+.hero-label {
   color: var(--gold-light);
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 9px;
 }
 
 .hero-content h2 {
-  font-size: 45px;
+  font-size: 32px;
   font-weight: 800;
-  margin: 12px 0;
   line-height: 1.25;
+  margin-bottom: 8px;
 }
 
 .hero-content h3 {
   color: var(--gold-light);
-  font-size: 23px;
-  margin-bottom: 20px;
+  font-size: 19px;
+  margin-bottom: 10px;
 }
 
-.hero-content p {
-  font-size: 15px;
-  max-width: 700px;
-  margin: 0 auto 28px;
+.hero-message {
+  max-width: 650px;
+  margin: 0 auto 18px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .hero-btn {
   display: inline-block;
   background: var(--gold);
   color: var(--green);
-  padding: 13px 30px;
+  padding: 10px 18px;
+  border: 1px solid var(--gold);
   border-radius: 5px;
+  font-size: 12px;
   font-weight: 700;
   transition: 0.3s;
 }
 
 .hero-btn:hover {
   background: var(--white);
-  transform: translateY(-3px);
+  border-color: var(--white);
+}
+
+.secondary-btn {
+  background: transparent;
+  color: var(--white);
+  border-color: var(--white);
+}
+
+.secondary-btn:hover {
+  background: var(--white);
+  color: var(--green);
 }
 
 
-/* =========================================
-   COMMON SECTION
-========================================= */
+/* ==============================
+   COMMON SECTIONS
+============================== */
 
 section:not(.hero) {
-  padding: 70px 7%;
+  padding: 50px 7%;
 }
 
 .section-title {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .section-title h2 {
   color: var(--green);
-  font-size: 30px;
+  font-size: 27px;
   font-weight: 800;
   margin-bottom: 8px;
 }
@@ -288,21 +328,21 @@ section:not(.hero) {
 .section-title h2::after {
   content: "";
   display: block;
-  width: 65px;
+  width: 60px;
   height: 3px;
   background: var(--gold);
-  margin: 12px auto 0;
+  margin: 10px auto 0;
 }
 
 .section-title p {
   color: var(--gray);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 
-/* =========================================
-   ABOUT SECTION
-========================================= */
+/* ==============================
+   ABOUT
+============================== */
 
 .about-section {
   background: var(--white);
@@ -310,43 +350,43 @@ section:not(.hero) {
 
 .about-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 45px;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 30px;
   align-items: center;
 }
 
 .about-image img {
   width: 100%;
-  height: 340px;
+  height: 260px;
   object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+  border-radius: 7px;
 }
 
 .about-text h3 {
   color: var(--green);
-  font-size: 23px;
-  margin-bottom: 15px;
+  font-size: 20px;
+  margin-bottom: 12px;
 }
 
 .about-text p {
   color: var(--gray);
-  font-size: 14px;
-  margin-bottom: 15px;
+  font-size: 13px;
+  margin-bottom: 12px;
 }
 
 .read-more {
   display: inline-block;
-  margin-top: 10px;
   color: var(--green);
+  font-size: 13px;
   font-weight: 700;
   border-bottom: 2px solid var(--gold);
+  margin-top: 5px;
 }
 
 
-/* =========================================
-   NOTICE BOARD
-========================================= */
+/* ==============================
+   NOTICE
+============================== */
 
 .notice-section {
   background: var(--light);
@@ -355,22 +395,23 @@ section:not(.hero) {
 .notice-box {
   max-width: 850px;
   margin: auto;
-  padding: 25px;
+  padding: 20px;
   text-align: center;
   background: var(--white);
   border-left: 4px solid var(--gold);
   border-radius: 5px;
-  box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
 }
 
 .notice-box p {
   color: var(--gray);
+  font-size: 13px;
 }
 
 
-/* =========================================
+/* ==============================
    EVENTS
-========================================= */
+============================== */
 
 .events-section {
   background: var(--white);
@@ -379,26 +420,28 @@ section:not(.hero) {
 .event-box {
   max-width: 850px;
   margin: auto;
-  padding: 30px;
+  padding: 25px;
   text-align: center;
   background: var(--light);
-  border-radius: 8px;
+  border-radius: 7px;
 }
 
 .event-box p {
   color: var(--gray);
-  margin-bottom: 12px;
+  font-size: 13px;
+  margin-bottom: 10px;
 }
 
 .event-box a {
   color: var(--green);
+  font-size: 13px;
   font-weight: 700;
 }
 
 
-/* =========================================
+/* ==============================
    GALLERY
-========================================= */
+============================== */
 
 .gallery-section {
   background: var(--light);
@@ -407,36 +450,36 @@ section:not(.hero) {
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 15px;
 }
 
 .gallery-grid img {
   width: 100%;
-  height: 230px;
+  height: 180px;
   object-fit: cover;
   border-radius: 7px;
   transition: 0.3s;
 }
 
 .gallery-grid img:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transform: translateY(-3px);
 }
 
 .gallery-link {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 22px;
 }
 
 .gallery-link a {
   color: var(--green);
+  font-size: 13px;
   font-weight: 700;
 }
 
 
-/* =========================================
+/* ==============================
    MEMBERSHIP
-========================================= */
+============================== */
 
 .membership-section {
   text-align: center;
@@ -454,14 +497,13 @@ section:not(.hero) {
 
 .membership-btn {
   display: inline-block;
-  margin: 8px;
-  padding: 12px 25px;
+  margin: 6px;
+  padding: 10px 19px;
   border: 1px solid var(--gold);
   border-radius: 5px;
   color: var(--white);
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
-  transition: 0.3s;
 }
 
 .membership-btn:hover {
@@ -470,9 +512,9 @@ section:not(.hero) {
 }
 
 
-/* =========================================
+/* ==============================
    CONTACT
-========================================= */
+============================== */
 
 .contact-section {
   text-align: center;
@@ -481,51 +523,52 @@ section:not(.hero) {
 
 .contact-section p {
   color: var(--gray);
-  margin-bottom: 15px;
+  font-size: 13px;
+  margin-bottom: 12px;
 }
 
 .contact-section a {
   color: var(--green);
+  font-size: 13px;
   font-weight: 700;
 }
 
 
-/* =========================================
+/* ==============================
    FOOTER
-========================================= */
+============================== */
 
 .footer {
   background: #092c26;
   color: var(--white);
   text-align: center;
-  padding: 40px 20px 20px;
+  padding: 32px 18px 18px;
   border-top: 3px solid var(--gold);
 }
 
 .footer h3 {
   color: var(--gold-light);
-  font-size: 23px;
-  margin-bottom: 10px;
+  font-size: 20px;
+  margin-bottom: 8px;
 }
 
 .footer p {
-  font-size: 13px;
+  font-size: 12px;
   color: #d6e1dc;
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 }
 
 .footer-links {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 22px;
-  margin: 20px 0;
+  gap: 18px;
+  margin: 18px 0;
 }
 
 .footer-links a {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--white);
-  transition: 0.3s;
 }
 
 .footer-links a:hover {
@@ -534,88 +577,79 @@ section:not(.hero) {
 
 .copyright {
   border-top: 1px solid rgba(255,255,255,0.15);
-  padding-top: 18px;
-  margin-top: 20px;
+  padding-top: 14px;
+  margin-top: 15px;
 }
 
 
-/* =========================================
-   RESPONSIVE TABLET
-========================================= */
+/* ==============================
+   TABLET
+============================== */
 
-@media (max-width: 900px) {
-
-  .header {
-    grid-template-columns: 75px 1fr 75px;
-    padding: 15px 3%;
-    gap: 10px;
-  }
-
-  .header-logo img {
-    width: 65px;
-    height: 65px;
-  }
+@media (max-width: 950px) {
 
   .header-title h1 {
-    font-size: 23px;
+    font-size: 22px;
   }
 
   .nav-menu li a,
   .nav-menu li button {
-    padding: 14px 8px;
-    font-size: 11px;
-  }
-
-  .hero-content h2 {
-    font-size: 36px;
-  }
-
-  .about-content {
-    gap: 25px;
+    padding: 14px 7px;
+    font-size: 10px;
   }
 
 }
 
 
-/* =========================================
-   RESPONSIVE MOBILE
-========================================= */
+/* ==============================
+   MOBILE
+============================== */
 
 @media (max-width: 650px) {
 
+  body {
+    padding-top: 145px;
+  }
+
+  html {
+    scroll-padding-top: 150px;
+  }
+
   .header {
-    min-height: 100px;
-    grid-template-columns: 55px 1fr 55px;
-    padding: 12px 10px;
-    gap: 8px;
+    min-height: 95px;
+    grid-template-columns: 52px 1fr 52px;
+    padding: 8px 10px;
+    gap: 6px;
   }
 
   .header-logo img {
-    width: 50px;
-    height: 50px;
+    width: 46px;
+    height: 46px;
   }
 
   .header-title h1 {
     font-size: 16px;
+    line-height: 1.3;
   }
 
   .header-title p {
     font-size: 9px;
     line-height: 1.4;
+    margin-top: 4px;
   }
 
   .header-title span {
-    font-size: 8px;
-    letter-spacing: 0;
+    font-size: 9px;
+    margin-top: 4px;
   }
 
 
-  /* MOBILE NAVIGATION */
+  /* MOBILE NAV */
 
   .navbar {
     min-height: 50px;
-    justify-content: flex-start;
-    padding: 0 12px;
+    justify-content: flex-end;
+    padding: 0 15px;
   }
 
   .menu-toggle {
@@ -626,11 +660,12 @@ section:not(.hero) {
     display: none;
     position: absolute;
     top: 100%;
-    left: 0;
+    right: 0;
     width: 100%;
     background: var(--green);
     flex-direction: column;
     align-items: stretch;
+    justify-content: flex-start;
     gap: 0;
     box-shadow: 0 5px 12px rgba(0,0,0,0.15);
   }
@@ -647,7 +682,7 @@ section:not(.hero) {
   .nav-menu li button {
     width: 100%;
     text-align: left;
-    padding: 13px 20px;
+    padding: 12px 20px;
     font-size: 13px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
   }
@@ -665,38 +700,57 @@ section:not(.hero) {
   }
 
 
-  /* HERO */
+  /* MOBILE HERO */
 
   .hero {
-    min-height: 430px;
-    padding: 55px 18px;
+    min-height: 340px;
+    padding: 30px 17px;
+    background-position: center;
   }
 
-  .hero-content > p:first-child {
-    font-size: 16px;
+  .hero-label {
+    font-size: 13px;
+    margin-bottom: 8px;
   }
 
   .hero-content h2 {
-    font-size: 29px;
+    font-size: 25px;
+    margin-bottom: 7px;
   }
 
   .hero-content h3 {
-    font-size: 18px;
+    font-size: 16px;
+    margin-bottom: 8px;
   }
 
-  .hero-content p {
-    font-size: 13px;
+  .hero-message {
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  .hero-buttons {
+    gap: 8px;
+  }
+
+  .hero-btn {
+    padding: 9px 12px;
+    font-size: 11px;
   }
 
 
-  /* SECTIONS */
+  /* MOBILE SECTIONS */
 
   section:not(.hero) {
-    padding: 50px 18px;
+    padding: 38px 17px;
+  }
+
+  .section-title {
+    margin-bottom: 23px;
   }
 
   .section-title h2 {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .section-title p {
@@ -704,59 +758,52 @@ section:not(.hero) {
   }
 
 
-  /* ABOUT */
+  /* MOBILE ABOUT */
 
   .about-content {
     grid-template-columns: 1fr;
-    gap: 25px;
+    gap: 20px;
   }
 
   .about-image img {
-    height: 230px;
+    height: 200px;
   }
 
   .about-text h3 {
-    font-size: 20px;
+    font-size: 18px;
   }
 
 
-  /* GALLERY */
+  /* MOBILE GALLERY */
 
   .gallery-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 
   .gallery-grid img {
-    height: 220px;
+    height: 135px;
   }
 
 
-  /* MEMBERSHIP */
+  /* MOBILE MEMBERSHIP */
 
   .membership-btn {
     display: block;
-    max-width: 250px;
-    margin: 12px auto;
-  }
-
-
-  /* FOOTER */
-
-  .footer h3 {
-    font-size: 20px;
+    max-width: 240px;
+    margin: 10px auto;
   }
 
   .footer-links {
-    gap: 14px;
+    gap: 12px;
   }
 
 }
 
 
-/* =========================================
+/* ==============================
    SMALL MOBILE
-========================================= */
+============================== */
 
 @media (max-width: 380px) {
 
@@ -768,13 +815,26 @@ section:not(.hero) {
     font-size: 8px;
   }
 
+  .header-title span {
+    font-size: 8px;
+  }
+
   .header-logo img {
-    width: 43px;
-    height: 43px;
+    width: 42px;
+    height: 42px;
   }
 
   .hero-content h2 {
-    font-size: 25px;
+    font-size: 22px;
+  }
+
+  .hero-content h3 {
+    font-size: 15px;
+  }
+
+  .hero-btn {
+    padding: 8px 10px;
+    font-size: 10px;
   }
 
 }
