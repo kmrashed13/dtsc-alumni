@@ -1,1 +1,755 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101b18">
+
+<title>Admin Dashboard | DTSC Alumni Association</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#101b18;
+  --sidebar:#14231e;
+  --card:#192a23;
+  --gold:#d6b878;
+  --light:#f0d9a4;
+  --white:#f4f3ed;
+  --muted:#91a098;
+  --line:rgba(255,255,255,.09);
+}
+
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body {
+  background:var(--bg);
+  color:var(--white);
+  font-family:'DM Sans',sans-serif;
+  min-height:100vh;
+}
+
+button {
+  font-family:inherit;
+}
+
+.layout {
+  display:flex;
+  min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width:255px;
+  background:var(--sidebar);
+  border-right:1px solid var(--line);
+  padding:25px 17px;
+  display:flex;
+  flex-direction:column;
+  flex-shrink:0;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:0 8px 27px;
+  border-bottom:1px solid var(--line);
+}
+
+.brand img {
+  width:39px;
+  height:39px;
+  object-fit:contain;
+}
+
+.brand h3 {
+  font-size:11px;
+  letter-spacing:1px;
+}
+
+.brand p {
+  color:var(--muted);
+  font-size:9px;
+  margin-top:5px;
+}
+
+.menu-label {
+  color:#73847a;
+  font-size:9px;
+  letter-spacing:2px;
+  padding:27px 11px 12px;
+}
+
+.nav {
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.nav a {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px;
+  border-radius:8px;
+  color:#a9b6ae;
+  text-decoration:none;
+  font-size:12px;
+  transition:.2s;
+}
+
+.nav a:hover,
+.nav a.active {
+  background:rgba(214,184,120,.12);
+  color:var(--gold);
+}
+
+.nav-icon {
+  width:20px;
+  text-align:center;
+  font-size:16px;
+}
+
+.sidebar-bottom {
+  margin-top:auto;
+  border-top:1px solid var(--line);
+  padding-top:18px;
+}
+
+.sidebar-bottom a {
+  display:block;
+  color:var(--muted);
+  text-decoration:none;
+  padding:11px;
+  font-size:11px;
+}
+
+.sidebar-bottom a:hover {
+  color:var(--gold);
+}
+
+/* MAIN */
+
+.main {
+  flex:1;
+  min-width:0;
+}
+
+.topbar {
+  min-height:75px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 35px;
+  gap:15px;
+}
+
+.page-title {
+  font-family:'Playfair Display',serif;
+  font-size:23px;
+}
+
+.page-subtitle {
+  color:var(--muted);
+  font-size:10px;
+  margin-top:5px;
+}
+
+.top-actions {
+  display:flex;
+  align-items:center;
+  gap:17px;
+}
+
+.status {
+  font-size:10px;
+  color:#9fd5ae;
+  background:rgba(80,170,110,.10);
+  padding:8px 12px;
+  border-radius:30px;
+}
+
+.admin-profile {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.avatar {
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(214,184,120,.16);
+  display:grid;
+  place-items:center;
+  color:var(--gold);
+  font-weight:700;
+}
+
+.admin-profile strong {
+  display:block;
+  font-size:11px;
+}
+
+.admin-profile small {
+  color:var(--muted);
+  font-size:9px;
+}
+
+/* CONTENT */
+
+.content {
+  padding:32px 35px;
+  max-width:1450px;
+  margin:auto;
+}
+
+.welcome {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:30px;
+}
+
+.welcome h2 {
+  font-family:'Playfair Display',serif;
+  font-size:27px;
+  font-weight:600;
+}
+
+.welcome p {
+  color:var(--muted);
+  font-size:12px;
+  margin-top:8px;
+}
+
+.date-label {
+  border:1px solid var(--line);
+  padding:10px 14px;
+  border-radius:8px;
+  color:var(--gold);
+  font-size:10px;
+}
+
+/* STATS */
+
+.stats {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:17px;
+  margin-bottom:30px;
+}
+
+.stat-card {
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:21px;
+  transition:.25s;
+}
+
+.stat-card:hover {
+  transform:translateY(-3px);
+  border-color:rgba(214,184,120,.35);
+}
+
+.stat-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:24px;
+}
+
+.stat-icon {
+  width:39px;
+  height:39px;
+  border-radius:10px;
+  background:rgba(214,184,120,.11);
+  color:var(--gold);
+  display:grid;
+  place-items:center;
+  font-size:18px;
+}
+
+.stat-tag {
+  color:#8ea394;
+  font-size:9px;
+}
+
+.stat-card h3 {
+  font-size:29px;
+  font-weight:600;
+}
+
+.stat-card p {
+  color:var(--muted);
+  font-size:11px;
+  margin-top:5px;
+}
+
+/* SECTIONS */
+
+.section-grid {
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:20px;
+}
+
+.panel {
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:23px;
+  margin-bottom:20px;
+}
+
+.panel-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:22px;
+}
+
+.panel-header h3 {
+  font-family:'Playfair Display',serif;
+  font-size:18px;
+}
+
+.panel-header span {
+  color:var(--gold);
+  font-size:10px;
+}
+
+/* QUICK LINKS */
+
+.quick-links {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:11px;
+}
+
+.quick-link {
+  border:1px solid var(--line);
+  padding:15px;
+  border-radius:9px;
+  text-decoration:none;
+  color:var(--white);
+  transition:.2s;
+}
+
+.quick-link:hover {
+  border-color:var(--gold);
+  background:rgba(214,184,120,.05);
+}
+
+.quick-link b {
+  display:block;
+  color:var(--gold);
+  font-size:18px;
+  margin-bottom:9px;
+}
+
+.quick-link span {
+  font-size:11px;
+}
+
+/* ACTIVITY */
+
+.activity {
+  display:flex;
+  gap:13px;
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.activity:last-child {
+  border-bottom:none;
+}
+
+.activity-dot {
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--gold);
+  margin-top:5px;
+  flex-shrink:0;
+}
+
+.activity p {
+  color:#c7d0ca;
+  font-size:11px;
+  line-height:1.6;
+}
+
+.activity small {
+  color:var(--muted);
+  font-size:9px;
+  display:block;
+  margin-top:4px;
+}
+
+/* RESPONSIVE */
+
+.menu-toggle {
+  display:none;
+  background:none;
+  border:none;
+  color:var(--gold);
+  font-size:22px;
+  cursor:pointer;
+}
+
+@media(max-width:1050px) {
+  .stats {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .section-grid {
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:750px) {
+  .sidebar {
+    position:fixed;
+    left:-270px;
+    top:0;
+    bottom:0;
+    z-index:20;
+    transition:.3s;
+    width:255px;
+  }
+
+  .sidebar.open {
+    left:0;
+  }
+
+  .menu-toggle {
+    display:block;
+  }
+
+  .topbar {
+    padding:14px 18px;
+  }
+
+  .content {
+    padding:25px 17px;
+  }
+
+  .status {
+    display:none;
+  }
+
+  .page-title {
+    font-size:19px;
+  }
+}
+
+@media(max-width:480px) {
+  .stats {
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .stat-card {
+    padding:15px;
+  }
+
+  .stat-card h3 {
+    font-size:23px;
+  }
+
+  .welcome {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .date-label {
+    display:none;
+  }
+
+  .quick-links {
+    grid-template-columns:1fr 1fr;
+  }
+
+  .admin-profile strong {
+    font-size:9px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+
+  <div class="brand">
+    <img src="../assets/logo.png" alt="Logo">
+    <div>
+      <h3>DTSC ALUMNI</h3>
+      <p>ADMINISTRATION</p>
+    </div>
+  </div>
+
+  <div class="menu-label">MAIN WORKSPACE</div>
+
+  <nav class="nav">
+
+    <a href="./dashboard.html" class="active">
+      <span class="nav-icon">▦</span> Dashboard
+    </a>
+
+    <a href="./members.html">
+      <span class="nav-icon">♙</span> Members
+    </a>
+
+    <a href="./teachers.html">
+      <span class="nav-icon">♧</span> Teachers
+    </a>
+
+    <a href="./applications.html">
+      <span class="nav-icon">▤</span> Applications
+    </a>
+
+    <a href="./events.html">
+      <span class="nav-icon">◷</span> Events
+    </a>
+
+    <a href="./notices.html">
+      <span class="nav-icon">▧</span> Notices
+    </a>
+
+    <a href="./gallery.html">
+      <span class="nav-icon">▣</span> Gallery
+    </a>
+
+  </nav>
+
+  <div class="menu-label">SYSTEM</div>
+
+  <nav class="nav">
+
+    <a href="./settings.html">
+      <span class="nav-icon">⚙</span> Settings
+    </a>
+
+  </nav>
+
+  <div class="sidebar-bottom">
+    <a href="../index.html">↗ View Public Website</a>
+    <a href="#" id="logoutBtn">⇥ Sign Out</a>
+  </div>
+
+</aside>
+
+<!-- MAIN CONTENT -->
+
+<main class="main">
+
+  <header class="topbar">
+
+    <div style="display:flex;align-items:center;gap:13px">
+      <button class="menu-toggle" id="menuToggle">☰</button>
+      <div>
+        <div class="page-title">Administration</div>
+        <div class="page-subtitle">Management Control Center</div>
+      </div>
+    </div>
+
+    <div class="top-actions">
+
+      <div class="status">● SYSTEM SECURE</div>
+
+      <div class="admin-profile">
+        <div class="avatar" id="adminAvatar">A</div>
+        <div>
+          <strong id="adminName">Administrator</strong>
+          <small id="adminRole">Super Admin</small>
+        </div>
+      </div>
+
+    </div>
+
+  </header>
+
+  <section class="content">
+
+    <div class="welcome">
+
+      <div>
+        <h2>Welcome Back, <span id="welcomeName">Admin</span></h2>
+        <p>Here's what's happening with your alumni community.</p>
+      </div>
+
+      <div class="date-label" id="todayDate">Loading date...</div>
+
+    </div>
+
+    <!-- STATISTICS -->
+
+    <div class="stats">
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-icon">♙</div>
+          <span class="stat-tag">COMMUNITY</span>
+        </div>
+        <h3 id="totalMembers">—</h3>
+        <p>Total Members</p>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-icon">▤</div>
+          <span class="stat-tag">REVIEW</span>
+        </div>
+        <h3 id="pendingApplications">—</h3>
+        <p>Pending Applications</p>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-icon">◷</div>
+          <span class="stat-tag">ACTIVITIES</span>
+        </div>
+        <h3 id="totalEvents">—</h3>
+        <p>Total Events</p>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-icon">▧</div>
+          <span class="stat-tag">UPDATES</span>
+        </div>
+        <h3 id="totalNotices">—</h3>
+        <p>Total Notices</p>
+      </div>
+
+    </div>
+
+    <div class="section-grid">
+
+      <!-- QUICK MANAGEMENT -->
+
+      <section class="panel">
+
+        <div class="panel-header">
+          <h3>Quick Management</h3>
+          <span>CONTROL CENTER</span>
+        </div>
+
+        <div class="quick-links">
+
+          <a class="quick-link" href="./members.html">
+            <b>♙</b>
+            <span>Manage Members</span>
+          </a>
+
+          <a class="quick-link" href="./applications.html">
+            <b>▤</b>
+            <span>Review Applications</span>
+          </a>
+
+          <a class="quick-link" href="./events.html">
+            <b>◷</b>
+            <span>Manage Events</span>
+          </a>
+
+          <a class="quick-link" href="./notices.html">
+            <b>▧</b>
+            <span>Publish Notices</span>
+          </a>
+
+          <a class="quick-link" href="./gallery.html">
+            <b>▣</b>
+            <span>Manage Gallery</span>
+          </a>
+
+          <a class="quick-link" href="./settings.html">
+            <b>⚙</b>
+            <span>Portal Settings</span>
+          </a>
+
+        </div>
+
+      </section>
+
+      <!-- ACTIVITY -->
+
+      <section class="panel">
+
+        <div class="panel-header">
+          <h3>System Overview</h3>
+          <span>LIVE DATA</span>
+        </div>
+
+        <div class="activity">
+          <div class="activity-dot"></div>
+          <div>
+            <p>Supabase Authentication</p>
+            <small id="authStatus">Checking connection...</small>
+          </div>
+        </div>
+
+        <div class="activity">
+          <div class="activity-dot"></div>
+          <div>
+            <p>Administrator Access</p>
+            <small id="roleStatus">Verifying permissions...</small>
+          </div>
+        </div>
+
+        <div class="activity">
+          <div class="activity-dot"></div>
+          <div>
+            <p>Database Connection</p>
+            <small id="databaseStatus">Checking database...</small>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+  </section>
+
+</main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./config.js"></script>
+<script src="./dashboard.js"></script>
+
+<script>
+document.getElementById("todayDate").textContent =
+  new Date().toLocaleDateString("en-GB", {
+    day:"numeric",
+    month:"long",
+    year:"numeric"
+  });
+
+document.getElementById("menuToggle").addEventListener("click", () => {
+  document.getElementById("sidebar").classList.toggle("open");
+});
+</script>
+
+</body>
+</html>
+
