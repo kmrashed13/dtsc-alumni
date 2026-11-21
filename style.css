@@ -1,12 +1,14 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap');
 
 /* =====================================
-   1. GLOBAL
+   1. GLOBAL SETTINGS
 ===================================== */
 
 :root {
   --green: #103e35;
-  --green-dark: #092f28;
+  --green-dark: #092c26;
+  --green-light: #176052;
   --gold: #c9a646;
   --gold-light: #e5cf82;
   --white: #ffffff;
@@ -23,7 +25,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 190px;
+  scroll-padding-top: 230px;
 }
 
 body {
@@ -31,7 +33,7 @@ body {
   color: var(--dark);
   background: var(--white);
   line-height: 1.6;
-  padding-top: 180px;
+  padding-top: 225px;
 }
 
 a {
@@ -51,7 +53,7 @@ button {
 
 
 /* =====================================
-   2. FIXED HEADER + NAVIGATION
+   2. FIXED HEADER
 ===================================== */
 
 .site-header {
@@ -66,7 +68,7 @@ button {
 
 
 /* =====================================
-   3. HEADER
+   3. HEADER DESIGN
 ===================================== */
 
 .header {
@@ -107,7 +109,7 @@ button {
 }
 
 .header-title p {
-  color: #777;
+  color: #777777;
   font-size: 15px;
   margin-top: 7px;
 }
@@ -134,7 +136,7 @@ button {
   align-items: center;
   justify-content: flex-end;
 
-  padding: 0 4%;
+  padding: 0 3%;
   position: relative;
 }
 
@@ -142,7 +144,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 5px;
+  gap: 4px;
   list-style: none;
 }
 
@@ -153,13 +155,13 @@ button {
 .nav-menu li a,
 .nav-menu li button {
   display: block;
-  padding: 17px 12px;
+  padding: 17px 11px;
 
   color: var(--white);
   background: transparent;
   border: none;
 
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   white-space: nowrap;
 
@@ -174,43 +176,7 @@ button {
 
 
 /* =====================================
-   5. ACCOUNT DROPDOWN
-===================================== */
-
-.account-dropdown {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-
-  min-width: 165px;
-  background: var(--white);
-
-  border-top: 3px solid var(--gold);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-  border-radius: 0 0 5px 5px;
-  overflow: hidden;
-}
-
-.account-dropdown.show {
-  display: block;
-}
-
-.account-dropdown a {
-  display: block;
-  padding: 12px 16px !important;
-  color: var(--green) !important;
-  background: var(--white) !important;
-}
-
-.account-dropdown a:hover {
-  background: var(--light) !important;
-  color: var(--gold) !important;
-}
-
-
-/* =====================================
-   6. HAMBURGER
+   5. HAMBURGER BUTTON
 ===================================== */
 
 .menu-toggle {
@@ -218,24 +184,28 @@ button {
   background: transparent;
   color: var(--white);
   border: none;
-  font-size: 36px;
+  font-size: 34px;
   line-height: 1;
   padding: 8px 12px;
 }
 
 
 /* =====================================
-   7. HERO BANNER
+   6. HERO BANNER
+   Reference ratio: 1536 x 343
 ===================================== */
 
 .hero {
   width: 100%;
-  min-height: 650px;
+  min-height: 343px;
+  aspect-ratio: 1536 / 343;
 
   background:
     linear-gradient(
-      rgba(4, 47, 37, 0.70),
-      rgba(4, 47, 37, 0.76)
+      90deg,
+      rgba(3, 48, 37, 0.88) 0%,
+      rgba(3, 48, 37, 0.70) 42%,
+      rgba(3, 48, 37, 0.08) 100%
     ),
     url("./assets/institute.jpg");
 
@@ -245,93 +215,92 @@ button {
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
-  text-align: center;
-  padding: 60px 25px;
-
+  padding: 25px 5%;
+  text-align: left;
   color: var(--white);
 }
 
 .hero-content {
   width: 100%;
-  max-width: 850px;
+  max-width: 760px;
 }
 
 .hero-label {
-  color: var(--gold-light);
-  font-size: 27px;
-  font-weight: 600;
-  margin-bottom: 45px;
+  color: var(--white);
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 0;
 }
 
 .hero-content h2 {
-  color: var(--white);
-  font-size: clamp(36px, 5vw, 52px);
+  color: var(--gold-light);
+  font-size: clamp(30px, 4vw, 44px);
   font-weight: 800;
-  line-height: 1.3;
-  margin-bottom: 25px;
+  line-height: 1.2;
+  margin-bottom: 8px;
 }
 
 .hero-content h3 {
-  color: var(--gold-light);
-  font-size: clamp(22px, 3vw, 31px);
-  font-weight: 700;
-  margin-bottom: 35px;
+  color: var(--white);
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 7px;
 }
 
 .hero-message {
   color: var(--white);
-  font-size: 19px;
-  line-height: 1.8;
-  max-width: 750px;
-  margin: 0 auto 45px;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 650px;
+  margin: 0 0 15px;
 }
 
 .hero-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 
 .hero-btn {
   display: inline-block;
-  padding: 15px 28px;
+  padding: 9px 20px;
 
-  background: var(--gold);
-  color: var(--green);
+  background: transparent;
+  color: var(--white);
 
   border: 2px solid var(--gold);
-  border-radius: 8px;
+  border-radius: 30px;
 
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 700;
   transition: 0.3s;
 }
 
 .hero-btn:hover {
-  background: var(--white);
-  border-color: var(--white);
+  background: var(--gold);
   color: var(--green);
 }
 
 .secondary-btn {
-  background: var(--gold);
-  color: var(--green);
-  border-color: var(--gold);
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255,255,255,0.8);
 }
 
 .secondary-btn:hover {
   background: var(--white);
-  border-color: var(--white);
   color: var(--green);
+  border-color: var(--white);
 }
 
 
 /* =====================================
-   8. COMMON SECTIONS
+   7. COMMON SECTION
 ===================================== */
 
 section:not(.hero) {
@@ -366,7 +335,7 @@ section:not(.hero) {
 
 
 /* =====================================
-   9. ABOUT
+   8. ABOUT SECTION
 ===================================== */
 
 .about-section {
@@ -412,7 +381,7 @@ section:not(.hero) {
 
 
 /* =====================================
-   10. NOTICE BOARD
+   9. NOTICE BOARD
 ===================================== */
 
 .notice-section {
@@ -440,7 +409,7 @@ section:not(.hero) {
 
 
 /* =====================================
-   11. EVENTS
+   10. EVENTS
 ===================================== */
 
 .events-section {
@@ -471,7 +440,7 @@ section:not(.hero) {
 
 
 /* =====================================
-   12. PHOTO GALLERY
+   11. PHOTO GALLERY
 ===================================== */
 
 .gallery-section {
@@ -483,6 +452,8 @@ section:not(.hero) {
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
 }
+
+/* Empty gallery until Admin uploads */
 
 .gallery-grid:empty {
   display: none;
@@ -513,7 +484,7 @@ section:not(.hero) {
 
 
 /* =====================================
-   13. MEMBERSHIP
+   12. MEMBERSHIP
 ===================================== */
 
 .membership-section {
@@ -552,7 +523,7 @@ section:not(.hero) {
 
 
 /* =====================================
-   14. CONTACT
+   13. CONTACT
 ===================================== */
 
 .contact-section {
@@ -574,64 +545,100 @@ section:not(.hero) {
 
 
 /* =====================================
-   15. FOOTER
+   14. PROFESSIONAL FOOTER
 ===================================== */
 
 .footer {
-  background: #092c26;
+  background: var(--green-dark);
   color: var(--white);
-
-  text-align: center;
-  padding: 40px 20px 20px;
-
+  padding: 50px 6% 0;
   border-top: 4px solid var(--gold);
+  text-align: left;
 }
 
-.footer h3 {
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+  gap: 35px;
+  padding-bottom: 35px;
+}
+
+.footer-column h3 {
   color: var(--gold-light);
-  font-size: 22px;
+  font-size: 21px;
+  margin-bottom: 16px;
+}
+
+.footer-column h4 {
+  color: var(--gold-light);
+  font-size: 16px;
+  margin-bottom: 17px;
+}
+
+.footer-column p {
+  color: #d4e0db;
+  font-size: 13px;
+  line-height: 1.8;
+  margin-bottom: 9px;
+}
+
+.footer-column ul {
+  list-style: none;
+}
+
+.footer-column ul li {
   margin-bottom: 10px;
 }
 
-.footer p {
+.footer-column ul li a,
+.footer-column > a {
+  color: #d4e0db;
   font-size: 13px;
-  color: #d6e1dc;
-  margin-bottom: 8px;
+  transition: 0.3s;
 }
 
-.footer-links {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 22px;
-  margin: 20px 0;
-}
-
-.footer-links a {
-  font-size: 13px;
-  color: var(--white);
-}
-
-.footer-links a:hover {
+.footer-column ul li a:hover,
+.footer-column > a:hover {
   color: var(--gold-light);
+  padding-left: 4px;
 }
 
-.copyright {
-  border-top: 1px solid rgba(255,255,255,0.15);
-  padding-top: 15px;
-  margin-top: 18px;
+.footer-bottom {
+  max-width: 1200px;
+  margin: auto;
+  padding: 18px 0;
+
+  border-top: 1px solid rgba(255,255,255,0.18);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footer-bottom p {
+  color: #bdcbc5;
+  font-size: 12px;
 }
 
 
 /* =====================================
-   16. TABLET
+   15. TABLET RESPONSIVE
 ===================================== */
 
 @media (max-width: 950px) {
 
+  body {
+    padding-top: 210px;
+  }
+
   .header {
+    min-height: 145px;
     grid-template-columns: 75px 1fr 75px;
-    min-height: 150px;
   }
 
   .header-logo img {
@@ -652,9 +659,8 @@ section:not(.hero) {
   }
 
   .navbar {
-    min-height: 100px;
+    min-height: 65px;
     justify-content: flex-end;
-    padding: 0 5%;
   }
 
   .menu-toggle {
@@ -664,6 +670,7 @@ section:not(.hero) {
 
   .nav-menu {
     display: none;
+
     position: absolute;
     top: 100%;
     right: 0;
@@ -695,26 +702,11 @@ section:not(.hero) {
     border-bottom: 1px solid rgba(255,255,255,0.08);
   }
 
-  .account-dropdown {
-    position: static;
-    width: 100%;
-    box-shadow: none;
-    border-radius: 0;
-  }
-
-  .account-dropdown a {
-    padding-left: 40px !important;
-  }
-
-  body {
-    padding-top: 250px;
-  }
-
 }
 
 
 /* =====================================
-   17. MOBILE
+   16. MOBILE RESPONSIVE
 ===================================== */
 
 @media (max-width: 650px) {
@@ -775,6 +767,7 @@ section:not(.hero) {
 
   .nav-menu {
     display: none;
+
     position: absolute;
     top: 100%;
     right: 0;
@@ -803,26 +796,18 @@ section:not(.hero) {
     font-size: 13px;
   }
 
-  .account-dropdown {
-    position: static;
-    width: 100%;
-    box-shadow: none;
-    border-radius: 0;
-  }
-
-  .account-dropdown a {
-    padding-left: 35px !important;
-  }
-
 
   /* HERO */
 
   .hero {
-    min-height: 650px;
-    padding: 45px 20px;
+    aspect-ratio: auto;
+    min-height: 343px;
+    padding: 30px 20px;
+
+    justify-content: center;
+    text-align: center;
 
     background-position: center;
-    text-align: center;
   }
 
   .hero-content {
@@ -830,41 +815,40 @@ section:not(.hero) {
   }
 
   .hero-label {
-    font-size: 20px;
-    line-height: 1.5;
-    margin-bottom: 45px;
+    font-size: 17px;
+    margin-bottom: 8px;
   }
 
   .hero-content h2 {
-    font-size: 34px;
-    line-height: 1.35;
-    margin-bottom: 28px;
+    font-size: 27px;
+    line-height: 1.3;
+    margin-bottom: 10px;
   }
 
   .hero-content h3 {
-    font-size: 21px;
+    font-size: 17px;
     line-height: 1.5;
-    margin-bottom: 32px;
+    margin-bottom: 10px;
   }
 
   .hero-message {
-    font-size: 15px;
-    line-height: 1.8;
-    margin-bottom: 35px;
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 0 auto 17px;
   }
 
   .hero-buttons {
     justify-content: center;
-    gap: 10px;
+    gap: 9px;
   }
 
   .hero-btn {
-    padding: 13px 17px;
-    font-size: 13px;
+    padding: 9px 14px;
+    font-size: 12px;
   }
 
 
-  /* SECTIONS */
+  /* COMMON SECTIONS */
 
   section:not(.hero) {
     padding: 42px 18px;
@@ -926,15 +910,40 @@ section:not(.hero) {
 
   /* FOOTER */
 
-  .footer-links {
-    gap: 12px;
+  .footer {
+    padding: 35px 22px 0;
+    text-align: center;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 15px;
+  }
+
+  .footer-column h3 {
+    font-size: 18px;
+  }
+
+  .footer-column h4 {
+    font-size: 14px;
+  }
+
+  .footer-column p,
+  .footer-column ul li a,
+  .footer-column > a {
+    font-size: 12px;
+  }
+
+  .footer-bottom {
+    justify-content: center;
+    text-align: center;
   }
 
 }
 
 
 /* =====================================
-   18. SMALL MOBILE
+   17. SMALL MOBILE
 ===================================== */
 
 @media (max-width: 380px) {
@@ -953,25 +962,20 @@ section:not(.hero) {
     height: 42px;
   }
 
-  .hero-label {
-    font-size: 18px;
-  }
-
   .hero-content h2 {
-    font-size: 29px;
+    font-size: 24px;
   }
 
   .hero-content h3 {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .hero-message {
-    font-size: 13px;
+    font-size: 12px;
   }
 
-  .hero-btn {
-    padding: 11px 13px;
-    font-size: 11px;
+  .footer-container {
+    grid-template-columns: 1fr;
   }
 
 }
