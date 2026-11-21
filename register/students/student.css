@@ -39,56 +39,63 @@ body {
   box-shadow: var(--shadow);
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 
 .form-header {
   position: relative;
   text-align: center;
-  padding: 30px 20px 25px;
+  padding: 30px 20px 27px;
   color: white;
   background: linear-gradient(135deg, #102944, #17365d 65%, #20547a);
   border-bottom: 5px solid var(--green);
 }
 
-.form-header::after {
+.form-header::before {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 10%;
-  width: 80%;
-  height: 1px;
-  background: rgba(255,255,255,.3);
+  width: 180px;
+  height: 180px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 50%;
+  top: -100px;
+  right: -40px;
 }
 
 .form-logo {
-  width: 76px;
-  height: 76px;
+  width: 82px;
+  height: 82px;
   object-fit: contain;
   padding: 5px;
   background: white;
   border: 3px solid rgba(255,255,255,.7);
   border-radius: 50%;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
-.form-header h1,
-.form-header h2 {
+.form-header h1 {
   color: white;
-  font-size: 25px;
+  font-size: 27px;
   font-weight: 700;
   line-height: 1.4;
-  letter-spacing: .3px;
+}
+
+.form-header p {
+  color: #e0ebf5;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 4px;
 }
 
 .header-subtitle {
-  color: #dce8f4;
-  font-size: 14px;
+  display: block;
+  color: #cbdbea;
+  font-size: 13px;
   margin-top: 5px;
 }
 
 .back-link {
   position: absolute;
-  top: 15px;
+  top: 16px;
   left: 17px;
   color: white;
   text-decoration: none;
@@ -96,6 +103,7 @@ body {
   border: 1px solid rgba(255,255,255,.4);
   padding: 5px 12px;
   border-radius: 5px;
+  transition: .2s;
 }
 
 .back-link:hover {
@@ -103,7 +111,7 @@ body {
   color: var(--navy);
 }
 
-/* ================= FORM ================= */
+/* FORM */
 
 #studentRegistrationForm {
   padding: 25px;
@@ -133,7 +141,7 @@ body {
   margin-bottom: 17px;
 }
 
-/* ================= GRID ================= */
+/* TWO COLUMN GRID */
 
 .form-grid {
   display: grid;
@@ -158,12 +166,7 @@ body {
   margin-bottom: 6px;
 }
 
-.form-group label span,
-.required {
-  color: #c0392b;
-}
-
-/* ================= INPUTS ================= */
+/* INPUTS */
 
 input,
 select,
@@ -206,18 +209,20 @@ textarea:disabled {
   cursor: not-allowed;
 }
 
-/* ================= DATE + BLOOD ================= */
+/* DATE */
 
 .date-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
+  gap: 7px;
 }
 
-/* ================= ROUND PHOTO ================= */
+/* PHOTO UPLOAD */
 
 #studentPhoto {
-  max-width: 100%;
+  cursor: pointer;
+  padding: 8px;
+  background: #f8fafc;
 }
 
 .photo-preview {
@@ -242,7 +247,7 @@ textarea:disabled {
   border-radius: 50%;
 }
 
-/* ================= CHECKBOX ================= */
+/* CHECKBOX */
 
 .checkbox-line,
 .academic-options,
@@ -250,6 +255,12 @@ textarea:disabled {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+.checkbox-line {
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 14px;
 }
 
 .checkbox-line label,
@@ -269,6 +280,7 @@ input[type="radio"] {
   height: 17px;
   accent-color: var(--green);
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .checkbox-card {
@@ -287,7 +299,7 @@ input[type="radio"] {
   background: var(--green-light);
 }
 
-/* ================= CONDITIONAL FIELDS ================= */
+/* CONDITIONAL SECTIONS */
 
 .conditional-section {
   margin-top: 18px;
@@ -298,12 +310,18 @@ input[type="radio"] {
   border-radius: 6px;
 }
 
+.conditional-section h3 {
+  color: var(--navy);
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
 .conditional-section[hidden],
 [hidden] {
   display: none !important;
 }
 
-/* ================= GOOGLE ================= */
+/* GOOGLE SIGN IN */
 
 .google-auth {
   margin-top: 15px;
@@ -329,6 +347,13 @@ input[type="radio"] {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+  transition: .2s;
+}
+
+.google-button span {
+  font-size: 19px;
+  font-weight: 700;
+  color: #4285f4;
 }
 
 .google-button:hover {
@@ -336,7 +361,7 @@ input[type="radio"] {
   border-color: var(--navy);
 }
 
-/* ================= DECLARATION ================= */
+/* DECLARATION */
 
 .declaration-section {
   padding: 18px;
@@ -346,6 +371,10 @@ input[type="radio"] {
   margin-bottom: 22px;
 }
 
+.declaration-section .section-title {
+  border-color: var(--green);
+}
+
 .declaration-section label {
   display: flex;
   align-items: flex-start;
@@ -353,7 +382,7 @@ input[type="radio"] {
   font-size: 14px;
 }
 
-/* ================= BUTTONS ================= */
+/* ACTION BUTTONS */
 
 .form-actions {
   display: flex;
@@ -390,6 +419,10 @@ input[type="radio"] {
   border: 1px solid #cbd5df !important;
 }
 
+.reset-button:hover {
+  background: #dce3eb;
+}
+
 .submit-button {
   background: var(--green);
   color: white;
@@ -404,7 +437,7 @@ input[type="radio"] {
   cursor: not-allowed;
 }
 
-/* ================= PREVIEW ================= */
+/* PREVIEW */
 
 .preview-area {
   margin-top: 25px;
@@ -426,7 +459,7 @@ input[type="radio"] {
   font-size: 14px;
 }
 
-/* ================= MESSAGE ================= */
+/* ADDRESS MESSAGE */
 
 .address-data-message {
   padding: 10px 13px;
@@ -438,7 +471,7 @@ input[type="radio"] {
   font-size: 13px;
 }
 
-/* ================= FOOTER ================= */
+/* FOOTER */
 
 .form-footer {
   padding: 18px;
@@ -449,7 +482,7 @@ input[type="radio"] {
   font-size: 13px;
 }
 
-/* ================= MOBILE ================= */
+/* TABLET */
 
 @media (max-width: 700px) {
   body {
@@ -460,14 +493,13 @@ input[type="radio"] {
     padding: 48px 12px 22px;
   }
 
-  .form-header h1,
-  .form-header h2 {
-    font-size: 20px;
+  .form-header h1 {
+    font-size: 21px;
   }
 
   .form-logo {
-    width: 68px;
-    height: 68px;
+    width: 70px;
+    height: 70px;
   }
 
   .back-link {
@@ -510,7 +542,6 @@ input[type="radio"] {
   }
 
   .date-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 5px;
   }
 
@@ -531,6 +562,8 @@ input[type="radio"] {
     width: 100%;
   }
 }
+
+/* SMALL MOBILE */
 
 @media (max-width: 360px) {
   .form-grid {
