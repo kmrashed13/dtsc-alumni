@@ -1,501 +1,663 @@
 
 document.addEventListener("DOMContentLoaded", () => {
-  const $ = id => document.getElementById(id);
-  const form = $("studentRegistrationForm");
 
-  if (!form) return;
+    const $ = (id) => document.getElementById(id);
 
-  const currentYear = new Date().getFullYear();
+    const currentYear = new Date().getFullYear();
 
-  // =====================================
-  // 1. DROPDOWN HELPERS
-  // =====================================
+    // =====================================
+    // 1. COMMON DROPDOWN FUNCTIONS
+    // =====================================
 
-  function fillYears(id, start, end = currentYear, descending = true) {
-    const select = $(id);
-    if (!select) return;
-
-    select.innerHTML = '<option value="">Select Year</option>';
-
-    const years = [];
-
-    for (let y = start; y <= end; y++) years.push(y);
-
-    if (descending) years.reverse();
-
-    years.forEach(year => {
-      const option = document.createElement("option");
-      option.value = year;
-      option.textContent = year;
-      select.appendChild(option);
-    });
-  }
-
-  function fillSessions(id, start, end = currentYear + 1) {
-    const select = $(id);
-    if (!select) return;
-
-    select.innerHTML = '<option value="">Select Session</option>';
-
-    for (let year = start; year <= end; year++) {
-      const option = document.createElement("option");
-      option.value = `${year}-${String(year + 1).slice(-2)}`;
-      option.textContent = option.value;
-      select.appendChild(option);
-    }
-  }
-
-  // Birth date
-  const day = $("birthDay");
-
-  if (day) {
-    for (let i = 1; i <= 31; i++) {
-      const option = document.createElement("option");
-      option.value = i;
-      option.textContent = i;
-      day.appendChild(option);
-    }
-  }
-
-  fillYears("birthYear", 1940);
-  fillYears("jscPassingYear", 1966);
-  fillYears("sscPassingYear", 1966);
-  fillYears("hscPassingYear", 1966);
-
-  fillSessions("jscSession", 1966);
-  fillSessions("sscSession", 1966);
-  fillSessions("hscSession", 1966);
-
-
-  // =====================================
-  // 2. PHOTO PREVIEW
-  // =====================================
-
-  $("studentPhoto")?.addEventListener("change", event => {
-    const file = event.target.files[0];
-
-    if (!file) return;
-
-    if (!file.type.startsWith("image/")) {
-      alert("Please select a valid image.");
-      event.target.value = "";
-      return;
+    function addOption(select, value, label) {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = label;
+        select.appendChild(option);
     }
 
-    const reader = new FileReader();
+    function fillYears(selectId, startYear, endYear) {
+        const select = $(selectId);
+        if (!select) return;
 
-    reader.onload = e => {
-      $("photoPreview").src = e.target.result;
-    };
+        select.innerHTML = '<option value="">Select Year</option>';
 
-    reader.readAsDataURL(file);
-  });
-
-
-  // =====================================
-  // 3. CONDITIONAL SECTION HELPER
-  // =====================================
-
-  function toggleSection(id, show) {
-    const section = $(id);
-    if (!section) return;
-
-    section.classList.toggle("active", show);
-
-    section.querySelectorAll("input, select, textarea").forEach(field => {
-      field.disabled = !show;
-      field.required = show && field.dataset.required === "true";
-
-      if (!show) {
-        field.value = "";
-      }
-    });
-  }
-
-  function configureRequired(sectionId, fieldIds) {
-    const section = $(sectionId);
-    if (!section) return;
-
-    fieldIds.forEach(id => {
-      const field = $(id);
-      if (field) field.dataset.required = "true";
-    });
-  }
-
-
-  // =====================================
-  // 4. ACADEMIC CONDITIONAL LOGIC
-  // =====================================
-
-  const academicOptions = [
-    {
-      checkbox: "examJSC",
-      section: "jscFields",
-      fields: [
-        "jscRoll",
-        "jscReg",
-        "jscGPA",
-        "jscPassingYear",
-        "jscSession"
-      ]
-    },
-    {
-      checkbox: "examSSC",
-      section: "sscFields",
-      fields: [
-        "sscTrade",
-        "sscSession",
-        "sscRoll",
-        "sscReg",
-        "sscGPA",
-        "sscPassingYear"
-      ]
-    },
-    {
-      checkbox: "examHSC",
-      section: "hscFields",
-      fields: [
-        "hscTrade",
-        "hscSession",
-        "hscRoll",
-        "hscReg",
-        "hscGPA",
-        "hscPassingYear"
-      ]
-    },
-    {
-      checkbox: "examDiploma",
-      section: "diplomaFields",
-      fields: [
-        "diplomaTechnology",
-        "diplomaSession",
-        "diplomaRoll",
-        "diplomaReg",
-        "diplomaCGPA",
-        "diplomaPassingYear"
-      ]
-    }
-  ];
-
-  academicOptions.forEach(item => {
-    configureRequired(item.section, item.fields);
-
-    $(item.checkbox)?.addEventListener("change", event => {
-      toggleSection(item.section, event.target.checked);
-    });
-
-    toggleSection(item.section, $(item.checkbox)?.checked || false);
-  });
-
-
-  // =====================================
-  // 5. CURRENT STATUS CONDITIONAL LOGIC
-  // =====================================
-
-  const statusOptions = [
-    {
-      checkbox: "statusHigher",
-      section: "higherStudiesFields",
-      fields: ["higherInstitute", "higherDepartment"]
-    },
-    {
-      checkbox: "statusJob",
-      section: "jobFields",
-      fields: [
-        "jobType",
-        "jobOrganization",
-        "jobDesignation",
-        "jobDepartment",
-        "jobLocation"
-      ]
-    },
-    {
-      checkbox: "statusBusiness",
-      section: "businessFields",
-      fields: ["businessName", "businessLocation"]
-    },
-    {
-      checkbox: "statusOthers",
-      section: "otherStatusFields",
-      fields: ["otherStatus"]
-    }
-  ];
-
-  statusOptions.forEach(item => {
-    configureRequired(item.section, item.fields);
-
-    $(item.checkbox)?.addEventListener("change", event => {
-      toggleSection(item.section, event.target.checked);
-    });
-
-    toggleSection(item.section, $(item.checkbox)?.checked || false);
-  });
-
-
-  // =====================================
-  // 6. PRESENT / PERMANENT ADDRESS
-  // =====================================
-
-  const addressPairs = [
-    ["presentDivision", "permanentDivision"],
-    ["presentDistrict", "permanentDistrict"],
-    ["presentAreaType", "permanentAreaType"],
-    ["presentArea", "permanentArea"],
-    ["presentUnion", "permanentUnion"],
-    ["presentPostOffice", "permanentPostOffice"],
-    ["presentPostCode", "permanentPostCode"],
-    ["presentAddress", "permanentAddress"]
-  ];
-
-  function copyAddress() {
-    addressPairs.forEach(([from, to]) => {
-      const source = $(from);
-      const target = $(to);
-
-      if (!source || !target) return;
-
-      if (target.tagName === "SELECT") {
-        const matchingOption = [...target.options].find(
-          option => option.value === source.value
-        );
-
-        target.value = matchingOption ? source.value : "";
-      } else {
-        target.value = source.value;
-      }
-
-      target.dispatchEvent(new Event("change", { bubbles: true }));
-    });
-
-    $("permanentUnionGroup").hidden =
-      $("presentUnionGroup").hidden;
-  }
-
-  function updateSameAddress() {
-    const checked = $("sameAddress")?.checked;
-
-    $("permanentAddressFields").style.display =
-      checked ? "none" : "grid";
-
-    addressPairs.forEach(([from, to]) => {
-      const target = $(to);
-      if (!target) return;
-
-      target.required = !checked;
-    });
-
-    $("permanentUnionGroup").querySelector("input").required = !checked;
-
-    if (checked) copyAddress();
-  }
-
-  $("sameAddress")?.addEventListener("change", updateSameAddress);
-
-  addressPairs.forEach(([from]) => {
-    $(from)?.addEventListener("change", () => {
-      if ($("sameAddress")?.checked) copyAddress();
-    });
-
-    $(from)?.addEventListener("input", () => {
-      if ($("sameAddress")?.checked) copyAddress();
-    });
-  });
-
-  updateSameAddress();
-
-
-  // =====================================
-  // 7. UNION / MUNICIPALITY FIELD
-  // =====================================
-
-  function setupUnion(areaId, groupId, inputId) {
-    const area = $(areaId);
-    const group = $(groupId);
-    const input = $(inputId);
-
-    if (!area || !group || !input) return;
-
-    function update() {
-      const show = area.value === "upazila";
-
-      group.hidden = !show;
-      input.required = show;
+        for (let year = startYear; year <= endYear; year++) {
+            addOption(select, String(year), String(year));
+        }
     }
 
-    area.addEventListener("change", update);
-    update();
-  }
+    // Date of birth
+    for (let day = 1; day <= 31; day++) {
+        addOption($("birthDay"), String(day), String(day));
+    }
 
-  setupUnion("presentAreaType", "presentUnionGroup", "presentUnion");
-  setupUnion("permanentAreaType", "permanentUnionGroup", "permanentUnion");
+    fillYears("birthYear", 1940, currentYear);
 
+    // Passing years
+    ["jscPassingYear", "sscPassingYear", "hscPassingYear"].forEach(id => {
+        fillYears(id, 1966, currentYear);
+    });
 
-  // =====================================
-  // 8. PASSWORD CONFIRMATION
-  // =====================================
+    // Session: 1966-67 through next calendar year
+    function fillSessions(selectId) {
+        const select = $(selectId);
+        if (!select) return;
 
-  function checkPassword() {
-    const password = $("password");
-    const confirm = $("confirmPassword");
+        select.innerHTML = '<option value="">Select Session</option>';
 
-    if (!password || !confirm) return;
+        for (let year = 1966; year <= currentYear + 1; year++) {
+            const nextYear = String(year + 1).slice(-2);
+            const session = `${year}-${nextYear}`;
+            addOption(select, session, session);
+        }
+    }
 
-    confirm.setCustomValidity(
-      confirm.value && password.value !== confirm.value
-        ? "Passwords do not match."
-        : ""
-    );
-  }
-
-  $("password")?.addEventListener("input", checkPassword);
-  $("confirmPassword")?.addEventListener("input", checkPassword);
-
-
-  // =====================================
-  // 9. HTML ESCAPE
-  // =====================================
-
-  function escapeHTML(value) {
-    return String(value ?? "").replace(/[&<>"']/g, char => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    })[char]);
-  }
+    ["jscSession", "sscSession", "hscSession"].forEach(fillSessions);
 
 
-  // =====================================
-  // 10. FORM PREVIEW
-  // =====================================
+    // =====================================
+    // 2. CONDITIONAL SECTION HANDLER
+    // =====================================
 
-  $("previewBtn")?.addEventListener("click", () => {
-    const preview = $("previewArea");
+    function toggleSection(sectionId, show) {
+        const section = $(sectionId);
+        if (!section) return;
 
-    const fields = [
-      ["Name", "fullName"],
-      ["Father's Name", "fatherName"],
-      ["Mother's Name", "motherName"],
-      ["Blood Group", "bloodGroup"],
-      ["Mobile", "mobile"],
-      ["Email", "email"],
-      ["Present Address", "presentAddress"],
-      ["Permanent Address", "permanentAddress"],
-      ["Suggestions", "suggestions"]
+        section.hidden = !show;
+
+        section.querySelectorAll("input, select, textarea").forEach(field => {
+            field.disabled = !show;
+            field.required = show &&
+                field.dataset.required === "true";
+
+            if (!show) {
+                field.value = "";
+            }
+        });
+    }
+
+    // Mark required fields in conditional sections
+    document.querySelectorAll(
+        "#jscFields, #sscFields, #hscFields, #diplomaFields, " +
+        "#higherStudiesFields, #jobFields, #businessFields, #otherStatusFields"
+    ).forEach(section => {
+        section.querySelectorAll("input, select, textarea").forEach(field => {
+            if (field.hasAttribute("required")) {
+                field.dataset.required = "true";
+                field.required = false;
+            }
+        });
+    });
+
+
+    // Academic conditional sections
+    const examRules = [
+        ["examJSC", "jscFields"],
+        ["examSSC", "sscFields"],
+        ["examHSC", "hscFields"],
+        ["examDiploma", "diplomaFields"]
     ];
 
-    let html = "<h3>Registration Preview</h3>";
-
-    fields.forEach(([label, id]) => {
-      html += `
-        <p>
-          <strong>${escapeHTML(label)}:</strong>
-          ${escapeHTML($(id)?.value || "Not provided")}
-        </p>
-      `;
+    examRules.forEach(([checkboxId, sectionId]) => {
+        $(checkboxId).addEventListener("change", function () {
+            toggleSection(sectionId, this.checked);
+        });
     });
 
-    const selectedExams = academicOptions
-      .filter(item => $(item.checkbox)?.checked)
-      .map(item => item.checkbox.replace("exam", ""));
 
-    html += `
-      <p>
-        <strong>Selected Examinations:</strong>
-        ${escapeHTML(selectedExams.join(", ") || "None")}
-      </p>
-    `;
+    // Current status conditional sections
+    const statusRules = [
+        ["statusHigher", "higherStudiesFields"],
+        ["statusJob", "jobFields"],
+        ["statusBusiness", "businessFields"],
+        ["statusOthers", "otherStatusFields"]
+    ];
 
-    const selectedStatuses = statusOptions
-      .filter(item => $(item.checkbox)?.checked)
-      .map(item => $(item.checkbox).value);
-
-    html += `
-      <p>
-        <strong>Current Status:</strong>
-        ${escapeHTML(selectedStatuses.join(", ") || "None")}
-      </p>
-    `;
-
-    preview.innerHTML = html;
-    preview.hidden = false;
-    preview.style.display = "block";
-    preview.scrollIntoView({ behavior: "smooth" });
-  });
+    statusRules.forEach(([checkboxId, sectionId]) => {
+        $(checkboxId).addEventListener("change", function () {
+            toggleSection(sectionId, this.checked);
+        });
+    });
 
 
-  // =====================================
-  // 11. GOOGLE SIGN-IN PLACEHOLDER
-  // =====================================
+    // =====================================
+    // 3. JOB TYPE LABEL
+    // =====================================
 
-  $("googleSignIn")?.addEventListener("click", () => {
-    alert(
-      "Google Sign-In চালু করতে Supabase Authentication সংযুক্ত করতে হবে।"
-    );
-  });
+    $("jobType").addEventListener("change", function () {
+
+        const organizationLabel = document.querySelector(
+            'label[for="jobOrganization"]'
+        );
+
+        const label = $("jobOrganization")
+            .closest(".form-group")
+            .querySelector("label");
+
+        if (this.value === "Government Service") {
+            label.textContent = "Organization Name *";
+        } else if (this.value === "Private") {
+            label.textContent = "Organization / Company *";
+        } else {
+            label.textContent = "Organization / Company *";
+        }
+    });
 
 
-  // =====================================
-  // 12. FORM SUBMISSION
-  // =====================================
+    // =====================================
+    // 4. BANGLADESH ADDRESS DATA
+    // =====================================
 
-  form.addEventListener("submit", event => {
-    event.preventDefault();
+    const ADDRESS_DATA_URL =
+        "https://iqbalhasandev.github.io/bangladesh-geo-json/bangladesh-geo.json";
 
-    checkPassword();
+    let bangladeshData = [];
 
-    if (!form.reportValidity()) return;
+    const cityCorporations = {
+        "dhaka": [
+            "Dhaka North City Corporation",
+            "Dhaka South City Corporation"
+        ],
+        "chattogram": ["Chattogram City Corporation"],
+        "chittagong": ["Chattogram City Corporation"],
+        "khulna": ["Khulna City Corporation"],
+        "rajshahi": ["Rajshahi City Corporation"],
+        "barishal": ["Barishal City Corporation"],
+        "barisal": ["Barishal City Corporation"],
+        "sylhet": ["Sylhet City Corporation"],
+        "rangpur": ["Rangpur City Corporation"],
+        "gazipur": ["Gazipur City Corporation"],
+        "narayanganj": ["Narayanganj City Corporation"],
+        "cumilla": ["Cumilla City Corporation"],
+        "comilla": ["Cumilla City Corporation"],
+        "mymensingh": ["Mymensingh City Corporation"]
+    };
 
-    const hasExam = academicOptions.some(
-      item => $(item.checkbox)?.checked
-    );
-
-    if (!hasExam) {
-      alert("Please select at least one examination.");
-      $("examJSC").focus();
-      return;
+    function normalize(value) {
+        return String(value || "")
+            .toLowerCase()
+            .replace(/[^a-z0-9]/g, "");
     }
 
-    if (!statusOptions.some(item => $(item.checkbox)?.checked)) {
-      alert("Please select your current status.");
-      $("statusHigher").focus();
-      return;
+    function getName(item) {
+        return item.bn_name
+            ? `${item.bn_name} (${item.name})`
+            : item.name;
     }
 
-    if (!$("declaration").checked) {
-      alert("Please accept the declaration.");
-      return;
+    function resetSelect(select, placeholder) {
+        select.innerHTML = "";
+        addOption(select, "", placeholder);
     }
 
-    alert(
-      "Form validation successful! Supabase Database is not connected yet. Your information has not been saved."
-    );
-  });
+    function findDivision(value) {
+        return bangladeshData.find(item =>
+            item.name === value
+        );
+    }
+
+    function findDistrict(division, value) {
+        if (!division) return null;
+
+        return (division.districts || []).find(item =>
+            item.name === value
+        );
+    }
 
 
-  // =====================================
-  // 13. RESET FORM
-  // =====================================
+    // =====================================
+    // 5. ADDRESS CASCADING DROPDOWNS
+    // =====================================
 
-  form.addEventListener("reset", () => {
-    setTimeout(() => {
-      academicOptions.forEach(item => {
-        toggleSection(item.section, false);
-      });
+    function setupAddress(prefix) {
 
-      statusOptions.forEach(item => {
-        toggleSection(item.section, false);
-      });
+        const divisionSelect = $(prefix + "Division");
+        const districtSelect = $(prefix + "District");
+        const areaTypeSelect = $(prefix + "AreaType");
+        const areaSelect = $(prefix + "Area");
 
-      updateSameAddress();
+        const unionGroup = $(prefix + "UnionGroup");
 
-      $("photoPreview").removeAttribute("src");
+        if (!divisionSelect) return;
 
-      $("previewArea").innerHTML = "";
-      $("previewArea").hidden = true;
-      $("previewArea").style.display = "none";
-    }, 0);
-  });
+        function populateDivisions() {
+            resetSelect(divisionSelect, "Select Division");
+
+            bangladeshData.forEach(division => {
+                addOption(
+                    divisionSelect,
+                    division.name,
+                    getName(division)
+                );
+            });
+        }
+
+        divisionSelect.addEventListener("change", () => {
+
+            resetSelect(districtSelect, "Select District");
+            resetSelect(areaSelect, "Select Area");
+
+            areaTypeSelect.value = "";
+            unionGroup.hidden = true;
+
+            const division = findDivision(divisionSelect.value);
+
+            if (!division) return;
+
+            (division.districts || []).forEach(district => {
+                addOption(
+                    districtSelect,
+                    district.name,
+                    getName(district)
+                );
+            });
+        });
+
+
+        districtSelect.addEventListener("change", () => {
+
+            resetSelect(areaSelect, "Select Area");
+            areaTypeSelect.value = "";
+            unionGroup.hidden = true;
+
+        });
+
+
+        areaTypeSelect.addEventListener("change", () => {
+
+            resetSelect(areaSelect, "Select Area");
+            unionGroup.hidden = true;
+
+            const division = findDivision(divisionSelect.value);
+            const district = findDistrict(
+                division,
+                districtSelect.value
+            );
+
+            if (!district) return;
+
+            if (areaTypeSelect.value === "upazila") {
+
+                (district.upazilas || []).forEach(upazila => {
+                    addOption(
+                        areaSelect,
+                        upazila.name,
+                        getName(upazila)
+                    );
+                });
+
+                unionGroup.hidden = false;
+
+            } else if (areaTypeSelect.value === "city") {
+
+                const districtKey = normalize(district.name);
+                const cities = cityCorporations[districtKey] || [];
+
+                cities.forEach(city => {
+                    addOption(areaSelect, city, city);
+                });
+
+                if (cities.length === 0) {
+                    addOption(
+                        areaSelect,
+                        "",
+                        "No City Corporation listed for this district"
+                    );
+                }
+            }
+        });
+
+        areaSelect.addEventListener("change", () => {
+
+            if (areaTypeSelect.value !== "upazila") return;
+
+            const division = findDivision(divisionSelect.value);
+            const district = findDistrict(
+                division,
+                districtSelect.value
+            );
+
+            const upazila = (district?.upazilas || []).find(item =>
+                item.name === areaSelect.value
+            );
+
+            const unionInput = $(prefix + "Union");
+
+            if (!unionInput || !upazila) return;
+
+            // Keep union/municipality as a user-entered field.
+            unionInput.placeholder = "Enter Union / Municipality";
+        });
+
+        populateDivisions();
+    }
+
+
+    // Load Bangladesh location dataset
+    async function loadAddressData() {
+
+        const message = document.createElement("p");
+        message.className = "address-data-message";
+        message.textContent = "Loading Bangladesh location data...";
+
+        const presentSection = $("presentDivision")
+            .closest(".form-section");
+
+        presentSection.appendChild(message);
+
+        try {
+
+            const response = await fetch(ADDRESS_DATA_URL);
+
+            if (!response.ok) {
+                throw new Error("Could not load address data");
+            }
+
+            bangladeshData = await response.json();
+
+            setupAddress("present");
+            setupAddress("permanent");
+
+            message.textContent = "Bangladesh location data loaded.";
+            message.style.color = "#198754";
+
+        } catch (error) {
+
+            console.error(error);
+
+            message.textContent =
+                "Address data could not be loaded. Please check your internet connection.";
+
+            message.style.color = "#dc3545";
+        }
+    }
+
+    loadAddressData();
+
+
+    // =====================================
+    // 6. SAME PRESENT & PERMANENT ADDRESS
+    // =====================================
+
+    const sameAddress = $("sameAddress");
+    const permanentFields = $("permanentAddressFields");
+
+    function copyPresentAddress() {
+
+        const fields = [
+            "Division",
+            "District",
+            "AreaType",
+            "Area",
+            "Union",
+            "PostOffice",
+            "PostCode",
+            "Address"
+        ];
+
+        fields.forEach(field => {
+            const present = $("present" + field);
+            const permanent = $("permanent" + field);
+
+            if (present && permanent) {
+                permanent.value = present.value;
+            }
+        });
+    }
+
+    sameAddress.addEventListener("change", function () {
+
+        const same = this.checked;
+
+        permanentFields.hidden = same;
+
+        permanentFields.querySelectorAll(
+            "input, select, textarea"
+        ).forEach(field => {
+            field.disabled = same;
+            field.required = !same &&
+                field.dataset.required === "true";
+        });
+
+        if (same) {
+            copyPresentAddress();
+        }
+    });
+
+    document.querySelectorAll(
+        "#presentDivision, #presentDistrict, #presentAreaType, " +
+        "#presentArea, #presentUnion, #presentPostOffice, " +
+        "#presentPostCode, #presentAddress"
+    ).forEach(field => {
+        field.addEventListener("change", () => {
+            if (sameAddress.checked) {
+                copyPresentAddress();
+            }
+        });
+
+        field.addEventListener("input", () => {
+            if (sameAddress.checked) {
+                copyPresentAddress();
+            }
+        });
+    });
+
+
+    // =====================================
+    // 7. PHOTO PREVIEW
+    // =====================================
+
+    $("studentPhoto").addEventListener("change", function () {
+
+        const file = this.files[0];
+        const preview = $("photoPreview");
+
+        preview.innerHTML = "";
+
+        if (!file) {
+            preview.textContent = "Photo Preview";
+            return;
+        }
+
+        if (!file.type.startsWith("image/")) {
+            alert("Please select an image file.");
+            this.value = "";
+            preview.textContent = "Photo Preview";
+            return;
+        }
+
+        if (file.size > 2 * 1024 * 1024) {
+            alert("Photo size must be 2MB or less.");
+            this.value = "";
+            preview.textContent = "Photo Preview";
+            return;
+        }
+
+        const image = document.createElement("img");
+        image.alt = "Student Photo Preview";
+
+        const reader = new FileReader();
+
+        reader.onload = event => {
+            image.src = event.target.result;
+        };
+
+        reader.readAsDataURL(file);
+
+        preview.appendChild(image);
+    });
+
+
+    // =====================================
+    // 8. PASSWORD VALIDATION
+    // =====================================
+
+    function validatePassword() {
+
+        const password = $("password").value;
+        const confirmPassword = $("confirmPassword").value;
+
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters.");
+            $("password").focus();
+            return false;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Password and Confirm Password do not match.");
+            $("confirmPassword").focus();
+            return false;
+        }
+
+        return true;
+    }
+
+
+    // =====================================
+    // 9. PREVIEW
+    // =====================================
+
+    $("previewBtn").addEventListener("click", () => {
+
+        const preview = $("previewArea");
+
+        const name = $("fullName").value || "Not provided";
+        const father = $("fatherName").value || "Not provided";
+        const mother = $("motherName").value || "Not provided";
+
+        const selectedExams = examRules
+            .filter(([id]) => $(id).checked)
+            .map(([id]) => $(id).value);
+
+        const selectedStatuses = statusRules
+            .filter(([id]) => $(id).checked)
+            .map(([id]) => $(id).nextSibling?.textContent?.trim() || id);
+
+        preview.innerHTML = "";
+
+        const heading = document.createElement("h3");
+        heading.textContent = "Registration Preview";
+
+        const details = document.createElement("div");
+
+        const rows = [
+            ["Name", name],
+            ["Father Name", father],
+            ["Mother Name", mother],
+            ["Contact", $("mobile").value || "Not provided"],
+            ["Email", $("email").value || "Not provided"],
+            ["Blood Group", $("bloodGroup").value || "Not selected"],
+            ["Examinations", selectedExams.join(", ") || "Not selected"],
+            ["Current Status", selectedStatuses.join(", ") || "Not selected"]
+        ];
+
+        rows.forEach(([label, value]) => {
+            const paragraph = document.createElement("p");
+            const strong = document.createElement("strong");
+
+            strong.textContent = label + ": ";
+            paragraph.appendChild(strong);
+            paragraph.appendChild(document.createTextNode(value));
+
+            details.appendChild(paragraph);
+        });
+
+        preview.appendChild(heading);
+        preview.appendChild(details);
+        preview.hidden = false;
+
+        preview.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    });
+
+
+    // =====================================
+    // 10. GOOGLE SIGN-IN PLACEHOLDER
+    // =====================================
+
+    $("googleSignIn").addEventListener("click", () => {
+        alert(
+            "Google Sign-in is not connected yet. " +
+            "Google OAuth configuration will be added in the authentication step."
+        );
+    });
+
+
+    // =====================================
+    // 11. RESET FORM
+    // =====================================
+
+    $("studentRegistrationForm").addEventListener("reset", () => {
+
+        setTimeout(() => {
+
+            examRules.forEach(([checkboxId, sectionId]) => {
+                $(checkboxId).checked = false;
+                toggleSection(sectionId, false);
+            });
+
+            statusRules.forEach(([checkboxId, sectionId]) => {
+                $(checkboxId).checked = false;
+                toggleSection(sectionId, false);
+            });
+
+            sameAddress.checked = false;
+            permanentFields.hidden = false;
+
+            permanentFields.querySelectorAll(
+                "input, select, textarea"
+            ).forEach(field => {
+                field.disabled = false;
+            });
+
+            $("photoPreview").textContent = "Photo Preview";
+            $("previewArea").hidden = true;
+            $("previewArea").innerHTML = "";
+
+            $("presentUnionGroup").hidden = true;
+            $("permanentUnionGroup").hidden = true;
+
+        }, 0);
+    });
+
+
+    // =====================================
+    // 12. REGISTER BUTTON
+    // =====================================
+
+    $("studentRegistrationForm").addEventListener("submit", event => {
+
+        event.preventDefault();
+
+        if (sameAddress.checked) {
+            copyPresentAddress();
+        }
+
+        const selectedExam = examRules.some(([id]) => $(id).checked);
+
+        if (!selectedExam) {
+            alert("Please select at least one examination.");
+            $("examJSC").focus();
+            return;
+        }
+
+        if (!$("accountEmail").value.trim()) {
+            alert("Please enter your E-mail or Mobile number.");
+            $("accountEmail").focus();
+            return;
+        }
+
+        if (!$("googleSignIn").dataset.authenticated) {
+            if (!validatePassword()) return;
+        }
+
+        alert(
+            "Your form has passed the front-end validation. " +
+            "Database registration is not connected yet."
+        );
+    });
 
 });
