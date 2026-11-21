@@ -1,0 +1,625 @@
+
+/* =========================================
+   DTSC ALUMNI ASSOCIATION
+   MAIN STYLESHEET
+========================================= */
+
+:root {
+    --primary: #103e35;
+    --primary-dark: #092c26;
+    --secondary: #1b6555;
+    --gold: #d5a642;
+    --white: #ffffff;
+    --light: #f5f8f6;
+    --text: #26352f;
+    --muted: #6b7771;
+    --shadow: 0 5px 22px rgba(0,0,0,0.09);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Noto Sans Bengali", Arial, sans-serif;
+    background: var(--white);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+/* HEADER */
+
+.site-header {
+    background: var(--white);
+    padding: 15px 5%;
+    border-bottom: 3px solid var(--gold);
+}
+
+.header-container {
+    max-width: 1250px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.header-logo {
+    width: 85px;
+    height: 85px;
+    flex-shrink: 0;
+}
+
+.header-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.header-title {
+    text-align: center;
+    flex: 1;
+}
+
+.header-title h1 {
+    color: var(--primary);
+    font-size: 29px;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+.header-title p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* NAVIGATION */
+
+.navbar {
+    background: var(--primary);
+    position: relative;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1350px;
+    min-height: 60px;
+    padding: 0 5%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.nav-menu a {
+    display: block;
+    color: var(--white);
+    padding: 17px 12px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.nav-menu a:hover {
+    background: var(--secondary);
+    color: var(--gold);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.language-btn,
+.account-btn {
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--white);
+    padding: 8px 13px;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+.language-btn:hover,
+.account-btn:hover {
+    background: var(--gold);
+    color: var(--primary-dark);
+}
+
+.account-wrapper {
+    position: relative;
+}
+
+.account-dropdown {
+    display: none;
+    position: absolute;
+    top: 43px;
+    right: 0;
+    min-width: 155px;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.account-dropdown.show {
+    display: block;
+}
+
+.account-dropdown a {
+    display: block;
+    padding: 11px 15px;
+    color: var(--primary);
+    font-size: 14px;
+}
+
+.account-dropdown a:hover {
+    background: var(--light);
+    color: var(--secondary);
+}
+
+.menu-toggle {
+    display: none;
+    background: transparent;
+    color: var(--white);
+    border: none;
+    font-size: 26px;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 560px;
+    background:
+        linear-gradient(rgba(5,35,29,0.72),
+        rgba(5,35,29,0.72)),
+        url("assets/Institute.jpg") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-overlay {
+    width: 100%;
+    padding: 90px 20px;
+}
+
+.hero-content {
+    max-width: 850px;
+    margin: auto;
+    color: var(--white);
+}
+
+.hero-tag {
+    display: inline-block;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 7px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.hero-content h2 {
+    font-size: 46px;
+    line-height: 1.35;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+.hero-content p {
+    max-width: 650px;
+    margin: auto;
+    font-size: 17px;
+    color: #eeeeee;
+}
+
+.hero-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+/* BUTTONS */
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: var(--gold);
+    color: var(--primary-dark);
+    border: 1px solid var(--gold);
+}
+
+.btn-primary:hover {
+    background: var(--white);
+    border-color: var(--white);
+}
+
+.btn-outline {
+    color: var(--white);
+    border: 1px solid var(--white);
+}
+
+.btn-outline:hover {
+    background: var(--white);
+    color: var(--primary);
+}
+
+/* WELCOME */
+
+.welcome-section {
+    padding: 75px 5% 35px;
+    text-align: center;
+}
+
+.section-heading {
+    max-width: 800px;
+    margin: auto;
+}
+
+.section-heading span,
+.institute-content span {
+    color: var(--gold);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.section-heading h2 {
+    color: var(--primary);
+    font-size: 30px;
+    margin: 10px 0;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* FEATURES */
+
+.features-section {
+    max-width: 1250px;
+    margin: auto;
+    padding: 35px 5% 80px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.feature-card {
+    background: var(--white);
+    padding: 30px 22px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border-bottom: 3px solid var(--gold);
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-7px);
+}
+
+.feature-icon {
+    font-size: 38px;
+    margin-bottom: 13px;
+}
+
+.feature-card h3 {
+    color: var(--primary);
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: var(--muted);
+    font-size: 14px;
+    min-height: 55px;
+}
+
+.feature-card a {
+    display: inline-block;
+    color: var(--secondary);
+    font-weight: 700;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/* INSTITUTE */
+
+.institute-section {
+    background: var(--light);
+    padding: 75px 7%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 50px;
+}
+
+.institute-image img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.institute-content h2 {
+    color: var(--primary);
+    font-size: 30px;
+    line-height: 1.5;
+    margin: 12px 0;
+}
+
+.institute-content p {
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+.read-more {
+    color: var(--secondary);
+    font-weight: 700;
+}
+
+/* JOIN */
+
+.join-section {
+    background: var(--primary);
+    color: var(--white);
+    text-align: center;
+    padding: 75px 20px;
+}
+
+.join-section h2 {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.join-section p {
+    color: #e1e9e5;
+    margin-bottom: 25px;
+}
+
+/* FOOTER */
+
+.footer {
+    background: var(--primary-dark);
+    color: var(--white);
+}
+
+.footer-content {
+    max-width: 1250px;
+    margin: auto;
+    padding: 55px 5%;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+}
+
+.footer-content h3 {
+    color: var(--gold);
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.footer-content p,
+.footer-content a {
+    display: block;
+    color: #d7e1dc;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.footer-content a:hover {
+    color: var(--gold);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    text-align: center;
+    padding: 18px;
+    font-size: 13px;
+    color: #c8d4ce;
+}
+
+/* TABLET */
+
+@media (max-width: 1000px) {
+    .nav-menu a {
+        padding: 15px 7px;
+        font-size: 12px;
+    }
+
+    .features-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .header-title h1 {
+        font-size: 23px;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .site-header {
+        padding: 12px 3%;
+    }
+
+    .header-container {
+        gap: 8px;
+    }
+
+    .header-logo {
+        width: 55px;
+        height: 55px;
+    }
+
+    .header-title h1 {
+        font-size: 16px;
+    }
+
+    .header-title p {
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+    .nav-container {
+        min-height: 58px;
+        flex-wrap: wrap;
+        padding: 8px 4%;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        order: 3;
+        padding: 8px 0;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu a {
+        padding: 10px 12px;
+        font-size: 14px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .nav-actions {
+        margin-left: auto;
+    }
+
+    .hero {
+        min-height: 480px;
+    }
+
+    .hero-overlay {
+        padding: 70px 18px;
+    }
+
+    .hero-content h2 {
+        font-size: 30px;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    .welcome-section {
+        padding: 55px 5% 25px;
+    }
+
+    .section-heading h2 {
+        font-size: 23px;
+    }
+
+    .features-section {
+        grid-template-columns: 1fr;
+        padding: 25px 6% 55px;
+    }
+
+    .feature-card {
+        padding: 25px 20px;
+    }
+
+    .institute-section {
+        grid-template-columns: 1fr;
+        padding: 50px 6%;
+        gap: 25px;
+    }
+
+    .institute-image img {
+        height: 240px;
+    }
+
+    .institute-content h2 {
+        font-size: 24px;
+    }
+
+    .join-section {
+        padding: 55px 20px;
+    }
+
+    .join-section h2 {
+        font-size: 23px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 40px 7%;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 380px) {
+
+    .header-logo {
+        width: 43px;
+        height: 43px;
+    }
+
+    .header-title h1 {
+        font-size: 13px;
+    }
+
+    .header-title p {
+        font-size: 9px;
+    }
+
+    .language-btn,
+    .account-btn {
+        padding: 7px 9px;
+        font-size: 11px;
+    }
+
+    .hero-content h2 {
+        font-size: 25px;
+    }
+}
