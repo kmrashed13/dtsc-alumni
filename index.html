@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,74 +13,70 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
+  <!-- FIXED HEADER WRAPPER -->
+  <div class="site-header">
 
-    <div class="header-logo">
-      <img src="./assets/logo.png" alt="Alumni Logo">
-    </div>
+    <!-- MAIN HEADER -->
+    <header class="header">
 
-    <div class="header-title">
-      <h1>DTSC Alumni Association</h1>
-      <p>Dewanganj Govt. Technical School & College, Jamalpur</p>
-      <span>Connecting Generations, Building the Future</span>
-    </div>
+      <div class="header-logo">
+        <img src="./assets/logo.png" alt="DTSC Alumni Association Logo">
+      </div>
 
-    <div class="header-logo">
-      <img src="./assets/dtsclogo.png" alt="DTSC Logo">
-    </div>
+      <div class="header-title">
+        <h1>DTSC Alumni Association</h1>
+        <p>Dewanganj Govt. Technical School & College, Jamalpur</p>
+        <span>Shared Roots, Lifelong Fellowship</span>
+      </div>
 
-  </header>
+      <div class="header-logo">
+        <img src="./assets/dtsclogo.png" alt="DTSC Logo">
+      </div>
+
+    </header>
 
 
-  <!-- NAVIGATION -->
-  <nav class="navbar">
+    <!-- NAVIGATION -->
+    <nav class="navbar">
 
-    <button class="menu-toggle" id="menuToggle">
-      ☰
-    </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
+        ☰
+      </button>
 
-    <ul class="nav-menu" id="navMenu">
+      <ul class="nav-menu" id="navMenu">
 
-      <li><a href="index.html">Home</a></li>
+        <li><a href="index.html">Home</a></li>
 
-      <li><a href="about/index.html">About Us</a></li>
+        <li><a href="about/index.html">About Us</a></li>
 
-      <li><a href="events/index.html">Events</a></li>
+        <li><a href="events/index.html">Events</a></li>
 
-      <li><a href="gallery/index.html">Gallery</a></li>
+        <li><a href="gallery/index.html">Gallery</a></li>
 
-      <li>
-        <a href="membership/index.html">
-          Membership Directory
-        </a>
-      </li>
+        <li><a href="membership/index.html">Membership Directory</a></li>
 
-      <li><a href="contact/index.html">Contact</a></li>
+        <li><a href="contact/index.html">Contact</a></li>
 
-      <li>
-        <button id="languageToggle">(BN)</button>
-      </li>
+        <li>
+          <button id="languageToggle">(BN)</button>
+        </li>
 
-      <li class="account-menu">
+        <li class="account-menu">
 
-        <button id="accountToggle">
-          Account ▾
-        </button>
+          <button id="accountToggle">Account ▾</button>
 
-        <div class="account-dropdown" id="accountDropdown">
+          <div class="account-dropdown" id="accountDropdown">
+            <a href="register/index.html">Register</a>
+            <a href="login/index.html">Login</a>
+          </div>
 
-          <a href="register/index.html">Register</a>
+        </li>
 
-          <a href="login/index.html">Login</a>
+      </ul>
 
-        </div>
+    </nav>
 
-      </li>
-
-    </ul>
-
-  </nav>
+  </div>
 
 
   <!-- HERO SECTION -->
@@ -87,23 +84,29 @@
 
     <div class="hero-content">
 
-      <p>Welcome to</p>
+      <p class="hero-label">
+        Welcome to DTSC Alumni Association
+      </p>
 
       <h2>DTSC Alumni Association</h2>
 
-      <h3>
-        A Bond Beyond Graduation
-      </h3>
+      <h3>Shared Roots, Lifelong Fellowship</h3>
 
-      <p>
-        Bringing together former students and respected teachers
-        of Dewanganj Govt. Technical School & College.
-        Let's reconnect, share memories and build a stronger community.
+      <p class="hero-message">
+        Together again—DTSCians, friends, and teachers bound by shared memories.
       </p>
 
-      <a href="register/index.html" class="hero-btn">
-        Join Our Community
-      </a>
+      <div class="hero-buttons">
+
+        <a href="register/index.html" class="hero-btn">
+          Join Our Community
+        </a>
+
+        <a href="membership/index.html" class="hero-btn secondary-btn">
+          Explore Directory
+        </a>
+
+      </div>
 
     </div>
 
@@ -253,18 +256,13 @@
       Dewanganj Govt. Technical School & College, Jamalpur
     </p>
 
-    <p>
-      Connecting Generations, Building the Future
-    </p>
+    <p>Shared Roots, Lifelong Fellowship</p>
 
     <div class="footer-links">
 
       <a href="about/index.html">About</a>
-
       <a href="events/index.html">Events</a>
-
       <a href="membership/index.html">Membership</a>
-
       <a href="contact/index.html">Contact</a>
 
     </div>
