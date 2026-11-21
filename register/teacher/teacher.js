@@ -1,52 +1,51 @@
-
-document.addEventListener("DOMContentLoaded", function () {
-
+document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("teacherRegistrationForm");
 
-  if (!form) {
-    console.error("Teacher Registration Form পাওয়া যায়নি!");
-    return;
-  }
+  if (!form) return;
 
-  // =====================================
-  // HELPER FUNCTIONS
-  // =====================================
+  const $ = (id) => document.getElementById(id);
 
-  function get(id) {
-    return document.getElementById(id);
-  }
+  // ==============================
+  // 1. PHOTO PREVIEW
+  // ==============================
 
-  function show(id, visible) {
-    const element = get(id);
-    if (element) {
-      element.style.display = visible ? "block" : "none";
+  const photoInput = $("teacherPhoto");
+  const photoPreview = $("photoPreview");
+
+  photoInput?.addEventListener("change", () => {
+    const file = photoInput.files?.[0];
+
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("শুধুমাত্র ছবি নির্বাচন করুন।");
+      photoInput.value = "";
+      return;
     }
-  }
 
-  function getValue(id) {
-    const element = get(id);
-    return element ? element.value.trim() : "";
-  }
+    const reader = new FileReader();
 
-  function selectedRadio(name) {
-    const selected = form.querySelector(
-      `input[name="${name}"]:checked`
-    );
-    return selected ? selected.value.toLowerCase() : "";
-  }
+    reader.onload = (event) => {
+      photoPreview.src = event.target.result;
+    };
 
-  function setOptions(id, start, end, placeholder) {
-    const select = get(id);
+    reader.readAsDataURL(file);
+  });
+
+
+  // ==============================
+  // 2. YEAR DROPDOWNS
+  // ==============================
+
+  const currentYear = new Date().getFullYear();
+
+  function populateYears(id, startYear = 1966) {
+    const select = $(id);
     if (!select) return;
 
-    select.innerHTML = "";
+    select.innerHTML = '<option value="">Select Year</option>';
 
-    const first = document.createElement("option");
-    first.value = "";
-    first.textContent = placeholder || "Select Year";
-    select.appendChild(first);
-
-    for (let year = start; year <= end; year++) {
+    for (let year = currentYear; year >= startYear; year--) {
       const option = document.createElement("option");
       option.value = year;
       option.textContent = year;
@@ -54,299 +53,316 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // =====================================
-  // YEAR DROPDOWNS
-  // =====================================
-
-  const currentYear = new Date().getFullYear();
-
   [
     "retiredJoiningYear",
     "retirementYear",
     "serviceFromYear",
     "serviceToYear"
-  ].forEach(id => {
-    setOptions(id, 1966, currentYear, "Select Year");
-  });
+  ].forEach(id => populateYears(id));
 
-  // =====================================
-  // SERVICE STATUS CONDITIONAL LOGIC
-  // =====================================
 
-  function updateServiceStatus() {
+  // ==============================
+  // 3. CONDITIONAL FIELD HELPERS
+  // ==============================
 
-    const status = selectedRadio("serviceStatus");
+  function showGroup(id, show) {
+    const element = $(id);
+    if (!element) return;
 
-    show("workingFields", status.includes("working"));
-    show("retiredFields", status.includes("retired"));
+    element.style.display = show ? "block" : "none";
 
-    show(
-      "exTeacherFields",
-      status.includes("transferred") ||
-      status.includes("ex-teacher") ||
-      status.includes("exteacher")
-    );
-
-    show(
-      "designationDepartment",
-      status.includes("working") ||
-      status.includes("retired") ||
-      status.includes("transferred") ||
-      status.includes("ex-teacher") ||
-      status.includes("exteacher")
-    );
+    element.querySelectorAll("input, select, textarea").forEach(field => {
+      field.required = show && field.dataset.required === "true";
+      if (!show) {
+        field.value = "";
+      }
+    });
   }
 
-  form.querySelectorAll(
+  function setRequired(id, required) {
+    const element = $(id);
+    if (element) element.required = required;
+  }
+
+  function toggleSection(id, show) {
+    const section = $(id);
+    if (!section) return;
+
+    section.classList.toggle("active", show);
+
+    section.querySelectorAll("input, select, textarea").forEach(field => {
+      field.disabled = !show;
+
+      if (!show) {
+        field.required = false;
+        field.value = "";
+      }
+    });
+  }
+
+
+  // ==============================
+  // 4. DESIGNATION: OTHERS
+  // ==============================
+
+  function setupDesignation(selectId, groupId, inputId) {
+    const select = $(selectId);
+    if (!select) return;
+
+    const update = () => {
+      const isOther = select.value === "Others";
+
+      showGroup(groupId, isOther);
+      setRequired(inputId, isOther);
+    };
+
+    select.addEventListener("change", update);
+    update();
+  }
+
+  setupDesignation(
+    "workingDesignation",
+    "workingOtherDesignationGroup",
+    "workingOtherDesignation"
+  );
+
+  setupDesignation(
+    "retiredDesignation",
+    "retiredOtherDesignationGroup",
+    "retiredOtherDesignation"
+  );
+
+  setupDesignation(
+    "exDesignation",
+    "exOtherDesignationGroup",
+    "exOtherDesignation"
+  );
+
+
+  // ==============================
+  // 5. DEPARTMENT: NON-TECH / OTHERS
+  // ==============================
+
+  function setupDepartment(selectId, nonTechGroupId, subjectId, otherGroupId, otherInputId) {
+    const select = $(selectId);
+    if (!select) return;
+
+    const update = () => {
+      const value = select.value;
+
+      const isNonTech = value === "Non-Tech/General";
+      const isOther = value === "Others";
+
+      showGroup(nonTechGroupId, isNonTech);
+      showGroup(otherGroupId, isOther);
+
+      setRequired(subjectId, isNonTech);
+      setRequired(otherInputId, isOther);
+    };
+
+    select.addEventListener("change", update);
+    update();
+  }
+
+  setupDepartment(
+    "workingDepartment",
+    "workingNonTechGroup",
+    "workingNonTechSubject",
+    "workingOtherDepartmentGroup",
+    "workingOtherDepartment"
+  );
+
+  setupDepartment(
+    "retiredDepartment",
+    "retiredNonTechGroup",
+    "retiredNonTechSubject",
+    "retiredOtherDepartmentGroup",
+    "retiredOtherDepartment"
+  );
+
+  setupDepartment(
+    "exDepartment",
+    "exNonTechGroup",
+    "exNonTechSubject",
+    "exOtherDepartmentGroup",
+    "exOtherDepartment"
+  );
+
+
+  // ==============================
+  // 6. SERVICE STATUS
+  // ==============================
+
+  const statusRadios = document.querySelectorAll(
     'input[name="serviceStatus"]'
-  ).forEach(radio => {
+  );
+
+  function updateServiceStatus() {
+    const selected = document.querySelector(
+      'input[name="serviceStatus"]:checked'
+    )?.value;
+
+    toggleSection("workingFields", selected === "working");
+    toggleSection("retiredFields", selected === "retired");
+    toggleSection("exTeacherFields", selected === "transferred");
+
+    if (selected === "working") {
+      ["workingDesignation", "workingDepartment", "joiningDate"].forEach(
+        id => setRequired(id, true)
+      );
+    }
+
+    if (selected === "retired") {
+      [
+        "retiredDesignation",
+        "retiredDepartment",
+        "retiredJoiningYear",
+        "retirementYear"
+      ].forEach(id => setRequired(id, true));
+    }
+
+    if (selected === "transferred") {
+      [
+        "exDesignation",
+        "exDepartment",
+        "serviceFromYear",
+        "serviceToYear",
+        "currentStatus"
+      ].forEach(id => setRequired(id, true));
+    }
+  }
+
+  statusRadios.forEach(radio => {
     radio.addEventListener("change", updateServiceStatus);
   });
 
   updateServiceStatus();
 
-  // =====================================
-  // DESIGNATION: OTHERS
-  // =====================================
 
-  const designation = get("designation");
+  // ==============================
+  // 7. CURRENT STATUS
+  // ==============================
 
-  function updateDesignation() {
-    if (!designation) return;
-
-    show(
-      "otherDesignationGroup",
-      designation.value.toLowerCase() === "others"
-    );
-  }
-
-  if (designation) {
-    designation.addEventListener("change", updateDesignation);
-    updateDesignation();
-  }
-
-  // =====================================
-  // DEPARTMENT: NON-TECH / OTHERS
-  // =====================================
-
-  const department = get("department");
-
-  function updateDepartment() {
-    if (!department) return;
-
-    const value = department.value.toLowerCase();
-
-    show(
-      "nonTechSubjectGroup",
-      value.includes("non-tech") ||
-      value.includes("non tech")
-    );
-
-    show(
-      "otherDepartmentGroup",
-      value === "others"
-    );
-  }
-
-  if (department) {
-    department.addEventListener("change", updateDepartment);
-    updateDepartment();
-  }
-
-  // =====================================
-  // CURRENT STATUS CONDITIONAL LOGIC
-  // =====================================
-
-  const currentStatus = get("currentStatus");
+  const currentStatus = $("currentStatus");
 
   function updateCurrentStatus() {
-    if (!currentStatus) return;
+    const value = currentStatus?.value;
 
-    const value = currentStatus.value.toLowerCase();
+    const isInstitute = value === "Government" || value === "Private";
+    const isOther = value === "Others";
 
-    show(
-      "otherInstituteGroup",
-      value.includes("government") ||
-      value.includes("private")
-    );
+    showGroup("currentInstituteGroup", isInstitute);
+    showGroup("currentDesignationGroup", isInstitute);
+    showGroup("otherCurrentStatusGroup", isOther);
 
-    show(
-      "otherCurrentStatusGroup",
-      value.includes("others")
-    );
+    setRequired("currentInstitute", isInstitute);
+    setRequired("currentDesignation", isInstitute);
+    setRequired("otherCurrentStatus", isOther);
   }
 
-  if (currentStatus) {
-    currentStatus.addEventListener("change", updateCurrentStatus);
-    updateCurrentStatus();
-  }
+  currentStatus?.addEventListener("change", updateCurrentStatus);
+  updateCurrentStatus();
 
-  // =====================================
-  // SAME ADDRESS CHECKBOX
-  // =====================================
 
-  const sameAddress = get("sameAddress");
+  // ==============================
+  // 8. PRESENT & PERMANENT ADDRESS
+  // ==============================
 
-  function copyAddress() {
+  const sameAddress = $("sameAddress");
+  const permanentSection = $("permanentAddressSection");
 
-    if (!sameAddress || !sameAddress.checked) return;
+  const addressFields = [
+    "Division",
+    "District",
+    "AreaType",
+    "Upazila",
+    "Union",
+    "PostOffice",
+    "PostCode",
+    "Address"
+  ];
 
-    const fields = [
-      "Division",
-      "District",
-      "Upazila",
-      "Union",
-      "PostOffice",
-      "PostCode",
-      "Address"
-    ];
+  function copyPresentAddress() {
+    addressFields.forEach(field => {
+      const present = $("present" + field);
+      const permanent = $("permanent" + field);
 
-    fields.forEach(field => {
+      if (!present || !permanent) return;
 
-      const present = get("present" + field);
-      const permanent = get("permanent" + field);
-
-      if (present && permanent) {
-        permanent.value = present.value;
-
-        // Trigger dependent dropdown updates
-        permanent.dispatchEvent(
-          new Event("change", { bubbles: true })
-        );
-      }
-
+      permanent.value = present.value;
     });
   }
 
-  if (sameAddress) {
-    sameAddress.addEventListener("change", function () {
+  function updateSameAddress() {
+    const checked = sameAddress?.checked;
 
-      const permanentSection =
-        get("permanentAddressSection");
-
-      if (permanentSection) {
-        permanentSection.style.display =
-          sameAddress.checked ? "none" : "block";
-      }
-
-      if (sameAddress.checked) {
-        copyAddress();
-      }
-    });
-  }
-
-  [
-    "presentDivision",
-    "presentDistrict",
-    "presentUpazila",
-    "presentUnion",
-    "presentPostOffice",
-    "presentPostCode",
-    "presentAddress"
-  ].forEach(id => {
-
-    const field = get(id);
-
-    if (field) {
-      field.addEventListener("change", function () {
-        if (sameAddress && sameAddress.checked) {
-          copyAddress();
-        }
-      });
-
-      field.addEventListener("input", function () {
-        if (sameAddress && sameAddress.checked) {
-          copyAddress();
-        }
+    if (permanentSection) {
+      permanentSection.querySelectorAll(".form-grid").forEach(grid => {
+        grid.style.display = checked ? "none" : "grid";
       });
     }
 
+    if (checked) {
+      copyPresentAddress();
+    }
+  }
+
+  sameAddress?.addEventListener("change", updateSameAddress);
+
+  document.querySelectorAll(
+    '[id^="present"]'
+  ).forEach(field => {
+    field.addEventListener("change", () => {
+      if (sameAddress?.checked) copyPresentAddress();
+    });
+
+    field.addEventListener("input", () => {
+      if (sameAddress?.checked) copyPresentAddress();
+    });
   });
 
-  // =====================================
-  // PHOTO PREVIEW
-  // =====================================
+  updateSameAddress();
 
-  const photoInput = get("photo");
-  const photoPreview = get("photoPreview");
 
-  if (photoInput && photoPreview) {
+  // ==============================
+  // 9. PASSWORD CONFIRMATION
+  // ==============================
 
-    photoInput.addEventListener("change", function () {
-
-      const file = photoInput.files[0];
-
-      if (!file) {
-        photoPreview.style.display = "none";
-        return;
-      }
-
-      if (!file.type.startsWith("image/")) {
-        alert("অনুগ্রহ করে একটি ছবি নির্বাচন করুন।");
-        photoInput.value = "";
-        return;
-      }
-
-      if (file.size > 5 * 1024 * 1024) {
-        alert("ছবির সাইজ সর্বোচ্চ 5 MB হতে পারবে।");
-        photoInput.value = "";
-        return;
-      }
-
-      const reader = new FileReader();
-
-      reader.onload = function (event) {
-        photoPreview.src = event.target.result;
-        photoPreview.style.display = "block";
-      };
-
-      reader.readAsDataURL(file);
-
-    });
-  }
-
-  // =====================================
-  // PASSWORD CONFIRMATION
-  // =====================================
-
-  const password = get("password");
-  const confirmPassword = get("confirmPassword");
+  const password = $("password");
+  const confirmPassword = $("confirmPassword");
 
   function checkPassword() {
+    if (!password || !confirmPassword) return;
 
-    if (!password || !confirmPassword) return true;
-
-    if (confirmPassword.value &&
-        password.value !== confirmPassword.value) {
-
-      confirmPassword.setCustomValidity(
-        "Password দুটি মিলছে না।"
-      );
-
-      return false;
-
+    if (confirmPassword.value && password.value !== confirmPassword.value) {
+      confirmPassword.setCustomValidity("Passwords do not match.");
+    } else {
+      confirmPassword.setCustomValidity("");
     }
-
-    confirmPassword.setCustomValidity("");
-    return true;
   }
 
-  if (password && confirmPassword) {
+  password?.addEventListener("input", checkPassword);
+  confirmPassword?.addEventListener("input", checkPassword);
 
-    password.addEventListener("input", checkPassword);
-    confirmPassword.addEventListener("input", checkPassword);
 
+  // ==============================
+  // 10. PREVIEW
+  // ==============================
+
+  const previewBtn = $("previewBtn");
+  const previewArea = $("previewArea");
+
+  function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[char]);
   }
 
-  // =====================================
-  // FORM PREVIEW
-  // =====================================
-
-  const previewButton = get("previewBtn");
-  const previewArea = get("previewArea");
-
-  function createPreview() {
-
+  previewBtn?.addEventListener("click", () => {
     const fields = [
       ["Full Name", "fullName"],
       ["Bangla Name", "banglaName"],
@@ -355,115 +371,92 @@ document.addEventListener("DOMContentLoaded", function () {
       ["Mobile", "mobile"],
       ["Email", "email"],
       ["Present Address", "presentAddress"],
-      ["Permanent Address", "permanentAddress"],
-      ["Service Status", null],
-      ["Designation", "designation"],
-      ["Department", "department"],
-      ["Message / Advice", "message"]
+      ["Post Office", "presentPostOffice"],
+      ["Post Code", "presentPostCode"],
+      ["Service Status", null]
     ];
 
-    let html = `
-      <h2>Registration Preview</h2>
-      <p>আপনার দেওয়া তথ্যগুলো যাচাই করুন।</p>
-      <div class="preview-list">
-    `;
+    let html = "<h3>Registration Preview</h3>";
 
     fields.forEach(([label, id]) => {
+      let value = "";
 
-      let value = id
-        ? getValue(id)
-        : selectedRadio("serviceStatus");
-
-      if (value) {
-        html += `
-          <p>
-            <strong>${escapeHTML(label)}:</strong>
-            ${escapeHTML(value)}
-          </p>
-        `;
+      if (label === "Service Status") {
+        value = document.querySelector(
+          'input[name="serviceStatus"]:checked'
+        )?.value || "";
+      } else {
+        value = $(id)?.value || "";
       }
 
+      html += `
+        <p>
+          <strong>${escapeHTML(label)}:</strong>
+          ${escapeHTML(value || "Not provided")}
+        </p>
+      `;
     });
-
-    html += `</div>`;
 
     if (previewArea) {
       previewArea.innerHTML = html;
       previewArea.style.display = "block";
-      previewArea.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+      previewArea.scrollIntoView({ behavior: "smooth" });
     }
-  }
+  });
 
-  function escapeHTML(value) {
-    return String(value).replace(/[&<>"']/g, function (char) {
-      return {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-      }[char];
-    });
-  }
 
-  if (previewButton) {
-    previewButton.addEventListener("click", function () {
+  // ==============================
+  // 11. GOOGLE SIGN-IN PLACEHOLDER
+  // ==============================
 
-      if (!form.reportValidity()) return;
-      if (!checkPassword()) return;
+  $("googleSignIn")?.addEventListener("click", () => {
+    alert(
+      "Google Sign-In চালু করতে Supabase Authentication সংযুক্ত করতে হবে।"
+    );
+  });
 
-      createPreview();
 
-    });
-  }
+  // ==============================
+  // 12. FORM SUBMISSION
+  // ==============================
 
-  // =====================================
-  // GOOGLE SIGN-IN PLACEHOLDER
-  // =====================================
-
-  const googleButton = get("googleSignIn");
-
-  if (googleButton) {
-
-    googleButton.addEventListener("click", function () {
-
-      alert(
-        "Google Sign-In এখনো সংযুক্ত করা হয়নি। " +
-        "পরবর্তী ধাপে Supabase Authentication যুক্ত করা হবে।"
-      );
-
-    });
-
-  }
-
-  // =====================================
-  // FORM SUBMISSION
-  // =====================================
-
-  form.addEventListener("submit", function (event) {
-
+  form.addEventListener("submit", event => {
     event.preventDefault();
+
+    checkPassword();
 
     if (!form.reportValidity()) return;
 
-    if (!checkPassword()) {
-      alert("Password দুটি মিলছে না।");
+    if (!$("declaration")?.checked) {
+      alert("অনুগ্রহ করে Declaration গ্রহণ করুন।");
       return;
     }
 
-    if (sameAddress && sameAddress.checked) {
-      copyAddress();
-    }
-
     alert(
-      "ফর্মের তথ্য যাচাই সম্পন্ন হয়েছে।\n\n" +
-      "এখনো Database সংযুক্ত করা হয়নি। " +
-      "Supabase সংযুক্ত করার পর Registration সম্পন্ন হবে।"
+      "ফরমটি যাচাই সম্পন্ন হয়েছে। তবে Supabase Database এখনো সংযুক্ত হয়নি, তাই তথ্য সংরক্ষণ করা হয়নি।"
     );
+  });
 
+
+  // ==============================
+  // 13. RESET FORM
+  // ==============================
+
+  form.addEventListener("reset", () => {
+    setTimeout(() => {
+      updateServiceStatus();
+      updateCurrentStatus();
+      updateSameAddress();
+
+      if (previewArea) {
+        previewArea.innerHTML = "";
+        previewArea.style.display = "none";
+      }
+
+      if (photoPreview) {
+        photoPreview.removeAttribute("src");
+      }
+    }, 0);
   });
 
 });
