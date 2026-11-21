@@ -1,129 +1,194 @@
+
 document.addEventListener("DOMContentLoaded", function () {
-    // Mobile Hamburger Menu
-    const menuToggle = document.getElementById("menuToggle");
-    const navMenu = document.getElementById("navMenu");
 
-    function closeMobileMenu() {
-        if (menuToggle && navMenu) {
-            navMenu.classList.remove("active");
-            menuToggle.setAttribute("aria-expanded", "false");
-            menuToggle.innerHTML = "&#9776;";
-        }
-    }
+  // =====================================
+  // 1. MOBILE HAMBURGER MENU
+  // =====================================
 
-    if (menuToggle && navMenu) {
-        menuToggle.addEventListener("click", function () {
-            const isOpen = navMenu.classList.toggle("active");
-            menuToggle.setAttribute("aria-expanded", isOpen);
-            menuToggle.innerHTML = isOpen ? "&times;" : "&#9776;";
-        });
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
 
-        navMenu.querySelectorAll("a").forEach(function (link) {
-            link.addEventListener("click", function () {
-                if (!link.classList.contains("open-modal")) {
-                    closeMobileMenu();
-                }
-            });
-        });
-    }
+  if (menuToggle && navMenu) {
 
-    // Modal Popup Logic
-    function openModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add("show");
-            modal.setAttribute("aria-hidden", "false");
-            document.body.style.overflow = "hidden";
-        }
-    }
+    menuToggle.addEventListener("click", function () {
 
-    function closeModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.remove("show");
-            modal.setAttribute("aria-hidden", "true");
-            document.body.style.overflow = "";
-        }
-    }
+      const isOpen = navMenu.classList.toggle("active");
 
-    document.querySelectorAll(".open-modal").forEach(function (trigger) {
-        trigger.addEventListener("click", function (e) {
-            e.preventDefault();
-            closeMobileMenu();
-            const targetId = this.getAttribute("data-target");
-            openModal(targetId);
-        });
+      menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.innerHTML = isOpen ? "&times;" : "☰";
+
     });
 
-    document.querySelectorAll(".modal-close").forEach(function (closeBtn) {
-        closeBtn.addEventListener("click", function () {
-            const targetId = this.getAttribute("data-close");
-            closeModal(targetId);
-        });
+    navMenu.querySelectorAll("a").forEach(function (link) {
+
+      link.addEventListener("click", function () {
+
+        navMenu.classList.remove("active");
+
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.innerHTML = "☰";
+
+      });
+
     });
 
-    document.querySelectorAll(".switch-modal").forEach(function (switchBtn) {
-        switchBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            const fromModal = this.getAttribute("data-from");
-            const toModal = this.getAttribute("data-to");
-            closeModal(fromModal);
-            openModal(toModal);
-        });
+    document.addEventListener("click", function (event) {
+
+      if (
+        !navMenu.contains(event.target) &&
+        !menuToggle.contains(event.target)
+      ) {
+
+        navMenu.classList.remove("active");
+
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.innerHTML = "☰";
+
+      }
+
     });
 
-    document.querySelectorAll(".modal-backdrop").forEach(function (backdrop) {
-        backdrop.addEventListener("click", function (e) {
-            if (e.target === backdrop) {
-                closeModal(backdrop.id);
-            }
-        });
+  }
+
+
+  // =====================================
+  // 2. LANGUAGE TOGGLE
+  // =====================================
+
+  const languageToggle = document.getElementById("languageToggle");
+
+  if (languageToggle) {
+
+    languageToggle.addEventListener("click", function () {
+
+      const currentLanguage = document.documentElement.lang;
+
+      if (currentLanguage === "en") {
+
+        document.documentElement.lang = "bn";
+        languageToggle.textContent = "(EN)";
+
+      } else {
+
+        document.documentElement.lang = "en";
+        languageToggle.textContent = "(BN)";
+
+      }
+
     });
 
-    document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") {
-            document.querySelectorAll(".modal-backdrop.show").forEach(function (openBackdrop) {
-                closeModal(openBackdrop.id);
-            });
-        }
-    });
+  }
 
-    // Conditional Program Field
-    const regProgram = document.getElementById("regProgram");
-    const deptGroup = document.getElementById("deptGroup");
-    const regDept = document.getElementById("regDept");
 
-    if (regProgram && deptGroup) {
-        regProgram.addEventListener("change", function () {
-            if (this.value === "Diploma" || this.value === "SSC" || this.value === "HSC") {
-                deptGroup.style.display = "block";
-                if (regDept) regDept.setAttribute("required", "required");
-            } else {
-                deptGroup.style.display = "none";
-                if (regDept) regDept.removeAttribute("required");
-            }
-        });
+  // =====================================
+  // 3. REGISTER & LOGIN POPUPS
+  // =====================================
+
+  const registerModal = document.getElementById("registerModal");
+  const loginModal = document.getElementById("loginModal");
+
+  const closeRegisterBtn = document.getElementById("closeRegisterModal");
+  const closeLoginBtn = document.getElementById("closeLoginModal");
+
+  function closeAllModals() {
+
+    if (registerModal) {
+      registerModal.classList.remove("active");
+      registerModal.setAttribute("aria-hidden", "true");
     }
 
-    // Form Submission Handlers
-    const loginForm = document.getElementById("loginForm");
-    if (loginForm) {
-        loginForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            alert("Login submitted! Connect your backend/Firebase authentication here.");
-            closeModal("loginModal");
-            loginForm.reset();
-        });
+    if (loginModal) {
+      loginModal.classList.remove("active");
+      loginModal.setAttribute("aria-hidden", "true");
     }
 
-    const registerForm = document.getElementById("registerForm");
-    if (registerForm) {
-        registerForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            alert("Registration submitted successfully!");
-            closeModal("registerModal");
-            registerForm.reset();
-            if (deptGroup) deptGroup.style.display = "none";
-        });
+    document.body.classList.remove("modal-open");
+
+  }
+
+  function openModal(modal) {
+
+    if (!modal) return;
+
+    closeAllModals();
+
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+
+    document.body.classList.add("modal-open");
+
+  }
+
+
+  // REGISTER BUTTONS
+
+  document.querySelectorAll(".register-trigger").forEach(function (button) {
+
+    button.addEventListener("click", function (event) {
+
+      event.preventDefault();
+
+      openModal(registerModal);
+
+    });
+
+  });
+
+
+  // LOGIN BUTTONS
+
+  document.querySelectorAll(".login-trigger").forEach(function (button) {
+
+    button.addEventListener("click", function (event) {
+
+      event.preventDefault();
+
+      openModal(loginModal);
+
+    });
+
+  });
+
+
+  // CLOSE REGISTER
+
+  if (closeRegisterBtn) {
+
+    closeRegisterBtn.addEventListener("click", closeAllModals);
+
+  }
+
+
+  // CLOSE LOGIN
+
+  if (closeLoginBtn) {
+
+    closeLoginBtn.addEventListener("click", closeAllModals);
+
+  }
+
+
+  // CLICK OUTSIDE POPUP
+
+  document.querySelectorAll(
+    ".register-modal-overlay, .login-modal-overlay"
+  ).forEach(function (overlay) {
+
+    overlay.addEventListener("click", closeAllModals);
+
+  });
+
+
+  // ESC KEY
+
+  document.addEventListener("keydown", function (event) {
+
+    if (event.key === "Escape") {
+
+      closeAllModals();
+
     }
+
+  });
+
 });
