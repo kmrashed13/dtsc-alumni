@@ -1,830 +1,501 @@
 
-/* =====================================================
-   DTSC ALUMNI ASSOCIATION
-   STUDENT REGISTRATION SYSTEM
-   File: register/students/student.js
-===================================================== */
-
 document.addEventListener("DOMContentLoaded", () => {
+  const $ = id => document.getElementById(id);
+  const form = $("studentRegistrationForm");
 
-    const form = document.getElementById("studentRegistrationForm");
-    if (!form) return;
+  if (!form) return;
 
-    const totalSteps = 5;
-    let currentStep = 1;
+  const currentYear = new Date().getFullYear();
 
-    const $ = (id) => document.getElementById(id);
+  // =====================================
+  // 1. DROPDOWN HELPERS
+  // =====================================
 
-    const steps = [...document.querySelectorAll(".form-step")];
-    const indicators = [...document.querySelectorAll(".step-indicator")];
+  function fillYears(id, start, end = currentYear, descending = true) {
+    const select = $(id);
+    if (!select) return;
 
-    const previousBtn = $("previousBtn");
-    const nextBtn = $("nextBtn");
-    const previewBtn = $("previewBtn");
+    select.innerHTML = '<option value="">Select Year</option>';
 
-    /* =========================================
-       GENERAL HELPERS
-    ========================================= */
+    const years = [];
 
-    function showMessage(message, type = "error") {
-        const box = $("formMessage");
-        if (!box) return;
+    for (let y = start; y <= end; y++) years.push(y);
 
-        box.textContent = message;
-        box.hidden = false;
-        box.className = `form-message ${type}`;
+    if (descending) years.reverse();
 
-        box.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-    }
-
-    function hideMessage() {
-        const box = $("formMessage");
-        if (box) box.hidden = true;
-    }
-
-    function fillSelect(select, items, firstText) {
-        if (!select) return;
-
-        select.innerHTML = "";
-
-        const first = document.createElement("option");
-        first.value = "";
-        first.textContent = firstText;
-        select.appendChild(first);
-
-        items.forEach(item => {
-            const option = document.createElement("option");
-
-            if (typeof item === "object") {
-                option.value = item.value;
-                option.textContent = item.label;
-            } else {
-                option.value = item;
-                option.textContent = item;
-            }
-
-            select.appendChild(option);
-        });
-    }
-
-    function setSectionEnabled(section, enabled) {
-        if (!section) return;
-
-        section.hidden = !enabled;
-
-        section.querySelectorAll("input, select, textarea").forEach(field => {
-            field.disabled = !enabled;
-        });
-    }
-
-    /* =========================================
-       STEP NAVIGATION
-    ========================================= */
-
-    function updateStep() {
-        steps.forEach(step => {
-            const active = Number(step.dataset.step) === currentStep;
-            step.classList.toggle("active", active);
-            step.hidden = !active;
-        });
-
-        indicators.forEach(indicator => {
-            const number = Number(indicator.dataset.step);
-
-            indicator.classList.toggle("active", number === currentStep);
-            indicator.classList.toggle("completed", number < currentStep);
-        });
-
-        const percent = Math.round((currentStep / totalSteps) * 100);
-
-        $("stepCounter").textContent =
-            `Step ${currentStep} of ${totalSteps}`;
-
-        $("progressPercent").textContent =
-            `${percent}% Completed`;
-
-        $("progressFill").style.width = `${percent}%`;
-
-        previousBtn.hidden = currentStep === 1;
-        nextBtn.hidden = currentStep === totalSteps;
-        previewBtn.hidden = currentStep !== totalSteps;
-
-        hideMessage();
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    }
-
-    function validateCurrentStep() {
-        const activeStep = steps.find(
-            step => Number(step.dataset.step) === currentStep
-        );
-
-        if (!activeStep) return true;
-
-        const fields = [
-            ...activeStep.querySelectorAll(
-                "input, select, textarea"
-            )
-        ];
-
-        for (const field of fields) {
-            if (
-                field.disabled ||
-                field.type === "file" ||
-                field.type === "checkbox" ||
-                field.type === "radio"
-            ) continue;
-
-            if (!field.checkValidity()) {
-                field.reportValidity();
-                field.focus();
-                return false;
-            }
-        }
-
-        // Academic step: at least one examination
-        if (currentStep === 3) {
-            const selected = form.querySelectorAll(
-                'input[name="examinations"]:checked'
-            );
-
-            if (selected.length === 0) {
-                showMessage(
-                    "Please select at least one examination."
-                );
-                return false;
-            }
-        }
-
-        // Current status is required
-        if (currentStep === 4) {
-            const status = form.querySelector(
-                'input[name="currentStatus"]:checked'
-            );
-
-            if (!status) {
-                showMessage(
-                    "Please select your current status."
-                );
-                return false;
-            }
-        }
-
-        // Password check
-        if (currentStep === 5) {
-            const password = $("accountPassword").value;
-            const confirm = $("confirmPassword").value;
-
-            if (password.length < 8) {
-                showMessage(
-                    "Password must contain at least 8 characters."
-                );
-                $("accountPassword").focus();
-                return false;
-            }
-
-            if (password !== confirm) {
-                showMessage("Passwords do not match.");
-                $("confirmPassword").focus();
-                return false;
-            }
-
-            if (!$("declaration").checked) {
-                showMessage(
-                    "Please accept the declaration before continuing."
-                );
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    nextBtn.addEventListener("click", () => {
-        if (!validateCurrentStep()) return;
-
-        if (currentStep < totalSteps) {
-            currentStep++;
-            updateStep();
-        }
+    years.forEach(year => {
+      const option = document.createElement("option");
+      option.value = year;
+      option.textContent = year;
+      select.appendChild(option);
     });
+  }
 
-    previousBtn.addEventListener("click", () => {
-        if (currentStep > 1) {
-            currentStep--;
-            updateStep();
-        }
-    });
+  function fillSessions(id, start, end = currentYear + 1) {
+    const select = $(id);
+    if (!select) return;
 
-    /* =========================================
-       DATE OF BIRTH
-    ========================================= */
+    select.innerHTML = '<option value="">Select Session</option>';
 
-    const currentYear = new Date().getFullYear();
+    for (let year = start; year <= end; year++) {
+      const option = document.createElement("option");
+      option.value = `${year}-${String(year + 1).slice(-2)}`;
+      option.textContent = option.value;
+      select.appendChild(option);
+    }
+  }
 
-    fillSelect(
-        $("birthDay"),
-        Array.from({ length: 31 }, (_, i) =>
-            String(i + 1).padStart(2, "0")
-        ),
-        "Day"
-    );
+  // Birth date
+  const day = $("birthDay");
 
-    const months = [
-        "January", "February", "March", "April",
-        "May", "June", "July", "August",
-        "September", "October", "November", "December"
-    ];
+  if (day) {
+    for (let i = 1; i <= 31; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = i;
+      day.appendChild(option);
+    }
+  }
 
-    fillSelect(
-        $("birthMonth"),
-        months.map((month, index) => ({
-            value: String(index + 1).padStart(2, "0"),
-            label: month
-        })),
-        "Month"
-    );
+  fillYears("birthYear", 1940);
+  fillYears("jscPassingYear", 1966);
+  fillYears("sscPassingYear", 1966);
+  fillYears("hscPassingYear", 1966);
 
-    fillSelect(
-        $("birthYear"),
-        Array.from(
-            { length: currentYear - 1940 + 1 },
-            (_, i) => String(currentYear - i)
-        ),
-        "Year"
-    );
+  fillSessions("jscSession", 1966);
+  fillSessions("sscSession", 1966);
+  fillSessions("hscSession", 1966);
 
-    $("currentYear").textContent = currentYear;
 
-    /* =========================================
-       ACADEMIC YEAR DROPDOWNS
-    ========================================= */
+  // =====================================
+  // 2. PHOTO PREVIEW
+  // =====================================
 
-    document.querySelectorAll(".passing-year-select").forEach(select => {
-        fillSelect(
-            select,
-            Array.from(
-                { length: currentYear - 1966 + 1 },
-                (_, i) => String(currentYear - i)
-            ),
-            "Select Year"
-        );
-    });
+  $("studentPhoto")?.addEventListener("change", event => {
+    const file = event.target.files[0];
 
-    document.querySelectorAll(".session-select").forEach(select => {
-        const sessions = [];
+    if (!file) return;
 
-        for (let year = 1966; year <= currentYear; year++) {
-            sessions.push(`${year}-${String(year + 1).slice(-2)}`);
-        }
+    if (!file.type.startsWith("image/")) {
+      alert("Please select a valid image.");
+      event.target.value = "";
+      return;
+    }
 
-        fillSelect(select, sessions, "Select Session");
-    });
+    const reader = new FileReader();
 
-    /* =========================================
-       PROFILE PHOTO PREVIEW
-    ========================================= */
-
-    $("profilePhoto").addEventListener("change", event => {
-        const file = event.target.files[0];
-
-        if (!file) return;
-
-        const allowedTypes = [
-            "image/jpeg",
-            "image/png",
-            "image/webp"
-        ];
-
-        if (!allowedTypes.includes(file.type)) {
-            showMessage("Please select a JPG, PNG or WEBP image.");
-            event.target.value = "";
-            return;
-        }
-
-        if (file.size > 2 * 1024 * 1024) {
-            showMessage("Photo size must not exceed 2 MB.");
-            event.target.value = "";
-            return;
-        }
-
-        const reader = new FileReader();
-
-        reader.onload = e => {
-            $("photoPreview").innerHTML = `
-                <img
-                    src="${e.target.result}"
-                    alt="Student Photograph"
-                    style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"
-                >
-            `;
-        };
-
-        reader.readAsDataURL(file);
-        hideMessage();
-    });
-
-    /* =========================================
-       ACADEMIC CONDITIONAL SECTIONS
-    ========================================= */
-
-    const academicSections = {
-        JSC: $("jscSection"),
-        SSC: $("sscSection"),
-        HSC: $("hscSection"),
-        Diploma: $("diplomaSection")
+    reader.onload = e => {
+      $("photoPreview").src = e.target.result;
     };
 
-    function updateAcademicSections() {
-        const selected = [
-            ...form.querySelectorAll(
-                'input[name="examinations"]:checked'
-            )
-        ].map(input => input.value);
+    reader.readAsDataURL(file);
+  });
 
-        Object.entries(academicSections).forEach(([name, section]) => {
-            setSectionEnabled(
-                section,
-                selected.includes(name)
-            );
-        });
+
+  // =====================================
+  // 3. CONDITIONAL SECTION HELPER
+  // =====================================
+
+  function toggleSection(id, show) {
+    const section = $(id);
+    if (!section) return;
+
+    section.classList.toggle("active", show);
+
+    section.querySelectorAll("input, select, textarea").forEach(field => {
+      field.disabled = !show;
+      field.required = show && field.dataset.required === "true";
+
+      if (!show) {
+        field.value = "";
+      }
+    });
+  }
+
+  function configureRequired(sectionId, fieldIds) {
+    const section = $(sectionId);
+    if (!section) return;
+
+    fieldIds.forEach(id => {
+      const field = $(id);
+      if (field) field.dataset.required = "true";
+    });
+  }
+
+
+  // =====================================
+  // 4. ACADEMIC CONDITIONAL LOGIC
+  // =====================================
+
+  const academicOptions = [
+    {
+      checkbox: "examJSC",
+      section: "jscFields",
+      fields: [
+        "jscRoll",
+        "jscReg",
+        "jscGPA",
+        "jscPassingYear",
+        "jscSession"
+      ]
+    },
+    {
+      checkbox: "examSSC",
+      section: "sscFields",
+      fields: [
+        "sscTrade",
+        "sscSession",
+        "sscRoll",
+        "sscReg",
+        "sscGPA",
+        "sscPassingYear"
+      ]
+    },
+    {
+      checkbox: "examHSC",
+      section: "hscFields",
+      fields: [
+        "hscTrade",
+        "hscSession",
+        "hscRoll",
+        "hscReg",
+        "hscGPA",
+        "hscPassingYear"
+      ]
+    },
+    {
+      checkbox: "examDiploma",
+      section: "diplomaFields",
+      fields: [
+        "diplomaTechnology",
+        "diplomaSession",
+        "diplomaRoll",
+        "diplomaReg",
+        "diplomaCGPA",
+        "diplomaPassingYear"
+      ]
+    }
+  ];
+
+  academicOptions.forEach(item => {
+    configureRequired(item.section, item.fields);
+
+    $(item.checkbox)?.addEventListener("change", event => {
+      toggleSection(item.section, event.target.checked);
+    });
+
+    toggleSection(item.section, $(item.checkbox)?.checked || false);
+  });
+
+
+  // =====================================
+  // 5. CURRENT STATUS CONDITIONAL LOGIC
+  // =====================================
+
+  const statusOptions = [
+    {
+      checkbox: "statusHigher",
+      section: "higherStudiesFields",
+      fields: ["higherInstitute", "higherDepartment"]
+    },
+    {
+      checkbox: "statusJob",
+      section: "jobFields",
+      fields: [
+        "jobType",
+        "jobOrganization",
+        "jobDesignation",
+        "jobDepartment",
+        "jobLocation"
+      ]
+    },
+    {
+      checkbox: "statusBusiness",
+      section: "businessFields",
+      fields: ["businessName", "businessLocation"]
+    },
+    {
+      checkbox: "statusOthers",
+      section: "otherStatusFields",
+      fields: ["otherStatus"]
+    }
+  ];
+
+  statusOptions.forEach(item => {
+    configureRequired(item.section, item.fields);
+
+    $(item.checkbox)?.addEventListener("change", event => {
+      toggleSection(item.section, event.target.checked);
+    });
+
+    toggleSection(item.section, $(item.checkbox)?.checked || false);
+  });
+
+
+  // =====================================
+  // 6. PRESENT / PERMANENT ADDRESS
+  // =====================================
+
+  const addressPairs = [
+    ["presentDivision", "permanentDivision"],
+    ["presentDistrict", "permanentDistrict"],
+    ["presentAreaType", "permanentAreaType"],
+    ["presentArea", "permanentArea"],
+    ["presentUnion", "permanentUnion"],
+    ["presentPostOffice", "permanentPostOffice"],
+    ["presentPostCode", "permanentPostCode"],
+    ["presentAddress", "permanentAddress"]
+  ];
+
+  function copyAddress() {
+    addressPairs.forEach(([from, to]) => {
+      const source = $(from);
+      const target = $(to);
+
+      if (!source || !target) return;
+
+      if (target.tagName === "SELECT") {
+        const matchingOption = [...target.options].find(
+          option => option.value === source.value
+        );
+
+        target.value = matchingOption ? source.value : "";
+      } else {
+        target.value = source.value;
+      }
+
+      target.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+
+    $("permanentUnionGroup").hidden =
+      $("presentUnionGroup").hidden;
+  }
+
+  function updateSameAddress() {
+    const checked = $("sameAddress")?.checked;
+
+    $("permanentAddressFields").style.display =
+      checked ? "none" : "grid";
+
+    addressPairs.forEach(([from, to]) => {
+      const target = $(to);
+      if (!target) return;
+
+      target.required = !checked;
+    });
+
+    $("permanentUnionGroup").querySelector("input").required = !checked;
+
+    if (checked) copyAddress();
+  }
+
+  $("sameAddress")?.addEventListener("change", updateSameAddress);
+
+  addressPairs.forEach(([from]) => {
+    $(from)?.addEventListener("change", () => {
+      if ($("sameAddress")?.checked) copyAddress();
+    });
+
+    $(from)?.addEventListener("input", () => {
+      if ($("sameAddress")?.checked) copyAddress();
+    });
+  });
+
+  updateSameAddress();
+
+
+  // =====================================
+  // 7. UNION / MUNICIPALITY FIELD
+  // =====================================
+
+  function setupUnion(areaId, groupId, inputId) {
+    const area = $(areaId);
+    const group = $(groupId);
+    const input = $(inputId);
+
+    if (!area || !group || !input) return;
+
+    function update() {
+      const show = area.value === "upazila";
+
+      group.hidden = !show;
+      input.required = show;
     }
 
-    form.querySelectorAll(
-        'input[name="examinations"]'
-    ).forEach(input => {
-        input.addEventListener("change", updateAcademicSections);
-    });
+    area.addEventListener("change", update);
+    update();
+  }
 
-    updateAcademicSections();
+  setupUnion("presentAreaType", "presentUnionGroup", "presentUnion");
+  setupUnion("permanentAreaType", "permanentUnionGroup", "permanentUnion");
 
-    /* =========================================
-       CURRENT STATUS CONDITIONAL SECTIONS
-    ========================================= */
 
-    const higherStudiesSection = $("higherStudiesSection");
-    const jobSection = $("jobSection");
-    const othersSection = $("othersSection");
+  // =====================================
+  // 8. PASSWORD CONFIRMATION
+  // =====================================
 
-    function updateCurrentStatus() {
-        const selected = form.querySelector(
-            'input[name="currentStatus"]:checked'
-        );
+  function checkPassword() {
+    const password = $("password");
+    const confirm = $("confirmPassword");
 
-        const value = selected ? selected.value : "";
+    if (!password || !confirm) return;
 
-        setSectionEnabled(
-            higherStudiesSection,
-            value === "Higher Studies"
-        );
+    confirm.setCustomValidity(
+      confirm.value && password.value !== confirm.value
+        ? "Passwords do not match."
+        : ""
+    );
+  }
 
-        setSectionEnabled(
-            jobSection,
-            value === "Job Holder"
-        );
+  $("password")?.addEventListener("input", checkPassword);
+  $("confirmPassword")?.addEventListener("input", checkPassword);
 
-        setSectionEnabled(
-            othersSection,
-            value === "Others" ||
-            value === "Entrepreneur / Business"
-        );
 
-        const otherTitle = othersSection.querySelector("h4");
-        const otherLabel = othersSection.querySelector("label");
+  // =====================================
+  // 9. HTML ESCAPE
+  // =====================================
 
-        if (value === "Entrepreneur / Business") {
-            otherTitle.textContent = "Business Information";
-            otherLabel.textContent = "Business / Enterprise Details";
-        } else {
-            otherTitle.textContent = "Other Information";
-            otherLabel.textContent = "Please describe your current status";
-        }
-    }
+  function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[char]);
+  }
 
-    form.querySelectorAll(
-        'input[name="currentStatus"]'
-    ).forEach(input => {
-        input.addEventListener("change", updateCurrentStatus);
-    });
 
-    updateCurrentStatus();
+  // =====================================
+  // 10. FORM PREVIEW
+  // =====================================
 
-    /* Employment type */
-    $("employmentType").addEventListener("change", () => {
-        const isPrivate = $("employmentType").value === "Private";
+  $("previewBtn")?.addEventListener("click", () => {
+    const preview = $("previewArea");
 
-        const locationField = form.querySelector(
-            '[name="jobLocation"]'
-        );
-
-        locationField.closest(".form-group").hidden = !isPrivate;
-        locationField.disabled = !isPrivate;
-
-        if (!isPrivate) locationField.value = "";
-    });
-
-    /* =========================================
-       BANGLADESH DIVISION & DISTRICT DATA
-    ========================================= */
-
-    const locations = {
-        "Barishal": [
-            "Barguna", "Barishal", "Bhola", "Jhalokati",
-            "Patuakhali", "Pirojpur"
-        ],
-        "Chattogram": [
-            "Bandarban", "Brahmanbaria", "Chandpur",
-            "Chattogram", "Cumilla", "Cox's Bazar",
-            "Feni", "Khagrachhari", "Lakshmipur",
-            "Noakhali", "Rangamati"
-        ],
-        "Dhaka": [
-            "Dhaka", "Faridpur", "Gazipur", "Gopalganj",
-            "Kishoreganj", "Madaripur", "Manikganj",
-            "Munshiganj", "Narayanganj", "Narsingdi",
-            "Rajbari", "Shariatpur", "Tangail"
-        ],
-        "Khulna": [
-            "Bagerhat", "Chuadanga", "Jashore", "Jhenaidah",
-            "Khulna", "Kushtia", "Magura", "Meherpur",
-            "Narail", "Satkhira"
-        ],
-        "Mymensingh": [
-            "Jamalpur", "Mymensingh", "Netrokona", "Sherpur"
-        ],
-        "Rajshahi": [
-            "Bogura", "Joypurhat", "Naogaon", "Natore",
-            "Chapai Nawabganj", "Pabna", "Rajshahi", "Sirajganj"
-        ],
-        "Rangpur": [
-            "Dinajpur", "Gaibandha", "Kurigram", "Lalmonirhat",
-            "Nilphamari", "Panchagarh", "Rangpur", "Thakurgaon"
-        ],
-        "Sylhet": [
-            "Habiganj", "Moulvibazar", "Sunamganj", "Sylhet"
-        ]
-    };
-
-    const divisions = Object.keys(locations);
-
-    ["present", "permanent"].forEach(prefix => {
-        const divisionSelect = $(`${prefix}Division`);
-        const districtSelect = $(`${prefix}District`);
-
-        fillSelect(divisionSelect, divisions, "Select Division");
-
-        divisionSelect.addEventListener("change", () => {
-            const districts = locations[divisionSelect.value] || [];
-
-            fillSelect(
-                districtSelect,
-                districts,
-                "Select District"
-            );
-
-            districtSelect.disabled = districts.length === 0;
-
-            const areaSelect = $(`${prefix}Area`);
-            fillSelect(areaSelect, [], "Select Area");
-            areaSelect.disabled = true;
-        });
-    });
-
-    /* =========================================
-       AREA TYPE & WARD
-    ========================================= */
-
-    ["present", "permanent"].forEach(prefix => {
-        const typeSelect = $(`${prefix}AreaType`);
-        const areaSelect = $(`${prefix}Area`);
-
-        const wardGroup = $(`${prefix}WardGroup`);
-        const unionGroup = $(`${prefix}UnionGroup`);
-
-        const wardSelect = $(`${prefix}Ward`);
-        const unionInput = $(`${prefix}Union`);
-
-        const wardLabel = $(`${prefix}WardLabel`);
-
-        function updateAreaType() {
-            const type = typeSelect.value;
-
-            const district = $(`${prefix}District`).value;
-
-            setSectionEnabled(
-                wardGroup,
-                type === "city" || type === "municipality"
-            );
-
-            setSectionEnabled(
-                unionGroup,
-                type === "upazila"
-            );
-
-            wardLabel.textContent =
-                type === "city"
-                    ? "City Corporation Ward"
-                    : "Municipality Ward";
-
-            if (type === "city") {
-                fillSelect(
-                    wardSelect,
-                    Array.from({ length: 99 }, (_, i) => String(i + 1)),
-                    "Select Ward"
-                );
-            } else if (type === "municipality") {
-                fillSelect(
-                    wardSelect,
-                    Array.from({ length: 15 }, (_, i) =>
-                        String(i + 1).padStart(2, "0")
-                    ),
-                    "Select Ward"
-                );
-            } else {
-                fillSelect(wardSelect, [], "Select Ward");
-            }
-
-            // Area names are entered through the option prompt.
-            fillSelect(
-                areaSelect,
-                district ? ["Other / Enter Manually"] : [],
-                "Select Area"
-            );
-
-            areaSelect.disabled = !district;
-
-            if (district && type) {
-                areaSelect.value = "Other / Enter Manually";
-            }
-        }
-
-        typeSelect.addEventListener("change", updateAreaType);
-
-        areaSelect.addEventListener("change", () => {
-            if (areaSelect.value !== "Other / Enter Manually") return;
-
-            const entered = prompt(
-                "Enter your City Corporation, Municipality or Upazila name:"
-            );
-
-            if (entered && entered.trim()) {
-                const option = document.createElement("option");
-                option.value = entered.trim();
-                option.textContent = entered.trim();
-
-                areaSelect.appendChild(option);
-                areaSelect.value = entered.trim();
-            } else {
-                areaSelect.value = "";
-            }
-        });
-
-        $(`${prefix}District`).addEventListener("change", updateAreaType);
-    });
-
-    /* =========================================
-       SAME PRESENT & PERMANENT ADDRESS
-    ========================================= */
-
-    const sameAddress = $("sameAddress");
-    const permanentSection = $("permanentAddressSection");
-
-    const addressFields = [
-        "Division",
-        "District",
-        "AreaType",
-        "Area",
-        "Ward",
-        "Union",
-        "PostOffice",
-        "PostCode",
-        "Address"
+    const fields = [
+      ["Name", "fullName"],
+      ["Father's Name", "fatherName"],
+      ["Mother's Name", "motherName"],
+      ["Blood Group", "bloodGroup"],
+      ["Mobile", "mobile"],
+      ["Email", "email"],
+      ["Present Address", "presentAddress"],
+      ["Permanent Address", "permanentAddress"],
+      ["Suggestions", "suggestions"]
     ];
 
-    function copyPresentAddress() {
-        addressFields.forEach(suffix => {
-            const present = $(`present${suffix}`);
-            const permanent = $(`permanent${suffix}`);
+    let html = "<h3>Registration Preview</h3>";
 
-            if (!present || !permanent) return;
-
-            if (present.tagName === "SELECT") {
-                const value = present.value;
-
-                if (
-                    value &&
-                    ![...permanent.options].some(option => option.value === value)
-                ) {
-                    const option = document.createElement("option");
-                    option.value = value;
-                    option.textContent = value;
-                    permanent.appendChild(option);
-                }
-
-                permanent.value = value;
-            } else {
-                permanent.value = present.value;
-            }
-        });
-    }
-
-    sameAddress.addEventListener("change", () => {
-        const checked = sameAddress.checked;
-
-        permanentSection.hidden = checked;
-
-        permanentSection.querySelectorAll(
-            "input, select, textarea"
-        ).forEach(field => {
-            field.disabled = checked;
-        });
-
-        if (checked) copyPresentAddress();
+    fields.forEach(([label, id]) => {
+      html += `
+        <p>
+          <strong>${escapeHTML(label)}:</strong>
+          ${escapeHTML($(id)?.value || "Not provided")}
+        </p>
+      `;
     });
 
-    form.querySelectorAll(
-        '[id^="present"]'
-    ).forEach(field => {
-        field.addEventListener("change", () => {
-            if (sameAddress.checked) copyPresentAddress();
-        });
+    const selectedExams = academicOptions
+      .filter(item => $(item.checkbox)?.checked)
+      .map(item => item.checkbox.replace("exam", ""));
 
-        field.addEventListener("input", () => {
-            if (sameAddress.checked) copyPresentAddress();
-        });
-    });
+    html += `
+      <p>
+        <strong>Selected Examinations:</strong>
+        ${escapeHTML(selectedExams.join(", ") || "None")}
+      </p>
+    `;
 
-    /* =========================================
-       APPLICATION PREVIEW
-    ========================================= */
+    const selectedStatuses = statusOptions
+      .filter(item => $(item.checkbox)?.checked)
+      .map(item => $(item.checkbox).value);
 
-    function escapeHTML(value) {
-        return String(value ?? "").replace(/[&<>"']/g, char => ({
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#039;"
-        })[char]);
-    }
+    html += `
+      <p>
+        <strong>Current Status:</strong>
+        ${escapeHTML(selectedStatuses.join(", ") || "None")}
+      </p>
+    `;
 
-    function getFieldLabel(field) {
-        const group = field.closest(".form-group");
+    preview.innerHTML = html;
+    preview.hidden = false;
+    preview.style.display = "block";
+    preview.scrollIntoView({ behavior: "smooth" });
+  });
 
-        if (!group) return field.name || field.id;
 
-        const label = group.querySelector("label");
+  // =====================================
+  // 11. GOOGLE SIGN-IN PLACEHOLDER
+  // =====================================
 
-        return label
-            ? label.textContent.replace("*", "").trim()
-            : field.name;
-    }
-
-    function buildPreview() {
-        const content = $("previewContent");
-        const sections = [...form.querySelectorAll(".form-step")];
-
-        let html = "";
-
-        sections.forEach(section => {
-            const heading = section.querySelector(".section-heading h3");
-
-            html += `<div class="preview-section">
-                <h4>${escapeHTML(heading?.textContent || "Information")}</h4>
-                <div class="preview-grid">`;
-
-            const fields = section.querySelectorAll(
-                "input, select, textarea"
-            );
-
-            fields.forEach(field => {
-                if (
-                    field.disabled ||
-                    field.type === "password" ||
-                    field.type === "file" ||
-                    field.type === "submit" ||
-                    field.type === "button" ||
-                    field.type === "checkbox" ||
-                    field.type === "radio"
-                ) return;
-
-                if (field.closest("[hidden]")) return;
-
-                let value = field.value;
-
-                if (!value) return;
-
-                if (field.tagName === "SELECT") {
-                    value = field.options[field.selectedIndex]?.text || value;
-                }
-
-                html += `
-                    <div class="preview-item">
-                        <small>${escapeHTML(getFieldLabel(field))}</small>
-                        <strong>${escapeHTML(value)}</strong>
-                    </div>
-                `;
-            });
-
-            const checked = section.querySelectorAll(
-                'input[type="checkbox"]:checked, input[type="radio"]:checked'
-            );
-
-            checked.forEach(field => {
-                if (field.name === "declaration") return;
-
-                const label = field.closest("label");
-                const text = label?.innerText || field.value;
-
-                html += `
-                    <div class="preview-item">
-                        <small>${escapeHTML(field.name)}</small>
-                        <strong>${escapeHTML(text.trim())}</strong>
-                    </div>
-                `;
-            });
-
-            html += `</div></div>`;
-        });
-
-        const photo = $("profilePhoto").files[0];
-
-        if (photo) {
-            const imageURL = URL.createObjectURL(photo);
-
-            html = `
-                <div class="preview-photo">
-                    <img
-                        src="${imageURL}"
-                        alt="Student Photo"
-                        style="width:110px;height:130px;object-fit:cover;border-radius:8px;"
-                    >
-                </div>
-            ` + html;
-        }
-
-        content.innerHTML = html;
-    }
-
-    previewBtn.addEventListener("click", () => {
-        if (!validateCurrentStep()) return;
-
-        buildPreview();
-
-        $("previewModal").hidden = false;
-
-        document.body.style.overflow = "hidden";
-    });
-
-    function closePreview() {
-        $("previewModal").hidden = true;
-        document.body.style.overflow = "";
-    }
-
-    $("closePreview").addEventListener("click", closePreview);
-
-    $("editApplication").addEventListener("click", () => {
-        closePreview();
-        currentStep = 1;
-        updateStep();
-    });
-
-    $("previewModal").addEventListener("click", event => {
-        if (event.target === $("previewModal")) {
-            closePreview();
-        }
-    });
-
-    /* =========================================
-       FINAL SUBMISSION PLACEHOLDER
-       Supabase integration will be added next.
-    ========================================= */
-
-    $("finalSubmitBtn").addEventListener("click", () => {
-        showMessage(
-            "Your form preview is ready. Online registration is not connected yet. Supabase integration is the next step.",
-            "error"
-        );
-
-        closePreview();
-    });
-
-    /* =========================================
-       INITIALIZE
-    ========================================= */
-
-    updateStep();
-
-    setSectionEnabled($("permanentAddressSection"), true);
-
-    console.log(
-        "DTSC Student Registration Form initialized successfully."
+  $("googleSignIn")?.addEventListener("click", () => {
+    alert(
+      "Google Sign-In চালু করতে Supabase Authentication সংযুক্ত করতে হবে।"
     );
+  });
+
+
+  // =====================================
+  // 12. FORM SUBMISSION
+  // =====================================
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+
+    checkPassword();
+
+    if (!form.reportValidity()) return;
+
+    const hasExam = academicOptions.some(
+      item => $(item.checkbox)?.checked
+    );
+
+    if (!hasExam) {
+      alert("Please select at least one examination.");
+      $("examJSC").focus();
+      return;
+    }
+
+    if (!statusOptions.some(item => $(item.checkbox)?.checked)) {
+      alert("Please select your current status.");
+      $("statusHigher").focus();
+      return;
+    }
+
+    if (!$("declaration").checked) {
+      alert("Please accept the declaration.");
+      return;
+    }
+
+    alert(
+      "Form validation successful! Supabase Database is not connected yet. Your information has not been saved."
+    );
+  });
+
+
+  // =====================================
+  // 13. RESET FORM
+  // =====================================
+
+  form.addEventListener("reset", () => {
+    setTimeout(() => {
+      academicOptions.forEach(item => {
+        toggleSection(item.section, false);
+      });
+
+      statusOptions.forEach(item => {
+        toggleSection(item.section, false);
+      });
+
+      updateSameAddress();
+
+      $("photoPreview").removeAttribute("src");
+
+      $("previewArea").innerHTML = "";
+      $("previewArea").hidden = true;
+      $("previewArea").style.display = "none";
+    }, 0);
+  });
 
 });
