@@ -1,0 +1,588 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101b2d">
+<title>Teachers Management | DTSC Alumni Association</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#101b2d;
+  --sidebar:#142239;
+  --card:#192a42;
+  --card2:#1d304a;
+  --gold:#d6b878;
+  --light:#f0d9a4;
+  --white:#f4f3ed;
+  --muted:#9baabd;
+  --line:rgba(255,255,255,.09);
+  --green:#45c59a;
+  --red:#ed7777;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--white);min-height:100vh}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.layout{display:flex;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{
+  width:255px;background:var(--sidebar);
+  border-right:1px solid var(--line);
+  position:fixed;inset:0 auto 0 0;
+  padding:25px 17px;display:flex;
+  flex-direction:column;z-index:100;transition:.3s;
+}
+.brand{display:flex;align-items:center;gap:12px;padding:5px 8px 25px;border-bottom:1px solid var(--line)}
+.brand img{width:43px;height:43px;object-fit:contain;border-radius:10px;background:white;padding:3px}
+.brand h2{font-size:14px;color:var(--light)}
+.brand p{font-size:10px;color:var(--muted);margin-top:4px}
+.nav-title{font-size:10px;color:#718198;font-weight:700;letter-spacing:1.5px;padding:25px 10px 12px}
+.nav a{display:flex;align-items:center;gap:12px;padding:12px 13px;margin:4px 0;border-radius:9px;font-size:13px;color:var(--muted);transition:.2s}
+.nav a:hover,.nav a.active{background:rgba(214,184,120,.12);color:var(--light)}
+.nav a.active{border-left:3px solid var(--gold)}
+.nav-icon{width:20px;text-align:center;font-size:16px}
+.sidebar-bottom{margin-top:auto;border-top:1px solid var(--line);padding-top:15px}
+.sidebar-bottom a{display:block;padding:11px;color:var(--muted);font-size:12px}
+.sidebar-bottom a:hover{color:var(--gold)}
+
+/* MAIN */
+.main{margin-left:255px;width:calc(100% - 255px);padding:28px 32px 40px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:28px}
+.top-title h1{font-size:23px;font-weight:700}
+.top-title p{font-size:12px;color:var(--muted);margin-top:5px}
+.top-right{display:flex;align-items:center;gap:15px}
+.secure{color:var(--green);font-size:11px;border:1px solid rgba(69,197,154,.25);background:rgba(69,197,154,.08);padding:8px 12px;border-radius:20px}
+.profile{display:flex;align-items:center;gap:10px}
+.avatar{width:37px;height:37px;border-radius:50%;background:linear-gradient(135deg,#d6b878,#9e7d43);display:grid;place-items:center;color:#172238;font-weight:800}
+.profile strong{font-size:12px;display:block}
+.profile small{font-size:10px;color:var(--muted)}
+.menu-btn{display:none;background:var(--card);color:var(--gold);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:19px}
+
+.page-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:22px}
+.page-heading h2{font-size:20px}
+.page-heading p{font-size:12px;color:var(--muted);margin-top:6px}
+.demo-label{font-size:10px;color:var(--gold);background:rgba(214,184,120,.1);border:1px solid rgba(214,184,120,.22);padding:7px 12px;border-radius:20px}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:22px}
+.stat{background:var(--card);border:1px solid var(--line);padding:19px;border-radius:12px}
+.stat-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.stat-icon{width:35px;height:35px;border-radius:9px;display:grid;place-items:center;background:rgba(214,184,120,.12);color:var(--gold);font-size:17px}
+.stat small{color:var(--muted);font-size:11px}
+.stat h3{font-size:25px;margin-top:5px}
+.stat-note{font-size:10px;color:var(--green);margin-top:7px}
+
+/* CARD */
+.card{background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.card-head{padding:19px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.card-head h3{font-size:15px}
+.card-head p{font-size:11px;color:var(--muted);margin-top:5px}
+.actions{display:flex;gap:9px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);padding:9px 13px;border-radius:7px;font-size:11px;font-weight:700;color:var(--white);background:var(--card2)}
+.btn:hover{border-color:var(--gold);color:var(--light)}
+.btn-gold{background:var(--gold);color:#172238;border-color:var(--gold)}
+.btn-gold:hover{background:var(--light);color:#172238}
+.btn-danger{color:var(--red)}
+.btn-small{padding:6px 9px;font-size:10px}
+
+/* FILTERS */
+.filters{padding:17px 20px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:10px;border-bottom:1px solid var(--line)}
+.field{width:100%;background:#122139;border:1px solid var(--line);color:var(--white);border-radius:7px;padding:11px 12px;font-size:11px;outline:none}
+.field:focus{border-color:var(--gold)}
+.field::placeholder{color:#8291a5}
+select.field option{background:#192a42}
+
+/* TABLE */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:850px}
+th{text-align:left;color:#8fa0b5;font-size:10px;font-weight:700;letter-spacing:.6px;padding:14px 17px;background:rgba(255,255,255,.018)}
+td{padding:14px 17px;border-top:1px solid var(--line);font-size:11px;color:#dce3eb}
+tbody tr:hover{background:rgba(255,255,255,.025)}
+.teacher{display:flex;align-items:center;gap:10px}
+.teacher-avatar{width:35px;height:35px;border-radius:50%;background:#30425b;color:var(--light);display:grid;place-items:center;font-weight:700;font-size:11px}
+.teacher strong{display:block;font-size:11px}
+.teacher small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.status{display:inline-block;padding:5px 9px;border-radius:20px;font-size:9px;font-weight:700}
+.status.active{background:rgba(69,197,154,.12);color:var(--green)}
+.status.inactive{background:rgba(237,119,119,.12);color:var(--red)}
+.row-actions{display:flex;gap:5px}
+.empty{text-align:center;padding:35px!important;color:var(--muted)}
+.table-footer{padding:15px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:11px}
+
+/* MODAL */
+.modal{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:18px}
+.modal.show{display:flex}
+.modal-box{width:100%;max-width:480px;max-height:90vh;overflow:auto;background:#192a42;border:1px solid var(--line);border-radius:14px;padding:23px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.modal-head h3{font-size:17px}
+.close{background:transparent;border:0;color:var(--muted);font-size:24px}
+.form-group{margin-bottom:13px}
+.form-group label{display:block;color:var(--muted);font-size:10px;margin-bottom:7px}
+.form-group input,.form-group select{width:100%;padding:11px;background:#122139;border:1px solid var(--line);border-radius:7px;color:var(--white);outline:none;font-size:11px}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.modal-buttons{display:flex;justify-content:flex-end;gap:9px;margin-top:15px}
+.details p{padding:12px 0;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}
+.details strong{color:var(--white);float:right}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:90}
+
+@media(max-width:1100px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .filters{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .overlay.show{display:block}
+  .main{margin-left:0;width:100%;padding:20px 15px}
+  .menu-btn{display:block}
+  .top-title h1{font-size:18px}
+  .secure{display:none}
+  .profile div:last-child{display:none}
+  .stats{gap:10px}
+  .stat{padding:14px}
+  .stat h3{font-size:21px}
+}
+@media(max-width:430px){
+  .filters{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .page-heading h2{font-size:17px}
+  .modal-grid{grid-template-columns:1fr}
+}
+@media print{
+  .sidebar,.topbar,.page-heading,.filters,.actions,.row-actions,.overlay{display:none!important}
+  .main{margin:0;width:100%;padding:0}
+  body{background:white;color:black}
+  .card,.stat{background:white;border:1px solid #ddd;color:black}
+  td,th{color:black}
+  .status{border:1px solid #aaa}
+}
+</style>
+</head>
+
+<body>
+<div class="layout">
+
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <img src="../assets/logo.png" alt="DTSC Logo">
+    <div>
+      <h2>DTSC ALUMNI</h2>
+      <p>Association Management</p>
+    </div>
+  </div>
+
+  <div class="nav-title">MAIN MENU</div>
+  <nav class="nav">
+    <a href="dashboard.html"><span class="nav-icon">▦</span>Dashboard</a>
+    <a href="members.html"><span class="nav-icon">♙</span>Members</a>
+    <a href="teachers.html" class="active"><span class="nav-icon">♧</span>Teachers</a>
+    <a href="applications.html"><span class="nav-icon">▤</span>Applications</a>
+    <a href="events.html"><span class="nav-icon">◷</span>Events</a>
+    <a href="notices.html"><span class="nav-icon">▣</span>Notices</a>
+    <a href="gallery.html"><span class="nav-icon">▧</span>Gallery</a>
+    <a href="committee.html"><span class="nav-icon">♛</span>Executive Committee</a>
+    <a href="finance.html"><span class="nav-icon">৳</span>Finance Management</a>
+    <a href="reports.html"><span class="nav-icon">▥</span>Reports & Documents</a>
+    <a href="settings.html"><span class="nav-icon">⚙</span>Settings & Admin Roles</a>
+    <a href="activity-logs.html"><span class="nav-icon">◴</span>Activity Logs</a>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <a href="../index.html">↗ Visit Public Website</a>
+    <a href="../login/admin.html">⇥ Sign Out</a>
+  </div>
+</aside>
+
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<main class="main">
+
+<header class="topbar">
+  <div style="display:flex;align-items:center;gap:12px">
+    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="top-title">
+      <h1>Teachers Management</h1>
+      <p>Manage honorable teachers and faculty profiles</p>
+    </div>
+  </div>
+  <div class="top-right">
+    <span class="secure">● Preview Mode</span>
+    <div class="profile">
+      <div class="avatar">A</div>
+      <div>
+        <strong>Administrator</strong>
+        <small>Super Admin</small>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="page-heading">
+  <div>
+    <h2>Honorable Teachers</h2>
+    <p>Manage teacher profiles, departments and designations.</p>
+  </div>
+  <span class="demo-label">DEMO DATA · NOT CONNECTED TO DATABASE</span>
+</section>
+
+<section class="stats">
+  <div class="stat">
+    <div class="stat-top"><small>Total Teachers</small><span class="stat-icon">♧</span></div>
+    <h3 id="totalCount">0</h3>
+    <div class="stat-note">All registered teachers</div>
+  </div>
+  <div class="stat">
+    <div class="stat-top"><small>Active Teachers</small><span class="stat-icon">✓</span></div>
+    <h3 id="activeCount">0</h3>
+    <div class="stat-note">Currently active</div>
+  </div>
+  <div class="stat">
+    <div class="stat-top"><small>Inactive Teachers</small><span class="stat-icon">⊘</span></div>
+    <h3 id="inactiveCount">0</h3>
+    <div class="stat-note">Currently inactive</div>
+  </div>
+  <div class="stat">
+    <div class="stat-top"><small>Departments</small><span class="stat-icon">▦</span></div>
+    <h3 id="departmentCount">0</h3>
+    <div class="stat-note">Represented departments</div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head">
+    <div>
+      <h3>Teacher Directory</h3>
+      <p>View, search and manage teacher information</p>
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="exportCSV()">↓ Export CSV</button>
+      <button class="btn" onclick="window.print()">▤ Print</button>
+      <button class="btn btn-gold" onclick="openAddModal()">+ Add Teacher</button>
+    </div>
+  </div>
+
+  <div class="filters">
+    <input class="field" id="searchInput" placeholder="Search name, ID or email..." oninput="renderTeachers()">
+
+    <select class="field" id="departmentFilter" onchange="renderTeachers()">
+      <option value="">All Departments</option>
+      <option>Mechanical</option>
+      <option>Electrical</option>
+      <option>Computer</option>
+      <option>Civil</option>
+    </select>
+
+    <select class="field" id="designationFilter" onchange="renderTeachers()">
+      <option value="">All Designations</option>
+      <option>Principal</option>
+      <option>Vice Principal</option>
+      <option>Chief Instructor</option>
+      <option>Instructor</option>
+      <option>Junior Instructor</option>
+    </select>
+
+    <select class="field" id="statusFilter" onchange="renderTeachers()">
+      <option value="">All Status</option>
+      <option value="Active">Active</option>
+      <option value="Inactive">Inactive</option>
+    </select>
+
+    <button class="btn" onclick="resetFilters()">Reset</button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>TEACHER</th>
+          <th>TEACHER ID</th>
+          <th>DEPARTMENT</th>
+          <th>DESIGNATION</th>
+          <th>EMAIL</th>
+          <th>STATUS</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody id="teacherTable"></tbody>
+    </table>
+  </div>
+
+  <div class="table-footer">
+    <span id="resultCount">Showing 0 teachers</span>
+    <span>DTSC Alumni Association · Preview</span>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- TEACHER MODAL -->
+<div class="modal" id="teacherModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modalTitle">Teacher Details</h3>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+let teachers=[
+  {id:1,name:"Abdul Karim",teacherId:"DTSC-T-001",department:"Mechanical",designation:"Chief Instructor",email:"karim@example.com",phone:"01700000011",status:"Active"},
+  {id:2,name:"Mohammad Hasan",teacherId:"DTSC-T-002",department:"Electrical",designation:"Instructor",email:"hasan@example.com",phone:"01700000012",status:"Active"},
+  {id:3,name:"Fatema Akter",teacherId:"DTSC-T-003",department:"Computer",designation:"Junior Instructor",email:"fatema@example.com",phone:"01700000013",status:"Active"},
+  {id:4,name:"Abdur Rahman",teacherId:"DTSC-T-004",department:"Civil",designation:"Instructor",email:"rahman@example.com",phone:"01700000014",status:"Inactive"},
+  {id:5,name:"Mizanur Rahman",teacherId:"DTSC-T-005",department:"Mechanical",designation:"Principal",email:"mizan@example.com",phone:"01700000015",status:"Active"},
+  {id:6,name:"Shahida Begum",teacherId:"DTSC-T-006",department:"Electrical",designation:"Vice Principal",email:"shahida@example.com",phone:"01700000016",status:"Inactive"}
+];
+
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g,char=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[char]);
+}
+
+function updateStats(){
+  document.getElementById("totalCount").textContent=teachers.length;
+  document.getElementById("activeCount").textContent=teachers.filter(t=>t.status==="Active").length;
+  document.getElementById("inactiveCount").textContent=teachers.filter(t=>t.status==="Inactive").length;
+  document.getElementById("departmentCount").textContent=new Set(teachers.map(t=>t.department)).size;
+}
+
+function renderTeachers(){
+  const search=document.getElementById("searchInput").value.toLowerCase().trim();
+  const department=document.getElementById("departmentFilter").value;
+  const designation=document.getElementById("designationFilter").value;
+  const status=document.getElementById("statusFilter").value;
+
+  const filtered=teachers.filter(t=>
+    [t.name,t.teacherId,t.email].some(v=>v.toLowerCase().includes(search)) &&
+    (!department||t.department===department) &&
+    (!designation||t.designation===designation) &&
+    (!status||t.status===status)
+  );
+
+  const tbody=document.getElementById("teacherTable");
+
+  if(!filtered.length){
+    tbody.innerHTML='<tr><td colspan="7" class="empty">No teachers found.</td></tr>';
+  }else{
+    tbody.innerHTML=filtered.map(t=>`
+      <tr>
+        <td>
+          <div class="teacher">
+            <div class="teacher-avatar">${escapeHTML(t.name.charAt(0))}</div>
+            <div>
+              <strong>${escapeHTML(t.name)}</strong>
+              <small>${escapeHTML(t.phone)}</small>
+            </div>
+          </div>
+        </td>
+        <td>${escapeHTML(t.teacherId)}</td>
+        <td>${escapeHTML(t.department)}</td>
+        <td>${escapeHTML(t.designation)}</td>
+        <td>${escapeHTML(t.email)}</td>
+        <td><span class="status ${t.status.toLowerCase()}">${escapeHTML(t.status)}</span></td>
+        <td>
+          <div class="row-actions">
+            <button class="btn btn-small" onclick="viewTeacher(${t.id})">View</button>
+            <button class="btn btn-small" onclick="editTeacher(${t.id})">Edit</button>
+            <button class="btn btn-small btn-danger" onclick="deleteTeacher(${t.id})">Delete</button>
+          </div>
+        </td>
+      </tr>
+    `).join("");
+  }
+
+  document.getElementById("resultCount").textContent=`Showing ${filtered.length} of ${teachers.length} teachers`;
+  updateStats();
+}
+
+function openModal(title,content){
+  document.getElementById("modalTitle").textContent=title;
+  document.getElementById("modalContent").innerHTML=content;
+  document.getElementById("teacherModal").classList.add("show");
+}
+
+function closeModal(){
+  document.getElementById("teacherModal").classList.remove("show");
+}
+
+function viewTeacher(id){
+  const t=teachers.find(x=>x.id===id);
+  if(!t)return;
+
+  openModal("Teacher Profile",`
+    <div class="details">
+      <p>Full Name <strong>${escapeHTML(t.name)}</strong></p>
+      <p>Teacher ID <strong>${escapeHTML(t.teacherId)}</strong></p>
+      <p>Department <strong>${escapeHTML(t.department)}</strong></p>
+      <p>Designation <strong>${escapeHTML(t.designation)}</strong></p>
+      <p>Email <strong>${escapeHTML(t.email)}</strong></p>
+      <p>Phone <strong>${escapeHTML(t.phone)}</strong></p>
+      <p>Status <strong>${escapeHTML(t.status)}</strong></p>
+    </div>
+    <div class="modal-buttons">
+      <button class="btn btn-gold" onclick="closeModal()">Close</button>
+    </div>
+  `);
+}
+
+function openAddModal(){
+  openTeacherForm(null);
+}
+
+function editTeacher(id){
+  const t=teachers.find(x=>x.id===id);
+  if(t)openTeacherForm(t);
+}
+
+function openTeacherForm(teacher){
+  const isNew=!teacher;
+  const t=teacher||{
+    name:"",teacherId:"",department:"Mechanical",
+    designation:"Instructor",email:"",phone:"",status:"Active"
+  };
+
+  const departments=["Mechanical","Electrical","Computer","Civil"];
+  const designations=["Principal","Vice Principal","Chief Instructor","Instructor","Junior Instructor"];
+
+  openModal(isNew?"Add New Teacher":"Edit Teacher",`
+    <form id="teacherForm">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input name="name" required value="${escapeHTML(t.name)}">
+      </div>
+
+      <div class="modal-grid">
+        <div class="form-group">
+          <label>Teacher ID</label>
+          <input name="teacherId" required value="${escapeHTML(t.teacherId)}">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input name="phone" value="${escapeHTML(t.phone)}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Department</label>
+        <select name="department">
+          ${departments.map(d=>`<option ${t.department===d?"selected":""}>${d}</option>`).join("")}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Designation</label>
+        <select name="designation">
+          ${designations.map(d=>`<option ${t.designation===d?"selected":""}>${d}</option>`).join("")}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" name="email" required value="${escapeHTML(t.email)}">
+      </div>
+
+      <div class="form-group">
+        <label>Status</label>
+        <select name="status">
+          <option ${t.status==="Active"?"selected":""}>Active</option>
+          <option ${t.status==="Inactive"?"selected":""}>Inactive</option>
+        </select>
+      </div>
+
+      <div class="modal-buttons">
+        <button type="button" class="btn" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="btn btn-gold">${isNew?"Add Teacher":"Save Changes"}</button>
+      </div>
+    </form>
+  `);
+
+  document.getElementById("teacherForm").addEventListener("submit",function(e){
+    e.preventDefault();
+    const data=Object.fromEntries(new FormData(this).entries());
+
+    if(isNew){
+      data.id=Date.now();
+      teachers.unshift(data);
+    }else{
+      Object.assign(teacher,data);
+    }
+
+    closeModal();
+    renderTeachers();
+  });
+}
+
+function deleteTeacher(id){
+  const t=teachers.find(x=>x.id===id);
+  if(!t)return;
+
+  if(confirm(`Delete ${t.name} from the demo teacher list?`)){
+    teachers=teachers.filter(x=>x.id!==id);
+    renderTeachers();
+  }
+}
+
+function resetFilters(){
+  document.getElementById("searchInput").value="";
+  document.getElementById("departmentFilter").value="";
+  document.getElementById("designationFilter").value="";
+  document.getElementById("statusFilter").value="";
+  renderTeachers();
+}
+
+function exportCSV(){
+  const search=document.getElementById("searchInput").value.toLowerCase().trim();
+  const department=document.getElementById("departmentFilter").value;
+  const designation=document.getElementById("designationFilter").value;
+  const status=document.getElementById("statusFilter").value;
+
+  const filtered=teachers.filter(t=>
+    [t.name,t.teacherId,t.email].some(v=>v.toLowerCase().includes(search)) &&
+    (!department||t.department===department) &&
+    (!designation||t.designation===designation) &&
+    (!status||t.status===status)
+  );
+
+  const headers=["Name","Teacher ID","Department","Designation","Email","Phone","Status"];
+  const rows=filtered.map(t=>[
+    t.name,t.teacherId,t.department,t.designation,t.email,t.phone,t.status
+  ]);
+
+  const csv=[headers,...rows].map(row=>
+    row.map(value=>`"${String(value).replace(/"/g,'""')}"`).join(",")
+  ).join("\r\n");
+
+  const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="DTSC-Alumni-Teachers.csv";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function toggleSidebar(){
+  document.getElementById("sidebar").classList.toggle("open");
+  document.getElementById("overlay").classList.toggle("show");
+}
+
+document.getElementById("teacherModal").addEventListener("click",function(e){
+  if(e.target===this)closeModal();
+});
+
+renderTeachers();
+</script>
+</body>
+</html>
