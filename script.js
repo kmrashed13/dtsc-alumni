@@ -240,5 +240,38 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
   });
+(function () {
+
+  function openLoginPopupFromLink() {
+
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("openLogin") !== "true") return;
+
+    const loginTrigger = document.querySelector(".login-trigger");
+
+    if (loginTrigger) {
+      loginTrigger.click();
+    }
+
+    // Remove query parameter after opening
+    window.history.replaceState(
+      {},
+      document.title,
+      window.location.pathname + window.location.hash
+    );
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      openLoginPopupFromLink
+    );
+  } else {
+    openLoginPopupFromLink();
+  }
+
+})();
+
 
 });
