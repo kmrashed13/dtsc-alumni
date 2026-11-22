@@ -4,283 +4,209 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#103e35">
+  <meta name="theme-color" content="#101b35">
 
   <title>Membership Directory | DTSC Alumni Association</title>
 
-  <!-- HOME PAGE HEADER CSS -->
   <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="./directory.css">
 
-  <!-- DIRECTORY CSS -->
-  <link rel="stylesheet" href="directory.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- GLOBAL HOME PAGE HEADER -->
-
-  <div class="site-header">
-
-    <header class="header">
-
-      <div class="header-logo">
-        <img src="../assets/logo.png" alt="DTSC Alumni Association Logo">
-      </div>
-
-      <div class="header-title">
-        <h1>DTSC Alumni Association</h1>
-        <p>Dewanganj Govt. Technical School & College, Jamalpur</p>
-        <span>Shared Roots, Lifelong Fellowship</span>
-      </div>
-
-      <div class="header-logo">
-        <img src="../assets/dtsclogo.png" alt="DTSC Institute Logo">
-      </div>
-
-    </header>
-
-    <!-- NAVIGATION -->
-
-    <nav class="navbar">
-
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        aria-label="Open Menu"
-        aria-expanded="false">
-        ☰
-      </button>
-
-      <ul class="nav-menu" id="navMenu">
-
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../about/index.html">About Us</a></li>
-        <li><a href="../events/index.html">Events</a></li>
-        <li><a href="../gallery/index.html">Gallery</a></li>
-        <li><a href="./index.html">Membership Directory</a></li>
-        <li><a href="../contact/index.html">Contact</a></li>
-
-        <li>
-          <a href="../login/index.html">Login</a>
-        </li>
-
-        <li>
-          <a href="../register/students/student.html">Register</a>
-        </li>
-
-      </ul>
-
-    </nav>
-
-  </div>
-
-
-  <!-- DIRECTORY MAIN CONTAINER -->
+  <!-- GLOBAL HEADER -->
+  <div id="global-header"></div>
 
   <main class="directory-container">
 
-    <!-- SEARCH PANEL -->
-
-    <section class="search-panel">
-
-      <div class="section-heading">
-        <div>
-          <h2>Find Alumni</h2>
-          <p>Search and connect with DTSC students and teachers.</p>
-        </div>
-
-        <div class="search-icon">⌕</div>
+    <!-- DIRECTORY INTRO -->
+    <section class="directory-intro">
+      <div class="intro-content">
+        <span class="section-tag">OUR COMMUNITY</span>
+        <h2>Find Alumni</h2>
+        <p>
+          Search and reconnect with DTSC students and respected teachers.
+          Explore our alumni community and build lifelong connections.
+        </p>
       </div>
-
-      <!-- SEARCH INPUT -->
-
-      <div class="search-box">
-        <span class="search-symbol">⌕</span>
-
-        <input
-          type="search"
-          id="searchInput"
-          placeholder="Search by name, Alumni ID, division, district, upazila or contact..."
-          autocomplete="off">
-      </div>
-
-      <!-- FILTER HEADING -->
-
-      <div class="filter-heading">
-        <span>FILTER MEMBERS</span>
-        <div class="filter-line"></div>
-      </div>
-
-      <!-- FILTER GRID -->
-
-      <div class="filter-grid">
-
-        <div class="filter-item">
-          <label for="categoryFilter">Category</label>
-          <select id="categoryFilter">
-            <option value="">All Categories</option>
-            <option value="STUDENT">Student</option>
-            <option value="TEACHER">Teacher</option>
-          </select>
-        </div>
-
-        <div class="filter-item">
-          <label for="examFilter">Last Exam</label>
-          <select id="examFilter">
-            <option value="">All Exams</option>
-            <option value="Junior School Certificate">Junior School Certificate</option>
-            <option value="Secondary School Certificate">Secondary School Certificate</option>
-            <option value="Higher Secondary Certificate">Higher Secondary Certificate</option>
-            <option value="Diploma in Engineering">Diploma in Engineering</option>
-          </select>
-        </div>
-
-        <div class="filter-item">
-          <label for="tradeFilter">Trade / Technology</label>
-          <select id="tradeFilter">
-            <option value="">All Trades / Technologies</option>
-            <option value="General Electrical Works">General Electrical Works</option>
-            <option value="Refrigeration And Air Conditions">Refrigeration And Air Conditions</option>
-            <option value="Machine Tools Operation">Machine Tools Operation</option>
-            <option value="Firm Machinery">Firm Machinery</option>
-            <option value="21 - Agro Machinery">21 - Agro Machinery</option>
-            <option value="27 - Electrical Works and Maintenance">27 - Electrical Works and Maintenance</option>
-            <option value="30 - Machine Tools Operation and Maintenance">30 - Machine Tools Operation and Maintenance</option>
-            <option value="32 - Refrigeration and Air-conditioning">32 - Refrigeration and Air-conditioning</option>
-            <option value="67 - Electrical Technology">67 - Electrical Technology</option>
-            <option value="70 - Mechanical Technology">70 - Mechanical Technology</option>
-          </select>
-        </div>
-
-        <div class="filter-item">
-          <label for="yearFilter">Passing Year</label>
-          <select id="yearFilter">
-            <option value="">All Passing Years</option>
-          </select>
-        </div>
-
-        <div class="filter-item">
-          <label for="bloodFilter">Blood Group</label>
-          <select id="bloodFilter">
-            <option value="">All Blood Groups</option>
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-          </select>
-        </div>
-
-        <div class="filter-item">
-          <label for="statusFilter">Membership Status</label>
-          <select id="statusFilter">
-            <option value="">All Status</option>
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-            <option value="Pending">Pending</option>
-          </select>
-        </div>
-
-      </div>
-
-      <!-- ACTION BUTTONS -->
-
-      <div class="search-actions">
-        <button type="button" id="searchBtn">Search Members</button>
-        <button type="button" id="resetBtn">Reset Filters</button>
-      </div>
-
     </section>
 
+    <!-- SEARCH AND FILTER -->
+    <section class="directory-search-section">
+
+      <div class="search-box">
+        <div class="search-heading">
+          <div>
+            <h3>Search Alumni</h3>
+            <p>Find alumni by name, ID, location or contact information.</p>
+          </div>
+        </div>
+
+        <div class="search-input-wrap">
+          <span class="search-icon">⌕</span>
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search by name, Alumni ID, division, district, upazila or contact..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-grid">
+
+          <div class="filter-group">
+            <label for="categoryFilter">Category</label>
+            <select id="categoryFilter">
+              <option value="">All Categories</option>
+              <option value="Student">Student</option>
+              <option value="Teacher">Teacher</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="examFilter">Last Exam</label>
+            <select id="examFilter">
+              <option value="">All Exams</option>
+              <option value="Junior School Certificate">Junior School Certificate</option>
+              <option value="Secondary School Certificate">Secondary School Certificate</option>
+              <option value="Higher Secondary Certificate">Higher Secondary Certificate</option>
+              <option value="Diploma in Engineering">Diploma in Engineering</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="tradeFilter">Trade / Technology</label>
+            <select id="tradeFilter">
+              <option value="">All Trades / Technologies</option>
+              <option value="General Electrical Works">General Electrical Works</option>
+              <option value="Refrigeration And Air Conditions">Refrigeration And Air Conditions</option>
+              <option value="Machine Tools Operation">Machine Tools Operation</option>
+              <option value="Firm Machinery">Firm Machinery</option>
+              <option value="21 - Agro Machinery">21 - Agro Machinery</option>
+              <option value="27 - Electrical Works and Maintenance">27 - Electrical Works and Maintenance</option>
+              <option value="30 - Machine Tools Operation and Maintenance">30 - Machine Tools Operation and Maintenance</option>
+              <option value="32 - Refrigeration and Air-conditioning">32 - Refrigeration and Air-conditioning</option>
+              <option value="67 - Electrical Technology">67 - Electrical Technology</option>
+              <option value="70 - Mechanical Technology">70 - Mechanical Technology</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="yearFilter">Passing Year</label>
+            <select id="yearFilter">
+              <option value="">All Passing Years</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="bloodFilter">Blood Group</label>
+            <select id="bloodFilter">
+              <option value="">All Blood Groups</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="statusFilter">Membership Status</label>
+            <select id="statusFilter">
+              <option value="">All Status</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="Pending">Pending</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="search-actions">
+          <button type="button" id="searchBtn" class="search-button">
+            Search Alumni
+          </button>
+
+          <button type="button" id="resetBtn" class="reset-button">
+            Reset Filters
+          </button>
+        </div>
+
+      </div>
+    </section>
 
     <!-- RESULTS -->
-
-    <section class="results-section">
+    <section class="directory-results">
 
       <div class="results-header">
-        <h2>Directory Members</h2>
-        <span id="resultsCount">0 Members</span>
+        <div>
+          <h3>Alumni Members</h3>
+          <p>Explore our DTSCian community members.</p>
+        </div>
+
+        <div class="results-count">
+          <span id="resultsCount">0</span>
+          <span>Members Found</span>
+        </div>
       </div>
 
-      <div id="memberList"></div>
+      <div id="memberList" class="member-list">
+        <!-- Member cards will be loaded by directory.js -->
+      </div>
 
     </section>
 
   </main>
 
-
   <!-- PROFILE MODAL -->
+  <div class="profile-modal" id="profileModal">
 
-  <div id="profileModal">
+    <div class="profile-modal-content">
 
-    <div class="modal-content">
-
-      <button type="button" id="closeModal" aria-label="Close">
+      <button type="button" class="modal-close" id="closeModal" aria-label="Close">
         &times;
       </button>
 
-      <div class="profile-header">
+      <div class="profile-modal-header">
+        <img id="profilePhoto" src="" alt="Member Photo">
 
-        <img id="profilePhoto" src="" alt="Profile Photo">
-
-        <div>
+        <div class="profile-modal-heading">
           <h2 id="profileName">Member Name</h2>
           <p id="profileId">Alumni ID</p>
           <div id="profileBadges"></div>
         </div>
-
       </div>
 
-      <div class="profile-divider"></div>
-
-      <h3 class="profile-section-title">Member Information</h3>
-
-      <div id="profileDetails"></div>
+      <div id="profileDetails" class="profile-details">
+        <!-- Profile details will be loaded by directory.js -->
+      </div>
 
     </div>
 
   </div>
 
-
-  <!-- EXISTING DIRECTORY FOOTER -->
-
+  <!-- FOOTER -->
   <footer class="directory-footer">
-    <p>© <span id="footerYear"></span> DTSC Alumni Directory</p>
-    <p>Connecting DTSCians, Building Lifelong Bonds.</p>
+    <div class="footer-content">
+      <p>
+        &copy; <span id="footerYear"></span>
+        DTSC Alumni Association. All Rights Reserved.
+      </p>
+      <p>Shared Roots, Lifelong Fellowship</p>
+    </div>
   </footer>
 
+  <!-- GLOBAL HEADER LOADER -->
+  <script src="../header-loader.js"></script>
 
-  <!-- MOBILE NAVIGATION SCRIPT -->
-
-  <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const navMenu = document.getElementById("navMenu");
-
-    if (menuToggle && navMenu) {
-      menuToggle.addEventListener("click", function () {
-        const isOpen = navMenu.classList.toggle("active");
-
-        menuToggle.setAttribute("aria-expanded", isOpen);
-        menuToggle.setAttribute(
-          "aria-label",
-          isOpen ? "Close Menu" : "Open Menu"
-        );
-      });
-
-      navMenu.querySelectorAll("a").forEach(function (link) {
-        link.addEventListener("click", function () {
-          navMenu.classList.remove("active");
-          menuToggle.setAttribute("aria-expanded", "false");
-        });
-      });
-    }
-  </script>
-
-  <!-- DIRECTORY JAVASCRIPT -->
-  <script src="directory.js"></script>
+  <!-- DIRECTORY SCRIPT -->
+  <script src="./directory.js"></script>
 
 </body>
 </html>
