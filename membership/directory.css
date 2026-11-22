@@ -350,6 +350,8 @@ button {
   box-shadow: var(--shadow);
 }
 
+/* LEFT: PHOTO + NAME */
+
 .member-info {
   display: flex;
   align-items: center;
@@ -358,14 +360,18 @@ button {
   min-width: 0;
 }
 
+/* CIRCLE PROFILE PHOTO */
+
 .member-photo {
   width: 67px;
   height: 67px;
   min-width: 67px;
   object-fit: cover;
-  border-radius: 13px;
+  object-position: center;
+  border-radius: 50%;
   background: #edf0f5;
   border: 2px solid #e7d4a9;
+  display: block;
 }
 
 .member-info h3 {
@@ -382,12 +388,23 @@ button {
   font-weight: 600;
 }
 
-/* RIGHT CATEGORY & DETAILS */
+/* ADMIN GIVEN DESIGNATION */
+
+.member-designation {
+  display: block;
+  color: #906b24;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+/* RIGHT: CATEGORY + VIEW PROFILE */
 
 .member-actions {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  justify-content: center;
   gap: 10px;
   flex-shrink: 0;
 }
@@ -402,21 +419,26 @@ button {
 .role-badge {
   display: inline-flex;
   align-items: center;
-  padding: 6px 9px;
-  border-radius: 6px;
+  justify-content: center;
+  padding: 7px 11px;
+  border-radius: 7px;
   background: #edf1f7;
   border: 1px solid #dce3ee;
   color: var(--navy);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: .3px;
 }
 
-.role-badge.admin {
-  background: #f8f0df;
-  border-color: #ead8ad;
-  color: #906b24;
+/* STUDENT BADGE */
+
+.role-badge.student {
+  background: #edf1f7;
+  border-color: #dce3ee;
+  color: var(--navy);
 }
+
+/* TEACHER BADGE */
 
 .role-badge.teacher {
   background: #e9f4ef;
@@ -424,26 +446,40 @@ button {
   color: #26734f;
 }
 
+/* ADMIN BADGE */
+
+.role-badge.admin {
+  background: #f8f0df;
+  border-color: #ead8ad;
+  color: #906b24;
+}
+
+/* SYSTEM ADMIN BADGE */
+
 .role-badge.system {
   background: #f2eafa;
   border-color: #e0d0f0;
   color: #74469a;
 }
 
+/* VIEW PROFILE BUTTON */
+
 .view-profile {
-  padding: 9px 17px;
+  padding: 10px 18px;
   background: var(--navy);
   color: white;
   border: none;
-  border-radius: 7px;
-  font-size: 11px;
+  border-radius: 8px;
+  font-size: 12px;
   font-weight: 700;
   transition: .2s;
+  white-space: nowrap;
 }
 
 .view-profile:hover {
   background: var(--gold);
   color: var(--navy);
+  transform: translateY(-2px);
 }
 
 /* EMPTY STATE */
@@ -523,7 +559,7 @@ button {
   width: 80px;
   height: 80px;
   object-fit: cover;
-  border-radius: 14px;
+  border-radius: 50%;
   background: #edf0f5;
   border: 2px solid var(--gold);
 }
@@ -603,7 +639,7 @@ button {
   color: var(--gold-light);
 }
 
-/* RESPONSIVE */
+/* TABLET & MOBILE */
 
 @media (max-width: 760px) {
 
@@ -672,13 +708,17 @@ button {
     font-size: 13px;
   }
 
+  .member-designation {
+    font-size: 10px;
+  }
+
   .member-badges {
-    max-width: 150px;
+    max-width: 130px;
   }
 
   .role-badge {
     font-size: 8px;
-    padding: 5px 6px;
+    padding: 6px 7px;
   }
 
   .view-profile {
@@ -686,6 +726,8 @@ button {
     font-size: 10px;
   }
 }
+
+/* SMALL MOBILE */
 
 @media (max-width: 420px) {
 
@@ -714,15 +756,51 @@ button {
   }
 
   .member-card {
-    align-items: flex-start;
+    align-items: center;
+    padding: 13px 10px;
+    gap: 7px;
+  }
+
+  .member-info {
+    gap: 8px;
+  }
+
+  .member-photo {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+  }
+
+  .member-info h3 {
+    font-size: 11px;
+  }
+
+  .member-info p {
+    font-size: 9px;
+  }
+
+  .member-designation {
+    font-size: 9px;
   }
 
   .member-actions {
-    max-width: 125px;
+    max-width: 110px;
+    gap: 7px;
   }
 
   .member-badges {
-    max-width: 125px;
+    max-width: 110px;
+    gap: 4px;
+  }
+
+  .role-badge {
+    font-size: 7px;
+    padding: 5px 6px;
+  }
+
+  .view-profile {
+    padding: 7px 9px;
+    font-size: 9px;
   }
 
   .results-header h2 {
@@ -745,5 +823,33 @@ button {
   .directory-footer {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+/* EXTRA SMALL SCREENS */
+
+@media (max-width: 340px) {
+
+  .member-photo {
+    width: 39px;
+    height: 39px;
+    min-width: 39px;
+  }
+
+  .member-info {
+    gap: 6px;
+  }
+
+  .member-info h3 {
+    font-size: 10px;
+  }
+
+  .member-actions {
+    max-width: 95px;
+  }
+
+  .view-profile {
+    padding: 6px 7px;
+    font-size: 8px;
   }
 }
