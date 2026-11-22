@@ -4,40 +4,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#101d36">
+  <meta name="theme-color" content="#103e35">
 
-  <title>DTSC Alumni Directory</title>
+  <title>Membership Directory | DTSC Alumni Association</title>
 
+  <!-- HOME PAGE HEADER CSS -->
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- DIRECTORY CSS -->
   <link rel="stylesheet" href="directory.css">
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="directory-header">
-    <div class="header-content">
+  <!-- GLOBAL HOME PAGE HEADER -->
 
-      <img src="../assets/logo.png" alt="DTSC Alumni Logo">
+  <div class="site-header">
 
-      <div class="header-title">
-        <span class="header-label">DTSCIAN COMMUNITY</span>
-        <h1>DTSC ALUMNI DIRECTORY</h1>
-        <p>
-          Find for reconnect with lost batchmates, reach out to respected
-          teachers, and build lifelong bonds within our DTSCian family.
-        </p>
+    <header class="header">
+
+      <div class="header-logo">
+        <img src="../assets/logo.png" alt="DTSC Alumni Association Logo">
       </div>
 
-      <img src="../assets/dtsclogo.png" alt="DTSC Institute Logo">
+      <div class="header-title">
+        <h1>DTSC Alumni Association</h1>
+        <p>Dewanganj Govt. Technical School & College, Jamalpur</p>
+        <span>Shared Roots, Lifelong Fellowship</span>
+      </div>
 
-    </div>
-  </header>
+      <div class="header-logo">
+        <img src="../assets/dtsclogo.png" alt="DTSC Institute Logo">
+      </div>
+
+    </header>
+
+    <!-- NAVIGATION -->
+
+    <nav class="navbar">
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Open Menu"
+        aria-expanded="false">
+        ☰
+      </button>
+
+      <ul class="nav-menu" id="navMenu">
+
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about/index.html">About Us</a></li>
+        <li><a href="../events/index.html">Events</a></li>
+        <li><a href="../gallery/index.html">Gallery</a></li>
+        <li><a href="./index.html">Membership Directory</a></li>
+        <li><a href="../contact/index.html">Contact</a></li>
+
+        <li>
+          <a href="../login/index.html">Login</a>
+        </li>
+
+        <li>
+          <a href="../register/students/student.html">Register</a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+  </div>
 
 
-  <!-- MAIN CONTAINER -->
+  <!-- DIRECTORY MAIN CONTAINER -->
+
   <main class="directory-container">
 
     <!-- SEARCH PANEL -->
+
     <section class="search-panel">
 
       <div class="section-heading">
@@ -49,8 +92,8 @@
         <div class="search-icon">⌕</div>
       </div>
 
-
       <!-- SEARCH INPUT -->
+
       <div class="search-box">
         <span class="search-symbol">⌕</span>
 
@@ -58,19 +101,18 @@
           type="search"
           id="searchInput"
           placeholder="Search by name, Alumni ID, division, district, upazila or contact..."
-          autocomplete="off"
-        >
+          autocomplete="off">
       </div>
 
-
       <!-- FILTER HEADING -->
+
       <div class="filter-heading">
         <span>FILTER MEMBERS</span>
         <div class="filter-line"></div>
       </div>
 
-
       <!-- FILTER GRID -->
+
       <div class="filter-grid">
 
         <div class="filter-item">
@@ -82,7 +124,6 @@
           </select>
         </div>
 
-
         <div class="filter-item">
           <label for="examFilter">Last Exam</label>
           <select id="examFilter">
@@ -93,7 +134,6 @@
             <option value="Diploma in Engineering">Diploma in Engineering</option>
           </select>
         </div>
-
 
         <div class="filter-item">
           <label for="tradeFilter">Trade / Technology</label>
@@ -112,14 +152,12 @@
           </select>
         </div>
 
-
         <div class="filter-item">
           <label for="yearFilter">Passing Year</label>
           <select id="yearFilter">
             <option value="">All Passing Years</option>
           </select>
         </div>
-
 
         <div class="filter-item">
           <label for="bloodFilter">Blood Group</label>
@@ -136,7 +174,6 @@
           </select>
         </div>
 
-
         <div class="filter-item">
           <label for="statusFilter">Membership Status</label>
           <select id="statusFilter">
@@ -149,8 +186,8 @@
 
       </div>
 
-
       <!-- ACTION BUTTONS -->
+
       <div class="search-actions">
         <button type="button" id="searchBtn">Search Members</button>
         <button type="button" id="resetBtn">Reset Filters</button>
@@ -160,6 +197,7 @@
 
 
     <!-- RESULTS -->
+
     <section class="results-section">
 
       <div class="results-header">
@@ -175,6 +213,7 @@
 
 
   <!-- PROFILE MODAL -->
+
   <div id="profileModal">
 
     <div class="modal-content">
@@ -206,13 +245,41 @@
   </div>
 
 
-  <!-- FOOTER -->
+  <!-- EXISTING DIRECTORY FOOTER -->
+
   <footer class="directory-footer">
     <p>© <span id="footerYear"></span> DTSC Alumni Directory</p>
     <p>Connecting DTSCians, Building Lifelong Bonds.</p>
   </footer>
 
 
+  <!-- MOBILE NAVIGATION SCRIPT -->
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
+
+    if (menuToggle && navMenu) {
+      menuToggle.addEventListener("click", function () {
+        const isOpen = navMenu.classList.toggle("active");
+
+        menuToggle.setAttribute("aria-expanded", isOpen);
+        menuToggle.setAttribute(
+          "aria-label",
+          isOpen ? "Close Menu" : "Open Menu"
+        );
+      });
+
+      navMenu.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          navMenu.classList.remove("active");
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+  </script>
+
+  <!-- DIRECTORY JAVASCRIPT -->
   <script src="directory.js"></script>
 
 </body>
