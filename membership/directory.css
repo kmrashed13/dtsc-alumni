@@ -16,8 +16,6 @@
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -36,55 +34,50 @@ button {
   cursor: pointer;
 }
 
-/* HEADER */
+/* =====================================
+   MAIN DIRECTORY
+===================================== */
 
-.directory-header {
+.directory-container {
+  width: min(1180px, 92%);
+  margin: 38px auto 60px;
+}
+
+/* =====================================
+   INTRO SECTION
+===================================== */
+
+.directory-intro {
+  padding: 45px 20px 35px;
+  text-align: center;
   background:
     radial-gradient(circle at 50% 0%, #30496e 0%, transparent 55%),
     linear-gradient(135deg, #09152b, #172b49);
-  padding: 38px 5%;
   border-bottom: 3px solid var(--gold);
   color: white;
 }
 
-.header-content {
-  max-width: 1250px;
+.intro-content {
+  max-width: 850px;
   margin: auto;
-  display: grid;
-  grid-template-columns: 95px 1fr 95px;
-  gap: 25px;
-  align-items: center;
-  text-align: center;
 }
 
-.header-content img {
-  width: 85px;
-  height: 85px;
-  object-fit: contain;
-  padding: 7px;
-  border-radius: 50%;
-  background: white;
-  border: 3px solid var(--gold);
-}
-
-.header-label,
-.eyebrow {
-  display: block;
-  color: #b28b43;
+.section-tag {
+  display: inline-block;
+  color: var(--gold-light);
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 2px;
-  margin-bottom: 8px;
-}
-
-.header-title h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(25px, 4vw, 39px);
-  letter-spacing: 1px;
   margin-bottom: 10px;
 }
 
-.header-title p {
+.directory-intro h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(27px, 4vw, 39px);
+  margin-bottom: 10px;
+}
+
+.directory-intro p {
   max-width: 760px;
   margin: auto;
   font-size: 13px;
@@ -92,16 +85,16 @@ button {
   color: #d6dfeb;
 }
 
-/* MAIN */
+/* =====================================
+   SEARCH PANEL
+===================================== */
 
-.directory-container {
+.directory-search-section {
   width: min(1180px, 92%);
-  margin: 38px auto 60px;
+  margin: 30px auto 0;
 }
 
-/* SEARCH PANEL */
-
-.search-panel {
+.search-box {
   position: relative;
   overflow: hidden;
   padding: 32px;
@@ -111,7 +104,7 @@ button {
   box-shadow: var(--shadow);
 }
 
-.search-panel::before {
+.search-box::before {
   content: "";
   position: absolute;
   top: 0;
@@ -121,44 +114,33 @@ button {
   background: linear-gradient(90deg, var(--navy), var(--gold), var(--navy));
 }
 
-.section-heading {
+.search-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 24px;
 }
 
-.section-heading h2 {
+.search-heading h3 {
   font-size: 24px;
   color: var(--navy);
   font-weight: 800;
 }
 
-.section-heading p {
+.search-heading p {
   font-size: 13px;
   color: var(--muted);
   margin-top: 4px;
 }
 
-.search-icon {
-  width: 55px;
-  height: 55px;
-  display: grid;
-  place-items: center;
-  border-radius: 15px;
-  background: #f7f0e0;
-  color: #a77e30;
-  font-size: 35px;
-}
-
 /* SEARCH INPUT */
 
-.search-box {
+.search-input-wrap {
   position: relative;
   margin-bottom: 28px;
 }
 
-.search-symbol {
+.search-icon {
   position: absolute;
   left: 19px;
   top: 50%;
@@ -190,26 +172,9 @@ button {
   color: #a1aaba;
 }
 
-/* FILTER HEADING */
-
-.filter-heading {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  color: #9b7a3d;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  margin-bottom: 17px;
-}
-
-.filter-line {
-  height: 1px;
-  background: #e9e3d5;
-  flex: 1;
-}
-
-/* FILTER GRID */
+/* =====================================
+   FILTER GRID
+===================================== */
 
 .filter-grid {
   display: grid;
@@ -217,20 +182,20 @@ button {
   gap: 16px;
 }
 
-.filter-item {
+.filter-group {
   display: flex;
   flex-direction: column;
   gap: 7px;
   min-width: 0;
 }
 
-.filter-item label {
+.filter-group label {
   font-size: 11px;
   font-weight: 700;
   color: #647188;
 }
 
-.filter-item select {
+.filter-group select {
   width: 100%;
   height: 49px;
   padding: 0 12px;
@@ -244,12 +209,14 @@ button {
   transition: .2s;
 }
 
-.filter-item select:focus {
+.filter-group select:focus {
   border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(214,173,87,.12);
 }
 
-/* BUTTONS */
+/* =====================================
+   SEARCH BUTTONS
+===================================== */
 
 .search-actions {
   display: flex;
@@ -291,37 +258,50 @@ button {
   background: #edf0f5;
 }
 
-/* RESULTS */
+/* =====================================
+   RESULTS
+===================================== */
 
-.results-section {
-  margin-top: 35px;
+.directory-results {
+  width: min(1180px, 92%);
+  margin: 35px auto 60px;
 }
 
 .results-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 15px;
   margin-bottom: 19px;
   padding-bottom: 15px;
   border-bottom: 1px solid #e2e7ef;
 }
 
-.results-header h2 {
+.results-header h3 {
   font-size: 22px;
   color: var(--navy);
   font-weight: 800;
 }
 
-#resultsCount {
+.results-header p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.results-count {
   background: var(--navy);
   color: var(--gold-light);
   padding: 8px 15px;
   border-radius: 30px;
   font-size: 11px;
   font-weight: 800;
+  white-space: nowrap;
 }
 
-/* MEMBER LIST */
+/* =====================================
+   MEMBER LIST
+===================================== */
 
 #memberList {
   display: flex;
@@ -350,7 +330,7 @@ button {
   box-shadow: var(--shadow);
 }
 
-/* LEFT: PHOTO + NAME */
+/* PHOTO + INFORMATION */
 
 .member-info {
   display: flex;
@@ -359,8 +339,6 @@ button {
   flex: 1;
   min-width: 0;
 }
-
-/* CIRCLE PROFILE PHOTO */
 
 .member-photo {
   width: 67px;
@@ -398,7 +376,7 @@ button {
   margin-top: 5px;
 }
 
-/* RIGHT: CATEGORY + VIEW PROFILE */
+/* MEMBER ACTIONS */
 
 .member-actions {
   display: flex;
@@ -416,6 +394,8 @@ button {
   gap: 6px;
 }
 
+/* ROLE BADGES */
+
 .role-badge {
   display: inline-flex;
   align-items: center;
@@ -430,15 +410,11 @@ button {
   letter-spacing: .3px;
 }
 
-/* STUDENT BADGE */
-
 .role-badge.student {
   background: #edf1f7;
   border-color: #dce3ee;
   color: var(--navy);
 }
-
-/* TEACHER BADGE */
 
 .role-badge.teacher {
   background: #e9f4ef;
@@ -446,15 +422,11 @@ button {
   color: #26734f;
 }
 
-/* ADMIN BADGE */
-
 .role-badge.admin {
   background: #f8f0df;
   border-color: #ead8ad;
   color: #906b24;
 }
-
-/* SYSTEM ADMIN BADGE */
 
 .role-badge.system {
   background: #f2eafa;
@@ -462,7 +434,7 @@ button {
   color: #74469a;
 }
 
-/* VIEW PROFILE BUTTON */
+/* VIEW PROFILE */
 
 .view-profile {
   padding: 10px 18px;
@@ -494,7 +466,9 @@ button {
   font-size: 14px;
 }
 
-/* PROFILE MODAL */
+/* =====================================
+   PROFILE MODAL
+===================================== */
 
 #profileModal {
   position: fixed;
@@ -512,7 +486,7 @@ button {
   display: flex;
 }
 
-.modal-content {
+.profile-modal-content {
   position: relative;
   width: min(560px, 100%);
   max-height: 90vh;
@@ -548,7 +522,12 @@ button {
   font-size: 24px;
 }
 
-.profile-header {
+#closeModal:hover {
+  background: var(--navy);
+  color: white;
+}
+
+.profile-modal-header {
   display: flex;
   align-items: center;
   gap: 17px;
@@ -562,6 +541,7 @@ button {
   border-radius: 50%;
   background: #edf0f5;
   border: 2px solid var(--gold);
+  flex-shrink: 0;
 }
 
 #profileName {
@@ -582,25 +562,15 @@ button {
   gap: 6px;
 }
 
-.profile-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 23px 0;
-}
-
-.profile-section-title {
-  color: var(--navy);
-  font-size: 15px;
-  margin-bottom: 15px;
-}
-
 #profileDetails {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 11px;
+  margin-top: 23px;
 }
 
-.profile-detail {
+.profile-detail,
+.profile-detail-item {
   padding: 12px;
   background: #f7f8fb;
   border: 1px solid #edf0f4;
@@ -608,75 +578,60 @@ button {
   min-width: 0;
 }
 
-.profile-detail span {
+.profile-detail span,
+.profile-detail-item span {
   display: block;
   color: var(--muted);
   font-size: 10px;
   margin-bottom: 4px;
 }
 
-.profile-detail strong {
+.profile-detail strong,
+.profile-detail-item strong {
   display: block;
   color: var(--navy);
   font-size: 12px;
   overflow-wrap: anywhere;
 }
 
-/* FOOTER */
+/* =====================================
+   FOOTER
+===================================== */
 
 .directory-footer {
   padding: 23px 5%;
   background: var(--navy-dark);
   color: #c5cedb;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
+  text-align: center;
   font-size: 11px;
 }
 
-.directory-footer span {
-  color: var(--gold-light);
+.directory-footer p {
+  margin: 5px 0;
+  line-height: 1.7;
 }
 
-/* TABLET & MOBILE */
+/* =====================================
+   RESPONSIVE
+===================================== */
 
 @media (max-width: 760px) {
 
-  .directory-header {
-    padding: 27px 4%;
-  }
-
-  .header-content {
-    grid-template-columns: 58px 1fr 58px;
-    gap: 10px;
-  }
-
-  .header-content img {
-    width: 55px;
-    height: 55px;
-    padding: 4px;
-  }
-
-  .header-title h1 {
-    font-size: 21px;
-  }
-
-  .header-title p {
-    font-size: 11px;
-  }
-
-  .directory-container {
+  .directory-container,
+  .directory-search-section,
+  .directory-results {
     width: 94%;
-    margin-top: 23px;
   }
 
-  .search-panel {
+  .directory-intro {
+    padding: 35px 15px;
+  }
+
+  .search-box {
     padding: 22px 17px;
-    border-radius: 15px;
   }
 
-  .section-heading h2 {
+  .search-heading h3 {
     font-size: 21px;
   }
 
@@ -685,7 +640,7 @@ button {
     gap: 13px 10px;
   }
 
-  .filter-item select {
+  .filter-group select {
     font-size: 11px;
   }
 
@@ -725,18 +680,17 @@ button {
     padding: 8px 11px;
     font-size: 10px;
   }
-}
 
-/* SMALL MOBILE */
+}
 
 @media (max-width: 420px) {
 
-  .header-title h1 {
-    font-size: 17px;
+  .directory-intro h2 {
+    font-size: 25px;
   }
 
-  .header-title p {
-    font-size: 10px;
+  .directory-intro p {
+    font-size: 12px;
   }
 
   .filter-grid {
@@ -753,6 +707,10 @@ button {
     min-width: 0;
     padding: 0 10px;
     font-size: 11px;
+  }
+
+  .results-header h3 {
+    font-size: 18px;
   }
 
   .member-card {
@@ -775,10 +733,7 @@ button {
     font-size: 11px;
   }
 
-  .member-info p {
-    font-size: 9px;
-  }
-
+  .member-info p,
   .member-designation {
     font-size: 9px;
   }
@@ -803,53 +758,21 @@ button {
     font-size: 9px;
   }
 
-  .results-header h2 {
-    font-size: 18px;
-  }
-
-  #resultsCount {
-    font-size: 9px;
-    padding: 7px 10px;
-  }
-
-  .modal-content {
+  .profile-modal-content {
     padding: 22px 17px;
+  }
+
+  #profilePhoto {
+    width: 65px;
+    height: 65px;
+  }
+
+  #profileName {
+    font-size: 16px;
   }
 
   #profileDetails {
     grid-template-columns: 1fr 1fr;
   }
 
-  .directory-footer {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-/* EXTRA SMALL SCREENS */
-
-@media (max-width: 340px) {
-
-  .member-photo {
-    width: 39px;
-    height: 39px;
-    min-width: 39px;
-  }
-
-  .member-info {
-    gap: 6px;
-  }
-
-  .member-info h3 {
-    font-size: 10px;
-  }
-
-  .member-actions {
-    max-width: 95px;
-  }
-
-  .view-profile {
-    padding: 6px 7px;
-    font-size: 8px;
-  }
 }
