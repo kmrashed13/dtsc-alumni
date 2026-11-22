@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // =====================================
-  // 3. REGISTER & LOGIN POPUPS
+  // 3. REGISTER & LOGIN MODALS
   // =====================================
 
   const registerModal = document.getElementById("registerModal");
@@ -92,15 +92,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function closeAllModals() {
 
-    if (registerModal) {
-      registerModal.classList.remove("active");
-      registerModal.setAttribute("aria-hidden", "true");
-    }
+    [registerModal, loginModal].forEach(function (modal) {
 
-    if (loginModal) {
-      loginModal.classList.remove("active");
-      loginModal.setAttribute("aria-hidden", "true");
-    }
+      if (!modal) return;
+
+      modal.classList.remove("active");
+      modal.setAttribute("aria-hidden", "true");
+
+    });
 
     document.body.classList.remove("modal-open");
 
@@ -120,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  // REGISTER BUTTONS
+  // REGISTER POPUP OPEN
 
   document.querySelectorAll(".register-trigger").forEach(function (button) {
 
@@ -135,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  // LOGIN BUTTONS
+  // LOGIN POPUP OPEN
 
   document.querySelectorAll(".login-trigger").forEach(function (button) {
 
@@ -150,25 +149,76 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  // CLOSE REGISTER
+  // =====================================
+  // 4. STUDENT & TEACHER FORM NAVIGATION
+  // =====================================
+
+  const studentLink = document.querySelector(
+    "#registerModal .student-option"
+  );
+
+  const teacherLink = document.querySelector(
+    "#registerModal .teacher-option"
+  );
+
+  function navigateToForm(link) {
+
+    if (!link) return;
+
+    const destination = link.getAttribute("href");
+
+    if (!destination || destination === "#") {
+      alert("Registration page link is missing.");
+      return;
+    }
+
+    closeAllModals();
+
+    window.location.href = destination;
+
+  }
+
+  if (studentLink) {
+
+    studentLink.addEventListener("click", function (event) {
+
+      event.preventDefault();
+
+      navigateToForm(studentLink);
+
+    });
+
+  }
+
+  if (teacherLink) {
+
+    teacherLink.addEventListener("click", function (event) {
+
+      event.preventDefault();
+
+      navigateToForm(teacherLink);
+
+    });
+
+  }
+
+
+  // =====================================
+  // 5. CLOSE BUTTONS
+  // =====================================
 
   if (closeRegisterBtn) {
-
     closeRegisterBtn.addEventListener("click", closeAllModals);
-
   }
-
-
-  // CLOSE LOGIN
 
   if (closeLoginBtn) {
-
     closeLoginBtn.addEventListener("click", closeAllModals);
-
   }
 
 
-  // CLICK OUTSIDE POPUP
+  // =====================================
+  // 6. CLICK OUTSIDE MODAL
+  // =====================================
 
   document.querySelectorAll(
     ".register-modal-overlay, .login-modal-overlay"
@@ -179,14 +229,14 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  // ESC KEY
+  // =====================================
+  // 7. ESC KEY
+  // =====================================
 
   document.addEventListener("keydown", function (event) {
 
     if (event.key === "Escape") {
-
       closeAllModals();
-
     }
 
   });
