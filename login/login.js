@@ -87,7 +87,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     } catch (error) {
 
-      console.error("Admin Login Error:", error);
+     const unauthMsg = document.getElementById("unauthorized-msg");
+
+// পেজ লোড বা নতুন করে চেষ্টা করার সময় শুরুতে লুকানো থাকবে
+if (unauthMsg) {
+  unauthMsg.style.display = "none";
+}
+
+// লগইন ব্যর্থ হলে (catch ব্লক বা loginError অবস্থায়) এটি দেখান:
+if (unauthMsg) {
+  unauthMsg.style.display = "block";
+}
+   console.error("Admin Login Error:", error);
 
       showMessage(
         error.message || "Something went wrong. Please try again.",
