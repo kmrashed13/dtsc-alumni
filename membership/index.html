@@ -28,18 +28,14 @@
 
 <body>
 
-    <!-- =====================================
-         GLOBAL HEADER
-    ====================================== -->
+    <!-- GLOBAL HEADER -->
     <div id="global-header"></div>
 
 
-    <!-- =====================================
-         MEMBERSHIP DIRECTORY
-    ====================================== -->
+    <!-- MEMBERSHIP DIRECTORY -->
     <main class="directory-page">
 
-        <!-- Top Actions -->
+        <!-- TOP ACTIONS -->
         <div class="directory-topbar">
 
             <a href="../index.html" class="back-home-btn">
@@ -47,44 +43,36 @@
                 Back to Home
             </a>
 
-            <!-- Main Menu Register Popup Trigger -->
+            <!-- ADD YOUR PROFILE: MAIN REGISTER POPUP -->
             <a href="#"
                class="add-profile-btn register-trigger"
-               aria-label="Register">
+               aria-haspopup="dialog">
 
                 <i class="fas fa-user-plus"></i>
-                Register
+                Add Your Profile
 
             </a>
 
         </div>
 
 
-        <!-- =====================================
-             DIRECTORY BRAND HEADER
-        ====================================== -->
+        <!-- DIRECTORY BRAND HEADER -->
         <section class="directory-header">
 
             <div class="directory-brand">
 
                 <div class="brand-logo">
-                    <img src="../assets/logo.png"
-                         alt="DTSC Alumni Logo">
+                    <img src="../assets/logo.png" alt="DTSC Alumni Logo">
                 </div>
 
                 <div class="brand-title">
-
                     <h1>DTSC ALUMNI</h1>
-
                     <p>ALUMNI DIRECTORY</p>
-
                     <span>MEMBERSHIP DATABASE PORTAL</span>
-
                 </div>
 
                 <div class="brand-logo">
-                    <img src="../assets/dtsclogo.png"
-                         alt="DTSC Logo">
+                    <img src="../assets/dtsclogo.png" alt="DTSC Logo">
                 </div>
 
             </div>
@@ -92,9 +80,7 @@
         </section>
 
 
-        <!-- =====================================
-             SEARCH SECTION
-        ====================================== -->
+        <!-- SEARCH SECTION -->
         <section class="directory-search-section">
 
             <div class="search-box">
@@ -121,9 +107,7 @@
         </section>
 
 
-        <!-- =====================================
-             FILTER SECTION
-        ====================================== -->
+        <!-- FILTER SECTION -->
         <section class="directory-filter-section">
 
             <div class="filter-heading">
@@ -135,10 +119,8 @@
 
             <div class="filter-grid">
 
-                <!-- Category -->
                 <div class="filter-item">
                     <label for="categoryFilter">Category</label>
-
                     <select id="categoryFilter">
                         <option value="">All Categories</option>
                         <option value="STUDENT">Student</option>
@@ -146,11 +128,8 @@
                     </select>
                 </div>
 
-
-                <!-- Exam -->
                 <div class="filter-item">
                     <label for="examFilter">Exam</label>
-
                     <select id="examFilter">
                         <option value="">All Exams</option>
                         <option value="SSC">SSC</option>
@@ -159,45 +138,23 @@
                     </select>
                 </div>
 
-
-                <!-- Trade -->
                 <div class="filter-item">
                     <label for="tradeFilter">Trade / Technology</label>
-
                     <select id="tradeFilter">
                         <option value="">All Trades</option>
-                        <option value="General Electrical Works">
-                            General Electrical Works
-                        </option>
-                        <option value="Refrigeration And Air Conditions">
-                            Refrigeration And Air Conditions
-                        </option>
-                        <option value="Machine Tools Operation">
-                            Machine Tools Operation
-                        </option>
-                        <option value="Firm Machinery">
-                            Firm Machinery
-                        </option>
-                        <option value="Agro Machinery">
-                            21 - Agro Machinery
-                        </option>
-                        <option value="Electrical Works and Maintenance">
-                            27 - Electrical Works and Maintenance
-                        </option>
-                        <option value="Machine Tools Operation and Maintenance">
-                            30 - Machine Tools Operation and Maintenance
-                        </option>
-                        <option value="Refrigeration and Air Conditioning">
-                            32 - Refrigeration and Air Conditioning
-                        </option>
+                        <option value="General Electrical Works">General Electrical Works</option>
+                        <option value="Refrigeration And Air Conditions">Refrigeration And Air Conditions</option>
+                        <option value="Machine Tools Operation">Machine Tools Operation</option>
+                        <option value="Firm Machinery">Firm Machinery</option>
+                        <option value="Agro Machinery">21 - Agro Machinery</option>
+                        <option value="Electrical Works and Maintenance">27 - Electrical Works and Maintenance</option>
+                        <option value="Machine Tools Operation and Maintenance">30 - Machine Tools Operation and Maintenance</option>
+                        <option value="Refrigeration and Air Conditioning">32 - Refrigeration and Air Conditioning</option>
                     </select>
                 </div>
 
-
-                <!-- Passing Year -->
                 <div class="filter-item">
                     <label for="yearFilter">Passing Year</label>
-
                     <select id="yearFilter">
                         <option value="">All Years</option>
                         <option value="2026">2026</option>
@@ -212,11 +169,8 @@
                     </select>
                 </div>
 
-
-                <!-- Blood Group -->
                 <div class="filter-item">
                     <label for="bloodFilter">Blood Group</label>
-
                     <select id="bloodFilter">
                         <option value="">All Groups</option>
                         <option value="A+">A+</option>
@@ -230,11 +184,8 @@
                     </select>
                 </div>
 
-
-                <!-- Status -->
                 <div class="filter-item">
                     <label for="statusFilter">Status</label>
-
                     <select id="statusFilter">
                         <option value="">All Status</option>
                         <option value="Verified">Verified</option>
@@ -245,22 +196,17 @@
 
             </div>
 
-
             <div class="filter-actions">
-
                 <button type="button" id="resetBtn">
                     <i class="fas fa-rotate-left"></i>
                     Reset Filters
                 </button>
-
             </div>
 
         </section>
 
 
-        <!-- =====================================
-             MEMBER RESULTS
-        ====================================== -->
+        <!-- MEMBER RESULTS -->
         <section class="directory-results">
 
             <div class="results-header">
@@ -276,24 +222,14 @@
 
             </div>
 
-
-            <!-- Member Cards Generated by JS -->
             <div class="member-list" id="memberList">
-
-                <!-- directory.js will load members here -->
-
+                <!-- Members loaded by directory.js -->
             </div>
 
-
-            <!-- No Result Message -->
             <div id="noResults" class="no-results" style="display:none;">
-
                 <i class="fas fa-user-slash"></i>
-
                 <h3>No Members Found</h3>
-
                 <p>Try changing your search or filter options.</p>
-
             </div>
 
         </section>
@@ -301,9 +237,7 @@
     </main>
 
 
-    <!-- =====================================
-         PROFILE DETAILS MODAL
-    ====================================== -->
+    <!-- PROFILE DETAILS MODAL -->
     <div class="profile-modal" id="profileModal">
 
         <div class="modal-overlay" id="modalOverlay"></div>
@@ -317,7 +251,6 @@
                 <i class="fas fa-times"></i>
             </button>
 
-
             <div class="profile-modal-header">
 
                 <img
@@ -327,18 +260,14 @@
                 >
 
                 <h2 id="profileName">Member Name</h2>
-
                 <p id="profileId">Member ID</p>
 
                 <div id="profileBadges"></div>
 
             </div>
 
-
             <div class="profile-details" id="profileDetails">
-
-                <!-- Profile details generated by directory.js -->
-
+                <!-- Profile details loaded by directory.js -->
             </div>
 
         </div>
@@ -346,23 +275,13 @@
     </div>
 
 
-    <!-- =====================================
-         GLOBAL FOOTER
-    ====================================== -->
+    <!-- GLOBAL FOOTER -->
     <div id="global-footer"></div>
 
 
-    <!-- =====================================
-         JAVASCRIPT
-    ====================================== -->
-
-    <!-- Global Header & Footer Loader -->
+    <!-- JAVASCRIPT -->
     <script src="../header-loader.js"></script>
-
-    <!-- Main Website Script: Register Popup -->
     <script src="../script.js"></script>
-
-    <!-- Membership Directory Script -->
     <script src="./directory.js"></script>
 
 </body>
