@@ -10,7 +10,13 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
+  function showMessage(text, type) {
+    message.textContent = text;
+    message.className = "message " + type;
+  }
+
   form.addEventListener("submit", async function (event) {
+
     event.preventDefault();
 
     const email = document.getElementById("email").value.trim();
@@ -18,46 +24,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const client = window.supabaseClient;
 
-    function showMessage(text, type) {
-      message.textContent = text;
-      message.className = "message " + type;
-    }
-
     if (!client) {
-      showMessage(
-        "Supabase connection not found. Check supabase.js and script loading.",
-        "error"
-      );
-      console.error("Supabase client is missing.");
+      showMessage("Supabase connection not found. Check configuration.", "error");
       return;
     }
 
     loginBtn.disabled = true;
     loginBtn.textContent = "VERIFYING ADMIN...";
 
-    showMessage("Connecting to Supabase...", "loading");
+    showMessage("Authenticating...", "loading");
 
     try {
 
-      // STEP 1: Authenticate User
+      // STEP 1: Authenticate
       const { data, error } = await client.auth.signInWithPassword({
         email: email,
         password: password
       });
 
-      if (error) {
-        throw error;
+      if (error) throw error;
+
+      if (!data.user) {
+        throw new Error("User authentication failed.");
       }
 
       const user = data.user;
 
-      if (!user) {
-        throw new Error("User authentication failed.");
-      }
-
+      // STEP 2: Verify Admin
       showMessage("Checking administrator permission...", "loading");
 
-      // STEP 2: Verify Admin Role
       const { data: admin, error: adminError } = await client
         .from("admin_users")
         .select("user_id, role")
@@ -65,27 +60,25 @@ document.addEventListener("DOMContentLoaded", function () {
         .maybeSingle();
 
       if (adminError) {
-        throw new Error(
-          "Admin verification failed: " + adminError.message
-        );
+        throw new Error("Admin verification failed: " + adminError.message);
       }
 
-      // STEP 3: Authorization Check
+      // STEP 3: Check Role
+      const allowedRoles = ["admin", "super_admin"];
+
       if (
         !admin ||
-        !["admin", "super_admin"].includes(
-          String(admin.role).toLowerCase()
-        )
+        !allowedRoles.includes(String(admin.role).toLowerCase())
       ) {
 
         await client.auth.signOut();
 
         throw new Error(
-          "Access denied! You are not an authorized administrator."
+          "Access denied! Unauthorized administrator."
         );
       }
 
-      // STEP 4: Successful Login
+      // STEP 4: Success
       showMessage("Login successful! Redirecting...", "success");
 
       loginBtn.textContent = "LOGIN SUCCESSFUL";
