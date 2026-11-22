@@ -1,136 +1,108 @@
 
 /* ==========================================
    DTSC ALUMNI DIRECTORY
-   SEARCH + FILTER + PROFILE
-   NAVY BLUE + GOLD
+   Demo Member Data
+   Search + Filter System
 ========================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ==========================================
      1. DEMO MEMBER DATA
-     Replace with Supabase data later
+
+     Later replace this array with database data.
   ========================================== */
 
   const members = [
 
     {
+      name: "Md. Rahim Uddin",
       id: "DTSC-2020-001",
-      name: "RASHEDUL ISLAM",
-      category: "STUDENT",
-      designation: "System Admin",
-      photo: "../assets/default-user.png",
-      exam: "DIPLOMA",
-      trade: "Machine Tools Operation",
-      year: "2024",
+      role: "General Secretary",
+      category: "Student",
+      exam: "Diploma in Engineering",
+      trade: "70 - Mechanical Technology",
+      year: "2020",
       blood: "O+",
-      status: "VERIFIED",
-      thana: "Dewanganj",
-      district: "Jamalpur",
-      division: "Mymensingh",
-      contact: "01516503120"
+      status: "Verified",
+      place: "Dewanganj, Jamalpur",
+      contact: "01700000001",
+      image: "https://i.pravatar.cc/100?img=12"
     },
 
     {
-      id: "DTSC-2021-002",
-      name: "S. M. M. MUSABBIR UDDIN",
-      category: "STUDENT",
-      designation: "Content Writing Team",
-      photo: "../assets/default-user.png",
-      exam: "DIPLOMA",
-      trade: "General Electrical Works",
-      year: "2025",
+      name: "Nusrat Jahan",
+      id: "DTSC-2018-014",
+      role: "",
+      category: "Teacher",
+      exam: "Secondary School Certificate",
+      trade: "67 - Electrical Technology",
+      year: "2018",
       blood: "A+",
-      status: "ACTIVE",
-      thana: "Jamalpur Sadar",
-      district: "Jamalpur",
-      division: "Mymensingh",
-      contact: "01700000001"
+      status: "Verified",
+      place: "Jamalpur Sadar",
+      contact: "01700000002",
+      image: "https://i.pravatar.cc/100?img=47"
     },
 
     {
-      id: "DTSC-2022-003",
-      name: "RAHIM UDDIN",
-      category: "STUDENT",
-      designation: "Moderator",
-      photo: "../assets/default-user.png",
-      exam: "DIPLOMA",
-      trade: "Refrigeration And Air Conditions",
-      year: "2025",
+      name: "Sabbir Ahmed",
+      id: "DTSC-2022-027",
+      role: "Executive Member",
+      category: "Student",
+      exam: "Diploma in Engineering",
+      trade: "30 - Machine Tools Operation and Maintenance",
+      year: "2022",
       blood: "B+",
-      status: "VERIFIED",
-      thana: "Islampur",
-      district: "Jamalpur",
-      division: "Mymensingh",
-      contact: "01700000002"
+      status: "Pending",
+      place: "Islampur, Jamalpur",
+      contact: "01700000003",
+      image: "https://i.pravatar.cc/100?img=13"
     },
 
     {
-      id: "DTSC-T-001",
-      name: "MD. ABDUL KARIM",
-      category: "TEACHER",
-      designation: "Senior Instructor",
-      photo: "../assets/default-user.png",
-      exam: "DIPLOMA",
-      trade: "Electrical Works and Maintenance",
-      year: "2020",
+      name: "Mst. Tania Akter",
+      id: "DTSC-2021-035",
+      role: "",
+      category: "Student",
+      exam: "Higher Secondary Certificate",
+      trade: "General Electrical Works",
+      year: "2021",
       blood: "AB+",
-      status: "VERIFIED",
-      thana: "Dewanganj",
-      district: "Jamalpur",
-      division: "Mymensingh",
-      contact: "01700000003"
+      status: "Verified",
+      place: "Melandaha, Jamalpur",
+      contact: "01700000004",
+      image: "https://i.pravatar.cc/100?img=44"
     },
 
     {
-      id: "DTSC-2023-004",
-      name: "TANVIR AHMED",
-      category: "STUDENT",
-      designation: "",
-      photo: "../assets/default-user.png",
-      exam: "DIPLOMA",
-      trade: "Agro Machinery",
-      year: "2026",
+      name: "Abdullah Al Mamun",
+      id: "DTSC-2019-042",
+      role: "President",
+      category: "Teacher",
+      exam: "Diploma in Engineering",
+      trade: "27 - Electrical Works and Maintenance",
+      year: "2019",
       blood: "O-",
-      status: "PENDING",
-      thana: "Melandaha",
-      district: "Jamalpur",
-      division: "Mymensingh",
-      contact: "01700000004"
+      status: "Verified",
+      place: "Sarishabari, Jamalpur",
+      contact: "01700000005",
+      image: "https://i.pravatar.cc/100?img=14"
     },
 
     {
-      id: "DTSC-T-002",
-      name: "MD. RAFIQUL ISLAM",
-      category: "TEACHER",
-      designation: "",
-      photo: "../assets/default-user.png",
-      exam: "DIPLOMA",
-      trade: "Machine Tools Operation",
-      year: "2020",
+      name: "Mehedi Hasan",
+      id: "DTSC-2023-052",
+      role: "",
+      category: "Student",
+      exam: "Junior School Certificate",
+      trade: "Refrigeration And Air Conditions",
+      year: "2023",
       blood: "B-",
-      status: "ACTIVE",
-      thana: "Dewanganj",
-      district: "Jamalpur",
-      division: "Mymensingh",
-      contact: "01700000005"
-    },
-
-    {
-      id: "DTSC-2024-005",
-      name: "SHAKIL HOSSAIN",
-      category: "STUDENT",
-      designation: "",
-      photo: "../assets/default-user.png",
-      exam: "DIPLOMA",
-      trade: "Firm Machinery",
-      year: "2025",
-      blood: "AB-",
-      status: "ACTIVE",
-      thana: "Bakshiganj",
-      district: "Jamalpur",
-      division: "Mymensingh",
-      contact: "01700000006"
+      status: "Pending",
+      place: "Dewanganj, Jamalpur",
+      contact: "01700000006",
+      image: "https://i.pravatar.cc/100?img=15"
     }
 
   ];
@@ -140,45 +112,35 @@ document.addEventListener("DOMContentLoaded", () => {
      2. HTML ELEMENTS
   ========================================== */
 
-  const $ = id => document.getElementById(id);
+  const searchInput = document.getElementById("alumniSearch");
 
-  const searchInput = $("searchInput");
-  const clearSearch = $("clearSearch");
+  const searchBtn = document.getElementById("searchBtn");
 
-  const categoryFilter = $("categoryFilter");
-  const examFilter = $("examFilter");
-  const tradeFilter = $("tradeFilter");
-  const yearFilter = $("yearFilter");
-  const bloodFilter = $("bloodFilter");
-  const statusFilter = $("statusFilter");
+  const categoryFilter = document.getElementById("categoryFilter");
 
-  const searchBtn = $("searchBtn");
-  const resetBtn = $("resetBtn");
+  const examFilter = document.getElementById("examFilter");
 
-  const resultsCount = $("resultsCount");
-  const memberList = $("memberList");
-  const emptyState = $("emptyState");
+  const tradeFilter = document.getElementById("tradeFilter");
 
-  const profileModal = $("profileModal");
-  const closeModal = $("closeModal");
-  const modalOverlay = $("modalOverlay");
+  const yearFilter = document.getElementById("yearFilter");
 
-  const profilePhoto = $("profilePhoto");
-  const profileName = $("profileName");
-  const profileId = $("profileId");
-  const profileBadges = $("profileBadges");
-  const profileDetails = $("profileDetails");
+  const bloodFilter = document.getElementById("bloodFilter");
+
+  const statusFilter = document.getElementById("statusFilter");
+
+  const resetBtn = document.getElementById("resetBtn");
+
+  const memberList = document.getElementById("memberList");
+
+  const resultCount = document.getElementById("resultCount");
 
 
   /* ==========================================
-     3. HELPER FUNCTIONS
+     3. SAFE HTML HELPER
   ========================================== */
 
-  function normalize(value) {
-    return String(value ?? "").toLowerCase().trim();
-  }
-
   function escapeHTML(value) {
+
     return String(value ?? "").replace(/[&<>"']/g, char => ({
       "&": "&amp;",
       "<": "&lt;",
@@ -186,167 +148,73 @@ document.addEventListener("DOMContentLoaded", () => {
       '"': "&quot;",
       "'": "&#039;"
     })[char]);
-  }
 
-  function categoryClass(category) {
-    return category === "TEACHER" ? "teacher" : "student";
-  }
-
-  function categoryName(category) {
-    return category === "TEACHER" ? "TEACHER" : "STUDENT";
-  }
-
-  function setImageFallback(image) {
-    image.onerror = () => {
-      image.onerror = null;
-      image.src = "https://placehold.co/120x120?text=DTSC";
-    };
   }
 
 
   /* ==========================================
-     4. MEMBER CARD
+     4. RENDER MEMBERS
   ========================================== */
 
-  function createMemberCard(member) {
+  function renderMembers() {
 
-    const card = document.createElement("article");
-    card.className = "member-card";
+    const searchText = searchInput.value.trim().toLowerCase();
 
-    const designationHTML = member.designation
-      ? `
-        <span class="member-designation">
-          <i class="fas fa-award"></i>
-          ${escapeHTML(member.designation)}
-        </span>
-      `
-      : "";
+    const selectedCategory = categoryFilter.value;
 
-    card.innerHTML = `
+    const selectedExam = examFilter.value;
 
-      <div class="member-info">
+    const selectedTrade = tradeFilter.value;
 
-        <img
-          class="member-photo"
-          src="${escapeHTML(member.photo)}"
-          alt="${escapeHTML(member.name)}"
-        >
+    const selectedYear = yearFilter.value;
 
-        <div class="member-text">
+    const selectedBlood = bloodFilter.value;
 
-          <h3>${escapeHTML(member.name)}</h3>
-
-          <p>${escapeHTML(member.id)}</p>
-
-          ${designationHTML}
-
-        </div>
-
-      </div>
-
-      <div class="member-actions">
-
-        <div class="member-badges">
-
-          <span class="role-badge ${categoryClass(member.category)}">
-            ${categoryName(member.category)}
-          </span>
-
-        </div>
-
-        <button type="button" class="view-profile">
-          <i class="fas fa-eye"></i>
-          View Profile
-        </button>
-
-      </div>
-
-    `;
-
-    setImageFallback(card.querySelector(".member-photo"));
-
-    card.querySelector(".view-profile").addEventListener("click", () => {
-      openProfile(member);
-    });
-
-    return card;
-  }
+    const selectedStatus = statusFilter.value;
 
 
-  /* ==========================================
-     5. DISPLAY MEMBERS
-  ========================================== */
+    /* FILTER MEMBERS */
 
-  function displayMembers(list) {
+    const filteredMembers = members.filter(member => {
 
-    memberList.innerHTML = "";
+      const searchableText = [
 
-    list.forEach(member => {
-      memberList.appendChild(createMemberCard(member));
-    });
-
-    resultsCount.innerHTML = `
-      <strong>${list.length}</strong>
-      <span>Members Found</span>
-    `;
-
-    memberList.style.display = list.length ? "flex" : "none";
-    emptyState.style.display = list.length ? "none" : "block";
-  }
-
-
-  /* ==========================================
-     6. SEARCH + FILTER
-  ========================================== */
-
-  function filterMembers() {
-
-    const query = normalize(searchInput.value);
-
-    const category = categoryFilter.value;
-    const exam = examFilter.value;
-    const trade = tradeFilter.value;
-    const year = yearFilter.value;
-    const blood = bloodFilter.value;
-    const status = statusFilter.value;
-
-    const filtered = members.filter(member => {
-
-      // Search: Name / ID / Thana / District /
-      // Division / Contact No
-
-      const searchFields = [
         member.name,
         member.id,
-        member.thana,
-        member.district,
-        member.division,
+        member.role,
+        member.category,
+        member.exam,
+        member.trade,
+        member.year,
+        member.blood,
+        member.status,
+        member.place,
         member.contact
-      ];
+
+      ].join(" ").toLowerCase();
+
 
       const matchesSearch =
-        !query ||
-        searchFields.some(value =>
-          normalize(value).includes(query)
-        );
+        !searchText || searchableText.includes(searchText);
 
       const matchesCategory =
-        !category || member.category === category;
+        !selectedCategory || member.category === selectedCategory;
 
       const matchesExam =
-        !exam || member.exam === exam;
+        !selectedExam || member.exam === selectedExam;
 
       const matchesTrade =
-        !trade || member.trade === trade;
+        !selectedTrade || member.trade === selectedTrade;
 
       const matchesYear =
-        !year || member.year === year;
+        !selectedYear || member.year === selectedYear;
 
       const matchesBlood =
-        !blood || member.blood === blood;
+        !selectedBlood || member.blood === selectedBlood;
 
       const matchesStatus =
-        !status || member.status === status;
+        !selectedStatus || member.status === selectedStatus;
+
 
       return (
         matchesSearch &&
@@ -360,151 +228,165 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    displayMembers(filtered);
-  }
+
+    /* UPDATE COUNT */
+
+    resultCount.textContent = filteredMembers.length;
 
 
-  /* ==========================================
-     7. PROFILE MODAL
-  ========================================== */
+    /* EMPTY RESULT */
 
-  function openProfile(member) {
+    if (filteredMembers.length === 0) {
 
-    profilePhoto.src = member.photo;
-    setImageFallback(profilePhoto);
+      memberList.innerHTML = `
+        <div class="no-results">
+          No Alumni Found.<br>
+          Try changing your search or filters.
+        </div>
+      `;
 
-    profileName.textContent = member.name;
-    profileId.textContent = member.id;
+      return;
 
-    profileBadges.innerHTML = `
-
-      <span class="role-badge ${categoryClass(member.category)}">
-        ${categoryName(member.category)}
-      </span>
-
-      ${member.designation ? `
-        <span class="role-badge admin">
-          <i class="fas fa-award"></i>
-          ${escapeHTML(member.designation)}
-        </span>
-      ` : ""}
-
-    `;
-
-    const details = [
-      ["Examination", member.exam],
-      ["Trade / Technology", member.trade],
-      ["Passing Year", member.year],
-      ["Blood Group", member.blood],
-      ["Status", member.status],
-      ["Thana", member.thana],
-      ["District", member.district],
-      ["Division", member.division],
-      ["Contact No", member.contact]
-    ];
-
-    profileDetails.innerHTML = details.map(([label, value]) => `
-
-      <div class="profile-detail-item">
-        <span>${escapeHTML(label)}</span>
-        <strong>${escapeHTML(value || "Not Provided")}</strong>
-      </div>
-
-    `).join("");
-
-    profileModal.classList.add("active");
-    document.body.style.overflow = "hidden";
-  }
-
-
-  /* ==========================================
-     8. CLOSE PROFILE MODAL
-  ========================================== */
-
-  function closeProfile() {
-
-    profileModal.classList.remove("active");
-    document.body.style.overflow = "";
-
-  }
-
-  closeModal.addEventListener("click", closeProfile);
-  modalOverlay.addEventListener("click", closeProfile);
-
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") {
-      closeProfile();
     }
-  });
+
+
+    /* DISPLAY MEMBER CARDS */
+
+    memberList.innerHTML = filteredMembers.map(member => {
+
+      const name = escapeHTML(member.name);
+      const id = escapeHTML(member.id);
+      const role = escapeHTML(member.role);
+      const category = escapeHTML(member.category);
+      const image = escapeHTML(member.image);
+
+      const profileURL =
+        "profile.html?id=" + encodeURIComponent(member.id);
+
+
+      return `
+
+        <article class="member-card">
+
+          <!-- PROFILE IMAGE -->
+
+          <img
+            class="member-avatar"
+            src="${image}"
+            alt="${name}"
+            loading="lazy"
+            onerror="this.style.display='none'"
+          >
+
+
+          <!-- MEMBER DETAILS -->
+
+          <div class="member-details">
+
+            <div class="member-name">
+              ${name}
+            </div>
+
+            <div class="member-id">
+              ID: ${id}
+            </div>
+
+            ${
+              role
+                ? `<div class="member-role">${role}</div>`
+                : ""
+            }
+
+          </div>
+
+
+          <!-- CATEGORY AND PROFILE LINK -->
+
+          <div class="member-right">
+
+            <span class="member-category ${
+              member.category === "Teacher" ? "teacher" : ""
+            }">
+              ${category}
+            </span>
+
+            <a
+              href="${profileURL}"
+              class="view-profile"
+            >
+              View Profile ↗
+            </a>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("");
+
+  }
 
 
   /* ==========================================
-     9. SEARCH EVENTS
+     5. SEARCH BUTTON
   ========================================== */
 
-  searchBtn.addEventListener("click", filterMembers);
-
-  searchInput.addEventListener("input", filterMembers);
-
-  searchInput.addEventListener("keydown", event => {
-    if (event.key === "Enter") {
-      filterMembers();
-    }
-  });
-
-  clearSearch.addEventListener("click", () => {
-    searchInput.value = "";
-    filterMembers();
-    searchInput.focus();
-  });
+  searchBtn.addEventListener("click", renderMembers);
 
 
   /* ==========================================
-     10. FILTER EVENTS
+     6. LIVE SEARCH
   ========================================== */
 
-  [
+  searchInput.addEventListener("input", renderMembers);
+
+
+  /* ==========================================
+     7. FILTER EVENTS
+  ========================================== */
+
+  const filters = [
+
     categoryFilter,
     examFilter,
     tradeFilter,
     yearFilter,
     bloodFilter,
     statusFilter
-  ].forEach(filter => {
-    filter.addEventListener("change", filterMembers);
+
+  ];
+
+  filters.forEach(filter => {
+
+    filter.addEventListener("change", renderMembers);
+
   });
 
 
   /* ==========================================
-     11. RESET FILTERS
+     8. RESET ALL FILTERS
   ========================================== */
 
   resetBtn.addEventListener("click", () => {
 
     searchInput.value = "";
 
-    [
-      categoryFilter,
-      examFilter,
-      tradeFilter,
-      yearFilter,
-      bloodFilter,
-      statusFilter
-    ].forEach(filter => {
+    filters.forEach(filter => {
+
       filter.value = "";
+
     });
 
-    displayMembers(members);
+    renderMembers();
 
   });
 
 
   /* ==========================================
-     12. INITIAL LOAD
+     9. INITIAL LOAD
   ========================================== */
 
-  displayMembers(members);
-
-  console.log("DTSC Alumni Directory Loaded Successfully");
+  renderMembers();
 
 });
