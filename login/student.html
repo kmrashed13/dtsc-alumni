@@ -1,20 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Login | DTSC Alumni</title>
+<link rel="stylesheet" href="login.css">
+<style>
+body{background:#f0f5f2}
+.login-container{border-top:5px solid #17634b}
+.login-container h2{color:#17634b}
+button{background:#17634b;color:white}
+button:hover{background:#104b38}
+</style>
+</head>
+<body>
+<div class="login-container">
+<h2>🎓 Student Portal</h2>
+<p>YOUR CONNECTION. YOUR COMMUNITY.</p>
 
-<div class="login-card student">
-  <header>
-    <div>🎓</div>
-    <h2>Student Portal</h2>
-    <p>YOUR CONNECTION. YOUR COMMUNITY.</p>
-  </header>
-  <main>
-    <h3>Sign In Student</h3>
-    <label>Email Address</label>
-    <input type="email" placeholder="Enter your email">
-    <label>Password</label>
-    <input type="password" placeholder="Enter your password">
-    <p class="forgot">Forgot Password?</p>
-    <button>SIGN IN AS STUDENT →</button>
-    <p class="register">Not Registered? <a href="../register/students/student.html">Register Now</a></p>
-    <a href="../index.html">← Back to Home</a>
-    <a href="../index.html?openLogin=true">← Back to Login Portal</a>
-  </main>
+<form id="studentLoginForm">
+<label>Email Address</label>
+<input type="email" id="email" placeholder="Enter your email" required>
+
+<label>Password</label>
+<input type="password" id="password" placeholder="Enter your password" required>
+
+<p><a href="#" id="forgotPassword">Forgot Password?</a></p>
+
+<button type="submit" id="loginBtn">SIGN IN AS STUDENT →</button>
+<p id="loginMessage"></p>
+</form>
+
+<p>Not Registered? <a href="../register/students/student.html">Register Now</a></p>
+
+<div class="back-links">
+<a href="../index.html">← Back to Home</a>
+<a href="../index.html?openLogin=true">← Back to Login Portal</a>
 </div>
+</div>
+</body>
+</html>
