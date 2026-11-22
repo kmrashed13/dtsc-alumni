@@ -524,3 +524,24 @@
     flex-basis: 34px;
   }
 }
+/* Logo Fix */
+.directory-logo img {
+    display: block;
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 7px;
+    padding: 3px;
+}
+
+/* Remove Extra Top Space */
+.directory-container {
+    margin-top: 8px !important;
+    padding-top: 0 !important;
+}
+
+body {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
