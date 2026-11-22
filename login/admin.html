@@ -1,41 +1,63 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101d35">
 <title>Administration Login | DTSC Alumni</title>
-<link rel="stylesheet" href="login.css">
-<style>
-body{background:#eef0f4}
-.login-container{border-top:5px solid #c6a65d}
-.login-container h2{color:#172943}
-button{background:linear-gradient(135deg,#d9bd78,#c6a65d);color:#172943}
-button:hover{background:#c6a65d}
-</style>
+<link rel="stylesheet" href="./login.css">
 </head>
-<body>
+
+<body class="admin-page">
+
 <div class="login-container">
-<h2>♙ Administration Portal</h2>
-<p>DTSC ALUMNI ASSOCIATION</p>
 
-<form id="adminLoginForm">
-<label>Official Email Address</label>
-<input type="email" id="email" placeholder="Enter official email" required>
+  <header class="login-header">
+    <div class="portal-icon">♙</div>
+    <h2>Administration Portal</h2>
+    <p>DTSC ALUMNI ASSOCIATION</p>
+  </header>
 
-<label>Password</label>
-<input type="password" id="password" placeholder="Enter your password" required>
+  <main class="login-form-area">
 
-<button type="submit" id="loginBtn">SECURE ADMIN LOGIN →</button>
-<p id="loginMessage"></p>
-</form>
+    <h3>Administrator Sign In</h3>
 
-<p class="notice">Restricted Access · Authorized Personnel Only</p>
+    <form id="adminLoginForm">
 
-<div class="back-links">
-<a href="../index.html">← Back to Home</a>
-<a href="../index.html?openLogin=true">← Back to Login Portal</a>
+      <label for="email">Official Email Address</label>
+      <input type="email" id="email"
+        placeholder="Enter official email" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password"
+        placeholder="Enter your password" required>
+
+      <button type="submit" class="login-submit" id="loginBtn">
+        SECURE ADMIN LOGIN →
+      </button>
+
+      <p id="loginMessage"></p>
+
+    </form>
+
+    <div class="notice">
+      Restricted Access<br>
+      Authorized Personnel Only
+    </div>
+
+    <div class="back-navigation">
+      <a href="../index.html">⌂ Back to Home</a>
+      <a href="../index.html?openLogin=true">← Back to Login Portal</a>
+    </div>
+
+  </main>
+
+  <footer class="login-footer">
+    © 2026 DTSC Alumni Association
+  </footer>
+
 </div>
-</div>
+
+<script src="./login.js"></script>
 </body>
 </html>
