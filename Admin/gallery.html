@@ -1,1 +1,535 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101b32">
+<title>Gallery Management | DTSC Alumni Association</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+  --navy:#101b32;
+  --navy2:#172642;
+  --gold:#d5ad58;
+  --bg:#f4f6fa;
+  --white:#fff;
+  --text:#25334b;
+  --muted:#8792a5;
+  --border:#e8ecf2;
+  --green:#16866a;
+  --red:#d95362;
+  --shadow:0 8px 28px rgba(20,35,60,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.layout{display:flex;min-height:100vh}
+.sidebar{
+ width:255px;background:var(--navy);color:white;padding:25px 17px;
+ position:fixed;inset:0 auto 0 0;z-index:20;overflow-y:auto;
+}
+.brand{display:flex;align-items:center;gap:12px;padding:0 8px 25px;border-bottom:1px solid #ffffff18}
+.brand-icon{width:43px;height:43px;background:var(--gold);color:var(--navy);border-radius:12px;display:grid;place-items:center;font-size:19px}
+.brand h2{font-size:15px;line-height:1.35}
+.brand small{font-size:10px;color:#aebbd0;letter-spacing:1px}
+.nav-label{font-size:10px;color:#8291a9;font-weight:700;letter-spacing:1.5px;margin:25px 10px 10px}
+.nav a{display:flex;align-items:center;gap:13px;padding:12px 13px;margin:4px 0;border-radius:9px;color:#c4cede;text-decoration:none;font-size:13px;font-weight:500;transition:.2s}
+.nav a i{width:17px;text-align:center}
+.nav a:hover,.nav a.active{background:#ffffff12;color:var(--gold)}
+.nav a.active{border-left:3px solid var(--gold);padding-left:10px}
+.sidebar-bottom{margin-top:30px;padding:15px 10px;border-top:1px solid #ffffff18;color:#9aa8bd;font-size:11px;line-height:1.8}
+.main{margin-left:255px;width:calc(100% - 255px);padding:28px 32px 45px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:27px;gap:15px}
+.top-left{display:flex;align-items:center;gap:13px}
+.menu-btn{display:none;border:0;background:white;border-radius:9px;width:40px;height:40px;color:var(--navy)}
+.page-title h1{font-size:25px;color:var(--navy);font-weight:800}
+.page-title p{font-size:12px;color:var(--muted);margin-top:5px}
+.top-actions{display:flex;align-items:center;gap:10px}
+.preview{background:#fff7e6;color:#9a6e19;border:1px solid #f1dfb7;padding:9px 13px;border-radius:8px;font-size:11px;font-weight:700}
+.admin-user{display:flex;align-items:center;gap:9px;background:white;padding:7px 12px;border-radius:10px;box-shadow:var(--shadow)}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-size:12px}
+.admin-user strong{font-size:11px;display:block}
+.admin-user small{font-size:10px;color:var(--muted)}
+.demo-note{background:#fff9eb;border:1px solid #f1e2bf;border-radius:10px;padding:12px 15px;color:#876a30;font-size:12px;margin-bottom:22px;display:flex;gap:10px;align-items:center}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.stat{background:white;border-radius:13px;padding:19px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center}
+.stat p{font-size:11px;color:var(--muted);font-weight:600}
+.stat h2{font-size:25px;color:var(--navy);margin-top:8px}
+.stat-icon{width:43px;height:43px;border-radius:12px;background:#f3eddf;color:#b58b37;display:grid;place-items:center;font-size:17px}
+.panel{background:white;border-radius:13px;box-shadow:var(--shadow);padding:21px}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:19px;flex-wrap:wrap}
+.panel-head h3{font-size:16px;color:var(--navy)}
+.panel-head p{font-size:11px;color:var(--muted);margin-top:4px}
+.btn{border:0;border-radius:8px;padding:10px 14px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-primary{background:var(--navy);color:white}
+.btn-primary:hover{background:#223756}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-light{background:#f1f3f7;color:#59677c}
+.btn-danger{background:#fff0f1;color:var(--red)}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px}
+.search{position:relative;flex:1;min-width:180px}
+.search i{position:absolute;left:12px;top:12px;color:#9aa5b5;font-size:12px}
+.search input{padding-left:34px;width:100%}
+input,select,textarea{border:1px solid var(--border);border-radius:8px;padding:10px 11px;font-size:12px;outline:none;background:white;color:var(--text)}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px #d5ad581c}
+.toolbar select{min-width:135px}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.photo-card{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:white;min-width:0}
+.photo-cover{height:165px;position:relative;background:linear-gradient(135deg,#1b3454,#667d9d);display:grid;place-items:center;color:#fff;overflow:hidden}
+.photo-cover img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.photo-cover .placeholder{font-size:39px;color:#ffffffa8}
+.photo-tag{position:absolute;top:10px;left:10px;background:#ffffffed;color:var(--navy);padding:5px 8px;border-radius:6px;font-size:9px;font-weight:800;z-index:2}
+.photo-tag.hidden{background:#fff0f1;color:var(--red)}
+.featured{position:absolute;right:10px;top:10px;background:#f8e8bd;color:#805d19;padding:5px 8px;border-radius:6px;font-size:9px;font-weight:800;z-index:2}
+.photo-info{padding:13px}
+.photo-info h4{font-size:13px;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.photo-info p{font-size:10px;color:var(--muted);margin-top:6px}
+.photo-meta{display:flex;justify-content:space-between;align-items:center;margin-top:13px;padding-top:11px;border-top:1px solid var(--border)}
+.photo-meta small{font-size:10px;color:var(--muted)}
+.card-actions{display:flex;gap:5px}
+.icon-btn{width:28px;height:28px;border:0;border-radius:7px;background:#f2f4f8;color:#647187;font-size:11px}
+.icon-btn:hover{background:#e8edf5;color:var(--navy)}
+.empty{grid-column:1/-1;text-align:center;padding:55px 15px;color:var(--muted);font-size:13px}
+.empty i{font-size:35px;display:block;margin-bottom:12px;color:#c1cad6}
+.footer{text-align:center;color:#9aa4b4;font-size:10px;margin-top:25px}
+
+/* Modal */
+.modal{display:none;position:fixed;inset:0;background:#101b3275;z-index:50;align-items:center;justify-content:center;padding:15px}
+.modal.show{display:flex}
+.modal-box{background:white;width:100%;max-width:530px;max-height:90vh;overflow:auto;border-radius:14px;padding:23px;box-shadow:0 20px 70px #0003}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.modal-head h3{font-size:17px;color:var(--navy)}
+.close{border:0;background:#f1f3f7;width:30px;height:30px;border-radius:8px;color:#657188}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:11px;font-weight:700;color:#56647a}
+.field textarea{min-height:80px;resize:vertical}
+.checkline{display:flex;align-items:center;gap:9px;font-size:12px;color:#526078}
+.checkline input{accent-color:var(--navy)}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
+.detail-image{width:100%;height:190px;object-fit:cover;border-radius:10px;background:#e9edf3}
+.detail-placeholder{height:190px;border-radius:10px;background:linear-gradient(135deg,#1b3454,#8295b1);display:grid;place-items:center;color:white;font-size:45px}
+.detail-text{font-size:12px;line-height:1.8;color:#657188;margin-top:12px}
+@media(max-width:1100px){.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){
+ .sidebar{transform:translateX(-100%);transition:.25s}
+ .sidebar.open{transform:translateX(0)}
+ .main{margin-left:0;width:100%;padding:19px 15px 35px}
+ .menu-btn{display:block}
+ .page-title h1{font-size:20px}
+ .admin-user .user-info{display:none}
+ .gallery-grid{grid-template-columns:1fr 1fr;gap:10px}
+ .photo-cover{height:125px}
+ .panel{padding:14px}
+}
+@media(max-width:430px){
+ .stats{gap:9px}
+ .stat{padding:13px}
+ .stat h2{font-size:21px}
+ .gallery-grid{grid-template-columns:1fr}
+ .photo-cover{height:175px}
+ .form-grid{grid-template-columns:1fr}
+ .field.full{grid-column:auto}
+ .preview{font-size:9px;padding:8px}
+}
+</style>
+</head>
+
+<body>
+<div class="layout">
+
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <div class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+    <div><h2>DTSC Alumni</h2><small>ADMINISTRATION</small></div>
+  </div>
+
+  <div class="nav-label">MAIN MENU</div>
+  <nav class="nav">
+    <a href="dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="members.html"><i class="fa-solid fa-users"></i> Members</a>
+    <a href="teachers.html"><i class="fa-solid fa-chalkboard-user"></i> Teachers</a>
+    <a href="applications.html"><i class="fa-solid fa-file-circle-check"></i> Applications</a>
+    <a href="events.html"><i class="fa-solid fa-calendar-days"></i> Events</a>
+    <a href="notices.html"><i class="fa-solid fa-bullhorn"></i> Notices</a>
+    <a class="active" href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a>
+  </nav>
+
+  <div class="nav-label">MANAGEMENT</div>
+  <nav class="nav">
+    <a href="committee.html"><i class="fa-solid fa-user-group"></i> Executive Committee</a>
+    <a href="finance.html"><i class="fa-solid fa-wallet"></i> Finance Management</a>
+    <a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports & Documents</a>
+  </nav>
+
+  <div class="nav-label">SYSTEM</div>
+  <nav class="nav">
+    <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings & Admin Roles</a>
+    <a href="activity-logs.html"><i class="fa-solid fa-clock-rotate-left"></i> Activity Logs</a>
+  </nav>
+
+  <div class="sidebar-bottom">
+    DTSC Alumni Association<br>
+    Management System<br>
+    <span style="color:#d5ad58">Version 1.0.0</span>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="top-left">
+      <button class="menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+      <div class="page-title">
+        <h1>Gallery Management</h1>
+        <p>Manage association photos and albums</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <div class="preview"><i class="fa-solid fa-eye"></i> PREVIEW MODE</div>
+      <div class="admin-user">
+        <div class="avatar">A</div>
+        <div class="user-info"><strong>Administrator</strong><small>Super Admin</small></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="demo-note">
+    <i class="fa-solid fa-circle-info"></i>
+    Demo interface only. Gallery changes are temporary and will reset after refresh. Supabase integration will be added later.
+  </div>
+
+  <section class="stats">
+    <div class="stat"><div><p>Total Photos</p><h2 id="totalCount">0</h2></div><div class="stat-icon"><i class="fa-solid fa-images"></i></div></div>
+    <div class="stat"><div><p>Albums / Categories</p><h2 id="albumCount">0</h2></div><div class="stat-icon"><i class="fa-solid fa-folder-open"></i></div></div>
+    <div class="stat"><div><p>Featured Photos</p><h2 id="featuredCount">0</h2></div><div class="stat-icon"><i class="fa-solid fa-star"></i></div></div>
+    <div class="stat"><div><p>Hidden Photos</p><h2 id="hiddenCount">0</h2></div><div class="stat-icon"><i class="fa-solid fa-eye-slash"></i></div></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <div><h3>Gallery Collection</h3><p>Upload, organize and manage gallery photos</p></div>
+      <button class="btn btn-primary" onclick="openAddModal()"><i class="fa-solid fa-plus"></i> Add Photo</button>
+    </div>
+
+    <div class="toolbar">
+      <div class="search"><i class="fa-solid fa-search"></i><input id="searchInput" type="search" placeholder="Search photo title..." oninput="renderGallery()"></div>
+      <select id="categoryFilter" onchange="renderGallery()">
+        <option value="">All Categories</option>
+      </select>
+      <select id="visibilityFilter" onchange="renderGallery()">
+        <option value="">All Visibility</option>
+        <option value="Published">Published</option>
+        <option value="Hidden">Hidden</option>
+      </select>
+      <button class="btn btn-light" onclick="exportCSV()"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+      <button class="btn btn-light" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </section>
+
+  <div class="footer">© 2026 DTSC Alumni Association. All rights reserved.</div>
+</main>
+</div>
+
+<!-- ADD / EDIT MODAL -->
+<div class="modal" id="photoModal">
+ <div class="modal-box">
+  <div class="modal-head">
+    <h3 id="modalTitle">Add New Photo</h3>
+    <button class="close" onclick="closeModal('photoModal')"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <form id="photoForm">
+   <input type="hidden" id="photoId">
+   <div class="form-grid">
+    <div class="field full">
+      <label>Photo Title *</label>
+      <input id="photoTitle" required maxlength="100" placeholder="Enter photo title">
+    </div>
+    <div class="field">
+      <label>Category / Album *</label>
+      <select id="photoCategory" required>
+        <option value="">Select Category</option>
+        <option>Events</option>
+        <option>Reunion</option>
+        <option>Campus Life</option>
+        <option>Sports</option>
+        <option>Achievements</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Visibility</label>
+      <select id="photoVisibility">
+        <option>Published</option>
+        <option>Hidden</option>
+      </select>
+    </div>
+    <div class="field full">
+      <label>Image URL (Optional)</label>
+      <input id="photoUrl" type="url" placeholder="https://example.com/photo.jpg">
+    </div>
+    <div class="field full">
+      <label>Description</label>
+      <textarea id="photoDescription" maxlength="500" placeholder="Write a short description..."></textarea>
+    </div>
+    <div class="field full">
+      <label class="checkline"><input type="checkbox" id="photoFeatured"> Mark as Featured Photo</label>
+    </div>
+   </div>
+   <div class="modal-actions">
+    <button type="button" class="btn btn-light" onclick="closeModal('photoModal')">Cancel</button>
+    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Save Photo</button>
+   </div>
+  </form>
+ </div>
+</div>
+
+<!-- VIEW MODAL -->
+<div class="modal" id="viewModal">
+ <div class="modal-box">
+  <div class="modal-head">
+    <h3>Photo Details</h3>
+    <button class="close" onclick="closeModal('viewModal')"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div id="viewContent"></div>
+  <div class="modal-actions"><button class="btn btn-light" onclick="closeModal('viewModal')">Close</button></div>
+ </div>
+</div>
+
+<script>
+const demoPhotos = [
+ {id:1,title:"Annual Reunion 2026",category:"Reunion",visibility:"Published",featured:true,url:"",description:"Memorable moments from the DTSC Alumni annual reunion.",date:"2026-11-10"},
+ {id:2,title:"Campus Memories",category:"Campus Life",visibility:"Published",featured:false,url:"",description:"A collection of memories from our campus.",date:"2026-10-18"},
+ {id:3,title:"Sports Competition",category:"Sports",visibility:"Published",featured:true,url:"",description:"Highlights from the alumni sports competition.",date:"2026-09-22"},
+ {id:4,title:"Award Ceremony",category:"Achievements",visibility:"Hidden",featured:false,url:"",description:"Special moments from the award ceremony.",date:"2026-08-14"},
+ {id:5,title:"Alumni Gathering",category:"Events",visibility:"Published",featured:false,url:"",description:"Alumni members gathering together.",date:"2026-07-05"},
+ {id:6,title:"Institute Celebration",category:"Events",visibility:"Published",featured:true,url:"",description:"Celebrating our institute and its community.",date:"2026-06-12"}
+];
+
+let photos = demoPhotos.map(p=>({...p}));
+let nextId = 7;
+
+function escapeHTML(value){
+ return String(value ?? "").replace(/[&<>"']/g, char => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[char]);
+}
+
+function safeImageURL(value){
+ try{
+  const url = new URL(value);
+  if(url.protocol === "https:" || url.protocol === "http:") return url.href;
+ }catch(error){}
+ return "";
+}
+
+function placeholder(){
+ return '<div class="placeholder"><i class="fa-solid fa-image"></i></div>';
+}
+
+function photoImage(url){
+ const safe = safeImageURL(url);
+ if(!safe) return placeholder();
+ return '<img src="'+escapeHTML(safe)+'" alt="Gallery photo" onerror="this.remove()">';
+}
+
+function updateStats(){
+ document.getElementById("totalCount").textContent = photos.length;
+ document.getElementById("albumCount").textContent = new Set(photos.map(p=>p.category)).size;
+ document.getElementById("featuredCount").textContent = photos.filter(p=>p.featured).length;
+ document.getElementById("hiddenCount").textContent = photos.filter(p=>p.visibility==="Hidden").length;
+}
+
+function updateCategoryFilter(){
+ const select = document.getElementById("categoryFilter");
+ const current = select.value;
+ const categories = [...new Set(photos.map(p=>p.category))].sort();
+ select.innerHTML = '<option value="">All Categories</option>' +
+ categories.map(c=>'<option value="'+escapeHTML(c)+'">'+escapeHTML(c)+'</option>').join("");
+ select.value = categories.includes(current) ? current : "";
+}
+
+function renderGallery(){
+ updateStats();
+ updateCategoryFilter();
+
+ const search = document.getElementById("searchInput").value.toLowerCase().trim();
+ const category = document.getElementById("categoryFilter").value;
+ const visibility = document.getElementById("visibilityFilter").value;
+
+ const filtered = photos.filter(p=>
+  p.title.toLowerCase().includes(search) &&
+  (!category || p.category===category) &&
+  (!visibility || p.visibility===visibility)
+ );
+
+ const grid = document.getElementById("galleryGrid");
+
+ if(!filtered.length){
+  grid.innerHTML = '<div class="empty"><i class="fa-regular fa-images"></i>No photos found.</div>';
+  return;
+ }
+
+ grid.innerHTML = filtered.map(p=>`
+  <article class="photo-card">
+   <div class="photo-cover">
+    ${photoImage(p.url)}
+    ${placeholder().replace('class="placeholder"','class="placeholder" style="display:none"')}
+    <span class="photo-tag ${p.visibility==="Hidden"?"hidden":""}">${escapeHTML(p.visibility)}</span>
+    ${p.featured?'<span class="featured"><i class="fa-solid fa-star"></i> FEATURED</span>':""}
+   </div>
+   <div class="photo-info">
+    <h4 title="${escapeHTML(p.title)}">${escapeHTML(p.title)}</h4>
+    <p><i class="fa-solid fa-folder"></i> ${escapeHTML(p.category)} &nbsp; • &nbsp; ${escapeHTML(p.date)}</p>
+    <div class="photo-meta">
+     <small>${p.featured?"Featured":"Standard Photo"}</small>
+     <div class="card-actions">
+      <button class="icon-btn" title="View" onclick="viewPhoto(${p.id})"><i class="fa-solid fa-eye"></i></button>
+      <button class="icon-btn" title="Edit" onclick="editPhoto(${p.id})"><i class="fa-solid fa-pen"></i></button>
+      <button class="icon-btn" title="${p.visibility==="Published"?"Hide":"Publish"}" onclick="toggleVisibility(${p.id})"><i class="fa-solid ${p.visibility==="Published"?"fa-eye-slash":"fa-eye"}"></i></button>
+      <button class="icon-btn" title="Delete" onclick="deletePhoto(${p.id})"><i class="fa-solid fa-trash"></i></button>
+     </div>
+    </div>
+   </div>
+  </article>
+ `).join("");
+}
+
+function openAddModal(){
+ document.getElementById("photoForm").reset();
+ document.getElementById("photoId").value="";
+ document.getElementById("modalTitle").textContent="Add New Photo";
+ document.getElementById("photoModal").classList.add("show");
+}
+
+function editPhoto(id){
+ const p=photos.find(x=>x.id===id);
+ if(!p)return;
+ document.getElementById("photoId").value=p.id;
+ document.getElementById("photoTitle").value=p.title;
+ document.getElementById("photoCategory").value=p.category;
+ document.getElementById("photoVisibility").value=p.visibility;
+ document.getElementById("photoUrl").value=p.url;
+ document.getElementById("photoDescription").value=p.description;
+ document.getElementById("photoFeatured").checked=p.featured;
+ document.getElementById("modalTitle").textContent="Edit Photo";
+ document.getElementById("photoModal").classList.add("show");
+}
+
+document.getElementById("photoForm").addEventListener("submit",function(e){
+ e.preventDefault();
+
+ const id=Number(document.getElementById("photoId").value);
+ const rawUrl=document.getElementById("photoUrl").value.trim();
+ const safeUrl=rawUrl ? safeImageURL(rawUrl) : "";
+
+ if(rawUrl && !safeUrl){
+  alert("Please enter a valid HTTP or HTTPS image URL.");
+  return;
+ }
+
+ const data={
+  title:document.getElementById("photoTitle").value.trim(),
+  category:document.getElementById("photoCategory").value,
+  visibility:document.getElementById("photoVisibility").value,
+  url:safeUrl,
+  description:document.getElementById("photoDescription").value.trim(),
+  featured:document.getElementById("photoFeatured").checked,
+  date:new Date().toISOString().slice(0,10)
+ };
+
+ if(!data.title || !data.category)return;
+
+ if(id){
+  const index=photos.findIndex(p=>p.id===id);
+  if(index!==-1)photos[index]={...photos[index],...data};
+ }else{
+  photos.unshift({id:nextId++,...data});
+ }
+
+ closeModal("photoModal");
+ renderGallery();
+});
+
+function viewPhoto(id){
+ const p=photos.find(x=>x.id===id);
+ if(!p)return;
+
+ const safe=safeImageURL(p.url);
+ const image=safe
+  ? '<img class="detail-image" src="'+escapeHTML(safe)+'" alt="Photo">'
+  : '<div class="detail-placeholder"><i class="fa-solid fa-image"></i></div>';
+
+ document.getElementById("viewContent").innerHTML=`
+  ${image}
+  <h3 style="margin-top:15px;color:#101b32">${escapeHTML(p.title)}</h3>
+  <div class="detail-text">
+   <b>Category:</b> ${escapeHTML(p.category)}<br>
+   <b>Visibility:</b> ${escapeHTML(p.visibility)}<br>
+   <b>Featured:</b> ${p.featured?"Yes":"No"}<br>
+   <b>Date:</b> ${escapeHTML(p.date)}<br>
+   <b>Description:</b> ${escapeHTML(p.description || "No description added.")}
+  </div>
+ `;
+ document.getElementById("viewModal").classList.add("show");
+}
+
+function toggleVisibility(id){
+ const p=photos.find(x=>x.id===id);
+ if(!p)return;
+ p.visibility=p.visibility==="Published"?"Hidden":"Published";
+ renderGallery();
+}
+
+function deletePhoto(id){
+ const p=photos.find(x=>x.id===id);
+ if(!p)return;
+ if(confirm('Delete "'+p.title+'"?')){
+  photos=photos.filter(x=>x.id!==id);
+  renderGallery();
+ }
+}
+
+function closeModal(id){
+ document.getElementById(id).classList.remove("show");
+}
+
+function toggleSidebar(){
+ document.getElementById("sidebar").classList.toggle("open");
+}
+
+function exportCSV(){
+ const rows=[["Title","Category","Visibility","Featured","Date","Description"]];
+ photos.forEach(p=>rows.push([p.title,p.category,p.visibility,p.featured?"Yes":"No",p.date,p.description]));
+ const csv=rows.map(row=>row.map(value=>'"'+String(value??"").replace(/"/g,'""')+'"').join(",")).join("\n");
+ const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8;"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download="DTSC-Gallery.csv";
+ a.click();
+ URL.revokeObjectURL(url);
+}
+
+document.querySelectorAll(".modal").forEach(modal=>{
+ modal.addEventListener("click",e=>{
+  if(e.target===modal)modal.classList.remove("show");
+ });
+});
+
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape")document.querySelectorAll(".modal.show").forEach(m=>m.classList.remove("show"));
+});
+
+renderGallery();
+</script>
+</body>
+</html>
