@@ -1,0 +1,355 @@
+
+/* ==========================================
+   DTSC ALUMNI PROFILE
+   Navy Blue + Gold
+========================================== */
+
+.profile-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 0 15px;
+  font-family: 'Poppins', sans-serif;
+  color: #17233d;
+  box-sizing: border-box;
+}
+
+.profile-container * {
+  box-sizing: border-box;
+}
+
+
+/* TOPBAR */
+
+.profile-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 13px;
+}
+
+.back-directory {
+  display: inline-block;
+  background: #142344;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.back-directory:hover {
+  background: #c5a45d;
+  color: #101d39;
+}
+
+.topbar-title {
+  color: #142344;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+
+/* HERO */
+
+.profile-hero {
+  background: #fff;
+  border: 1px solid #e1e5ec;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.profile-cover {
+  height: 105px;
+  background: linear-gradient(120deg, #101d39, #263d65);
+  border-bottom: 3px solid #c5a45d;
+}
+
+.profile-identity {
+  display: flex;
+  align-items: flex-end;
+  gap: 13px;
+  padding: 0 16px;
+  margin-top: -40px;
+  position: relative;
+}
+
+.profile-photo {
+  width: 82px;
+  height: 82px;
+  flex: 0 0 82px;
+  border: 4px solid #fff;
+  border-radius: 10px;
+  object-fit: cover;
+  background: #e8edf5;
+}
+
+.profile-basic {
+  padding-bottom: 4px;
+  min-width: 0;
+}
+
+.profile-basic h1 {
+  color: #142344;
+  font-size: 17px;
+  font-weight: 800;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.profile-basic p {
+  color: #69758b;
+  font-size: 11px;
+  margin: 3px 0;
+}
+
+.verified-status {
+  font-size: 10px;
+  color: #21845d;
+  font-weight: 700;
+}
+
+.pending-status {
+  font-size: 10px;
+  color: #b07821;
+  font-weight: 700;
+}
+
+.profile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 13px 16px;
+}
+
+.profile-tag {
+  display: inline-block;
+  background: #e9f1ff;
+  color: #28569a;
+  padding: 4px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+
+/* INFORMATION SECTIONS */
+
+.profile-section {
+  background: #fff;
+  border: 1px solid #e1e5ec;
+  border-radius: 8px;
+  padding: 13px;
+  margin-bottom: 11px;
+}
+
+.profile-section h2 {
+  font-size: 13px;
+  color: #142344;
+  font-weight: 800;
+  margin: 0 0 12px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #e9edf3;
+}
+
+
+/* GRID */
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px 12px;
+}
+
+.profile-item {
+  min-width: 0;
+}
+
+.profile-item small {
+  display: block;
+  font-size: 10px;
+  color: #7b8598;
+  margin-bottom: 4px;
+}
+
+.profile-item strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #253550;
+  overflow-wrap: anywhere;
+}
+
+
+/* ASSOCIATION ROLE */
+
+.association-role {
+  background: #f5f0e4;
+  border-left: 3px solid #c5a45d;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #5d4a22;
+  margin-bottom: 12px;
+}
+
+
+/* CONTACT */
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-list > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 11px;
+  color: #34425a;
+  overflow-wrap: anywhere;
+}
+
+.contact-list > div > span:first-child {
+  color: #bd984e;
+}
+
+.contact-list strong {
+  white-space: nowrap;
+}
+
+.contact-list a {
+  color: #2878cf;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.contact-list a:hover {
+  text-decoration: underline;
+}
+
+
+/* NOT FOUND */
+
+.profile-not-found {
+  background: #fff;
+  border: 1px solid #e1e5ec;
+  border-radius: 10px;
+  padding: 35px 15px;
+  text-align: center;
+}
+
+.profile-not-found h2 {
+  color: #142344;
+  font-size: 17px;
+}
+
+.profile-not-found p {
+  color: #778198;
+  font-size: 12px;
+}
+
+.profile-not-found a {
+  display: inline-block;
+  background: #142344;
+  color: white;
+  text-decoration: none;
+  padding: 9px 13px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+
+
+/* FOOTER */
+
+.profile-footer {
+  text-align: center;
+  color: #8992a3;
+  font-size: 10px;
+  padding: 15px 5px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .profile-container {
+    margin: 15px auto;
+    padding: 0 10px;
+  }
+
+  .profile-cover {
+    height: 90px;
+  }
+
+  .profile-identity {
+    gap: 10px;
+    padding: 0 12px;
+    margin-top: -35px;
+  }
+
+  .profile-photo {
+    width: 72px;
+    height: 72px;
+    flex-basis: 72px;
+  }
+
+  .profile-basic h1 {
+    font-size: 14px;
+  }
+
+  .profile-basic p {
+    font-size: 10px;
+  }
+
+  .profile-tags {
+    padding: 11px 12px;
+  }
+
+  .profile-section {
+    padding: 11px;
+  }
+
+  .profile-section h2 {
+    font-size: 12px;
+  }
+
+  .profile-item small {
+    font-size: 9px;
+  }
+
+  .profile-item strong {
+    font-size: 10px;
+  }
+
+  .topbar-title {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 350px) {
+
+  .profile-identity {
+    gap: 7px;
+  }
+
+  .profile-photo {
+    width: 62px;
+    height: 62px;
+    flex-basis: 62px;
+  }
+
+  .profile-basic h1 {
+    font-size: 12px;
+  }
+
+  .profile-grid {
+    gap: 11px 7px;
+  }
+}
