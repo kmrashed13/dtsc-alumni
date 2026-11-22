@@ -111,7 +111,7 @@ html {
 }
 
 .membership-brand {
-  min-height: 125px;
+  min-height: 80px;
   padding: 12px 4%;
   display: grid;
   grid-template-columns: 90px 1fr 90px;
