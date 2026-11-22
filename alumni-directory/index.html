@@ -1,0 +1,1042 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10213e">
+
+<title>DTSC ALUMNI DIRECTORY</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#f4f6fa;
+  color:#17243a;
+}
+
+.container{
+  max-width:1150px;
+  margin:auto;
+  padding:22px;
+}
+
+/* HEADER */
+
+.header{
+  background:#10213e;
+  color:white;
+  padding:25px 20px;
+  border-bottom:4px solid #d6ad55;
+}
+
+.header-inner{
+  max-width:1150px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:85px 1fr 85px;
+  align-items:center;
+  gap:15px;
+}
+
+.header-logo{
+  width:75px;
+  height:75px;
+  object-fit:contain;
+  background:white;
+  border-radius:12px;
+  padding:5px;
+}
+
+.header-center{
+  text-align:center;
+}
+
+.header-center h1{
+  font-size:clamp(20px,3vw,32px);
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.header-center p{
+  color:#e0e6f0;
+  font-size:13px;
+  line-height:1.6;
+  margin-top:9px;
+  max-width:750px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* SECTION */
+
+.section-title{
+  font-size:23px;
+  font-weight:800;
+  margin-bottom:18px;
+}
+
+.search-panel{
+  background:white;
+  padding:24px;
+  border-radius:15px;
+  box-shadow:0 5px 25px rgba(20,35,60,.06);
+  border:1px solid #e8edf4;
+}
+
+.form-label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:8px;
+  color:#34445d;
+}
+
+input,select{
+  width:100%;
+  height:46px;
+  border:1px solid #dce3ed;
+  border-radius:8px;
+  padding:0 12px;
+  background:#fff;
+  color:#26364d;
+  font-family:inherit;
+  font-size:13px;
+  outline:none;
+}
+
+input:focus,select:focus{
+  border-color:#c49a43;
+  box-shadow:0 0 0 3px rgba(196,154,67,.12);
+}
+
+.search-input{
+  margin-bottom:22px;
+}
+
+.filter-heading{
+  font-size:14px;
+  font-weight:800;
+  margin-bottom:13px;
+}
+
+.filter-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.filter-item{
+  min-width:0;
+}
+
+.button-row{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+.btn{
+  border:none;
+  border-radius:8px;
+  padding:12px 22px;
+  font-family:inherit;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.btn-search{
+  background:#10213e;
+  color:white;
+}
+
+.btn-search:hover{
+  background:#1b345a;
+}
+
+.btn-reset{
+  background:#edf1f6;
+  color:#26364d;
+}
+
+.btn-reset:hover{
+  background:#dfe6ef;
+}
+
+/* RESULTS */
+
+.results-section{
+  margin-top:28px;
+}
+
+.results-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.results-count{
+  background:#e6f5eb;
+  color:#188047;
+  padding:7px 12px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.member-list{
+  display:grid;
+  gap:12px;
+}
+
+.member-card{
+  background:white;
+  border:1px solid #e6ebf2;
+  border-radius:12px;
+  padding:17px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  box-shadow:0 3px 12px rgba(20,35,60,.035);
+}
+
+.member-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  min-width:0;
+}
+
+.member-photo{
+  width:57px;
+  height:57px;
+  border-radius:50%;
+  background:#e9eef6;
+  color:#17365c;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+  flex-shrink:0;
+  overflow:hidden;
+}
+
+.member-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.member-name{
+  font-size:15px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.member-id{
+  font-size:12px;
+  color:#78869a;
+}
+
+.member-right{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:10px;
+  flex-shrink:0;
+}
+
+.badges{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:6px;
+}
+
+.badge{
+  padding:6px 10px;
+  border-radius:5px;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.3px;
+  background:#e9eff8;
+  color:#24436c;
+}
+
+.badge.teacher{
+  background:#e7f4ef;
+  color:#18704e;
+}
+
+.badge.admin{
+  background:#fff1d9;
+  color:#93600d;
+}
+
+.view-btn{
+  background:#10213e;
+  color:white;
+  border:none;
+  padding:9px 15px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.view-btn:hover{
+  background:#c49a43;
+  color:#10213e;
+}
+
+.empty-state{
+  background:white;
+  padding:45px 20px;
+  text-align:center;
+  border-radius:12px;
+  color:#77859a;
+  border:1px solid #e6ebf2;
+}
+
+/* PROFILE MODAL */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(7,17,33,.65);
+  z-index:1000;
+  padding:20px;
+  overflow-y:auto;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-content{
+  background:white;
+  width:100%;
+  max-width:480px;
+  border-radius:15px;
+  padding:24px;
+  position:relative;
+  margin:auto;
+}
+
+.close-modal{
+  position:absolute;
+  right:17px;
+  top:15px;
+  border:none;
+  background:#edf1f6;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.profile-heading{
+  text-align:center;
+  padding:15px 0 22px;
+}
+
+.profile-heading .member-photo{
+  margin:0 auto 12px;
+  width:75px;
+  height:75px;
+  font-size:30px;
+}
+
+.profile-heading h2{
+  font-size:20px;
+  margin-bottom:6px;
+}
+
+.profile-details{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.detail{
+  background:#f4f6fa;
+  border-radius:8px;
+  padding:12px;
+  min-width:0;
+}
+
+.detail small{
+  display:block;
+  color:#78869a;
+  font-size:10px;
+  margin-bottom:5px;
+}
+
+.detail strong{
+  font-size:13px;
+  overflow-wrap:anywhere;
+}
+
+.footer{
+  text-align:center;
+  color:#8490a1;
+  font-size:11px;
+  padding:30px 10px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:700px){
+  .header-inner{
+    grid-template-columns:52px 1fr 52px;
+    gap:8px;
+  }
+
+  .header-logo{
+    width:48px;
+    height:48px;
+  }
+
+  .header-center h1{
+    font-size:18px;
+  }
+
+  .header-center p{
+    font-size:10px;
+    line-height:1.5;
+  }
+
+  .container{
+    padding:15px;
+  }
+
+  .search-panel{
+    padding:17px;
+  }
+
+  .filter-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:13px 10px;
+  }
+
+  .member-card{
+    padding:12px;
+    gap:8px;
+  }
+
+  .member-left{
+    gap:9px;
+  }
+
+  .member-photo{
+    width:45px;
+    height:45px;
+    font-size:18px;
+  }
+
+  .member-name{
+    font-size:12px;
+  }
+
+  .member-id{
+    font-size:10px;
+  }
+
+  .badge{
+    font-size:8px;
+    padding:5px 6px;
+  }
+
+  .view-btn{
+    padding:8px 10px;
+    font-size:10px;
+  }
+
+  .button-row .btn{
+    flex:1;
+    padding:12px 8px;
+  }
+}
+
+@media(max-width:370px){
+  .filter-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+  <div class="header-inner">
+
+    <img class="header-logo"
+         src="../assets/logo.png"
+         alt="Organization Logo">
+
+    <div class="header-center">
+      <h1>DTSC ALUMNI DIRECTORY</h1>
+      <p>Find for reconnect with lost batchmates, reach out to respected teachers, and build lifelong bonds within our DTSCian family.</p>
+    </div>
+
+    <img class="header-logo"
+         src="../assets/dtsclogo.png"
+         alt="DTSC Logo">
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <!-- SEARCH -->
+
+  <section class="search-panel">
+
+    <h2 class="section-title">Find Alumni</h2>
+
+    <div class="search-input">
+      <label class="form-label" for="searchInput">
+        Search Alumni
+      </label>
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Name / Alumni ID / Division / District / Upazila / Contact..."
+      >
+    </div>
+
+    <h3 class="filter-heading">Advanced Filters</h3>
+
+    <div class="filter-grid">
+
+      <div class="filter-item">
+        <label class="form-label">Member Type</label>
+        <select id="memberType">
+          <option value="">All Member Types</option>
+          <option value="Student">Student</option>
+          <option value="Teacher">Honorable Teacher</option>
+          <option value="Admin">Admin</option>
+        </select>
+      </div>
+
+      <div class="filter-item">
+        <label class="form-label">Last Exam</label>
+        <select id="lastExam">
+          <option value="">All Exams</option>
+          <option value="Diploma">Diploma</option>
+          <option value="SSC">SSC</option>
+          <option value="HSC">HSC</option>
+        </select>
+      </div>
+
+      <div class="filter-item">
+        <label class="form-label">Trade</label>
+        <select id="trade">
+          <option value="">All Trades</option>
+          <option value="Mechanical">Mechanical</option>
+          <option value="Electrical">Electrical</option>
+          <option value="Civil">Civil</option>
+          <option value="Computer">Computer</option>
+        </select>
+      </div>
+
+      <div class="filter-item">
+        <label class="form-label">Passing Year</label>
+        <select id="passingYear">
+          <option value="">All Years</option>
+          <option value="2025">2025</option>
+          <option value="2024">2024</option>
+          <option value="2023">2023</option>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+        </select>
+      </div>
+
+      <div class="filter-item">
+        <label class="form-label">Blood Group</label>
+        <select id="bloodGroup">
+          <option value="">All Blood Groups</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+        </select>
+      </div>
+
+      <div class="filter-item">
+        <label class="form-label">Membership Status</label>
+        <select id="membershipStatus">
+          <option value="">All Statuses</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+          <option value="Pending">Pending</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="button-row">
+      <button class="btn btn-search" id="searchBtn">
+        Search
+      </button>
+
+      <button class="btn btn-reset" id="resetBtn">
+        Reset
+      </button>
+    </div>
+
+  </section>
+
+
+  <!-- RESULTS -->
+
+  <section class="results-section">
+
+    <div class="results-top">
+      <h2 class="section-title" style="margin:0">
+        Search Results
+      </h2>
+
+      <span class="results-count" id="resultsCount">
+        0 Members Found
+      </span>
+    </div>
+
+    <div class="member-list" id="memberList"></div>
+
+  </section>
+
+</main>
+
+
+<!-- PROFILE MODAL -->
+
+<div class="modal" id="profileModal">
+
+  <div class="modal-content">
+
+    <button class="close-modal" id="closeModal">
+      &times;
+    </button>
+
+    <div class="profile-heading">
+      <div class="member-photo" id="profilePhoto">
+        <span>👤</span>
+      </div>
+
+      <h2 id="profileName">Member Name</h2>
+      <p class="member-id" id="profileId"></p>
+    </div>
+
+    <div class="profile-details" id="profileDetails"></div>
+
+  </div>
+
+</div>
+
+
+<footer class="footer">
+  DTSC ALUMNI DIRECTORY &copy; 2026
+</footer>
+
+
+<script>
+
+// DEMO DATA
+// Later this section will be connected with Supabase.
+
+const members = [
+
+{
+name:"Abdullah Al Mamun",
+id:"DTSC-2020-001",
+type:"Student",
+exam:"Diploma",
+trade:"Mechanical",
+year:"2024",
+blood:"O+",
+status:"Active",
+division:"Mymensingh",
+district:"Jamalpur",
+upazila:"Dewanganj",
+contact:"01700000001",
+photo:""
+},
+
+{
+name:"Mohammad Hasan",
+id:"DTSC-2019-014",
+type:"Teacher",
+exam:"Diploma",
+trade:"Electrical",
+year:"2023",
+blood:"A+",
+status:"Active",
+division:"Mymensingh",
+district:"Jamalpur",
+upazila:"Islampur",
+contact:"01700000002",
+photo:""
+},
+
+{
+name:"Sakib Ahmed",
+id:"DTSC-2021-008",
+type:"Student",
+exam:"Diploma",
+trade:"Civil",
+year:"2025",
+blood:"B+",
+status:"Pending",
+division:"Dhaka",
+district:"Dhaka",
+upazila:"Savar",
+contact:"01700000003",
+photo:""
+},
+
+{
+name:"Tanvir Hossain",
+id:"DTSC-2018-003",
+type:"Admin",
+exam:"Diploma",
+trade:"Mechanical",
+year:"2022",
+blood:"AB+",
+status:"Inactive",
+division:"Mymensingh",
+district:"Jamalpur",
+upazila:"Dewanganj",
+contact:"01700000004",
+photo:""
+},
+
+{
+name:"Nusrat Jahan",
+id:"DTSC-2020-019",
+type:"Student",
+exam:"Diploma",
+trade:"Computer",
+year:"2024",
+blood:"A-",
+status:"Active",
+division:"Mymensingh",
+district:"Mymensingh",
+upazila:"Mymensingh Sadar",
+contact:"01700000005",
+photo:""
+}
+
+];
+
+
+// ELEMENTS
+
+const searchInput = document.getElementById("searchInput");
+const memberList = document.getElementById("memberList");
+const resultsCount = document.getElementById("resultsCount");
+
+const filters = {
+type:document.getElementById("memberType"),
+exam:document.getElementById("lastExam"),
+trade:document.getElementById("trade"),
+year:document.getElementById("passingYear"),
+blood:document.getElementById("bloodGroup"),
+status:document.getElementById("membershipStatus")
+};
+
+
+// MEMBER BADGES
+
+function getBadges(member){
+
+let badges = "";
+
+if(member.type === "Student"){
+  badges += '<span class="badge">STUDENT</span>';
+}
+
+if(member.type === "Teacher"){
+  badges += '<span class="badge teacher">HONORABLE TEACHER</span>';
+}
+
+if(member.type === "Admin"){
+  badges += '<span class="badge admin">ADMIN</span>';
+}
+
+return badges;
+
+}
+
+
+// MEMBER CARD
+
+function createCard(member,index){
+
+const photo = member.photo
+  ? `<img src="${member.photo}" alt="Profile Photo">`
+  : "👤";
+
+return `
+<div class="member-card">
+
+  <div class="member-left">
+
+    <div class="member-photo">
+      ${photo}
+    </div>
+
+    <div>
+      <div class="member-name">
+        ${member.name}
+      </div>
+
+      <div class="member-id">
+        ${member.id}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="member-right">
+
+    <div class="badges">
+      ${getBadges(member)}
+    </div>
+
+    <button class="view-btn"
+      data-index="${index}">
+      View Profile
+    </button>
+
+  </div>
+
+</div>
+`;
+
+}
+
+
+// FILTER FUNCTION
+
+function getFilteredMembers(){
+
+const query = searchInput.value.trim().toLowerCase();
+
+return members
+.map((member,index)=>({...member,originalIndex:index}))
+.filter(member=>{
+
+const searchableText = [
+
+member.name,
+member.id,
+member.division,
+member.district,
+member.upazila,
+member.contact
+
+].join(" ").toLowerCase();
+
+return (
+
+(!query || searchableText.includes(query)) &&
+
+(!filters.type.value || member.type === filters.type.value) &&
+
+(!filters.exam.value || member.exam === filters.exam.value) &&
+
+(!filters.trade.value || member.trade === filters.trade.value) &&
+
+(!filters.year.value || member.year === filters.year.value) &&
+
+(!filters.blood.value || member.blood === filters.blood.value) &&
+
+(!filters.status.value || member.status === filters.status.value)
+
+);
+
+});
+
+}
+
+
+// RENDER RESULTS
+
+function renderMembers(){
+
+const filtered = getFilteredMembers();
+
+resultsCount.textContent =
+`${filtered.length} Members Found`;
+
+if(filtered.length === 0){
+
+memberList.innerHTML = `
+<div class="empty-state">
+  <h3>No Alumni Found</h3>
+  <p>Try another search or change your filters.</p>
+</div>
+`;
+
+return;
+
+}
+
+memberList.innerHTML = filtered
+.map(member=>createCard(member,member.originalIndex))
+.join("");
+
+}
+
+
+// SEARCH BUTTON
+
+document.getElementById("searchBtn")
+.addEventListener("click",renderMembers);
+
+
+// ENTER KEY SEARCH
+
+searchInput.addEventListener("keydown",function(event){
+
+if(event.key === "Enter"){
+  renderMembers();
+}
+
+});
+
+
+// RESET BUTTON
+
+document.getElementById("resetBtn")
+.addEventListener("click",function(){
+
+searchInput.value = "";
+
+Object.values(filters).forEach(filter=>{
+  filter.value = "";
+});
+
+renderMembers();
+
+});
+
+
+// PROFILE MODAL
+
+const modal = document.getElementById("profileModal");
+
+function openProfile(index){
+
+const member = members[index];
+
+if(!member) return;
+
+const photo = member.photo
+  ? `<img src="${member.photo}" alt="Profile Photo">`
+  : "👤";
+
+document.getElementById("profilePhoto").innerHTML = photo;
+
+document.getElementById("profileName").textContent =
+member.name;
+
+document.getElementById("profileId").textContent =
+member.id;
+
+const details = [
+
+["Membership Status",member.status],
+["Last Exam",member.exam],
+["Trade",member.trade],
+["Passing Year",member.year],
+["Blood Group",member.blood],
+["Division",member.division],
+["District",member.district],
+["Upazila",member.upazila]
+
+];
+
+document.getElementById("profileDetails").innerHTML =
+details.map(([label,value])=>`
+
+<div class="detail">
+  <small>${label}</small>
+  <strong>${value}</strong>
+</div>
+
+`).join("");
+
+modal.classList.add("show");
+
+}
+
+
+// VIEW PROFILE CLICK
+
+memberList.addEventListener("click",function(event){
+
+const button = event.target.closest(".view-btn");
+
+if(!button) return;
+
+openProfile(Number(button.dataset.index));
+
+});
+
+
+// CLOSE MODAL
+
+document.getElementById("closeModal")
+.addEventListener("click",function(){
+
+modal.classList.remove("show");
+
+});
+
+modal.addEventListener("click",function(event){
+
+if(event.target === modal){
+  modal.classList.remove("show");
+}
+
+});
+
+
+// INITIAL LOAD
+
+renderMembers();
+
+</script>
+
+</body>
+</html>
