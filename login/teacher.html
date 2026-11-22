@@ -1,31 +1,334 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#152D50">
+
   <title>Honorable Teacher Login | DTSC Alumni Association</title>
-  <link rel="stylesheet" href="./login.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: linear-gradient(135deg, #e9edf4, #f5f7fa);
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 390px;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 18px 55px rgba(21,45,80,.13);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #152d50, #285486);
+      padding: 25px 26px 28px;
+      color: white;
+    }
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 13px;
+      background: rgba(255,255,255,.13);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-box svg {
+      width: 27px;
+      height: 27px;
+      stroke: #d9e8ff;
+      fill: none;
+      stroke-width: 1.7;
+    }
+
+    .brand {
+      font-size: 10px;
+      letter-spacing: 1.1px;
+      color: #d0ddf0;
+      font-weight: 600;
+    }
+
+    .header h1 {
+      font-size: 25px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      color: #d0ddf0;
+      font-size: 12px;
+    }
+
+    .form-section {
+      padding: 27px 26px 25px;
+    }
+
+    .form-title {
+      color: #19375c;
+      font-size: 21px;
+      line-height: 1.35;
+      margin-bottom: 5px;
+    }
+
+    .form-subtitle {
+      color: #8995a5;
+      font-size: 12px;
+      margin-bottom: 23px;
+    }
+
+    .input-group {
+      margin-bottom: 16px;
+    }
+
+    .input-group label {
+      display: block;
+      color: #52647b;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      margin-bottom: 8px;
+    }
+
+    .input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid #e0e7f0;
+      border-radius: 10px;
+      padding: 0 12px;
+      background: #fbfcfe;
+      transition: .2s;
+    }
+
+    .input-wrap:focus-within {
+      border-color: #315f9b;
+      box-shadow: 0 0 0 3px rgba(49,95,155,.08);
+    }
+
+    .input-wrap svg {
+      width: 18px;
+      height: 18px;
+      stroke: #8295ae;
+      fill: none;
+      stroke-width: 1.7;
+      flex-shrink: 0;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 13px 0;
+      font-size: 13px;
+      color: #263b55;
+    }
+
+    .input-wrap input::placeholder {
+      color: #a0acba;
+    }
+
+    .forgot {
+      display: block;
+      text-align: right;
+      color: #315f9b;
+      font-size: 11px;
+      font-weight: 600;
+      text-decoration: none;
+      margin: -3px 0 19px;
+    }
+
+    .login-btn {
+      display: block;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 10px;
+      background: linear-gradient(135deg, #244f85, #356eaa);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .4px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .login-btn:hover {
+      box-shadow: 0 7px 18px rgba(36,79,133,.22);
+      transform: translateY(-1px);
+    }
+
+    .register-line {
+      text-align: center;
+      margin-top: 21px;
+      color: #7b899a;
+      font-size: 11px;
+    }
+
+    .register-line a {
+      color: #315f9b;
+      font-weight: 700;
+      text-decoration: none;
+      margin-left: 3px;
+    }
+
+    .footer {
+      background: #f4f6fa;
+      padding: 13px;
+      text-align: center;
+      color: #8996a8;
+      font-size: 10px;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 17px;
+      color: #718198;
+      font-size: 11px;
+      text-decoration: none;
+    }
+
+    @media(max-width: 400px) {
+      .header, .form-section {
+        padding-left: 21px;
+        padding-right: 21px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-  <div class="login-container">
-    <h2>Honorable Teacher Login</h2>
-    <p>DTSC Alumni Association</p>
+  <main class="login-card">
 
-    <form>
-      <label for="email">Email Address</label>
-      <input type="email" id="email"
-        placeholder="Enter your email" required>
+    <section class="header">
 
-      <label for="password">Password</label>
-      <input type="password" id="password"
-        placeholder="Enter your password" required>
+      <div class="top-row">
 
-      <button type="submit">Login</button>
-    </form>
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 5.5A2.5 2.5 0 0 1 5.5 3H12v17H5.5A2.5 2.5 0 0 0 3 22V5.5Z"/>
+            <path d="M21 5.5A2.5 2.5 0 0 0 18.5 3H12v17h6.5A2.5 2.5 0 0 1 21 22V5.5Z"/>
+          </svg>
+        </div>
 
-    <a href="./index.html">Back to Login Options</a>
-  </div>
+        <div class="brand">DTSC ALUMNI ASSOCIATION</div>
+
+      </div>
+
+      <h1>Teacher Portal</h1>
+      <p>A respected place for our educators.</p>
+
+    </section>
+
+    <section class="form-section">
+
+      <h2 class="form-title">
+        Sign In as Honorable Teachers
+      </h2>
+
+      <p class="form-subtitle">
+        Access your teacher account
+      </p>
+
+      <form id="teacherLoginForm">
+
+        <div class="input-group">
+          <label>OFFICIAL EMAIL ADDRESS</label>
+
+          <div class="input-wrap">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="m3 7 9 6 9-6"/>
+            </svg>
+
+            <input
+              type="email"
+              placeholder="Enter your official email"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>PASSWORD</label>
+
+          <div class="input-wrap">
+            <svg viewBox="0 0 24 24">
+              <rect x="4" y="10" width="16" height="11" rx="2"/>
+              <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+            </svg>
+
+            <input
+              type="password"
+              id="teacherPassword"
+              placeholder="Enter your password"
+              required
+            >
+          </div>
+        </div>
+
+        <a href="#" class="forgot">
+          Forgot Password?
+        </a>
+
+        <button type="submit" class="login-btn">
+          SIGN IN AS HONORABLE TEACHERS →
+        </button>
+
+      </form>
+
+      <div class="register-line">
+        Not registered yet?
+        <a href="../register/teacher/teacher.html">
+          Register Now
+        </a>
+      </div>
+
+      <a href="./index.html" class="back-link">
+        ← Back to Login Portal
+      </a>
+
+    </section>
+
+    <footer class="footer">
+      © 2026 DTSC Alumni Association
+    </footer>
+
+  </main>
+
+  <script>
+    document.getElementById("teacherLoginForm")
+      .addEventListener("submit", function(event) {
+        event.preventDefault();
+        alert("Teacher authentication is not connected yet.");
+      });
+  </script>
 
 </body>
 </html>
