@@ -13,21 +13,55 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
-  <!-- GLOBAL HEADER -->
-  <div id="global-header"></div>
+  <!-- MEMBERSHIP HEADER -->
+  <header class="membership-header">
+
+    <div class="membership-topbar">
+
+      <a href="../index.html" class="back-home">
+        <i class="fas fa-arrow-left"></i>
+        Back to Home
+      </a>
+
+      <button
+        type="button"
+        class="add-profile-btn"
+        id="addProfileBtn"
+      >
+        <i class="fas fa-user-plus"></i>
+        Add Your Profile
+      </button>
+
+    </div>
+
+    <div class="membership-brand">
+
+      <img src="../assets/logo.png" alt="DTSC Alumni Logo">
+
+      <div class="membership-brand-title">
+        <h1>DTSC ALUMNI</h1>
+        <p>DATABASE PORTAL</p>
+      </div>
+
+      <img src="../assets/dtsclogo.png" alt="DTSC Institution Logo">
+
+    </div>
+
+  </header>
+
 
   <main class="directory-container">
-
-
 
     <!-- SEARCH AND FILTER -->
     <section class="directory-search-section">
 
       <div class="search-box">
+
         <div class="search-heading">
           <div>
             <h3>Search Alumni</h3>
@@ -37,6 +71,7 @@
 
         <div class="search-input-wrap">
           <span class="search-icon">⌕</span>
+
           <input
             type="search"
             id="searchInput"
@@ -119,6 +154,7 @@
         </div>
 
         <div class="search-actions">
+
           <button type="button" id="searchBtn" class="search-button">
             Search Alumni
           </button>
@@ -126,15 +162,19 @@
           <button type="button" id="resetBtn" class="reset-button">
             Reset Filters
           </button>
+
         </div>
 
       </div>
+
     </section>
+
 
     <!-- RESULTS -->
     <section class="directory-results">
 
       <div class="results-header">
+
         <div>
           <h3>Alumni Members</h3>
           <p>Explore our DTSCian community members.</p>
@@ -144,6 +184,7 @@
           <span id="resultsCount">0</span>
           <span>Members Found</span>
         </div>
+
       </div>
 
       <div id="memberList" class="member-list">
@@ -154,16 +195,23 @@
 
   </main>
 
+
   <!-- PROFILE MODAL -->
   <div class="profile-modal" id="profileModal">
 
     <div class="profile-modal-content">
 
-      <button type="button" class="modal-close" id="closeModal" aria-label="Close">
+      <button
+        type="button"
+        class="modal-close"
+        id="closeModal"
+        aria-label="Close"
+      >
         &times;
       </button>
 
       <div class="profile-modal-header">
+
         <img id="profilePhoto" src="" alt="Member Photo">
 
         <div class="profile-modal-heading">
@@ -171,6 +219,7 @@
           <p id="profileId">Alumni ID</p>
           <div id="profileBadges"></div>
         </div>
+
       </div>
 
       <div id="profileDetails" class="profile-details">
@@ -181,22 +230,55 @@
 
   </div>
 
+
   <!-- FOOTER -->
   <footer class="directory-footer">
+
     <div class="footer-content">
+
       <p>
         &copy; <span id="footerYear"></span>
         DTSC Alumni Association. All Rights Reserved.
       </p>
+
       <p>Shared Roots, Lifelong Fellowship</p>
+
     </div>
+
   </footer>
 
-  <!-- GLOBAL HEADER LOADER -->
-  <script src="../header-loader.js"></script>
 
   <!-- DIRECTORY SCRIPT -->
   <script src="./directory.js"></script>
+
+  <!-- MEMBERSHIP HEADER REGISTER CONNECTION -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      const addProfileBtn = document.getElementById("addProfileBtn");
+
+      addProfileBtn?.addEventListener("click", () => {
+
+        const registerBtn = document.querySelector(
+          "#global-header .register-btn"
+        );
+
+        if (registerBtn) {
+          registerBtn.click();
+        } else {
+          console.error("Main Register button not found.");
+        }
+
+      });
+
+      const footerYear = document.getElementById("footerYear");
+
+      if (footerYear) {
+        footerYear.textContent = new Date().getFullYear();
+      }
+
+    });
+  </script>
 
 </body>
 </html>
