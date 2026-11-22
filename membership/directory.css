@@ -38,14 +38,6 @@ button {
    INTRO
 ===================================== */
 
-.directory-intro {
-  background: linear-gradient(135deg, var(--navy-dark), var(--navy-light));
-  color: white;
-  text-align: center;
-  padding: 38px 18px;
-  border-bottom: 3px solid var(--gold);
-}
-
 .intro-content {
   max-width: 850px;
   margin: auto;
