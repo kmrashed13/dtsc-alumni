@@ -2,251 +2,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#101D35">
-  <title>Administration Login | DTSC Alumni</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101D35">
+<title>Administration Login | DTSC Alumni</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", Arial, sans-serif;
-    }
-
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: #f1f3f6;
-    }
-
-    .login-card {
-      width: 100%;
-      max-width: 390px;
-      background: #fff;
-      border-radius: 17px;
-      overflow: hidden;
-      box-shadow: 0 15px 45px rgba(16, 29, 53, .13);
-    }
-
-    .header {
-      background: linear-gradient(135deg, #101d35, #203b60);
-      padding: 32px 22px 27px;
-      text-align: center;
-      color: white;
-    }
-
-    .icon-box {
-      width: 62px;
-      height: 62px;
-      margin: 0 auto 15px;
-      border: 1px solid rgba(224, 193, 126, .5);
-      background: rgba(224, 193, 126, .1);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #e5c77e;
-      font-size: 30px;
-    }
-
-    .header h2 {
-      font-size: 21px;
-      font-weight: 700;
-      color: #f0d99e;
-      letter-spacing: .3px;
-    }
-
-    .header p {
-      font-size: 10px;
-      letter-spacing: 2px;
-      color: #c5cfdd;
-      margin-top: 7px;
-    }
-
-    .form-area {
-      padding: 29px 27px 25px;
-    }
-
-    .form-area h3 {
-      text-align: center;
-      color: #172943;
-      font-size: 19px;
-      margin-bottom: 25px;
-    }
-
-    .field {
-      margin-bottom: 18px;
-    }
-
-    .field label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: #46546a;
-      margin-bottom: 8px;
-    }
-
-    .field input {
-      width: 100%;
-      height: 46px;
-      padding: 0 13px;
-      border: 1px solid #dce1e8;
-      border-radius: 8px;
-      outline: none;
-      font-size: 13px;
-      color: #172943;
-      background: #fafbfc;
-    }
-
-    .field input:focus {
-      border-color: #c5a65e;
-      box-shadow: 0 0 0 3px rgba(197, 166, 94, .12);
-    }
-
-    .login-btn {
-      width: 100%;
-      height: 47px;
-      border: none;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #d9bd78, #c6a65d);
-      color: #172943;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .8px;
-      cursor: pointer;
-      margin-top: 7px;
-    }
-
-    .login-btn:hover {
-      filter: brightness(.96);
-    }
-
-    .notice {
-      text-align: center;
-      font-size: 10px;
-      color: #8993a2;
-      margin-top: 22px;
-      line-height: 1.6;
-    }
-
-    .back {
-      display: block;
-      text-align: center;
-      text-decoration: none;
-      color: #52647d;
-      font-size: 12px;
-      margin-top: 19px;
-    }
-
-    .footer {
-      text-align: center;
-      padding: 13px;
-      background: #f8f9fb;
-      color: #929baa;
-      font-size: 10px;
-      border-top: 1px solid #edf0f4;
-    }
-  </style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:#f1f3f6}
+.card{width:100%;max-width:390px;background:white;border-radius:17px;overflow:hidden;box-shadow:0 15px 45px #101d3520}
+.header{background:linear-gradient(135deg,#101d35,#203b60);padding:32px 22px 27px;text-align:center;color:white}
+.icon{font-size:34px;margin-bottom:14px;color:#e5c77e}
+.header h2{font-size:21px;color:#f0d99e}
+.header p{font-size:10px;letter-spacing:2px;color:#c5cfdd;margin-top:7px}
+.form-area{padding:29px 27px 25px}
+.form-area h3{text-align:center;color:#172943;font-size:19px;margin-bottom:25px}
+.field{margin-bottom:18px}
+label{display:block;font-size:12px;font-weight:600;color:#46546a;margin-bottom:8px}
+input{width:100%;height:46px;padding:0 13px;border:1px solid #dce1e8;border-radius:8px;outline:none;font-size:13px;color:#172943;background:#fafbfc}
+input:focus{border-color:#c5a65e;box-shadow:0 0 0 3px #c5a65e20}
+.login-btn{width:100%;height:47px;border:0;border-radius:8px;background:linear-gradient(135deg,#d9bd78,#c6a65d);color:#172943;font-size:12px;font-weight:800;letter-spacing:.8px;cursor:pointer;margin-top:7px}
+.login-btn:hover{filter:brightness(.96)}
+.back-links{display:flex;flex-direction:column;gap:9px;margin-top:19px}
+.back-links a{display:flex;align-items:center;justify-content:center;min-height:40px;border:1px solid #e0e5ed;border-radius:8px;background:#f5f7fa;color:#243b5a;font-size:12px;font-weight:600;text-decoration:none;transition:.25s}
+.back-links a:hover{background:#172943;color:#e5c77e;border-color:#172943;transform:translateY(-2px)}
+.notice{text-align:center;font-size:10px;color:#8993a2;margin-top:20px;line-height:1.6}
+.footer{text-align:center;padding:13px;background:#f8f9fb;color:#929baa;font-size:10px;border-top:1px solid #edf0f4}
+</style>
 </head>
 
 <body>
+<div class="card">
 
-  <div class="login-card">
+<div class="header">
+<div class="icon">♙</div>
+<h2>Administration Portal</h2>
+<p>DTSC ALUMNI ASSOCIATION</p>
+</div>
 
-    <div class="header">
-      <div class="icon-box">♙</div>
+<div class="form-area">
+<h3>Administrator Sign In</h3>
 
-      <h2>Administration Portal</h2>
-      <p>DTSC ALUMNI ASSOCIATION</p>
-    </div>
+<form id="adminLoginForm">
+<div class="field">
+<label for="email">Official Email Address</label>
+<input type="email" id="email" placeholder="Enter official email" required>
+</div>
 
-    <div class="form-area">
+<div class="field">
+<label for="password">Password</label>
+<input type="password" id="password" placeholder="Enter your password" required>
+</div>
 
-      <h3>Administrator Sign In</h3>
+<button type="submit" class="login-btn">
+SECURE ADMIN LOGIN →
+</button>
+</form>
 
-      <form id="adminLoginForm">
+<div class="back-links">
+<a href="../index.html">← Back to Home</a>
+<a href="./index.html">← Back to Login Portal</a>
+</div>
 
-        <div class="field">
-          <label for="email">Official Email Address</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="Enter official email"
-            required
-          >
-        </div>
+<div class="notice">
+Restricted Access<br>
+Authorized Personnel Only
+</div>
 
-        <div class="field">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            required
-          >
-        </div>
+</div>
 
-        <button type="submit" class="login-btn">
-          SECURE ADMIN LOGIN →
-        </button>
+<div class="footer">
+© 2026 DTSC Alumni Association. All Rights Reserved.
+</div>
 
-      </form>
+</div>
 
-      <div class="notice">
-        Restricted Access<br>
-        Authorized Personnel Only
-      </div>
-
-      <a href="./index.html" class="back">
-        ← Back to Login Options
-      </a>
-
-    </div>
-
-    <div class="footer">
-      © 2026 DTSC Alumni Association. All Rights Reserved.
-    </div>
-
-  </div>
-
-  <script>
-    document.getElementById("adminLoginForm")
-      .addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        alert("Admin authentication is not connected yet.");
-      });
-  </script>
-
+<script>
+document.getElementById("adminLoginForm").addEventListener("submit",function(e){
+e.preventDefault();
+alert("Admin authentication is not connected yet.");
+});
+</script>
 </body>
 </html>
-
-.back {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  width: 100%;
-  height: 43px;
-  margin-top: 20px;
-  border: 1px solid #e0e5ed;
-  border-radius: 8px;
-  background: #f5f7fa;
-  color: #243b5a;
-  font-size: 12px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: .25s ease;
-}
-
-.back:hover {
-  background: #172943;
-  color: #e5c77e;
-  border-color: #172943;
-  transform: translateY(-2px);
-}
