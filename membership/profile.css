@@ -353,3 +353,13 @@
     gap: 11px 7px;
   }
 }
+/* Remove Extra Top Space */
+.profile-container {
+    margin-top: 8px !important;
+    padding-top: 0 !important;
+}
+
+body {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
