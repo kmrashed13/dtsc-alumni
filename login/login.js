@@ -1,11 +1,10 @@
-
 document.addEventListener("DOMContentLoaded", function () {
 
   const form = document.getElementById("adminLoginForm");
   const message = document.getElementById("loginMessage");
   const loginBtn = document.getElementById("loginBtn");
 
-  if (!form) return;
+  if (!form || !message || !loginBtn) return;
 
   form.addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -14,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const password = document.getElementById("password").value;
 
     message.textContent = "Verifying Admin...";
+    message.className = "message loading";
     loginBtn.disabled = true;
 
     try {
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         throw new Error("Supabase connection not found.");
       }
 
-      // Step 1: Authenticate user
+      // Step 1: Authenticate
       const { data, error } = await client.auth.signInWithPassword({
         email,
         password
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         throw new Error("User not found.");
       }
 
-      // Step 2: Check Admin Role
+      // Step 2: Verify Admin Role
       const { data: admin, error: adminError } = await client
         .from("admin_users")
         .select("user_id, role")
@@ -45,25 +45,29 @@ document.addEventListener("DOMContentLoaded", function () {
         .maybeSingle();
 
       if (adminError) {
-        throw new Error("Admin verification failed: " + adminError.message);
+        throw new Error("Admin verification failed.");
       }
 
-      // Step 3: Allow only authorized admins
+      // Step 3: Check Authorization
       if (
         !admin ||
         !["admin", "super_admin"].includes(admin.role)
       ) {
         await client.auth.signOut();
-        throw new Error("Access denied! You are not an authorized Admin.");
+        throw new Error("Access denied! Unauthorized Admin.");
       }
 
-      // Step 4: Redirect to Dashboard
-      message.textContent = "Login successful!";
+      // Step 4: Redirect
+      message.textContent = "Login Successful! Redirecting...";
+      message.className = "message success";
 
       window.location.href = "../admin/dashboard.html";
 
     } catch (error) {
+
       message.textContent = error.message;
+      message.className = "message error";
+
       loginBtn.disabled = false;
     }
 
