@@ -2,328 +2,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#123D30">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123d30">
+<title>Student Login | DTSC Alumni</title>
 
-  <title>Student Login | DTSC Alumni Association</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", Arial, sans-serif;
-    }
-
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 22px;
-      background: linear-gradient(135deg, #e8efeb, #f5f8f6);
-    }
-
-    .login-card {
-      width: 100%;
-      max-width: 390px;
-      background: #fff;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 18px 55px rgba(18, 61, 48, 0.13);
-    }
-
-    .header {
-      background: linear-gradient(135deg, #123d30, #1d6048);
-      padding: 25px 26px 28px;
-      color: white;
-    }
-
-    .top-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-    }
-
-    .icon-box {
-      width: 48px;
-      height: 48px;
-      border-radius: 13px;
-      background: rgba(255,255,255,.13);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .icon-box svg {
-      width: 27px;
-      height: 27px;
-      stroke: #d9f2e4;
-      fill: none;
-      stroke-width: 1.7;
-    }
-
-    .brand {
-      font-size: 10px;
-      letter-spacing: 1.1px;
-      color: #d4e8dc;
-      font-weight: 600;
-    }
-
-    .header h1 {
-      font-size: 25px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .header p {
-      color: #c9ded2;
-      font-size: 12px;
-    }
-
-    .form-section {
-      padding: 27px 26px 25px;
-    }
-
-    .form-title {
-      color: #173d30;
-      font-size: 23px;
-      margin-bottom: 5px;
-    }
-
-    .form-subtitle {
-      color: #89958e;
-      font-size: 12px;
-      margin-bottom: 23px;
-    }
-
-    .input-group {
-      margin-bottom: 16px;
-    }
-
-    .input-group label {
-      display: block;
-      color: #52645a;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      margin-bottom: 8px;
-    }
-
-    .input-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border: 1px solid #e1e9e3;
-      border-radius: 10px;
-      padding: 0 12px;
-      background: #fbfcfb;
-      transition: .2s;
-    }
-
-    .input-wrap:focus-within {
-      border-color: #27815a;
-      box-shadow: 0 0 0 3px rgba(39,129,90,.08);
-    }
-
-    .input-wrap svg {
-      width: 18px;
-      height: 18px;
-      stroke: #83958a;
-      fill: none;
-      stroke-width: 1.7;
-      flex-shrink: 0;
-    }
-
-    .input-wrap input {
-      width: 100%;
-      border: none;
-      outline: none;
-      background: transparent;
-      padding: 13px 0;
-      font-size: 13px;
-      color: #263b30;
-    }
-
-    .input-wrap input::placeholder {
-      color: #a0aaa4;
-    }
-
-    .forgot {
-      display: block;
-      text-align: right;
-      color: #28744f;
-      font-size: 11px;
-      font-weight: 600;
-      text-decoration: none;
-      margin: -3px 0 19px;
-    }
-
-    .login-btn {
-      display: block;
-      width: 100%;
-      border: none;
-      border-radius: 10px;
-      padding: 14px;
-      background: linear-gradient(135deg, #176b4b, #23835b);
-      color: white;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .login-btn:hover {
-      box-shadow: 0 7px 18px rgba(23,107,75,.22);
-      transform: translateY(-1px);
-    }
-
-    .register-line {
-      text-align: center;
-      margin-top: 21px;
-      color: #7b8981;
-      font-size: 11px;
-    }
-
-    .register-line a {
-      color: #176b4b;
-      font-weight: 700;
-      text-decoration: none;
-      margin-left: 3px;
-    }
-
-    .footer {
-      background: #f5f8f6;
-      padding: 13px;
-      text-align: center;
-      color: #89968e;
-      font-size: 10px;
-    }
-
-    .back-link {
-      display: block;
-      text-align: center;
-      margin-top: 17px;
-      color: #718078;
-      font-size: 11px;
-      text-decoration: none;
-    }
-
-    @media(max-width: 400px) {
-      .header, .form-section {
-        padding-left: 21px;
-        padding-right: 21px;
-      }
-    }
-  </style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:#f1f4f2}
+.card{width:100%;max-width:390px;background:white;border-radius:17px;overflow:hidden;box-shadow:0 15px 40px #173b3020}
+.header{background:linear-gradient(135deg,#123d30,#267052);padding:32px 20px;text-align:center;color:white}
+.icon{font-size:34px;margin-bottom:12px}
+.header h2{font-size:22px;color:#fff}
+.header p{font-size:11px;color:#d2e6dc;margin-top:7px;letter-spacing:1px}
+.form-area{padding:28px 27px}
+.form-area h3{text-align:center;color:#173d30;font-size:19px;margin-bottom:24px}
+.field{margin-bottom:17px}
+label{display:block;font-size:12px;font-weight:600;color:#43564c;margin-bottom:8px}
+input{width:100%;height:46px;padding:0 13px;border:1px solid #dce5df;border-radius:8px;background:#fafcfb;outline:none;font-size:13px}
+input:focus{border-color:#267052;box-shadow:0 0 0 3px #26705215}
+.login-btn{width:100%;height:47px;border:0;border-radius:8px;background:#18533e;color:white;font-size:12px;font-weight:700;letter-spacing:.6px;cursor:pointer;margin-top:5px}
+.login-btn:hover{background:#103b2d}
+.back-links{display:flex;flex-direction:column;gap:9px;margin-top:19px}
+.back-links a{display:flex;align-items:center;justify-content:center;min-height:40px;border:1px solid #dce5df;border-radius:8px;background:#f5f8f6;color:#244b3a;font-size:12px;font-weight:600;text-decoration:none;transition:.25s}
+.back-links a:hover{background:#18533e;color:white;border-color:#18533e;transform:translateY(-2px)}
+.footer{text-align:center;padding:13px;background:#f8faf9;color:#929e96;font-size:10px;border-top:1px solid #edf1ee}
+</style>
 </head>
 
 <body>
+<div class="card">
 
-  <main class="login-card">
+<div class="header">
+<div class="icon">🎓</div>
+<h2>Student Portal</h2>
+<p>YOUR CONNECTION. YOUR COMMUNITY.</p>
+</div>
 
-    <section class="header">
+<div class="form-area">
+<h3>Sign In Student</h3>
 
-      <div class="top-row">
+<form id="studentLoginForm">
+<div class="field">
+<label for="email">Email Address</label>
+<input type="email" id="email" placeholder="Enter your email" required>
+</div>
 
-        <div class="icon-box">
-          <svg viewBox="0 0 24 24">
-            <path d="M2 9l10-5 10 5-10 5L2 9z"/>
-            <path d="M6 11v5c3 3 9 3 12 0v-5"/>
-            <path d="M22 9v6"/>
-          </svg>
-        </div>
+<div class="field">
+<label for="password">Password</label>
+<input type="password" id="password" placeholder="Enter your password" required>
+</div>
 
-        <div class="brand">DTSC ALUMNI ASSOCIATION</div>
+<button type="submit" class="login-btn">
+SIGN IN AS STUDENT →
+</button>
+</form>
 
-      </div>
+<div class="back-links">
+<a href="../index.html">← Back to Home</a>
+<a href="./index.html">← Back to Login Portal</a>
+</div>
 
-      <h1>Student Portal</h1>
-      <p>Your connection. Your community.</p>
+</div>
 
-    </section>
+<div class="footer">
+© 2026 DTSC Alumni Association. All Rights Reserved.
+</div>
 
-    <section class="form-section">
+</div>
 
-      <h2 class="form-title">Sign In Student</h2>
-      <p class="form-subtitle">
-        Access your student account
-      </p>
-
-      <form id="studentLoginForm">
-
-        <div class="input-group">
-          <label>EMAIL ADDRESS</label>
-
-          <div class="input-wrap">
-            <svg viewBox="0 0 24 24">
-              <rect x="3" y="5" width="18" height="14" rx="2"/>
-              <path d="m3 7 9 6 9-6"/>
-            </svg>
-
-            <input
-              type="email"
-              placeholder="Enter your email"
-              required
-            >
-          </div>
-        </div>
-
-        <div class="input-group">
-          <label>PASSWORD</label>
-
-          <div class="input-wrap">
-            <svg viewBox="0 0 24 24">
-              <rect x="4" y="10" width="16" height="11" rx="2"/>
-              <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
-            </svg>
-
-            <input
-              type="password"
-              id="studentPassword"
-              placeholder="Enter your password"
-              required
-            >
-          </div>
-        </div>
-
-        <a href="#" class="forgot">Forgot Password?</a>
-
-        <button type="submit" class="login-btn">
-          SIGN IN AS STUDENT →
-        </button>
-
-      </form>
-
-      <div class="register-line">
-        Not a member yet?
-        <a href="../register/students/student.html">
-          Register Now
-        </a>
-      </div>
-
-      <a href="./index.html" class="back-link">
-        ← Back to Login Portal
-      </a>
-
-    </section>
-
-    <footer class="footer">
-      © 2026 DTSC Alumni Association
-    </footer>
-
-  </main>
-
-  <script>
-    document.getElementById("studentLoginForm")
-      .addEventListener("submit", function(event) {
-        event.preventDefault();
-        alert("Student authentication is not connected yet.");
-      });
-  </script>
-
+<script>
+document.getElementById("studentLoginForm").addEventListener("submit",function(e){
+e.preventDefault();
+alert("Student authentication is not connected yet.");
+});
+</script>
 </body>
 </html>
