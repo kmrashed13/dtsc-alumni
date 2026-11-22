@@ -1,15 +1,22 @@
 const SUPABASE_URL = "https://fhgmjrtgxdudpzaonlhv.supabase.co";
 
-// Supabase Dashboard থেকে Publishable Key বসাও
-const SUPABASE_ANON_KEY = "sb_publishable_fnFoN8ecsee3fvi1FPYXRA_HiQj5qg8";
+// তোমার বর্তমান Publishable Key এখানে বসাও
+const SUPABASE_ANON_KEY = "sb_publishable_sEvhoc3qt1HmMdwaYPzbuQ_zWzU0dKv";
+
+window.supabaseClient = null;
 
 if (!window.supabase) {
   console.error("Supabase library not loaded.");
 } else {
-  window.supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-  );
+  try {
+    window.supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
 
-  console.log("Supabase client initialized.");
+    console.log("Supabase client initialized successfully.");
+
+  } catch (error) {
+    console.error("Supabase initialization failed:", error);
+  }
 }
