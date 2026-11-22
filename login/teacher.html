@@ -3,40 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#152d50">
 <title>Teacher Login | DTSC Alumni</title>
-<link rel="stylesheet" href="login.css">
-<style>
-body{background:#f1f3f8}
-.login-container{border-top:5px solid #294d78}
-.login-container h2{color:#203e64}
-button{background:#203e64;color:white}
-button:hover{background:#142c4b}
-</style>
+<link rel="stylesheet" href="./login.css">
 </head>
-<body>
+
+<body class="teacher-page">
+
 <div class="login-container">
-<h2>📖 Teacher Portal</h2>
-<p>A RESPECTED PLACE FOR OUR EDUCATORS</p>
 
-<form id="teacherLoginForm">
-<label>Official Email Address</label>
-<input type="email" id="email" placeholder="Enter official email" required>
+  <header class="login-header">
+    <div class="portal-icon">📖</div>
+    <h2>Teacher Portal</h2>
+    <p>A RESPECTED PLACE FOR OUR EDUCATORS</p>
+  </header>
 
-<label>Password</label>
-<input type="password" id="password" placeholder="Enter your password" required>
+  <main class="login-form-area">
 
-<p><a href="#" id="forgotPassword">Forgot Password?</a></p>
+    <h3>Sign In as Honorable Teachers</h3>
 
-<button type="submit" id="loginBtn">SIGN IN AS HONORABLE TEACHERS →</button>
-<p id="loginMessage"></p>
-</form>
+    <form id="teacherLoginForm">
 
-<p>Not Registered? <a href="../register/teacher/teacher.html">Register Now</a></p>
+      <label for="email">Official Email Address</label>
+      <input type="email" id="email"
+        placeholder="Enter official email" required>
 
-<div class="back-links">
-<a href="../index.html">← Back to Home</a>
-<a href="../index.html?openLogin=true">← Back to Login Portal</a>
+      <label for="password">Password</label>
+      <input type="password" id="password"
+        placeholder="Enter your password" required>
+
+      <div class="forgot-row">
+        <a href="#" id="forgotPassword">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="login-submit" id="loginBtn">
+        SIGN IN AS HONORABLE TEACHERS →
+      </button>
+
+      <p id="loginMessage"></p>
+
+    </form>
+
+    <div class="register-row">
+      Not Registered?
+      <a href="../register/teacher/teacher.html">Register Now</a>
+    </div>
+
+    <div class="back-navigation">
+      <a href="../index.html">⌂ Back to Home</a>
+      <a href="../index.html?openLogin=true">← Back to Login Portal</a>
+    </div>
+
+  </main>
+
+  <footer class="login-footer">
+    © 2026 DTSC Alumni Association
+  </footer>
+
 </div>
-</div>
+
 </body>
 </html>
