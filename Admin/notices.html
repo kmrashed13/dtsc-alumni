@@ -1,1 +1,873 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101d36">
+<title>Notices Management | DTSC Alumni Association</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+  --navy:#101d36;
+  --gold:#d6ad60;
+  --bg:#f4f6fa;
+  --white:#fff;
+  --text:#26344a;
+  --muted:#7d899b;
+  --border:#e8ecf2;
+  --green:#15966b;
+  --red:#dc5353;
+  --orange:#d99029;
+  --shadow:0 5px 22px rgba(16,29,54,.06);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.layout{display:flex;min-height:100vh}
+
+.sidebar{
+  width:255px;background:var(--navy);color:#fff;
+  position:fixed;inset:0 auto 0 0;display:flex;
+  flex-direction:column;z-index:100;transition:.3s;
+}
+.brand{
+  padding:25px 20px;display:flex;align-items:center;
+  gap:12px;border-bottom:1px solid rgba(255,255,255,.1);
+}
+.brand img{
+  width:43px;height:43px;object-fit:contain;
+  background:#fff;border-radius:10px;padding:4px;
+}
+.brand h2{font-size:15px;line-height:1.4}
+.brand small{color:var(--gold);font-size:10px;letter-spacing:1px}
+.nav-title{
+  padding:23px 22px 10px;font-size:10px;
+  color:#8492a8;letter-spacing:1.5px;font-weight:700;
+}
+.nav-menu{padding:0 12px;overflow-y:auto;flex:1}
+.nav-menu a{
+  display:flex;align-items:center;gap:13px;
+  padding:12px 14px;margin:3px 0;border-radius:8px;
+  text-decoration:none;color:#b9c4d4;font-size:13px;
+}
+.nav-menu a i{width:18px;text-align:center}
+.nav-menu a:hover,.nav-menu a.active{
+  background:rgba(214,173,96,.15);color:#f0d59c;
+}
+.nav-menu a.active{border-left:3px solid var(--gold)}
+.sidebar-bottom{padding:15px;border-top:1px solid rgba(255,255,255,.1)}
+.sidebar-bottom a{
+  display:flex;gap:10px;padding:11px;
+  color:#b9c4d4;text-decoration:none;font-size:12px;
+}
+
+.main{margin-left:255px;width:calc(100% - 255px)}
+.topbar{
+  height:76px;background:#fff;display:flex;
+  align-items:center;justify-content:space-between;
+  padding:0 30px;border-bottom:1px solid var(--border);
+}
+.top-left{display:flex;align-items:center;gap:15px}
+.topbar h3{font-size:17px;color:var(--navy)}
+.topbar p{font-size:11px;color:var(--muted);margin-top:3px}
+.top-right{display:flex;align-items:center;gap:17px}
+.secure{
+  font-size:11px;color:var(--green);background:#e8f7f0;
+  padding:8px 12px;border-radius:20px;
+}
+.admin-profile{display:flex;align-items:center;gap:9px}
+.admin-avatar{
+  width:36px;height:36px;background:var(--navy);
+  color:var(--gold);display:grid;place-items:center;border-radius:50%;
+}
+.admin-profile strong{font-size:12px}
+.admin-profile small{display:block;color:var(--muted);font-size:10px}
+.menu-toggle{display:none;border:0;background:none;font-size:20px;color:var(--navy)}
+
+.content{padding:28px 30px}
+.page-heading{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:15px;margin-bottom:24px;
+}
+.page-heading h1{font-size:23px;color:var(--navy)}
+.page-heading p{font-size:12px;color:var(--muted);margin-top:5px}
+.heading-actions{display:flex;gap:9px;flex-wrap:wrap}
+.btn{
+  border:0;padding:10px 15px;border-radius:7px;
+  font-size:12px;font-weight:700;display:inline-flex;
+  align-items:center;gap:8px;
+}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-light{background:#eef1f6;color:var(--navy)}
+.btn:hover{opacity:.88}
+
+.notice{
+  margin-bottom:18px;padding:12px 15px;border-radius:8px;
+  background:#fff7e8;border:1px solid #f4e4c3;
+  color:#896324;font-size:11px;line-height:1.6;
+}
+
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:17px;margin-bottom:24px;
+}
+.stat-card{
+  background:#fff;border-radius:11px;padding:19px;
+  box-shadow:var(--shadow);border:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.stat-card small{color:var(--muted);font-size:11px;font-weight:600}
+.stat-card h2{font-size:25px;color:var(--navy);margin-top:8px}
+.stat-icon{
+  width:43px;height:43px;border-radius:11px;
+  display:grid;place-items:center;font-size:17px;
+}
+.ic-blue{background:#eaf0ff;color:#4669c9}
+.ic-orange{background:#fff3e2;color:var(--orange)}
+.ic-green{background:#e5f7ef;color:var(--green)}
+.ic-purple{background:#f3eaff;color:#8055ad}
+
+.panel{
+  background:#fff;border:1px solid var(--border);
+  border-radius:11px;box-shadow:var(--shadow);overflow:hidden;
+}
+.panel-header{
+  padding:19px 21px;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;border-bottom:1px solid var(--border);
+}
+.panel-header h3{font-size:15px;color:var(--navy)}
+.panel-header p{color:var(--muted);font-size:11px;margin-top:4px}
+.filters{
+  padding:16px 20px;display:flex;gap:10px;
+  flex-wrap:wrap;border-bottom:1px solid var(--border);
+}
+.search-box{position:relative;flex:1;min-width:210px}
+.search-box i{
+  position:absolute;left:13px;top:13px;
+  color:#98a3b2;font-size:13px;
+}
+.search-box input{
+  width:100%;padding:11px 12px 11px 36px;
+  border:1px solid var(--border);border-radius:7px;
+  outline:none;font-size:12px;
+}
+.filters select{
+  min-width:150px;padding:10px;border:1px solid var(--border);
+  border-radius:7px;background:#fff;color:var(--text);font-size:12px;
+}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:850px}
+thead{background:#f8f9fc}
+th{
+  padding:14px 16px;text-align:left;color:#78859a;
+  font-size:10px;text-transform:uppercase;letter-spacing:.5px;
+}
+td{padding:14px 16px;border-top:1px solid #f0f2f6;font-size:12px}
+.notice-title{display:flex;align-items:center;gap:11px}
+.notice-icon{
+  width:38px;height:38px;border-radius:9px;
+  display:grid;place-items:center;background:#edf1fa;color:#405c91;
+}
+.notice-title strong{display:block;font-size:12px}
+.notice-title small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.category{
+  display:inline-block;padding:5px 8px;border-radius:5px;
+  background:#edf1fa;color:#425a88;font-size:10px;font-weight:700;
+}
+.status{
+  display:inline-block;padding:5px 9px;
+  border-radius:20px;font-size:10px;font-weight:700;
+}
+.published{background:#e3f7ed;color:#13865d}
+.draft{background:#fff3df;color:#bb791a}
+.archived{background:#edf0f4;color:#687487}
+.actions{display:flex;gap:6px}
+.action-btn{
+  width:29px;height:29px;border:0;border-radius:6px;
+  display:grid;place-items:center;font-size:11px;
+}
+.view-btn{background:#edf1fa;color:#405c91}
+.edit-btn{background:#fff3df;color:#bb791a}
+.publish-btn{background:#e4f7ee;color:var(--green)}
+.delete-btn{background:#ffeded;color:var(--red)}
+.empty-state{text-align:center;padding:35px;color:var(--muted);font-size:13px}
+.table-footer{padding:15px 20px;color:var(--muted);font-size:11px;border-top:1px solid var(--border)}
+
+/* MODALS */
+.modal{
+  position:fixed;inset:0;background:rgba(8,18,35,.65);
+  z-index:300;display:none;align-items:center;
+  justify-content:center;padding:15px;
+}
+.modal.show{display:flex}
+.modal-box{
+  background:#fff;width:100%;max-width:650px;
+  max-height:90vh;overflow-y:auto;border-radius:12px;
+  box-shadow:0 15px 50px rgba(0,0,0,.2);
+}
+.modal-header{
+  padding:18px 21px;display:flex;
+  justify-content:space-between;align-items:center;
+  border-bottom:1px solid var(--border);
+}
+.modal-header h3{font-size:16px;color:var(--navy)}
+.close-modal{border:0;background:none;font-size:20px;color:#7c8797}
+.modal-body{padding:22px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.form-group{display:flex;flex-direction:column;gap:7px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:11px;font-weight:700;color:#526078}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:11px;border:1px solid var(--border);
+  border-radius:7px;outline:none;font-size:12px;background:#fff;
+}
+.form-group textarea{resize:vertical;min-height:150px}
+.modal-footer{
+  padding:15px 21px;display:flex;justify-content:flex-end;
+  gap:8px;border-top:1px solid var(--border);
+}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.detail-item small{display:block;color:var(--muted);font-size:10px;margin-bottom:5px}
+.detail-item strong{font-size:12px;color:var(--navy);overflow-wrap:anywhere}
+.detail-description{
+  grid-column:1/-1;padding:14px;background:#f7f8fb;
+  border-radius:8px;font-size:12px;line-height:1.7;
+  white-space:pre-wrap;overflow-wrap:anywhere;
+}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:90}
+
+@media(max-width:1100px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .overlay.show{display:block}
+  .main{margin-left:0;width:100%}
+  .menu-toggle{display:block}
+  .topbar{padding:0 16px}
+  .top-right .secure{display:none}
+  .content{padding:20px 14px}
+  .page-heading{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:450px){
+  .stats-grid{gap:10px}
+  .stat-card{padding:14px}
+  .stat-card h2{font-size:21px}
+  .stat-icon{width:36px;height:36px}
+  .admin-profile div:last-child{display:none}
+  .topbar h3{font-size:14px}
+  .form-grid,.detail-grid{grid-template-columns:1fr}
+  .form-group.full,.detail-description{grid-column:auto}
+}
+@media print{
+  .sidebar,.topbar,.heading-actions,.filters,.actions,.notice{display:none!important}
+  .main{margin:0;width:100%}
+  .content{padding:0}
+  body{background:#fff}
+  .panel,.stat-card{box-shadow:none}
+}
+</style>
+</head>
+
+<body>
+<div class="layout">
+
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <img src="../assets/logo.png" alt="DTSC Logo" onerror="this.style.display='none'">
+    <div><h2>DTSC Alumni</h2><small>ADMINISTRATION</small></div>
+  </div>
+
+  <div class="nav-title">MAIN MENU</div>
+  <nav class="nav-menu">
+    <a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+    <a href="members.html"><i class="fa-solid fa-users"></i> Members</a>
+    <a href="teachers.html"><i class="fa-solid fa-chalkboard-user"></i> Teachers</a>
+    <a href="applications.html"><i class="fa-solid fa-file-circle-check"></i> Applications</a>
+    <a href="events.html"><i class="fa-solid fa-calendar-days"></i> Events</a>
+    <a href="notices.html" class="active"><i class="fa-solid fa-bullhorn"></i> Notices</a>
+    <a href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a>
+
+    <div class="nav-title">MANAGEMENT</div>
+    <a href="committee.html"><i class="fa-solid fa-user-group"></i> Executive Committee</a>
+    <a href="finance.html"><i class="fa-solid fa-wallet"></i> Finance Management</a>
+    <a href="reports.html"><i class="fa-solid fa-file-lines"></i> Reports & Documents</a>
+
+    <div class="nav-title">SYSTEM</div>
+    <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings & Admin Roles</a>
+    <a href="activity-logs.html"><i class="fa-solid fa-clock-rotate-left"></i> Activity Logs</a>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <a href="../index.html"><i class="fa-solid fa-globe"></i> Visit Public Website</a>
+    <a href="../login/admin.html"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a>
+  </div>
+</aside>
+
+<div class="overlay" id="overlay"></div>
+
+<main class="main">
+
+<header class="topbar">
+  <div class="top-left">
+    <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
+    <div>
+      <h3>Notices Management</h3>
+      <p>DTSC Alumni Association / Administration</p>
+    </div>
+  </div>
+
+  <div class="top-right">
+    <span class="secure"><i class="fa-solid fa-shield-halved"></i> Preview Mode</span>
+    <div class="admin-profile">
+      <div class="admin-avatar"><i class="fa-solid fa-user-shield"></i></div>
+      <div><strong>Administrator</strong><small>Super Admin</small></div>
+    </div>
+  </div>
+</header>
+
+<section class="content">
+
+  <div class="page-heading">
+    <div>
+      <h1>Notices & Announcements</h1>
+      <p>Create, publish and manage official association notices.</p>
+    </div>
+
+    <div class="heading-actions">
+      <button class="btn btn-light" id="printBtn"><i class="fa-solid fa-print"></i> Print</button>
+      <button class="btn btn-light" id="exportBtn"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+      <button class="btn btn-gold" id="addNoticeBtn"><i class="fa-solid fa-plus"></i> Create Notice</button>
+    </div>
+  </div>
+
+  <div class="notice">
+    <i class="fa-solid fa-circle-info"></i>
+    <strong>Preview Mode:</strong>
+    Notice data is temporary and will reset after refreshing the page. Supabase integration will be added later.
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div><small>Total Notices</small><h2 id="totalCount">0</h2></div>
+      <div class="stat-icon ic-blue"><i class="fa-solid fa-bullhorn"></i></div>
+    </div>
+
+    <div class="stat-card">
+      <div><small>Published</small><h2 id="publishedCount">0</h2></div>
+      <div class="stat-icon ic-green"><i class="fa-solid fa-circle-check"></i></div>
+    </div>
+
+    <div class="stat-card">
+      <div><small>Draft</small><h2 id="draftCount">0</h2></div>
+      <div class="stat-icon ic-orange"><i class="fa-solid fa-file-pen"></i></div>
+    </div>
+
+    <div class="stat-card">
+      <div><small>Archived</small><h2 id="archivedCount">0</h2></div>
+      <div class="stat-icon ic-purple"><i class="fa-solid fa-box-archive"></i></div>
+    </div>
+  </div>
+
+  <section class="panel">
+    <div class="panel-header">
+      <div><h3>All Notices</h3><p>Manage official announcements and updates</p></div>
+      <span class="category">Notice Directory</span>
+    </div>
+
+    <div class="filters">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="search" id="searchInput" placeholder="Search notice title or category...">
+      </div>
+
+      <select id="categoryFilter">
+        <option value="all">All Categories</option>
+        <option value="General">General</option>
+        <option value="Academic">Academic</option>
+        <option value="Event">Event</option>
+        <option value="Meeting">Meeting</option>
+        <option value="Important">Important</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <select id="statusFilter">
+        <option value="all">All Status</option>
+        <option value="Published">Published</option>
+        <option value="Draft">Draft</option>
+        <option value="Archived">Archived</option>
+      </select>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Notice Title</th>
+            <th>Category</th>
+            <th>Publish Date</th>
+            <th>Author</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="noticeTable"></tbody>
+      </table>
+
+      <div class="empty-state" id="emptyState" style="display:none">
+        <i class="fa-solid fa-folder-open"></i>
+        <p style="margin-top:10px">No notices found.</p>
+      </div>
+    </div>
+
+    <div class="table-footer">
+      Showing <strong id="showingCount">0</strong> notices
+    </div>
+  </section>
+
+</section>
+</main>
+</div>
+
+<!-- CREATE / EDIT MODAL -->
+<div class="modal" id="noticeModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 id="noticeModalTitle"><i class="fa-solid fa-pen-to-square"></i> Create New Notice</h3>
+      <button class="close-modal" id="closeNoticeModal">&times;</button>
+    </div>
+
+    <form id="noticeForm">
+      <div class="modal-body">
+        <input type="hidden" id="noticeId">
+
+        <div class="form-grid">
+          <div class="form-group full">
+            <label for="noticeTitle">Notice Title *</label>
+            <input type="text" id="noticeTitle" maxlength="150" required placeholder="Enter notice title">
+          </div>
+
+          <div class="form-group">
+            <label for="noticeCategory">Category *</label>
+            <select id="noticeCategory" required>
+              <option value="">Select Category</option>
+              <option>General</option>
+              <option>Academic</option>
+              <option>Event</option>
+              <option>Meeting</option>
+              <option>Important</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="noticeStatus">Status *</label>
+            <select id="noticeStatus" required>
+              <option value="Draft">Draft</option>
+              <option value="Published">Published</option>
+              <option value="Archived">Archived</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="publishDate">Publish Date *</label>
+            <input type="date" id="publishDate" required>
+          </div>
+
+          <div class="form-group">
+            <label for="noticeAuthor">Author</label>
+            <input type="text" id="noticeAuthor" maxlength="80" value="Administrator">
+          </div>
+
+          <div class="form-group full">
+            <label for="noticeContent">Notice Content *</label>
+            <textarea id="noticeContent" required maxlength="10000" placeholder="Write the complete notice here..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" id="cancelNoticeBtn">Cancel</button>
+        <button type="submit" class="btn btn-gold"><i class="fa-solid fa-floppy-disk"></i> Save Notice</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- VIEW MODAL -->
+<div class="modal" id="detailsModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3><i class="fa-solid fa-file-lines"></i> Notice Details</h3>
+      <button class="close-modal" id="closeDetailsModal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="detail-grid" id="detailsContent"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-light" id="detailsCloseBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* DEMO NOTICE DATA */
+
+let notices = [
+  {
+    id:1,
+    title:"DTSC Alumni Reunion 2026 Registration",
+    category:"Event",
+    date:"2026-11-20",
+    author:"Administrator",
+    status:"Published",
+    content:"Registration is now open for the DTSC Alumni Reunion 2026. All former students are invited to participate."
+  },
+  {
+    id:2,
+    title:"Executive Committee Meeting Notice",
+    category:"Meeting",
+    date:"2026-11-18",
+    author:"General Secretary",
+    status:"Published",
+    content:"A meeting of the Executive Committee will be held at the scheduled venue. All committee members are requested to attend."
+  },
+  {
+    id:3,
+    title:"Membership Registration Guidelines",
+    category:"General",
+    date:"2026-11-16",
+    author:"Administrator",
+    status:"Published",
+    content:"Applicants should complete the membership registration form with accurate information."
+  },
+  {
+    id:4,
+    title:"Annual Sports Program Announcement",
+    category:"Event",
+    date:"2026-11-14",
+    author:"Event Coordinator",
+    status:"Draft",
+    content:"The association is preparing an annual sports program for its members."
+  },
+  {
+    id:5,
+    title:"Important Membership Update",
+    category:"Important",
+    date:"2026-11-10",
+    author:"Administrator",
+    status:"Archived",
+    content:"Previous membership update notice."
+  }
+];
+
+function escapeHTML(value){
+  return String(value ?? "").replace(/[&<>"']/g,char=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",
+    '"':"&quot;","'":"&#039;"
+  }[char]));
+}
+
+function formatDate(date){
+  if(!date)return "N/A";
+  return new Date(date+"T00:00:00").toLocaleDateString("en-GB",{
+    day:"2-digit",month:"short",year:"numeric"
+  });
+}
+
+function updateStats(){
+  document.getElementById("totalCount").textContent=notices.length;
+  document.getElementById("publishedCount").textContent=
+    notices.filter(n=>n.status==="Published").length;
+  document.getElementById("draftCount").textContent=
+    notices.filter(n=>n.status==="Draft").length;
+  document.getElementById("archivedCount").textContent=
+    notices.filter(n=>n.status==="Archived").length;
+}
+
+function renderNotices(){
+
+  const search=document.getElementById("searchInput").value.toLowerCase().trim();
+  const category=document.getElementById("categoryFilter").value;
+  const status=document.getElementById("statusFilter").value;
+
+  const filtered=notices.filter(notice=>{
+    const matchesSearch=
+      notice.title.toLowerCase().includes(search) ||
+      notice.category.toLowerCase().includes(search);
+
+    return matchesSearch &&
+      (category==="all" || notice.category===category) &&
+      (status==="all" || notice.status===status);
+  });
+
+  document.getElementById("noticeTable").innerHTML=filtered.map(notice=>`
+    <tr>
+      <td>
+        <div class="notice-title">
+          <div class="notice-icon"><i class="fa-solid fa-file-lines"></i></div>
+          <div>
+            <strong>${escapeHTML(notice.title)}</strong>
+            <small>Notice #${notice.id}</small>
+          </div>
+        </div>
+      </td>
+
+      <td><span class="category">${escapeHTML(notice.category)}</span></td>
+      <td>${escapeHTML(formatDate(notice.date))}</td>
+      <td>${escapeHTML(notice.author)}</td>
+      <td><span class="status ${notice.status.toLowerCase()}">${escapeHTML(notice.status)}</span></td>
+
+      <td>
+        <div class="actions">
+          <button class="action-btn view-btn" data-action="view" data-id="${notice.id}" title="View">
+            <i class="fa-solid fa-eye"></i>
+          </button>
+
+          <button class="action-btn edit-btn" data-action="edit" data-id="${notice.id}" title="Edit">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+
+          <button class="action-btn publish-btn" data-action="toggle" data-id="${notice.id}" title="Change Status">
+            <i class="fa-solid fa-${notice.status==="Published"?"box-archive":"paper-plane"}"></i>
+          </button>
+
+          <button class="action-btn delete-btn" data-action="delete" data-id="${notice.id}" title="Delete">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+  `).join("");
+
+  document.getElementById("emptyState").style.display=filtered.length?"none":"block";
+  document.getElementById("showingCount").textContent=filtered.length;
+  updateStats();
+}
+
+/* OPEN CREATE / EDIT FORM */
+
+function openNoticeModal(notice=null){
+
+  document.getElementById("noticeForm").reset();
+  document.getElementById("noticeId").value=notice?notice.id:"";
+
+  document.getElementById("noticeModalTitle").innerHTML=notice
+    ? '<i class="fa-solid fa-pen"></i> Edit Notice'
+    : '<i class="fa-solid fa-pen-to-square"></i> Create New Notice';
+
+  document.getElementById("noticeAuthor").value="Administrator";
+
+  if(notice){
+    document.getElementById("noticeTitle").value=notice.title;
+    document.getElementById("noticeCategory").value=notice.category;
+    document.getElementById("noticeStatus").value=notice.status;
+    document.getElementById("publishDate").value=notice.date;
+    document.getElementById("noticeAuthor").value=notice.author;
+    document.getElementById("noticeContent").value=notice.content;
+  }else{
+    document.getElementById("publishDate").value=
+      new Date().toISOString().slice(0,10);
+  }
+
+  document.getElementById("noticeModal").classList.add("show");
+}
+
+function closeNoticeModal(){
+  document.getElementById("noticeModal").classList.remove("show");
+}
+
+/* VIEW DETAILS */
+
+function showDetails(id){
+  const notice=notices.find(n=>n.id===id);
+  if(!notice)return;
+
+  document.getElementById("detailsContent").innerHTML=`
+    <div class="detail-item">
+      <small>Notice Title</small>
+      <strong>${escapeHTML(notice.title)}</strong>
+    </div>
+    <div class="detail-item">
+      <small>Category</small>
+      <strong>${escapeHTML(notice.category)}</strong>
+    </div>
+    <div class="detail-item">
+      <small>Publish Date</small>
+      <strong>${escapeHTML(formatDate(notice.date))}</strong>
+    </div>
+    <div class="detail-item">
+      <small>Author</small>
+      <strong>${escapeHTML(notice.author)}</strong>
+    </div>
+    <div class="detail-item">
+      <small>Status</small>
+      <strong>${escapeHTML(notice.status)}</strong>
+    </div>
+    <div class="detail-description">
+      <strong>Notice Content</strong>
+      <p style="margin-top:9px">${escapeHTML(notice.content)}</p>
+    </div>
+  `;
+
+  document.getElementById("detailsModal").classList.add("show");
+}
+
+function closeDetails(){
+  document.getElementById("detailsModal").classList.remove("show");
+}
+
+/* SAVE NOTICE */
+
+document.getElementById("noticeForm").addEventListener("submit",function(e){
+  e.preventDefault();
+
+  const id=document.getElementById("noticeId").value;
+
+  const data={
+    title:document.getElementById("noticeTitle").value.trim(),
+    category:document.getElementById("noticeCategory").value,
+    status:document.getElementById("noticeStatus").value,
+    date:document.getElementById("publishDate").value,
+    author:document.getElementById("noticeAuthor").value.trim()||"Administrator",
+    content:document.getElementById("noticeContent").value.trim()
+  };
+
+  if(!data.title||!data.category||!data.date||!data.content){
+    alert("Please complete all required fields.");
+    return;
+  }
+
+  if(id){
+    const index=notices.findIndex(n=>n.id===Number(id));
+    if(index!==-1)notices[index]={...notices[index],...data};
+  }else{
+    notices.push({id:Date.now(),...data});
+  }
+
+  closeNoticeModal();
+  renderNotices();
+});
+
+/* TABLE ACTIONS */
+
+document.getElementById("noticeTable").addEventListener("click",function(e){
+
+  const button=e.target.closest("button[data-action]");
+  if(!button)return;
+
+  const id=Number(button.dataset.id);
+  const action=button.dataset.action;
+  const notice=notices.find(n=>n.id===id);
+
+  if(!notice)return;
+
+  if(action==="view")showDetails(id);
+
+  if(action==="edit")openNoticeModal(notice);
+
+  if(action==="toggle"){
+    if(notice.status==="Published"){
+      if(confirm("Archive this published notice?")){
+        notice.status="Archived";
+      }
+    }else{
+      if(confirm("Publish this notice now?")){
+        notice.status="Published";
+      }
+    }
+    renderNotices();
+  }
+
+  if(action==="delete"){
+    if(confirm("Are you sure you want to permanently delete this notice?")){
+      notices=notices.filter(n=>n.id!==id);
+      renderNotices();
+    }
+  }
+});
+
+/* SEARCH AND FILTER */
+
+document.getElementById("searchInput").addEventListener("input",renderNotices);
+document.getElementById("categoryFilter").addEventListener("change",renderNotices);
+document.getElementById("statusFilter").addEventListener("change",renderNotices);
+
+/* BUTTONS */
+
+document.getElementById("addNoticeBtn").addEventListener("click",()=>openNoticeModal());
+document.getElementById("closeNoticeModal").addEventListener("click",closeNoticeModal);
+document.getElementById("cancelNoticeBtn").addEventListener("click",closeNoticeModal);
+document.getElementById("closeDetailsModal").addEventListener("click",closeDetails);
+document.getElementById("detailsCloseBtn").addEventListener("click",closeDetails);
+
+document.getElementById("noticeModal").addEventListener("click",function(e){
+  if(e.target===this)closeNoticeModal();
+});
+
+document.getElementById("detailsModal").addEventListener("click",function(e){
+  if(e.target===this)closeDetails();
+});
+
+document.getElementById("printBtn").addEventListener("click",()=>window.print());
+
+/* CSV EXPORT */
+
+document.getElementById("exportBtn").addEventListener("click",function(){
+
+  if(!notices.length){
+    alert("No notices available to export.");
+    return;
+  }
+
+  const headers=["Title","Category","Publish Date","Author","Status","Content"];
+
+  const rows=notices.map(n=>[
+    n.title,n.category,n.date,n.author,n.status,n.content
+  ]);
+
+  const csv=[headers,...rows].map(row=>
+    row.map(value=>'"'+String(value??"").replace(/"/g,'""')+'"').join(",")
+  ).join("\r\n");
+
+  const blob=new Blob(["\uFEFF"+csv],{
+    type:"text/csv;charset=utf-8;"
+  });
+
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement("a");
+  link.href=url;
+  link.download="DTSC-Notices.csv";
+  link.click();
+  URL.revokeObjectURL(url);
+});
+
+/* MOBILE SIDEBAR */
+
+const sidebar=document.getElementById("sidebar");
+const overlay=document.getElementById("overlay");
+
+document.getElementById("menuToggle").addEventListener("click",()=>{
+  sidebar.classList.toggle("open");
+  overlay.classList.toggle("show");
+});
+
+overlay.addEventListener("click",()=>{
+  sidebar.classList.remove("open");
+  overlay.classList.remove("show");
+});
+
+/* INITIALIZE */
+renderNotices();
+</script>
+
+</body>
+</html>
+
