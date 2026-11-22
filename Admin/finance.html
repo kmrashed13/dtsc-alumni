@@ -1,0 +1,558 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101b32">
+<title>Finance Management | DTSC Alumni Association</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+ --navy:#101b32;--gold:#d5ad58;--bg:#f4f6fa;--white:#fff;
+ --text:#29364c;--muted:#8792a5;--border:#e8ecf2;
+ --green:#16866a;--red:#d95362;--shadow:0 8px 28px rgba(20,35,60,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:255px;background:var(--navy);color:white;padding:25px 17px;position:fixed;inset:0 auto 0 0;z-index:20;overflow-y:auto}
+.brand{display:flex;align-items:center;gap:12px;padding:0 8px 25px;border-bottom:1px solid #ffffff18}
+.brand-icon{width:43px;height:43px;background:var(--gold);color:var(--navy);border-radius:12px;display:grid;place-items:center;font-size:19px}
+.brand h2{font-size:15px;line-height:1.35}
+.brand small{font-size:10px;color:#aebbd0;letter-spacing:1px}
+.nav-label{font-size:10px;color:#8291a9;font-weight:700;letter-spacing:1.5px;margin:25px 10px 10px}
+.nav a{display:flex;align-items:center;gap:13px;padding:12px 13px;margin:4px 0;border-radius:9px;color:#c4cede;text-decoration:none;font-size:13px;transition:.2s}
+.nav a i{width:17px;text-align:center}
+.nav a:hover,.nav a.active{background:#ffffff12;color:var(--gold)}
+.nav a.active{border-left:3px solid var(--gold);padding-left:10px}
+.sidebar-bottom{margin-top:30px;padding:15px 10px;border-top:1px solid #ffffff18;color:#9aa8bd;font-size:11px;line-height:1.8}
+.main{margin-left:255px;width:calc(100% - 255px);padding:28px 32px 45px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:27px;gap:15px}
+.top-left{display:flex;align-items:center;gap:13px}
+.menu-btn{display:none;border:0;background:white;border-radius:9px;width:40px;height:40px;color:var(--navy)}
+.page-title h1{font-size:25px;color:var(--navy);font-weight:800}
+.page-title p{font-size:12px;color:var(--muted);margin-top:5px}
+.top-actions{display:flex;align-items:center;gap:10px}
+.preview{background:#fff7e6;color:#9a6e19;border:1px solid #f1dfb7;padding:9px 13px;border-radius:8px;font-size:11px;font-weight:700}
+.admin-user{display:flex;align-items:center;gap:9px;background:white;padding:7px 12px;border-radius:10px;box-shadow:var(--shadow)}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-size:12px}
+.admin-user strong{font-size:11px;display:block}
+.admin-user small{font-size:10px;color:var(--muted)}
+.demo-note{background:#fff9eb;border:1px solid #f1e2bf;border-radius:10px;padding:12px 15px;color:#876a30;font-size:12px;margin-bottom:22px;display:flex;gap:10px;align-items:center}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.stat{background:white;border-radius:13px;padding:19px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center}
+.stat p{font-size:11px;color:var(--muted);font-weight:600}
+.stat h2{font-size:23px;color:var(--navy);margin-top:8px}
+.stat-icon{width:43px;height:43px;border-radius:12px;background:#f3eddf;color:#b58b37;display:grid;place-items:center}
+.panel{background:white;border-radius:13px;box-shadow:var(--shadow);padding:21px;margin-bottom:20px}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:18px}
+.panel-head h3{font-size:16px;color:var(--navy)}
+.panel-head p{font-size:11px;color:var(--muted);margin-top:4px}
+.btn{border:0;border-radius:8px;padding:10px 14px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-primary{background:var(--navy);color:white}
+.btn-primary:hover{background:#223756}
+.btn-light{background:#f1f3f7;color:#59677c}
+.btn-danger{background:#fff0f1;color:var(--red)}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:17px}
+.search{position:relative;flex:1;min-width:180px}
+.search i{position:absolute;left:12px;top:12px;color:#9aa5b5;font-size:12px}
+.search input{padding-left:34px;width:100%}
+input,select,textarea{border:1px solid var(--border);border-radius:8px;padding:10px 11px;font-size:12px;outline:none;background:white;color:var(--text)}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px #d5ad581c}
+.toolbar select{min-width:130px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:780px}
+th{text-align:left;font-size:10px;color:#8994a6;background:#f8f9fb;padding:13px 12px;font-weight:700;white-space:nowrap}
+td{padding:13px 12px;border-bottom:1px solid var(--border);font-size:11px;color:#526078;white-space:nowrap}
+td strong{color:var(--navy)}
+.type-badge,.status-badge{display:inline-block;padding:5px 9px;border-radius:20px;font-size:9px;font-weight:700}
+.income{background:#e8f7f1;color:var(--green)}
+.expense{background:#fff0f1;color:var(--red)}
+.status-completed{background:#e8f7f1;color:var(--green)}
+.status-pending{background:#fff7e6;color:#a77922}
+.status-cancelled{background:#fff0f1;color:var(--red)}
+.amount-income{color:var(--green);font-weight:800}
+.amount-expense{color:var(--red);font-weight:800}
+.icon-btn{width:28px;height:28px;border:0;border-radius:7px;background:#f2f4f8;color:#647187;font-size:11px;margin-right:3px}
+.icon-btn:hover{background:#e8edf5;color:var(--navy)}
+.empty{text-align:center;padding:40px;color:var(--muted);font-size:12px}
+.summary{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.summary-card{border:1px solid var(--border);border-radius:11px;padding:16px}
+.summary-card p{font-size:11px;color:var(--muted)}
+.summary-card h3{font-size:20px;margin-top:7px;color:var(--navy)}
+.summary-card small{font-size:10px;color:var(--muted)}
+.footer{text-align:center;color:#9aa4b4;font-size:10px;margin-top:25px}
+.modal{display:none;position:fixed;inset:0;background:#101b3275;z-index:50;align-items:center;justify-content:center;padding:15px}
+.modal.show{display:flex}
+.modal-box{background:white;width:100%;max-width:540px;max-height:90vh;overflow:auto;border-radius:14px;padding:23px;box-shadow:0 20px 70px #0003}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.modal-head h3{font-size:17px;color:var(--navy)}
+.close{border:0;background:#f1f3f7;width:30px;height:30px;border-radius:8px;color:#657188}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:11px;font-weight:700;color:#56647a}
+.field textarea{min-height:75px;resize:vertical}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
+@media(max-width:1100px){.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){
+ .sidebar{transform:translateX(-100%);transition:.25s}
+ .sidebar.open{transform:translateX(0)}
+ .main{margin-left:0;width:100%;padding:19px 15px 35px}
+ .menu-btn{display:block}
+ .page-title h1{font-size:20px}
+ .admin-user .user-info{display:none}
+ .panel{padding:14px}
+}
+@media(max-width:480px){
+ .stats{gap:9px}
+ .stat{padding:13px}
+ .stat h2{font-size:19px}
+ .summary{grid-template-columns:1fr}
+ .form-grid{grid-template-columns:1fr}
+ .field.full{grid-column:auto}
+ .preview{font-size:9px;padding:8px}
+}
+@media print{
+ .sidebar,.top-actions,.menu-btn,.demo-note,.toolbar,.panel-head button,.icon-btn,.footer{display:none!important}
+ .main{margin:0;width:100%;padding:0}
+ body{background:white}
+}
+</style>
+</head>
+
+<body>
+<div class="layout">
+
+<aside class="sidebar" id="sidebar">
+ <div class="brand">
+  <div class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+  <div><h2>DTSC Alumni</h2><small>ADMINISTRATION</small></div>
+ </div>
+
+ <div class="nav-label">MAIN MENU</div>
+ <nav class="nav">
+  <a href="dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+  <a href="members.html"><i class="fa-solid fa-users"></i> Members</a>
+  <a href="teachers.html"><i class="fa-solid fa-chalkboard-user"></i> Teachers</a>
+  <a href="applications.html"><i class="fa-solid fa-file-circle-check"></i> Applications</a>
+  <a href="events.html"><i class="fa-solid fa-calendar-days"></i> Events</a>
+  <a href="notices.html"><i class="fa-solid fa-bullhorn"></i> Notices</a>
+  <a href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a>
+ </nav>
+
+ <div class="nav-label">MANAGEMENT</div>
+ <nav class="nav">
+  <a href="committee.html"><i class="fa-solid fa-user-group"></i> Executive Committee</a>
+  <a class="active" href="finance.html"><i class="fa-solid fa-wallet"></i> Finance Management</a>
+  <a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports & Documents</a>
+ </nav>
+
+ <div class="nav-label">SYSTEM</div>
+ <nav class="nav">
+  <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings & Admin Roles</a>
+  <a href="activity-logs.html"><i class="fa-solid fa-clock-rotate-left"></i> Activity Logs</a>
+ </nav>
+
+ <div class="sidebar-bottom">
+  DTSC Alumni Association<br>
+  Management System<br>
+  <span style="color:#d5ad58">Version 1.0.0</span>
+ </div>
+</aside>
+
+<main class="main">
+ <header class="topbar">
+  <div class="top-left">
+   <button class="menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+   <div class="page-title">
+    <h1>Finance Management</h1>
+    <p>Track association income, expenses and transactions</p>
+   </div>
+  </div>
+  <div class="top-actions">
+   <div class="preview"><i class="fa-solid fa-eye"></i> PREVIEW MODE</div>
+   <div class="admin-user">
+    <div class="avatar">A</div>
+    <div class="user-info"><strong>Administrator</strong><small>Super Admin</small></div>
+   </div>
+  </div>
+ </header>
+
+ <div class="demo-note">
+  <i class="fa-solid fa-circle-info"></i>
+  Demo interface only. Financial records are sample data and are not permanently stored. Supabase integration will be added later.
+ </div>
+
+ <section class="stats">
+  <div class="stat"><div><p>Total Income</p><h2 id="totalIncome">৳0</h2></div><div class="stat-icon"><i class="fa-solid fa-arrow-trend-up"></i></div></div>
+  <div class="stat"><div><p>Total Expenses</p><h2 id="totalExpense">৳0</h2></div><div class="stat-icon"><i class="fa-solid fa-arrow-trend-down"></i></div></div>
+  <div class="stat"><div><p>Available Balance</p><h2 id="balance">৳0</h2></div><div class="stat-icon"><i class="fa-solid fa-wallet"></i></div></div>
+  <div class="stat"><div><p>Total Transactions</p><h2 id="transactionCount">0</h2></div><div class="stat-icon"><i class="fa-solid fa-receipt"></i></div></div>
+ </section>
+
+ <section class="panel">
+  <div class="panel-head">
+   <div><h3>Financial Overview</h3><p>Summary of recorded transactions</p></div>
+  </div>
+  <div class="summary">
+   <div class="summary-card">
+    <p><i class="fa-solid fa-circle-arrow-down" style="color:#16866a"></i> Income Records</p>
+    <h3 id="incomeRecords">0</h3>
+    <small>Recorded income transactions</small>
+   </div>
+   <div class="summary-card">
+    <p><i class="fa-solid fa-circle-arrow-up" style="color:#d95362"></i> Expense Records</p>
+    <h3 id="expenseRecords">0</h3>
+    <small>Recorded expense transactions</small>
+   </div>
+  </div>
+ </section>
+
+ <section class="panel">
+  <div class="panel-head">
+   <div><h3>Transaction Records</h3><p>Manage all income and expense entries</p></div>
+   <button class="btn btn-primary" onclick="openAddModal()"><i class="fa-solid fa-plus"></i> Add Transaction</button>
+  </div>
+
+  <div class="toolbar">
+   <div class="search"><i class="fa-solid fa-search"></i><input id="searchInput" type="search" placeholder="Search title or reference..." oninput="renderTransactions()"></div>
+   <select id="typeFilter" onchange="renderTransactions()">
+    <option value="">All Types</option>
+    <option value="Income">Income</option>
+    <option value="Expense">Expense</option>
+   </select>
+   <select id="statusFilter" onchange="renderTransactions()">
+    <option value="">All Status</option>
+    <option>Completed</option>
+    <option>Pending</option>
+    <option>Cancelled</option>
+   </select>
+   <button class="btn btn-light" onclick="exportCSV()"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+   <button class="btn btn-light" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
+  </div>
+
+  <div class="table-wrap">
+   <table>
+    <thead>
+     <tr>
+      <th>TRANSACTION ID</th>
+      <th>TITLE</th>
+      <th>TYPE</th>
+      <th>CATEGORY</th>
+      <th>DATE</th>
+      <th>AMOUNT</th>
+      <th>STATUS</th>
+      <th>ACTIONS</th>
+     </tr>
+    </thead>
+    <tbody id="transactionTable"></tbody>
+   </table>
+  </div>
+ </section>
+
+ <div class="footer">© 2026 DTSC Alumni Association. All rights reserved.</div>
+</main>
+</div>
+
+<!-- ADD / EDIT MODAL -->
+<div class="modal" id="transactionModal">
+ <div class="modal-box">
+  <div class="modal-head">
+   <h3 id="modalTitle">Add Transaction</h3>
+   <button class="close" onclick="closeModal('transactionModal')"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <form id="transactionForm">
+   <input type="hidden" id="transactionId">
+   <div class="form-grid">
+    <div class="field full">
+     <label>Transaction Title *</label>
+     <input id="title" required maxlength="120" placeholder="e.g. Membership Fee Collection">
+    </div>
+    <div class="field">
+     <label>Transaction Type *</label>
+     <select id="type" required>
+      <option value="Income">Income</option>
+      <option value="Expense">Expense</option>
+     </select>
+    </div>
+    <div class="field">
+     <label>Category *</label>
+     <select id="category" required>
+      <option value="">Select Category</option>
+      <option>Membership Fee</option>
+      <option>Donation</option>
+      <option>Event Collection</option>
+      <option>Sponsorship</option>
+      <option>Office Expense</option>
+      <option>Event Expense</option>
+      <option>Transport</option>
+      <option>Printing</option>
+      <option>Other</option>
+     </select>
+    </div>
+    <div class="field">
+     <label>Amount (BDT) *</label>
+     <input id="amount" type="number" min="0.01" step="0.01" required placeholder="Enter amount">
+    </div>
+    <div class="field">
+     <label>Transaction Date *</label>
+     <input id="date" type="date" required>
+    </div>
+    <div class="field">
+     <label>Payment Method</label>
+     <select id="method">
+      <option>Cash</option>
+      <option>Bank Transfer</option>
+      <option>Mobile Banking</option>
+      <option>Other</option>
+     </select>
+    </div>
+    <div class="field">
+     <label>Status</label>
+     <select id="status">
+      <option>Completed</option>
+      <option>Pending</option>
+      <option>Cancelled</option>
+     </select>
+    </div>
+    <div class="field full">
+     <label>Reference / Received From / Paid To</label>
+     <input id="reference" maxlength="120" placeholder="Person name or reference">
+    </div>
+    <div class="field full">
+     <label>Description / Notes</label>
+     <textarea id="notes" maxlength="500" placeholder="Additional transaction details..."></textarea>
+    </div>
+   </div>
+   <div class="modal-actions">
+    <button type="button" class="btn btn-light" onclick="closeModal('transactionModal')">Cancel</button>
+    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Save Transaction</button>
+   </div>
+  </form>
+ </div>
+</div>
+
+<script>
+const demoTransactions=[
+ {id:1,title:"Annual Membership Fee",type:"Income",category:"Membership Fee",amount:15000,date:"2026-11-01",method:"Bank Transfer",status:"Completed",reference:"Member Collection",notes:"Annual membership fee collection."},
+ {id:2,title:"Alumni Reunion Donation",type:"Income",category:"Donation",amount:25000,date:"2026-10-20",method:"Mobile Banking",status:"Completed",reference:"Alumni Donors",notes:"Donation for reunion programme."},
+ {id:3,title:"Event Venue Booking",type:"Expense",category:"Event Expense",amount:8000,date:"2026-10-18",method:"Cash",status:"Completed",reference:"Event Venue",notes:"Venue booking payment."},
+ {id:4,title:"Printing and Stationery",type:"Expense",category:"Printing",amount:2500,date:"2026-10-12",method:"Cash",status:"Completed",reference:"Printing Shop",notes:"Printing documents and stationery."},
+ {id:5,title:"Corporate Sponsorship",type:"Income",category:"Sponsorship",amount:12000,date:"2026-10-05",method:"Bank Transfer",status:"Pending",reference:"Sponsor Contribution",notes:"Sponsorship payment awaiting confirmation."},
+ {id:6,title:"Transport Cost",type:"Expense",category:"Transport",amount:1800,date:"2026-09-25",method:"Cash",status:"Completed",reference:"Transport",notes:"Event-related transport cost."}
+];
+
+let transactions=demoTransactions.map(t=>({...t}));
+let nextId=7;
+
+function escapeHTML(value){
+ return String(value??"").replace(/[&<>"']/g,char=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[char]);
+}
+
+function money(value){
+ return "৳"+Number(value||0).toLocaleString("en-BD",{maximumFractionDigits:2});
+}
+
+function updateStats(){
+ const completed=transactions.filter(t=>t.status==="Completed");
+ const income=completed.filter(t=>t.type==="Income").reduce((sum,t)=>sum+Number(t.amount),0);
+ const expense=completed.filter(t=>t.type==="Expense").reduce((sum,t)=>sum+Number(t.amount),0);
+
+ document.getElementById("totalIncome").textContent=money(income);
+ document.getElementById("totalExpense").textContent=money(expense);
+ document.getElementById("balance").textContent=money(income-expense);
+ document.getElementById("transactionCount").textContent=transactions.length;
+ document.getElementById("incomeRecords").textContent=transactions.filter(t=>t.type==="Income").length;
+ document.getElementById("expenseRecords").textContent=transactions.filter(t=>t.type==="Expense").length;
+}
+
+function renderTransactions(){
+ updateStats();
+
+ const search=document.getElementById("searchInput").value.toLowerCase().trim();
+ const type=document.getElementById("typeFilter").value;
+ const status=document.getElementById("statusFilter").value;
+
+ const filtered=transactions.filter(t=>
+  (t.title.toLowerCase().includes(search)||t.reference.toLowerCase().includes(search))&&
+  (!type||t.type===type)&&
+  (!status||t.status===status)
+ );
+
+ const tbody=document.getElementById("transactionTable");
+
+ if(!filtered.length){
+  tbody.innerHTML='<tr><td colspan="8" class="empty">No transactions found.</td></tr>';
+  return;
+ }
+
+ tbody.innerHTML=filtered.map(t=>`
+  <tr>
+   <td><strong>TRX-${String(t.id).padStart(4,"0")}</strong></td>
+   <td><strong>${escapeHTML(t.title)}</strong></td>
+   <td><span class="type-badge ${t.type==="Income"?"income":"expense"}">${escapeHTML(t.type)}</span></td>
+   <td>${escapeHTML(t.category)}</td>
+   <td>${escapeHTML(t.date)}</td>
+   <td class="${t.type==="Income"?"amount-income":"amount-expense"}">${t.type==="Income"?"+":"−"} ${money(t.amount)}</td>
+   <td><span class="status-badge status-${t.status.toLowerCase()}">${escapeHTML(t.status)}</span></td>
+   <td>
+    <button class="icon-btn" title="View" onclick="viewTransaction(${t.id})"><i class="fa-solid fa-eye"></i></button>
+    <button class="icon-btn" title="Edit" onclick="editTransaction(${t.id})"><i class="fa-solid fa-pen"></i></button>
+    <button class="icon-btn" title="Delete" onclick="deleteTransaction(${t.id})"><i class="fa-solid fa-trash"></i></button>
+   </td>
+  </tr>
+ `).join("");
+}
+
+function openAddModal(){
+ document.getElementById("transactionForm").reset();
+ document.getElementById("transactionId").value="";
+ document.getElementById("date").value=new Date().toISOString().slice(0,10);
+ document.getElementById("modalTitle").textContent="Add Transaction";
+ document.getElementById("transactionModal").classList.add("show");
+}
+
+function editTransaction(id){
+ const t=transactions.find(x=>x.id===id);
+ if(!t)return;
+
+ document.getElementById("transactionId").value=t.id;
+ document.getElementById("title").value=t.title;
+ document.getElementById("type").value=t.type;
+ document.getElementById("category").value=t.category;
+ document.getElementById("amount").value=t.amount;
+ document.getElementById("date").value=t.date;
+ document.getElementById("method").value=t.method;
+ document.getElementById("status").value=t.status;
+ document.getElementById("reference").value=t.reference;
+ document.getElementById("notes").value=t.notes;
+
+ document.getElementById("modalTitle").textContent="Edit Transaction";
+ document.getElementById("transactionModal").classList.add("show");
+}
+
+document.getElementById("transactionForm").addEventListener("submit",function(e){
+ e.preventDefault();
+
+ const id=Number(document.getElementById("transactionId").value);
+ const data={
+  title:document.getElementById("title").value.trim(),
+  type:document.getElementById("type").value,
+  category:document.getElementById("category").value,
+  amount:Number(document.getElementById("amount").value),
+  date:document.getElementById("date").value,
+  method:document.getElementById("method").value,
+  status:document.getElementById("status").value,
+  reference:document.getElementById("reference").value.trim(),
+  notes:document.getElementById("notes").value.trim()
+ };
+
+ if(!data.title||!data.category||!data.date||!Number.isFinite(data.amount)||data.amount<=0){
+  alert("Please enter valid transaction details.");
+  return;
+ }
+
+ if(id){
+  const index=transactions.findIndex(t=>t.id===id);
+  if(index!==-1)transactions[index]={...transactions[index],...data};
+ }else{
+  transactions.unshift({id:nextId++,...data});
+ }
+
+ closeModal("transactionModal");
+ renderTransactions();
+});
+
+function viewTransaction(id){
+ const t=transactions.find(x=>x.id===id);
+ if(!t)return;
+
+ document.getElementById("viewTransactionData");
+ const content=`
+  <div style="padding:10px 0">
+   <div style="font-size:20px;font-weight:800;color:${t.type==="Income"?"#16866a":"#d95362"};margin-bottom:15px">
+    ${t.type==="Income"?"+":"−"} ${money(t.amount)}
+   </div>
+   ${detailRow("Transaction ID","TRX-"+String(t.id).padStart(4,"0"))}
+   ${detailRow("Title",t.title)}
+   ${detailRow("Type",t.type)}
+   ${detailRow("Category",t.category)}
+   ${detailRow("Date",t.date)}
+   ${detailRow("Payment Method",t.method)}
+   ${detailRow("Status",t.status)}
+   ${detailRow("Reference",t.reference)}
+   ${detailRow("Notes",t.notes)}
+  </div>
+ `;
+ let modal=document.getElementById("viewModal");
+ if(!modal){
+  modal=document.createElement("div");
+  modal.id="viewModal";
+  modal.className="modal";
+  modal.innerHTML='<div class="modal-box"><div class="modal-head"><h3>Transaction Details</h3><button class="close" onclick="closeModal(\\'viewModal\\')"><i class="fa-solid fa-xmark"></i></button></div><div id="viewContent"></div><div class="modal-actions"><button class="btn btn-light" onclick="closeModal(\\'viewModal\\')">Close</button></div></div>';
+  document.body.appendChild(modal);
+  modal.addEventListener("click",e=>{if(e.target===modal)modal.classList.remove("show");});
+ }
+ modal.querySelector("#viewContent").innerHTML=content;
+ modal.classList.add("show");
+}
+
+function detailRow(label,value){
+ return '<div style="padding:9px 0;border-bottom:1px solid #e8ecf2;font-size:11px;display:flex;gap:10px"><strong style="width:125px;color:#101b32">'+escapeHTML(label)+'</strong><span style="color:#657188;overflow-wrap:anywhere">'+escapeHTML(value||"Not provided")+'</span></div>';
+}
+
+function deleteTransaction(id){
+ const t=transactions.find(x=>x.id===id);
+ if(!t)return;
+ if(confirm('Delete transaction "'+t.title+'"?')){
+  transactions=transactions.filter(x=>x.id!==id);
+  renderTransactions();
+ }
+}
+
+function closeModal(id){
+ const modal=document.getElementById(id);
+ if(modal)modal.classList.remove("show");
+}
+
+function toggleSidebar(){
+ document.getElementById("sidebar").classList.toggle("open");
+}
+
+function exportCSV(){
+ const rows=[["Transaction ID","Title","Type","Category","Amount","Date","Payment Method","Status","Reference","Notes"]];
+ transactions.forEach(t=>rows.push(["TRX-"+String(t.id).padStart(4,"0"),t.title,t.type,t.category,t.amount,t.date,t.method,t.status,t.reference,t.notes]));
+ const csv=rows.map(row=>row.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\n");
+ const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8;"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download="DTSC-Finance-Transactions.csv";
+ a.click();
+ URL.revokeObjectURL(url);
+}
+
+document.querySelectorAll(".modal").forEach(modal=>{
+ modal.addEventListener("click",e=>{
+  if(e.target===modal)modal.classList.remove("show");
+ });
+});
+
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape")document.querySelectorAll(".modal.show").forEach(m=>m.classList.remove("show"));
+});
+
+renderTransactions();
+</script>
+</body>
+</html>
