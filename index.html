@@ -14,66 +14,8 @@
 
 <body>
 
-  <!-- HEADER + NAVIGATION -->
-
-  <div class="site-header">
-
-    <header class="header">
-
-      <div class="header-logo">
-        <img src="./assets/logo.png" alt="DTSC Alumni Association Logo">
-      </div>
-
-      <div class="header-title">
-        <h1>DTSC Alumni Association</h1>
-        <p>Dewanganj Govt. Technical School & College, Jamalpur</p>
-        <span>Shared Roots, Lifelong Fellowship</span>
-      </div>
-
-      <div class="header-logo">
-        <img src="./assets/dtsclogo.png" alt="DTSC Institute Logo">
-      </div>
-
-    </header>
-
-    <!-- NAVIGATION -->
-
-    <nav class="navbar">
-
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        aria-label="Open Menu"
-        aria-expanded="false">
-        ☰
-      </button>
-
-      <ul class="nav-menu" id="navMenu">
-
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="./about/index.html">About Us</a></li>
-        <li><a href="./events/index.html">Events</a></li>
-        <li><a href="./gallery/index.html">Gallery</a></li>
-        <li><a href="./membership/index.html">Membership Directory</a></li>
-        <li><a href="./contact/index.html">Contact</a></li>
-
-        <li>
-          <button id="languageToggle" type="button">(BN)</button>
-        </li>
-
-        <li>
-          <a href="#" class="login-trigger">Login</a>
-        </li>
-
-        <li>
-          <a href="#" class="register-trigger">Register</a>
-        </li>
-
-      </ul>
-
-    </nav>
-
-  </div>
+  <!-- GLOBAL HEADER -->
+  <div id="global-header"></div>
 
 
   <!-- HERO BANNER -->
@@ -449,11 +391,7 @@
 
       <div class="login-options">
 
-        <!-- STUDENT LOGIN -->
-
-        <a
-          href="./login/student.html"
-          class="login-option">
+        <a href="./login/student.html" class="login-option">
 
           <span class="option-icon">🎓</span>
 
@@ -466,11 +404,7 @@
 
         </a>
 
-        <!-- TEACHER LOGIN -->
-
-        <a
-          href="./login/teacher.html"
-          class="login-option">
+        <a href="./login/teacher.html" class="login-option">
 
           <span class="option-icon">👨‍🏫</span>
 
@@ -483,11 +417,7 @@
 
         </a>
 
-        <!-- ADMIN LOGIN -->
-
-        <a
-          href="./login/admin.html"
-          class="login-option admin-option">
+        <a href="./login/admin.html" class="login-option admin-option">
 
           <span class="option-icon">⚙️</span>
 
@@ -513,6 +443,7 @@
 
   <!-- JAVASCRIPT -->
 
+  <script src="./header-loader.js"></script>
   <script src="./script.js"></script>
 
 </body>
