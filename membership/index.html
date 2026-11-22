@@ -5,81 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#101d36">
 
-  <title>Membership Directory | DTSC Alumni Association</title>
+  <title>DTSC Alumni Directory</title>
 
-  <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="./directory.css">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="directory.css">
 </head>
 
 <body>
 
-<!-- =====================================
-     MEMBERSHIP HEADER
-===================================== -->
-
-<header class="membership-header">
-
-  <div class="membership-topbar">
-
-    <a href="../index.html" class="back-home">
-      <i class="fas fa-arrow-left"></i>
-      Back to Home
-    </a>
-
-    <button
-      type="button"
-      class="add-profile-btn"
-      id="addProfileBtn"
-    >
-      <i class="fas fa-user-plus"></i>
-      Add Your Profile
-    </button>
-
-  </div>
-
-  <div class="membership-brand">
-
-    <img src="../assets/logo.png" alt="DTSC Alumni Logo">
-
-    <div class="membership-brand-title">
-      <h1>DTSC ALUMNI</h1>
-      <p>DATABASE PORTAL</p>
+  <!-- TOP NAVIGATION BAR -->
+  <nav class="top-nav">
+    <div class="top-nav-container">
+      <a href="../index.html" class="nav-btn back-btn">
+        &larr; Back to Home
+      </a>
+      <a href="../register.html" class="nav-btn add-btn">
+        + Add Your Profile
+      </a>
     </div>
+  </nav>
 
-    <img src="../assets/dtsclogo.png" alt="DTSC Institute Logo">
+  <!-- HEADER -->
+  <header class="directory-header">
+    <div class="header-content">
 
-  </div>
+      <img src="../assets/logo.png" alt="DTSC Alumni Logo">
 
-</header>
-
-
-<!-- =====================================
-     MAIN DIRECTORY
-===================================== -->
-
-<main class="directory-container">
-
-  <!-- SEARCH AND FILTER -->
-
-  <section class="directory-search-section">
-
-    <div class="search-box">
-
-      <div class="search-heading">
-        <div>
-          <h3>Search Alumni</h3>
-          <p>Find alumni by name, ID, location or contact information.</p>
-        </div>
+      <div class="header-title">
+        <span class="header-label">DTSCIAN COMMUNITY</span>
+        <h1>DTSC ALUMNI DIRECTORY</h1>
+        <p>
+          Find for reconnect with lost batchmates, reach out to respected
+          teachers, and build lifelong bonds within our DTSCian family.
+        </p>
       </div>
 
-      <div class="search-input-wrap">
+      <img src="../assets/dtsclogo.png" alt="DTSC Institute Logo">
 
-        <span class="search-icon">⌕</span>
+    </div>
+  </header>
+
+
+  <!-- MAIN CONTAINER -->
+  <main class="directory-container">
+
+    <!-- SEARCH PANEL -->
+    <section class="search-panel">
+
+      <div class="section-heading">
+        <div>
+          <h2>Find Alumni</h2>
+          <p>Search and connect with DTSC students and teachers.</p>
+        </div>
+
+        <div class="search-icon">⌕</div>
+      </div>
+
+
+      <!-- SEARCH INPUT -->
+      <div class="search-box">
+        <span class="search-symbol">⌕</span>
 
         <input
           type="search"
@@ -87,28 +71,31 @@
           placeholder="Search by name, Alumni ID, division, district, upazila or contact..."
           autocomplete="off"
         >
+      </div>
 
+
+      <!-- FILTER HEADING -->
+      <div class="filter-heading">
+        <span>FILTER MEMBERS</span>
+        <div class="filter-line"></div>
       </div>
 
 
       <!-- FILTER GRID -->
-
       <div class="filter-grid">
 
-        <div class="filter-group">
+        <div class="filter-item">
           <label for="categoryFilter">Category</label>
-
           <select id="categoryFilter">
             <option value="">All Categories</option>
-            <option value="Student">Student</option>
-            <option value="Teacher">Teacher</option>
+            <option value="STUDENT">Student</option>
+            <option value="TEACHER">Teacher</option>
           </select>
         </div>
 
 
-        <div class="filter-group">
+        <div class="filter-item">
           <label for="examFilter">Last Exam</label>
-
           <select id="examFilter">
             <option value="">All Exams</option>
             <option value="Junior School Certificate">Junior School Certificate</option>
@@ -119,340 +106,9 @@
         </div>
 
 
-        <div class="filter-group">
+        <div class="filter-item">
           <label for="tradeFilter">Trade / Technology</label>
-
           <select id="tradeFilter">
             <option value="">All Trades / Technologies</option>
             <option value="General Electrical Works">General Electrical Works</option>
-            <option value="Refrigeration And Air Conditions">Refrigeration And Air Conditions</option>
-            <option value="Machine Tools Operation">Machine Tools Operation</option>
-            <option value="Firm Machinery">Firm Machinery</option>
-            <option value="21 - Agro Machinery">21 - Agro Machinery</option>
-            <option value="27 - Electrical Works and Maintenance">27 - Electrical Works and Maintenance</option>
-            <option value="30 - Machine Tools Operation and Maintenance">30 - Machine Tools Operation and Maintenance</option>
-            <option value="32 - Refrigeration and Air-conditioning">32 - Refrigeration and Air-conditioning</option>
-            <option value="67 - Electrical Technology">67 - Electrical Technology</option>
-            <option value="70 - Mechanical Technology">70 - Mechanical Technology</option>
-          </select>
-        </div>
-
-
-        <div class="filter-group">
-          <label for="yearFilter">Passing Year</label>
-
-          <select id="yearFilter">
-            <option value="">All Passing Years</option>
-          </select>
-        </div>
-
-
-        <div class="filter-group">
-          <label for="bloodFilter">Blood Group</label>
-
-          <select id="bloodFilter">
-            <option value="">All Blood Groups</option>
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-          </select>
-        </div>
-
-
-        <div class="filter-group">
-          <label for="statusFilter">Membership Status</label>
-
-          <select id="statusFilter">
-            <option value="">All Status</option>
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-            <option value="Pending">Pending</option>
-          </select>
-        </div>
-
-      </div>
-
-
-      <!-- SEARCH BUTTONS -->
-
-      <div class="search-actions">
-
-        <button type="button" id="searchBtn">
-          Search Alumni
-        </button>
-
-        <button type="button" id="resetBtn">
-          Reset Filters
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =====================================
-       ALUMNI RESULTS
-  ====================================== -->
-
-  <section class="directory-results">
-
-    <div class="results-header">
-
-      <div>
-        <h3>Alumni Members</h3>
-        <p>Explore our DTSCian community members.</p>
-      </div>
-
-      <div class="results-count">
-        <span id="resultsCount">0</span>
-        <span>Members Found</span>
-      </div>
-
-    </div>
-
-    <div id="memberList" class="member-list">
-      <!-- Member cards loaded by directory.js -->
-    </div>
-
-  </section>
-
-</main>
-
-
-<!-- =====================================
-     PROFILE MODAL
-===================================== -->
-
-<div class="profile-modal" id="profileModal">
-
-  <div class="profile-modal-content">
-
-    <button
-      type="button"
-      class="modal-close"
-      id="closeModal"
-      aria-label="Close"
-    >
-      &times;
-    </button>
-
-    <div class="profile-modal-header">
-
-      <img id="profilePhoto" src="" alt="Member Photo">
-
-      <div class="profile-modal-heading">
-
-        <h2 id="profileName">Member Name</h2>
-
-        <p id="profileId">Alumni ID</p>
-
-        <div id="profileBadges"></div>
-
-      </div>
-
-    </div>
-
-    <div id="profileDetails" class="profile-details">
-      <!-- Profile details loaded by directory.js -->
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-     REGISTER POPUP
-     SAME AS MAIN INDEX
-===================================== -->
-
-<div class="register-modal" id="registerModal" aria-hidden="true">
-
-  <div class="register-modal-overlay"></div>
-
-  <div
-    class="register-modal-content"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="registerTitle"
-  >
-
-    <button
-      type="button"
-      class="register-close"
-      id="closeRegisterModal"
-      aria-label="Close"
-    >
-      &times;
-    </button>
-
-    <div class="register-modal-icon">🎓</div>
-
-    <h2 id="registerTitle">Choose Registration Type</h2>
-
-    <p>Please select your membership category.</p>
-
-    <div class="register-options">
-
-      <a
-        href="../register/students/student.html"
-        class="register-option student-option"
-      >
-
-        <span class="option-icon">🎓</span>
-
-        <span class="option-text">
-          <strong>Student</strong>
-          <small>Register as a former student</small>
-        </span>
-
-        <span class="option-arrow">→</span>
-
-      </a>
-
-
-      <a
-        href="../register/teacher/teacher.html"
-        class="register-option teacher-option"
-      >
-
-        <span class="option-icon">👨‍🏫</span>
-
-        <span class="option-text">
-          <strong>Honorable Teacher</strong>
-          <small>Register as a respected teacher</small>
-        </span>
-
-        <span class="option-arrow">→</span>
-
-      </a>
-
-    </div>
-
-    <p class="register-modal-footer">
-      DTSC Alumni Association
-    </p>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================
-     FOOTER
-===================================== -->
-
-<footer class="directory-footer">
-
-  <div class="footer-content">
-
-    <p>
-      &copy; <span id="footerYear"></span>
-      DTSC Alumni Association. All Rights Reserved.
-    </p>
-
-    <p>Shared Roots, Lifelong Fellowship</p>
-
-  </div>
-
-</footer>
-
-
-<!-- =====================================
-     SCRIPTS
-===================================== -->
-
-<script src="./directory.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  // FOOTER YEAR
-
-  const footerYear = document.getElementById("footerYear");
-
-  if (footerYear) {
-    footerYear.textContent = new Date().getFullYear();
-  }
-
-
-  // REGISTER MODAL
-
-  const registerModal = document.getElementById("registerModal");
-
-  const addProfileBtn = document.getElementById("addProfileBtn");
-
-  const closeRegisterBtn = document.getElementById("closeRegisterModal");
-
-  const registerOverlay = registerModal?.querySelector(
-    ".register-modal-overlay"
-  );
-
-
-  // OPEN REGISTER
-
-  function openRegisterModal() {
-
-    if (!registerModal) return;
-
-    registerModal.classList.add("active");
-
-    registerModal.setAttribute("aria-hidden", "false");
-
-    document.body.style.overflow = "hidden";
-
-  }
-
-
-  // CLOSE REGISTER
-
-  function closeRegisterModal() {
-
-    if (!registerModal) return;
-
-    registerModal.classList.remove("active");
-
-    registerModal.setAttribute("aria-hidden", "true");
-
-    document.body.style.overflow = "";
-
-  }
-
-
-  // ADD YOUR PROFILE BUTTON
-
-  addProfileBtn?.addEventListener("click", openRegisterModal);
-
-
-  // CLOSE BUTTON
-
-  closeRegisterBtn?.addEventListener("click", closeRegisterModal);
-
-
-  // OVERLAY CLICK
-
-  registerOverlay?.addEventListener("click", closeRegisterModal);
-
-
-  // ESCAPE KEY
-
-  document.addEventListener("keydown", (event) => {
-
-    if (event.key === "Escape") {
-      closeRegisterModal();
-    }
-
-  });
-
-});
-</script>
-
-</body>
-</html>
+            <option value="Refrigeration And Air Conditions
