@@ -2,287 +2,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#101b35">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101d39">
 
-    <title>Membership Directory | DTSC Alumni Association</title>
+  <title>Alumni Directory | DTSC Alumni Association</title>
 
-    <!-- Main Website CSS -->
-    <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="directory.css">
 
-    <!-- Directory CSS -->
-    <link rel="stylesheet" href="./directory.css">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap"
-          rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- GLOBAL HEADER -->
-    <div id="global-header"></div>
+  <main class="directory-container">
+
+    <!-- DIRECTORY HEADER -->
+    <section class="directory-header">
+
+      <div class="directory-logo">
+        <img src="../logo.png" alt="DTSC Logo"
+             onerror="this.style.display='none'">
+      </div>
+
+      <div class="directory-welcome">
+        <h2>Welcome to DTSC</h2>
+        <p>Registered Alumni List</p>
+      </div>
+
+      <a href="../index.html" class="back-home">
+        <span>←</span> Back to Home
+      </a>
+
+    </section>
 
 
-    <!-- MEMBERSHIP DIRECTORY -->
-    <main class="directory-page">
+    <!-- SEARCH AND FILTER SECTION -->
+    <section class="directory-search-section">
 
-        <!-- TOP ACTIONS -->
-        <div class="directory-topbar">
+      <h2 class="search-heading">
+        <span class="search-heading-icon">⌕</span>
+        Find a DTSCian
+      </h2>
 
-            <a href="../index.html" class="back-home-btn">
-                <i class="fas fa-arrow-left"></i>
-                Back to Home
-            </a>
+      <!-- SEARCH -->
+      <div class="search-row">
 
-            <!-- ADD YOUR PROFILE: MAIN REGISTER POPUP -->
-            <a href="#"
-               class="add-profile-btn register-trigger"
-               aria-haspopup="dialog">
+        <input
+          type="search"
+          id="alumniSearch"
+          placeholder="Name / ID / Upazila / District / Contact..."
+          autocomplete="off"
+        >
 
-                <i class="fas fa-user-plus"></i>
-                Add Your Profile
+        <button type="button" id="searchBtn" class="search-button">
+          Search
+        </button>
 
-            </a>
+      </div>
 
+
+      <!-- FILTERS -->
+      <div class="directory-filters">
+
+        <div class="filter-group">
+          <label for="categoryFilter">Category</label>
+          <select id="categoryFilter">
+            <option value="">All Categories</option>
+            <option value="Student">Student</option>
+            <option value="Teacher">Teacher</option>
+          </select>
         </div>
 
 
-        <!-- DIRECTORY BRAND HEADER -->
-        <section class="directory-header">
-
-            <div class="directory-brand">
-
-                <div class="brand-logo">
-                    <img src="../assets/logo.png" alt="DTSC Alumni Logo">
-                </div>
-
-                <div class="brand-title">
-                    <h1>DTSC ALUMNI</h1>
-                    <p>ALUMNI DIRECTORY</p>
-                    <span>MEMBERSHIP DATABASE PORTAL</span>
-                </div>
-
-                <div class="brand-logo">
-                    <img src="../assets/dtsclogo.png" alt="DTSC Logo">
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- SEARCH SECTION -->
-        <section class="directory-search-section">
-
-            <div class="search-box">
-
-                <input
-                    type="search"
-                    id="searchInput"
-                    placeholder="Name/ID/Thana/District/Division/Contact No"
-                    autocomplete="off"
-                >
-
-                <button id="searchBtn" type="button">
-                    <i class="fas fa-search"></i>
-                    Search
-                </button>
-
-            </div>
-
-            <button id="clearSearch" type="button" class="clear-search-btn">
-                <i class="fas fa-times"></i>
-                Clear
-            </button>
-
-        </section>
-
-
-        <!-- FILTER SECTION -->
-        <section class="directory-filter-section">
-
-            <div class="filter-heading">
-                <h3>
-                    <i class="fas fa-filter"></i>
-                    Filter Members
-                </h3>
-            </div>
-
-            <div class="filter-grid">
-
-                <div class="filter-item">
-                    <label for="categoryFilter">Category</label>
-                    <select id="categoryFilter">
-                        <option value="">All Categories</option>
-                        <option value="STUDENT">Student</option>
-                        <option value="TEACHER">Teacher</option>
-                    </select>
-                </div>
-
-                <div class="filter-item">
-                    <label for="examFilter">Exam</label>
-                    <select id="examFilter">
-                        <option value="">All Exams</option>
-                        <option value="SSC">SSC</option>
-                        <option value="JSC">JSC</option>
-                        <option value="VOCATIONAL">Vocational</option>
-                    </select>
-                </div>
-
-                <div class="filter-item">
-                    <label for="tradeFilter">Trade / Technology</label>
-                    <select id="tradeFilter">
-                        <option value="">All Trades</option>
-                        <option value="General Electrical Works">General Electrical Works</option>
-                        <option value="Refrigeration And Air Conditions">Refrigeration And Air Conditions</option>
-                        <option value="Machine Tools Operation">Machine Tools Operation</option>
-                        <option value="Firm Machinery">Firm Machinery</option>
-                        <option value="Agro Machinery">21 - Agro Machinery</option>
-                        <option value="Electrical Works and Maintenance">27 - Electrical Works and Maintenance</option>
-                        <option value="Machine Tools Operation and Maintenance">30 - Machine Tools Operation and Maintenance</option>
-                        <option value="Refrigeration and Air Conditioning">32 - Refrigeration and Air Conditioning</option>
-                    </select>
-                </div>
-
-                <div class="filter-item">
-                    <label for="yearFilter">Passing Year</label>
-                    <select id="yearFilter">
-                        <option value="">All Years</option>
-                        <option value="2026">2026</option>
-                        <option value="2025">2025</option>
-                        <option value="2024">2024</option>
-                        <option value="2023">2023</option>
-                        <option value="2022">2022</option>
-                        <option value="2021">2021</option>
-                        <option value="2020">2020</option>
-                        <option value="2019">2019</option>
-                        <option value="2018">2018</option>
-                    </select>
-                </div>
-
-                <div class="filter-item">
-                    <label for="bloodFilter">Blood Group</label>
-                    <select id="bloodFilter">
-                        <option value="">All Groups</option>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                    </select>
-                </div>
-
-                <div class="filter-item">
-                    <label for="statusFilter">Status</label>
-                    <select id="statusFilter">
-                        <option value="">All Status</option>
-                        <option value="Verified">Verified</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Active">Active</option>
-                    </select>
-                </div>
-
-            </div>
-
-            <div class="filter-actions">
-                <button type="button" id="resetBtn">
-                    <i class="fas fa-rotate-left"></i>
-                    Reset Filters
-                </button>
-            </div>
-
-        </section>
-
-
-        <!-- MEMBER RESULTS -->
-        <section class="directory-results">
-
-            <div class="results-header">
-
-                <h2>
-                    <i class="fas fa-users"></i>
-                    Alumni Members
-                </h2>
-
-                <div class="results-count" id="resultsCount">
-                    Members Found: 0
-                </div>
-
-            </div>
-
-            <div class="member-list" id="memberList">
-                <!-- Members loaded by directory.js -->
-            </div>
-
-            <div id="noResults" class="no-results" style="display:none;">
-                <i class="fas fa-user-slash"></i>
-                <h3>No Members Found</h3>
-                <p>Try changing your search or filter options.</p>
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- PROFILE DETAILS MODAL -->
-    <div class="profile-modal" id="profileModal">
-
-        <div class="modal-overlay" id="modalOverlay"></div>
-
-        <div class="profile-modal-content">
-
-            <button type="button"
-                    class="close-modal"
-                    id="closeModal"
-                    aria-label="Close">
-                <i class="fas fa-times"></i>
-            </button>
-
-            <div class="profile-modal-header">
-
-                <img
-                    src="../assets/default-user.png"
-                    alt="Member Photo"
-                    id="profilePhoto"
-                >
-
-                <h2 id="profileName">Member Name</h2>
-                <p id="profileId">Member ID</p>
-
-                <div id="profileBadges"></div>
-
-            </div>
-
-            <div class="profile-details" id="profileDetails">
-                <!-- Profile details loaded by directory.js -->
-            </div>
-
+        <div class="filter-group">
+          <label for="examFilter">Last Exam</label>
+          <select id="examFilter">
+            <option value="">All Exams</option>
+            <option value="Junior School Certificate">Junior School Certificate</option>
+            <option value="Secondary School Certificate">Secondary School Certificate</option>
+            <option value="Higher Secondary Certificate">Higher Secondary Certificate</option>
+            <option value="Diploma in Engineering">Diploma in Engineering</option>
+          </select>
         </div>
 
+
+        <div class="filter-group">
+          <label for="tradeFilter">Trade / Technology</label>
+          <select id="tradeFilter">
+            <option value="">All Trades</option>
+            <option value="General Electrical Works">General Electrical Works</option>
+            <option value="Refrigeration And Air Conditions">Refrigeration And Air Conditions</option>
+            <option value="Machine Tools Operation">Machine Tools Operation</option>
+            <option value="Firm Machinery">Firm Machinery</option>
+            <option value="21 - Agro Machinery">21 - Agro Machinery</option>
+            <option value="27 - Electrical Works and Maintenance">27 - Electrical Works and Maintenance</option>
+            <option value="30 - Machine Tools Operation and Maintenance">30 - Machine Tools Operation and Maintenance</option>
+            <option value="32 - Refrigeration and Air-conditioning">32 - Refrigeration and Air-conditioning</option>
+            <option value="67 - Electrical Technology">67 - Electrical Technology</option>
+            <option value="70 - Mechanical Technology">70 - Mechanical Technology</option>
+          </select>
+        </div>
+
+
+        <div class="filter-group">
+          <label for="yearFilter">Passing Year</label>
+          <select id="yearFilter">
+            <option value="">All Years</option>
+            <option value="2026">2026</option>
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+          </select>
+        </div>
+
+
+        <div class="filter-group">
+          <label for="bloodFilter">Blood Group</label>
+          <select id="bloodFilter">
+            <option value="">All Groups</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+          </select>
+        </div>
+
+
+        <div class="filter-group">
+          <label for="statusFilter">Status</label>
+          <select id="statusFilter">
+            <option value="">All Status</option>
+            <option value="Verified">Verified</option>
+            <option value="Pending">Pending</option>
+          </select>
+        </div>
+
+      </div>
+
+
+      <!-- RESET -->
+      <div class="filter-actions">
+        <button type="button" id="resetBtn" class="reset-button">
+          ↺ Reset Filters
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- RESULT HEADER -->
+    <section class="result-header">
+
+      <h3>Alumni Found</h3>
+
+      <span class="result-count">
+        <strong id="resultCount">0</strong> Members
+      </span>
+
+    </section>
+
+
+    <!-- ALUMNI RESULTS -->
+    <section id="memberList" class="member-list" aria-live="polite">
+      <!-- JavaScript will load members here -->
+    </section>
+
+
+    <div class="directory-note">
+      DTSC Alumni Association
     </div>
 
-
-    <!-- GLOBAL FOOTER -->
-    <div id="global-footer"></div>
+  </main>
 
 
-    <!-- JAVASCRIPT -->
-    <script src="../header-loader.js"></script>
-    <script src="../script.js"></script>
-    <script src="./directory.js"></script>
+  <script src="directory.js"></script>
 
 </body>
 </html>
