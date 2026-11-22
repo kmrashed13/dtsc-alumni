@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101d39">
+
+  <title>Alumni Profile | DTSC Alumni Association</title>
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="profile.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <main class="profile-container">
+
+    <!-- TOP HEADER -->
+    <header class="profile-topbar">
+      <a href="index.html" class="back-directory">
+        ← Back to Directory
+      </a>
+
+      <span class="topbar-title">DTSC Alumni Profile</span>
+    </header>
+
+
+    <!-- PROFILE HERO -->
+    <section class="profile-hero">
+
+      <div class="profile-cover"></div>
+
+      <div class="profile-identity">
+
+        <img
+          id="profileImage"
+          class="profile-photo"
+          src=""
+          alt="Alumni Photo"
+        >
+
+        <div class="profile-basic">
+          <h1 id="profileName">Loading...</h1>
+          <p id="profileID"></p>
+          <div id="verificationStatus"></div>
+        </div>
+
+      </div>
+
+      <div class="profile-tags" id="profileTags"></div>
+
+    </section>
+
+
+    <!-- PERSONAL INFORMATION -->
+    <section class="profile-section">
+
+      <h2>Personal Information</h2>
+
+      <div class="profile-grid">
+
+        <div class="profile-item">
+          <small>Full Name</small>
+          <strong id="personalName">-</strong>
+        </div>
+
+        <div class="profile-item">
+          <small>Alumni ID</small>
+          <strong id="personalID">-</strong>
+        </div>
+
+        <div class="profile-item">
+          <small>Category</small>
+          <strong id="personalCategory">-</strong>
+        </div>
+
+        <div class="profile-item">
+          <small>Blood Group</small>
+          <strong id="personalBlood">-</strong>
+        </div>
+
+        <div class="profile-item">
+          <small>Upazila</small>
+          <strong id="personalUpazila">-</strong>
+        </div>
+
+        <div class="profile-item">
+          <small>District</small>
+          <strong id="personalDistrict">-</strong>
+        </div>
+
+        <div class="profile-item">
+          <small>Division</small>
+          <strong id="personalDivision">-</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- EDUCATION -->
+    <section class="profile-section">
+
+      <h2>Educational Information</h2>
+
+      <div class="profile-grid">
+
+        <div class="profile-item">
+          <small>Last Exam</small>
+          <strong id="educationExam">-</strong>
+        </div>
+
+        <div class="profile-item">
+          <small>Trade / Technology</small>
+          <strong id="educationTrade">-</strong>
+        </div>
+
+        <div class="profile-item">
+          <small>Passing Year</small>
+          <strong id="educationYear">-</strong>
+        </div>
+
+        <div class="profile-item">
+          <small>Institute</small>
+          <strong id="educationInstitute">-</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROFESSIONAL -->
+    <section class="profile-section">
+
+      <h2>Professional Information</h2>
+
+      <div class="profile-grid">
+
+        <div class="profile-item">
+          <small>Profession</small>
+          <strong id="profession">-</strong>
+        </div>
+
+        <div class="profile-item">
+          <small>Designation</small>
+          <strong id="designation">-</strong>
+        </div>
+
+        <div class="profile-item">
+          <small>Organization</small>
+          <strong id="organization">-</strong>
+        </div>
+
+        <div class="profile-item">
+          <small>Work Location</small>
+          <strong id="workLocation">-</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ASSOCIATION -->
+    <section class="profile-section">
+
+      <h2>Association Information</h2>
+
+      <div id="associationRole" class="association-role" hidden></div>
+
+      <div class="profile-grid">
+
+        <div class="profile-item">
+          <small>Membership Status</small>
+          <strong id="membershipStatus">-</strong>
+        </div>
+
+        <div class="profile-item">
+          <small>Member Since</small>
+          <strong id="memberSince">-</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section class="profile-section">
+
+      <h2>Contact Information</h2>
+
+      <div class="contact-list">
+
+        <div>
+          <span>☎</span>
+          <strong>Contact:</strong>
+          <a id="contactNumber" href="#">-</a>
+        </div>
+
+        <div>
+          <span>✉</span>
+          <strong>Email:</strong>
+          <a id="contactEmail" href="#">-</a>
+        </div>
+
+        <div>
+          <span>⌖</span>
+          <strong>Address:</strong>
+          <span id="contactAddress">-</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROFILE NOT FOUND -->
+    <section id="profileNotFound" class="profile-not-found" hidden>
+
+      <h2>Profile Not Found!</h2>
+
+      <p>
+        The requested alumni profile could not be found.
+      </p>
+
+      <a href="index.html">
+        Back to Alumni Directory
+      </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="profile-footer">
+      DTSC Alumni Association
+    </footer>
+
+  </main>
+
+  <script src="profile.js"></script>
+
+</body>
+</html>
