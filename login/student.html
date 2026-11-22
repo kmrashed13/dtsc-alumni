@@ -1,29 +1,203 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#198754">
+
   <title>Student Login | DTSC Alumni Association</title>
-  <link rel="stylesheet" href="./login.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: #f0f8f4;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 390px;
+      background: #ffffff;
+      padding: 35px 28px;
+      border-radius: 22px;
+      box-shadow: 0 12px 35px rgba(25, 135, 84, 0.10);
+      text-align: center;
+    }
+
+    .icon-box {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 18px;
+      background: #ddf3e7;
+      color: #198754;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 35px;
+    }
+
+    h2 {
+      color: #174b35;
+      font-size: 23px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #718096;
+      font-size: 12px;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
+    }
+
+    .welcome {
+      color: #334155;
+      font-size: 16px;
+      margin-bottom: 22px;
+    }
+
+    .input-group {
+      text-align: left;
+      margin-bottom: 17px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      color: #475569;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #dce8e0;
+      border-radius: 11px;
+      outline: none;
+      font-size: 14px;
+      background: #f8fbf9;
+    }
+
+    input:focus {
+      border-color: #198754;
+      background: #ffffff;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 11px;
+      background: #198754;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .login-btn:hover {
+      background: #146c43;
+    }
+
+    .links {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      font-size: 13px;
+    }
+
+    a {
+      color: #198754;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 25px;
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    .footer {
+      margin-top: 25px;
+      color: #94a3b8;
+      font-size: 11px;
+    }
+  </style>
 </head>
+
 <body>
 
-  <div class="login-container">
-    <h2>Student Login</h2>
-    <p>DTSC Alumni Association</p>
+  <div class="login-card">
 
-    <form>
-      <label for="email">Email Address</label>
-      <input type="email" id="email" placeholder="Enter your email" required>
+    <div class="icon-box">🎓</div>
 
-      <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Enter your password" required>
+    <h2>STUDENT LOGIN</h2>
 
-      <button type="submit">Login</button>
+    <p class="subtitle">DTSC ALUMNI ASSOCIATION</p>
+
+    <p class="welcome">Welcome Back, Student!</p>
+
+    <form id="studentLoginForm">
+
+      <div class="input-group">
+        <label>Email Address</label>
+        <input type="email"
+          placeholder="Enter your email"
+          required>
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password"
+          placeholder="Enter your password"
+          required>
+      </div>
+
+      <button type="submit" class="login-btn">
+        LOGIN AS STUDENT
+      </button>
+
     </form>
 
-    <a href="./index.html">Back to Login Options</a>
+    <div class="links">
+      <a href="#">Forgot Password?</a>
+      <a href="../register/students/student.html">Register</a>
+    </div>
+
+    <a href="./index.html" class="back-link">
+      ← Back to Login Portal
+    </a>
+
+    <div class="footer">
+      © 2026 DTSC Alumni Association
+    </div>
+
   </div>
+
+  <script>
+    document.getElementById("studentLoginForm")
+      .addEventListener("submit", function(event) {
+        event.preventDefault();
+        alert("Student authentication is not connected yet.");
+      });
+  </script>
 
 </body>
 </html>
