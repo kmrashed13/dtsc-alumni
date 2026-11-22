@@ -1,15 +1,13 @@
-
 /* ==========================================
    DTSC ALUMNI DIRECTORY
    Navy Blue + Gold
-   Demo Version
+   Complete Demo Version
 ========================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ==========================================
      1. DEMO MEMBER DATA
-     Replace with database data later
   ========================================== */
 
   const members = [
@@ -212,39 +210,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ==========================================
-     6. INITIALS AVATAR
+     6. GET FILTER VALUE
   ========================================== */
 
-  function getInitials(name) {
-
-    return name
-      .split(" ")
-      .filter(Boolean)
-      .slice(0, 2)
-      .map(word => word.charAt(0).toUpperCase())
-      .join("");
-
-  }
-
-
-  function createAvatar(name) {
-
-    const avatar = document.createElement("div");
-
-    avatar.className = "member-photo member-avatar";
-    avatar.textContent = getInitials(name);
-
-    avatar.style.display = "grid";
-    avatar.style.placeItems = "center";
-    avatar.style.fontWeight = "800";
-    avatar.style.fontSize = "19px";
-    avatar.style.color = "#101d36";
-    avatar.style.background = "#f0d99f";
-    avatar.style.borderRadius = "50%";
-    avatar.style.flexShrink = "0";
-
-    return avatar;
-
+  function getValue(element) {
+    return element ? element.value.trim() : "";
   }
 
 
@@ -258,7 +228,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     badge.className = "role-badge";
 
-    if (category === "STUDENT") {
+    const normalizedCategory = String(category || "").toUpperCase();
+
+    if (normalizedCategory === "STUDENT") {
 
       badge.classList.add("student");
       badge.textContent = "STUDENT";
@@ -277,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ==========================================
      8. MEMBER CARD
-     LEFT: PHOTO + NAME + ID + DESIGNATION
+     LEFT: NAME + ALUMNI ID
      RIGHT: CATEGORY + VIEW PROFILE
   ========================================== */
 
@@ -291,35 +263,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const info = document.createElement("div");
     info.className = "member-info";
-
-
-    /* PROFILE PHOTO */
-
-    let photo;
-
-    if (member.photo) {
-
-      photo = document.createElement("img");
-
-      photo.className = "member-photo";
-      photo.src = member.photo;
-      photo.alt = member.name;
-      photo.loading = "lazy";
-
-      photo.onerror = function () {
-
-        this.replaceWith(createAvatar(member.name));
-
-      };
-
-    } else {
-
-      photo = createAvatar(member.name);
-
-    }
-
-
-    /* MEMBER INFORMATION */
 
     const textBox = document.createElement("div");
     textBox.className = "member-text";
@@ -347,7 +290,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    info.appendChild(photo);
     info.appendChild(textBox);
 
 
@@ -364,7 +306,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    /* VIEW PROFILE */
+    /* VIEW PROFILE BUTTON */
 
     const viewButton = document.createElement("button");
 
@@ -388,25 +330,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ==========================================
-     9. GET FILTER VALUE
-  ========================================== */
-
-  function getValue(element) {
-
-    return element ? element.value.trim() : "";
-
-  }
-
-
-  /* ==========================================
-     10. FILTERING SYSTEM
+     9. FILTERING SYSTEM
   ========================================== */
 
   function filterMembers() {
 
     const search = getValue(searchInput).toLowerCase();
 
-    const category = getValue(categoryFilter);
+    const category = getValue(categoryFilter).toUpperCase();
     const exam = getValue(examFilter);
     const trade = getValue(tradeFilter);
     const year = getValue(yearFilter);
@@ -440,7 +371,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       const matchesCategory =
-        !category || member.category === category;
+        !category ||
+        String(member.category).toUpperCase() === category;
 
 
       const matchesExam =
@@ -460,7 +392,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       const matchesStatus =
-        !status || member.status === status;
+        !status ||
+        String(member.status).toLowerCase() === status.toLowerCase();
 
 
       return (
@@ -479,7 +412,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ==========================================
-     11. DISPLAY MEMBERS
+     10. DISPLAY MEMBERS
   ========================================== */
 
   function displayMembers() {
@@ -490,11 +423,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     memberList.innerHTML = "";
 
+
     if (resultsCount) {
-
-      resultsCount.textContent =
-        `${filteredMembers.length} Members`;
-
+      resultsCount.textContent = filteredMembers.length;
     }
 
 
@@ -525,7 +456,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ==========================================
-     12. PROFILE MODAL
+     11. PROFILE MODAL
   ========================================== */
 
   function openProfile(member) {
@@ -602,7 +533,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ["Blood Group", member.blood],
         ["Division", member.division],
         ["District", member.district],
-        ["Upazila", member.upazila]
+        ["Upazila", member.upazila],
+        ["Contact", member.contact]
 
       ];
 
@@ -635,7 +567,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ==========================================
-     13. CLOSE PROFILE MODAL
+     12. CLOSE PROFILE MODAL
   ========================================== */
 
   function closeProfile() {
@@ -678,18 +610,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ==========================================
-     14. INSTANT SEARCH
+     13. INSTANT SEARCH
   ========================================== */
 
   if (searchInput) {
-
     searchInput.addEventListener("input", displayMembers);
-
   }
 
 
   /* ==========================================
-     15. FILTER CHANGE EVENTS
+     14. FILTER CHANGE EVENTS
   ========================================== */
 
   [
@@ -704,27 +634,23 @@ document.addEventListener("DOMContentLoaded", () => {
   ].forEach(filter => {
 
     if (filter) {
-
       filter.addEventListener("change", displayMembers);
-
     }
 
   });
 
 
   /* ==========================================
-     16. SEARCH BUTTON
+     15. SEARCH BUTTON
   ========================================== */
 
   if (searchBtn) {
-
     searchBtn.addEventListener("click", displayMembers);
-
   }
 
 
   /* ==========================================
-     17. RESET FILTERS
+     16. RESET FILTERS
   ========================================== */
 
   if (resetBtn) {
@@ -748,9 +674,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ==========================================
-     18. INITIAL LOAD
+     17. INITIAL LOAD
   ========================================== */
 
   displayMembers();
 
-});
+})
