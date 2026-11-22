@@ -2,86 +2,94 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   // =====================================
-  // 1. MOBILE HAMBURGER MENU
+  // 1. MOBILE NAVIGATION
   // =====================================
 
-  const menuToggle = document.getElementById("menuToggle");
-  const navMenu = document.getElementById("navMenu");
+  function closeMobileMenu() {
 
-  if (menuToggle && navMenu) {
+    const navMenu = document.getElementById("navMenu");
+    const menuToggle = document.getElementById("menuToggle");
 
-    menuToggle.addEventListener("click", function () {
+    if (!navMenu || !menuToggle) return;
+
+    navMenu.classList.remove("active");
+
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open Menu");
+    menuToggle.innerHTML = "☰";
+
+  }
+
+  // Event Delegation for dynamically loaded header
+  document.addEventListener("click", function (event) {
+
+    const menuToggle = event.target.closest("#menuToggle");
+    const navMenu = document.getElementById("navMenu");
+
+    if (menuToggle && navMenu) {
 
       const isOpen = navMenu.classList.toggle("active");
 
       menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Close Menu" : "Open Menu"
+      );
+
       menuToggle.innerHTML = isOpen ? "&times;" : "☰";
 
-    });
+      return;
+    }
 
-    navMenu.querySelectorAll("a").forEach(function (link) {
+    // Close menu after clicking a navigation link
+    if (
+      navMenu &&
+      event.target.closest("#navMenu a")
+    ) {
+      closeMobileMenu();
+      return;
+    }
 
-      link.addEventListener("click", function () {
+    // Close menu when clicking outside
+    if (
+      navMenu &&
+      !navMenu.contains(event.target)
+    ) {
+      closeMobileMenu();
+    }
 
-        navMenu.classList.remove("active");
-
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.innerHTML = "☰";
-
-      });
-
-    });
-
-    document.addEventListener("click", function (event) {
-
-      if (
-        !navMenu.contains(event.target) &&
-        !menuToggle.contains(event.target)
-      ) {
-
-        navMenu.classList.remove("active");
-
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.innerHTML = "☰";
-
-      }
-
-    });
-
-  }
+  });
 
 
   // =====================================
   // 2. LANGUAGE TOGGLE
   // =====================================
 
-  const languageToggle = document.getElementById("languageToggle");
+  document.addEventListener("click", function (event) {
 
-  if (languageToggle) {
+    const languageToggle = event.target.closest("#languageToggle");
 
-    languageToggle.addEventListener("click", function () {
+    if (!languageToggle) return;
 
-      const currentLanguage = document.documentElement.lang;
+    const currentLanguage = document.documentElement.lang;
 
-      if (currentLanguage === "en") {
+    if (currentLanguage === "en") {
 
-        document.documentElement.lang = "bn";
-        languageToggle.textContent = "(EN)";
+      document.documentElement.lang = "bn";
+      languageToggle.textContent = "(EN)";
 
-      } else {
+    } else {
 
-        document.documentElement.lang = "en";
-        languageToggle.textContent = "(BN)";
+      document.documentElement.lang = "en";
+      languageToggle.textContent = "(BN)";
 
-      }
+    }
 
-    });
-
-  }
+  });
 
 
   // =====================================
-  // 3. REGISTER & LOGIN MODALS
+  // 3. MODAL ELEMENTS
   // =====================================
 
   const registerModal = document.getElementById("registerModal");
@@ -89,6 +97,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const closeRegisterBtn = document.getElementById("closeRegisterModal");
   const closeLoginBtn = document.getElementById("closeLoginModal");
+
+
+  // =====================================
+  // 4. CLOSE ALL MODALS
+  // =====================================
 
   function closeAllModals() {
 
@@ -105,6 +118,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   }
 
+
+  // =====================================
+  // 5. OPEN MODAL
+  // =====================================
+
   function openModal(modal) {
 
     if (!modal) return;
@@ -119,47 +137,41 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  // REGISTER POPUP OPEN
+  // =====================================
+  // 6. GLOBAL LOGIN & REGISTER TRIGGERS
+  // =====================================
 
-  document.querySelectorAll(".register-trigger").forEach(function (button) {
+  // Works with dynamically loaded Global Header
 
-    button.addEventListener("click", function (event) {
+  document.addEventListener("click", function (event) {
+
+    const registerTrigger = event.target.closest(".register-trigger");
+    const loginTrigger = event.target.closest(".login-trigger");
+
+    if (registerTrigger) {
 
       event.preventDefault();
 
       openModal(registerModal);
 
-    });
+      return;
+    }
 
-  });
-
-
-  // LOGIN POPUP OPEN
-
-  document.querySelectorAll(".login-trigger").forEach(function (button) {
-
-    button.addEventListener("click", function (event) {
+    if (loginTrigger) {
 
       event.preventDefault();
 
       openModal(loginModal);
 
-    });
+      return;
+    }
 
   });
 
 
   // =====================================
-  // 4. STUDENT & TEACHER FORM NAVIGATION
+  // 7. STUDENT & TEACHER REGISTRATION
   // =====================================
-
-  const studentLink = document.querySelector(
-    "#registerModal .student-option"
-  );
-
-  const teacherLink = document.querySelector(
-    "#registerModal .teacher-option"
-  );
 
   function navigateToForm(link) {
 
@@ -168,7 +180,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const destination = link.getAttribute("href");
 
     if (!destination || destination === "#") {
+
       alert("Registration page link is missing.");
+
       return;
     }
 
@@ -178,69 +192,98 @@ document.addEventListener("DOMContentLoaded", function () {
 
   }
 
-  if (studentLink) {
 
-    studentLink.addEventListener("click", function (event) {
+  document.addEventListener("click", function (event) {
+
+    const studentLink = event.target.closest(
+      "#registerModal .student-option"
+    );
+
+    const teacherLink = event.target.closest(
+      "#registerModal .teacher-option"
+    );
+
+    if (studentLink) {
 
       event.preventDefault();
 
       navigateToForm(studentLink);
 
-    });
+      return;
+    }
 
-  }
-
-  if (teacherLink) {
-
-    teacherLink.addEventListener("click", function (event) {
+    if (teacherLink) {
 
       event.preventDefault();
 
       navigateToForm(teacherLink);
 
-    });
-
-  }
-
-
-  // =====================================
-  // 5. CLOSE BUTTONS
-  // =====================================
-
-  if (closeRegisterBtn) {
-    closeRegisterBtn.addEventListener("click", closeAllModals);
-  }
-
-  if (closeLoginBtn) {
-    closeLoginBtn.addEventListener("click", closeAllModals);
-  }
-
-
-  // =====================================
-  // 6. CLICK OUTSIDE MODAL
-  // =====================================
-
-  document.querySelectorAll(
-    ".register-modal-overlay, .login-modal-overlay"
-  ).forEach(function (overlay) {
-
-    overlay.addEventListener("click", closeAllModals);
+      return;
+    }
 
   });
 
 
   // =====================================
-  // 7. ESC KEY
+  // 8. CLOSE BUTTONS
+  // =====================================
+
+  if (closeRegisterBtn) {
+
+    closeRegisterBtn.addEventListener(
+      "click",
+      closeAllModals
+    );
+
+  }
+
+  if (closeLoginBtn) {
+
+    closeLoginBtn.addEventListener(
+      "click",
+      closeAllModals
+    );
+
+  }
+
+
+  // =====================================
+  // 9. CLICK OUTSIDE MODAL
+  // =====================================
+
+  document.addEventListener("click", function (event) {
+
+    if (
+      event.target.classList.contains("register-modal-overlay") ||
+      event.target.classList.contains("login-modal-overlay")
+    ) {
+
+      closeAllModals();
+
+    }
+
+  });
+
+
+  // =====================================
+  // 10. ESC KEY
   // =====================================
 
   document.addEventListener("keydown", function (event) {
 
     if (event.key === "Escape") {
+
       closeAllModals();
+      closeMobileMenu();
+
     }
 
   });
-(function () {
+
+
+  // =====================================
+  // 11. OPEN LOGIN FROM URL
+  // =====================================
 
   function openLoginPopupFromLink() {
 
@@ -248,30 +291,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (params.get("openLogin") !== "true") return;
 
-    const loginTrigger = document.querySelector(".login-trigger");
+    openModal(loginModal);
 
-    if (loginTrigger) {
-      loginTrigger.click();
-    }
-
-    // Remove query parameter after opening
     window.history.replaceState(
       {},
       document.title,
       window.location.pathname + window.location.hash
     );
+
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener(
-      "DOMContentLoaded",
-      openLoginPopupFromLink
-    );
-  } else {
-    openLoginPopupFromLink();
-  }
+  openLoginPopupFromLink();
 
-})();
 
+  console.log("DTSC Alumni Main Script Loaded Successfully!");
 
 });
