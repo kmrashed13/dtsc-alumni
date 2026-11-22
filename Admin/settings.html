@@ -1,1 +1,472 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101b32">
+<title>Settings & Admin Roles | DTSC Alumni Association</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+ --navy:#101b32;--navy2:#1b2b47;--gold:#d5ad58;
+ --bg:#f3f5f9;--white:#fff;--text:#253148;
+ --muted:#8290a3;--border:#e7ebf1;
+ --green:#16845d;--red:#d34d55;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.layout{display:flex;min-height:100vh}
+.sidebar{
+ width:255px;background:var(--navy);color:#fff;
+ padding:24px 16px;position:fixed;inset:0 auto 0 0;
+ overflow-y:auto;z-index:20;transition:.25s
+}
+.brand{display:flex;align-items:center;gap:12px;padding:0 10px 25px;border-bottom:1px solid #ffffff18}
+.brand-logo{width:43px;height:43px;border-radius:12px;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-weight:800}
+.brand h2{font-size:14px;line-height:1.5}
+.brand small{font-size:10px;color:#aeb9ca}
+.menu-label{font-size:10px;color:#8290a5;letter-spacing:1.5px;margin:25px 12px 10px}
+.nav-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:#bdc7d6;padding:12px;border-radius:9px;font-size:13px;margin:3px 0}
+.nav-link:hover,.nav-link.active{background:#ffffff13;color:#fff}
+.nav-link.active{border-left:3px solid var(--gold);color:var(--gold)}
+.nav-icon{width:20px;text-align:center;font-size:16px}
+.main{margin-left:255px;width:calc(100% - 255px);padding:25px 30px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;gap:15px}
+.page-title h1{font-size:24px;color:var(--navy);font-weight:800}
+.page-title p{font-size:12px;color:var(--muted);margin-top:5px}
+.top-actions{display:flex;align-items:center;gap:12px}
+.preview{background:#fff;border:1px solid var(--border);padding:9px 13px;border-radius:8px;font-size:11px;color:var(--green);font-weight:700}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-weight:800}
+.mobile-menu{display:none;background:var(--navy);color:#fff;border:0;padding:9px 12px;border-radius:7px}
+.notice{background:#fff8e8;border:1px solid #f0dfb8;color:#876727;padding:12px 15px;border-radius:9px;font-size:12px;margin-bottom:22px;line-height:1.6}
+.settings-layout{display:grid;grid-template-columns:215px 1fr;gap:18px;align-items:start}
+.settings-nav{background:#fff;border:1px solid var(--border);border-radius:12px;padding:10px;position:sticky;top:20px}
+.settings-nav button{width:100%;border:0;background:transparent;text-align:left;padding:12px 10px;border-radius:7px;color:#657187;font-size:12px;margin:2px 0}
+.settings-nav button.active,.settings-nav button:hover{background:#f5f0e5;color:var(--navy);font-weight:700}
+.settings-content{min-width:0}
+.panel{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:18px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:20px}
+.panel-head h3{font-size:15px;color:var(--navy)}
+.panel-head p{font-size:11px;color:var(--muted);margin-top:5px}
+.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field label{display:block;font-size:11px;font-weight:700;color:#526074;margin-bottom:7px}
+.field input,.field select,.field textarea{
+ width:100%;border:1px solid var(--border);border-radius:7px;
+ padding:11px 12px;font-size:12px;outline:none;background:#fff;color:var(--text)
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold)}
+.field textarea{min-height:85px;resize:vertical}
+.full{grid-column:1/-1}
+.btn{border:0;border-radius:7px;padding:10px 15px;font-size:11px;font-weight:700}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-light{background:#f0f2f6;color:#48556a}
+.btn-danger{background:#fff0f0;color:var(--red)}
+.btn:hover{opacity:.88}
+.panel-footer{display:flex;justify-content:flex-end;gap:9px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+.toggle-row{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:15px 0;border-bottom:1px solid #eff1f4}
+.toggle-row:last-child{border-bottom:0}
+.toggle-row h4{font-size:12px;color:var(--navy)}
+.toggle-row p{font-size:10px;color:var(--muted);margin-top:4px}
+.switch{position:relative;width:42px;height:23px;flex-shrink:0}
+.switch input{opacity:0;width:0;height:0}
+.slider{position:absolute;inset:0;background:#cbd2dc;border-radius:20px;transition:.2s}
+.slider:before{content:"";position:absolute;width:17px;height:17px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
+.switch input:checked+.slider{background:var(--green)}
+.switch input:checked+.slider:before{transform:translateX(19px)}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:620px}
+th{text-align:left;font-size:10px;color:#8792a3;padding:12px;border-bottom:1px solid var(--border)}
+td{font-size:11px;padding:14px 12px;border-bottom:1px solid #f0f2f5}
+.role-badge{background:#f5eddb;color:#9a7025;padding:5px 9px;border-radius:20px;font-size:10px;font-weight:700}
+.status{font-size:10px;font-weight:700;color:var(--green)}
+.user-name{font-weight:700;color:var(--navy)}
+.danger-zone{border:1px solid #f1d4d4;background:#fffafa}
+.danger-zone h3{color:var(--red)}
+.empty-state{padding:25px;text-align:center;color:var(--muted);font-size:12px}
+.modal-bg{position:fixed;inset:0;background:#0c172b99;display:none;align-items:center;justify-content:center;padding:15px;z-index:50}
+.modal-bg.show{display:flex}
+.modal{background:#fff;border-radius:12px;padding:23px;width:100%;max-width:450px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.modal-head h3{font-size:16px;color:var(--navy)}
+.close{border:0;background:#f1f3f7;width:30px;height:30px;border-radius:7px;font-size:18px}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
+.section{display:none}
+.section.active{display:block}
+@media(max-width:900px){.settings-layout{grid-template-columns:1fr}.settings-nav{position:static;display:flex;overflow-x:auto;gap:4px}.settings-nav button{white-space:nowrap;width:auto}}
+@media(max-width:760px){
+ .sidebar{transform:translateX(-100%)}
+ .sidebar.open{transform:translateX(0)}
+ .main{margin-left:0;width:100%;padding:18px 14px}
+ .mobile-menu{display:block}
+ .page-title h1{font-size:20px}
+ .field-grid{grid-template-columns:1fr}
+ .full{grid-column:auto}
+ .panel{padding:16px}
+ .topbar{align-items:flex-start}
+}
+@media(max-width:400px){.preview{display:none}}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<aside class="sidebar" id="sidebar">
+ <div class="brand">
+  <div class="brand-logo">DT</div>
+  <div><h2>DTSC ALUMNI<br>ASSOCIATION</h2><small>ADMINISTRATION PANEL</small></div>
+ </div>
+
+ <div class="menu-label">MAIN MENU</div>
+ <a class="nav-link" href="dashboard.html"><span class="nav-icon">▦</span>Dashboard</a>
+ <a class="nav-link" href="members.html"><span class="nav-icon">♙</span>Members</a>
+ <a class="nav-link" href="teachers.html"><span class="nav-icon">♟</span>Honorable Teachers</a>
+ <a class="nav-link" href="applications.html"><span class="nav-icon">▤</span>Applications</a>
+ <a class="nav-link" href="events.html"><span class="nav-icon">▣</span>Events Management</a>
+ <a class="nav-link" href="notices.html"><span class="nav-icon">▧</span>Notices</a>
+ <a class="nav-link" href="gallery.html"><span class="nav-icon">▧</span>Gallery</a>
+
+ <div class="menu-label">MANAGEMENT</div>
+ <a class="nav-link" href="committee.html"><span class="nav-icon">♧</span>Executive Committee</a>
+ <a class="nav-link" href="finance.html"><span class="nav-icon">৳</span>Finance Management</a>
+ <a class="nav-link" href="reports.html"><span class="nav-icon">▤</span>Reports & Documents</a>
+ <a class="nav-link active" href="settings.html"><span class="nav-icon">⚙</span>Settings & Admin Roles</a>
+ <a class="nav-link" href="activity-logs.html"><span class="nav-icon">◷</span>Activity Logs</a>
+
+ <div class="menu-label">ACCOUNT</div>
+ <a class="nav-link" href="../login/admin.html"><span class="nav-icon">⇥</span>Sign Out</a>
+</aside>
+
+<main class="main">
+ <header class="topbar">
+  <div style="display:flex;align-items:center;gap:12px">
+   <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
+   <div class="page-title">
+    <h1>Settings & Admin Roles</h1>
+    <p>Manage organization preferences and administrator access</p>
+   </div>
+  </div>
+  <div class="top-actions">
+   <span class="preview">● PREVIEW MODE</span>
+   <div class="avatar">A</div>
+  </div>
+ </header>
+
+ <div class="notice">
+  <strong>Preview Mode:</strong> Settings are temporary demo values. No real account, password, or server configuration is changed.
+ </div>
+
+ <div class="settings-layout">
+  <nav class="settings-nav">
+   <button class="active" onclick="showSection('general',this)">⚙ General Settings</button>
+   <button onclick="showSection('organization',this)">▣ Organization</button>
+   <button onclick="showSection('profile',this)">♙ Admin Profile</button>
+   <button onclick="showSection('admins',this)">♧ Admin Users & Roles</button>
+   <button onclick="showSection('notifications',this)">♢ Notifications</button>
+   <button onclick="showSection('security',this)">◈ Security</button>
+  </nav>
+
+  <div class="settings-content">
+
+   <!-- GENERAL -->
+   <section class="section active" id="general">
+    <div class="panel">
+     <div class="panel-head">
+      <div><h3>General Settings</h3><p>Configure basic website preferences</p></div>
+     </div>
+     <div class="field-grid">
+      <div class="field"><label>Website Name</label><input id="siteName" value="DTSC Alumni Association"></div>
+      <div class="field"><label>Website Language</label>
+       <select id="language"><option>English</option><option>Bangla</option></select>
+      </div>
+      <div class="field"><label>Timezone</label>
+       <select id="timezone"><option>Asia/Dhaka (GMT+6)</option><option>UTC</option></select>
+      </div>
+      <div class="field"><label>Date Format</label>
+       <select id="dateFormat"><option>DD-MM-YYYY</option><option>MM-DD-YYYY</option><option>YYYY-MM-DD</option></select>
+      </div>
+     </div>
+     <div class="panel-footer">
+      <button class="btn btn-light" onclick="resetSection('general')">Reset</button>
+      <button class="btn btn-gold" onclick="saveSection('general')">Save Changes</button>
+     </div>
+    </div>
+   </section>
+
+   <!-- ORGANIZATION -->
+   <section class="section" id="organization">
+    <div class="panel">
+     <div class="panel-head"><div><h3>Organization Information</h3><p>Update official association details</p></div></div>
+     <div class="field-grid">
+      <div class="field"><label>Organization Name</label><input id="orgName" value="DTSC Alumni Association"></div>
+      <div class="field"><label>Short Name</label><input id="orgShort" value="DTSC"></div>
+      <div class="field"><label>Official Email</label><input id="orgEmail" type="email" value="info@dtscalumni.org"></div>
+      <div class="field"><label>Contact Number</label><input id="orgPhone" value=""></div>
+      <div class="field full"><label>Organization Address</label><textarea id="orgAddress" placeholder="Enter official address"></textarea></div>
+      <div class="field"><label>Official Website</label><input id="orgWebsite" type="url" placeholder="https://example.com"></div>
+      <div class="field"><label>Established Year</label><input id="orgYear" type="number" placeholder="Year"></div>
+     </div>
+     <div class="panel-footer">
+      <button class="btn btn-light" onclick="resetSection('organization')">Reset</button>
+      <button class="btn btn-gold" onclick="saveSection('organization')">Save Changes</button>
+     </div>
+    </div>
+   </section>
+
+   <!-- PROFILE -->
+   <section class="section" id="profile">
+    <div class="panel">
+     <div class="panel-head"><div><h3>Administrator Profile</h3><p>Demo profile information</p></div></div>
+     <div class="field-grid">
+      <div class="field"><label>Full Name</label><input id="adminName" value="System Administrator"></div>
+      <div class="field"><label>Designation</label><input id="adminDesignation" value="Super Administrator"></div>
+      <div class="field"><label>Email Address</label><input id="adminEmail" type="email" value="admin@example.com"></div>
+      <div class="field"><label>Phone Number</label><input id="adminPhone" placeholder="Enter phone number"></div>
+     </div>
+     <div class="panel-footer">
+      <button class="btn btn-light" onclick="resetSection('profile')">Reset</button>
+      <button class="btn btn-gold" onclick="saveSection('profile')">Save Profile</button>
+     </div>
+    </div>
+   </section>
+
+   <!-- ADMINS -->
+   <section class="section" id="admins">
+    <div class="panel">
+     <div class="panel-head">
+      <div><h3>Admin Users & Roles</h3><p>Manage administrator access records</p></div>
+      <button class="btn btn-gold" onclick="openAdminModal()">+ Add Admin</button>
+     </div>
+     <div class="notice">Demo access records only. Actual login permissions will be managed securely through Supabase later.</div>
+     <div class="table-wrap">
+      <table>
+       <thead><tr><th>ADMINISTRATOR</th><th>EMAIL</th><th>ROLE</th><th>STATUS</th><th>ACTION</th></tr></thead>
+       <tbody id="adminTable"></tbody>
+      </table>
+     </div>
+    </div>
+    <div class="panel">
+     <div class="panel-head"><div><h3>Available Roles</h3><p>Example role descriptions</p></div></div>
+     <div class="toggle-row"><div><h4>Super Admin</h4><p>Full administrative access and system management</p></div><span class="role-badge">FULL ACCESS</span></div>
+     <div class="toggle-row"><div><h4>Admin</h4><p>General management and operational access</p></div><span class="role-badge">STANDARD</span></div>
+     <div class="toggle-row"><div><h4>Finance Admin</h4><p>Finance and transaction management</p></div><span class="role-badge">FINANCE</span></div>
+     <div class="toggle-row"><div><h4>Content Admin</h4><p>Notices, events and gallery management</p></div><span class="role-badge">CONTENT</span></div>
+    </div>
+   </section>
+
+   <!-- NOTIFICATIONS -->
+   <section class="section" id="notifications">
+    <div class="panel">
+     <div class="panel-head"><div><h3>Notification Preferences</h3><p>Choose which notifications you want to receive</p></div></div>
+     <div class="toggle-row"><div><h4>New Membership Applications</h4><p>Get notified when a new application is submitted</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+     <div class="toggle-row"><div><h4>Application Status Updates</h4><p>Notifications about application review activity</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+     <div class="toggle-row"><div><h4>New Event Updates</h4><p>Receive event creation and update notifications</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+     <div class="toggle-row"><div><h4>Finance Activity</h4><p>Receive finance management notifications</p></div><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+     <div class="toggle-row"><div><h4>Security Alerts</h4><p>Receive important security notifications</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+     <div class="panel-footer"><button class="btn btn-gold" onclick="saveSection('notifications')">Save Preferences</button></div>
+    </div>
+   </section>
+
+   <!-- SECURITY -->
+   <section class="section" id="security">
+    <div class="panel">
+     <div class="panel-head"><div><h3>Security & Access Control</h3><p>Review security preferences</p></div></div>
+     <div class="toggle-row"><div><h4>Two-Factor Authentication</h4><p>Additional verification for administrator accounts</p></div><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+     <div class="toggle-row"><div><h4>Login Activity Monitoring</h4><p>Keep track of administrator login activity</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+     <div class="toggle-row"><div><h4>Session Timeout</h4><p>Demo preference for automatic session expiration</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+     <div class="field-grid" style="margin-top:20px">
+      <div class="field"><label>Session Timeout (Minutes)</label><select id="timeout"><option>15</option><option selected>30</option><option>60</option><option>120</option></select></div>
+      <div class="field"><label>Maximum Login Attempts</label><select id="attempts"><option>3</option><option selected>5</option><option>10</option></select></div>
+     </div>
+     <div class="panel-footer"><button class="btn btn-gold" onclick="saveSection('security')">Save Security Preferences</button></div>
+    </div>
+
+    <div class="panel">
+     <div class="panel-head"><div><h3>Change Password</h3><p>This is a visual demo only; it does not change any real password</p></div></div>
+     <form id="passwordForm">
+      <div class="field-grid">
+       <div class="field full"><label>Current Password</label><input type="password" id="currentPassword" required></div>
+       <div class="field"><label>New Password</label><input type="password" id="newPassword" minlength="8" required></div>
+       <div class="field"><label>Confirm New Password</label><input type="password" id="confirmPassword" minlength="8" required></div>
+      </div>
+      <div class="panel-footer"><button class="btn btn-gold" type="submit">Update Password</button></div>
+     </form>
+    </div>
+
+    <div class="panel danger-zone">
+     <div class="panel-head"><div><h3>Danger Zone</h3><p>Careful with administrative actions</p></div></div>
+     <div class="toggle-row">
+      <div><h4>Reset Demo Settings</h4><p>Restore the page's original demo values</p></div>
+      <button class="btn btn-danger" onclick="resetAll()">Reset Demo</button>
+     </div>
+    </div>
+   </section>
+
+  </div>
+ </div>
+</main>
+</div>
+
+<!-- ADMIN MODAL -->
+<div class="modal-bg" id="adminModal">
+ <div class="modal">
+  <div class="modal-head"><h3>Add Administrator</h3><button class="close" onclick="closeAdminModal()">×</button></div>
+  <form id="adminForm">
+   <div class="field" style="margin-bottom:13px"><label>Full Name *</label><input id="newAdminName" required maxlength="80"></div>
+   <div class="field" style="margin-bottom:13px"><label>Email Address *</label><input id="newAdminEmail" type="email" required></div>
+   <div class="field"><label>Role</label>
+    <select id="newAdminRole"><option>Admin</option><option>Super Admin</option><option>Finance Admin</option><option>Content Admin</option></select>
+   </div>
+   <div class="modal-actions">
+    <button type="button" class="btn btn-light" onclick="closeAdminModal()">Cancel</button>
+    <button type="submit" class="btn btn-gold">Add Admin</button>
+   </div>
+  </form>
+ </div>
+</div>
+
+<script>
+const originalValues = {
+ siteName:"DTSC Alumni Association",
+ language:"English",
+ timezone:"Asia/Dhaka (GMT+6)",
+ dateFormat:"DD-MM-YYYY",
+ orgName:"DTSC Alumni Association",
+ orgShort:"DTSC",
+ orgEmail:"info@dtscalumni.org",
+ orgPhone:"",
+ orgAddress:"",
+ orgWebsite:"",
+ orgYear:"",
+ adminName:"System Administrator",
+ adminDesignation:"Super Administrator",
+ adminEmail:"admin@example.com",
+ adminPhone:""
+};
+
+let adminUsers=[
+ {id:1,name:"System Administrator",email:"admin@example.com",role:"Super Admin",status:"Active"},
+ {id:2,name:"Finance Administrator",email:"finance@example.com",role:"Finance Admin",status:"Active"},
+ {id:3,name:"Content Administrator",email:"content@example.com",role:"Content Admin",status:"Active"}
+];
+
+function toggleSidebar(){
+ document.getElementById("sidebar").classList.toggle("open");
+}
+
+function showSection(id,button){
+ document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+ document.querySelectorAll(".settings-nav button").forEach(b=>b.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ button.classList.add("active");
+}
+
+function saveSection(section){
+ alert("Demo settings updated successfully. Permanent saving will be available after database integration.");
+}
+
+function resetSection(section){
+ const groups={
+  general:["siteName","language","timezone","dateFormat"],
+  organization:["orgName","orgShort","orgEmail","orgPhone","orgAddress","orgWebsite","orgYear"],
+  profile:["adminName","adminDesignation","adminEmail","adminPhone"]
+ };
+ (groups[section]||[]).forEach(id=>{
+  document.getElementById(id).value=originalValues[id];
+ });
+ alert("Demo values restored.");
+}
+
+function resetAll(){
+ if(!confirm("Restore the demo settings to their original values?"))return;
+ Object.keys(originalValues).forEach(id=>{
+  const el=document.getElementById(id);
+  if(el)el.value=originalValues[id];
+ });
+ document.querySelectorAll(".switch input").forEach((el,i)=>{
+  el.checked=[0,1,2,4,6,7,8][i]===i;
+ });
+ alert("Demo settings have been reset.");
+}
+
+function renderAdmins(){
+ const tbody=document.getElementById("adminTable");
+ tbody.innerHTML=adminUsers.map(a=>`
+  <tr>
+   <td><span class="user-name">${escapeHTML(a.name)}</span></td>
+   <td>${escapeHTML(a.email)}</td>
+   <td><span class="role-badge">${escapeHTML(a.role)}</span></td>
+   <td><span class="status">${escapeHTML(a.status)}</span></td>
+   <td><button class="btn btn-danger" onclick="removeAdmin(${a.id})">Remove</button></td>
+  </tr>
+ `).join("");
+ if(!adminUsers.length)tbody.innerHTML='<tr><td colspan="5" class="empty-state">No administrators found.</td></tr>';
+}
+
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+function openAdminModal(){
+ document.getElementById("adminModal").classList.add("show");
+}
+function closeAdminModal(){
+ document.getElementById("adminModal").classList.remove("show");
+}
+
+document.getElementById("adminForm").addEventListener("submit",function(e){
+ e.preventDefault();
+ const name=document.getElementById("newAdminName").value.trim();
+ const email=document.getElementById("newAdminEmail").value.trim();
+ const role=document.getElementById("newAdminRole").value;
+
+ if(adminUsers.some(a=>a.email.toLowerCase()===email.toLowerCase())){
+  alert("This email already exists in the demo list.");
+  return;
+ }
+
+ adminUsers.push({
+  id:Date.now(),name,email,role,status:"Active"
+ });
+ renderAdmins();
+ this.reset();
+ closeAdminModal();
+ alert("Demo administrator record added. No real login access has been created.");
+});
+
+function removeAdmin(id){
+ const admin=adminUsers.find(a=>a.id===id);
+ if(!admin)return;
+ if(!confirm("Remove "+admin.name+" from this demo list?"))return;
+ adminUsers=adminUsers.filter(a=>a.id!==id);
+ renderAdmins();
+}
+
+document.getElementById("adminModal").addEventListener("click",function(e){
+ if(e.target===this)closeAdminModal();
+});
+
+document.getElementById("passwordForm").addEventListener("submit",function(e){
+ e.preventDefault();
+ const newPass=document.getElementById("newPassword").value;
+ const confirmPass=document.getElementById("confirmPassword").value;
+
+ if(newPass!==confirmPass){
+  alert("New password and confirmation do not match.");
+  return;
+ }
+ alert("Demo only: no real password was changed. Supabase authentication will be connected later.");
+ this.reset();
+});
+
+renderAdmins();
+</script>
+</body>
+</html>
