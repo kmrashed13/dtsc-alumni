@@ -216,3 +216,29 @@ input:focus {
     font-size: 10px;
   }
 }
+
+/* ADMIN LOGIN STATUS MESSAGES */
+
+#loginMessage {
+  min-height: 18px;
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+#loginMessage.loading {
+  color: #315982;
+}
+
+#loginMessage.success {
+  color: #16834b;
+}
+
+#loginMessage.error {
+  color: #d12f3f;
+}
+
+.login-submit:focus-visible,
+.back-navigation a:focus-visible {
+  outline: 3px solid rgba(198,166,93,.45);
+  outline-offset: 3px;
+}
